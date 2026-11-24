@@ -1,0 +1,38 @@
+name: Daily briefing
+
+on:
+  schedule:
+    - cron: "17 12 * * *"   # ~4:17am Pacific in winter, 5:17am in summer
+  workflow_dispatch: {}      # "Run workflow" button for testing
+
+permissions:
+  contents: write
+
+concurrency:
+  group: briefing
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build today's briefing
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          READER_PROFILE: ${{ secrets.READER_PROFILE }}
+        run: python -m curator daily
+      - name: Publish
+        run: |
+          git config user.name "briefing-bot"
+          git config user.email "briefing-bot@users.noreply.github.com"
+          git add -A docs data
+          git commit -m "Briefing $(date -u +%F)" || exit 0
+          git pull --rebase
+          git push

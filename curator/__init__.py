@@ -1,0 +1,1 @@
+"""Personal daily briefing curator."""

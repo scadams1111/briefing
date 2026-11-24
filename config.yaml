@@ -1,0 +1,176 @@
+# ─────────────────────────────────────────────────────────────
+# Daily Briefing — configuration
+# Edit freely. Dead feeds are skipped automatically and listed
+# in docs/health.json so you can prune them.
+# ─────────────────────────────────────────────────────────────
+
+site_title: "The Daily Briefing"
+# Leave blank on GitHub — it's worked out from the repo name.
+site_url: ""
+
+daily_picks: 10          # articles in each day's briefing
+max_per_topic: 2         # so one busy topic can't take over the day
+min_light_picks: 1       # at least this many from "light" topics
+lookback_hours: 36       # ignore anything older
+min_words: 600           # skip short news blurbs
+candidates_per_topic: 6  # shortlist per topic sent to the AI for ranking
+keep_days: 30            # archive pages / epubs kept
+
+llm:
+  provider: gemini
+  # Tried in order; the first one your free key can use wins.
+  # Model names change — if all fail, copy a current Flash model
+  # name from aistudio.google.com and put it first.
+  models: ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-3.1-flash-lite"]
+  seconds_between_calls: 5   # stays under free-tier per-minute limits
+
+# Used when the READER_PROFILE secret isn't set. Keep this one
+# generic because the repo is public; put the personal version
+# in the secret (see README).
+profile: >
+  A curious, highly educated professional who wants to be well read:
+  the important stories and best-written pieces of the day, with
+  substance over hype.
+
+hackernews:
+  enabled: true
+  min_points: 150
+  topic: ai
+
+# weight: how much this topic matters (1.0 = normal)
+# kind: core | light   ("light" topics are fill-ins, at least min_light_picks/day)
+# feeds: RSS/Atom URLs (add `weight:` per feed if one source is extra good)
+# searches: news-search queries, good for niche topics without feeds
+topics:
+  - id: ai
+    name: AI & Tech
+    weight: 1.2
+    kind: core
+    feeds:
+      - https://www.technologyreview.com/feed/
+      - https://simonwillison.net/atom/everything/
+      - https://www.understandingai.org/feed
+      - https://www.oneusefulthing.org/feed
+      - https://arstechnica.com/feed/
+      - https://www.techmeme.com/feed.xml
+    searches: []
+
+  - id: science
+    name: Science & Medicine
+    weight: 1.2
+    kind: core
+    feeds:
+      - https://www.statnews.com/feed/
+      - https://www.quantamagazine.org/feed/
+      - https://www.science.org/rss/news_current.xml
+      - https://knowablemagazine.org/rss
+      - https://www.theatlantic.com/feed/channel/health/
+    searches: []
+
+  - id: business
+    name: Business & Economy
+    weight: 1.0
+    kind: core
+    feeds:
+      - https://www.noahpinion.blog/feed
+      - https://www.axios.com/feeds/feed.rss
+      - https://www.marketplace.org/feed/
+      - https://www.economist.com/finance-and-economics/rss.xml
+    searches: []
+
+  - id: world
+    name: World & Politics
+    weight: 1.1
+    kind: core
+    feeds:
+      - https://feeds.npr.org/1001/rss.xml
+      - https://feeds.bbci.co.uk/news/world/rss.xml
+      - https://www.economist.com/international/rss.xml
+      - https://www.foreignaffairs.com/rss.xml
+      - https://www.theatlantic.com/feed/channel/politics/
+    searches: []
+
+  - id: biotech
+    name: Biotech & Pharma
+    weight: 1.2
+    kind: core
+    feeds:
+      - https://www.fiercebiotech.com/rss/xml
+      - https://endpts.com/feed/
+      - https://www.biopharmadive.com/feeds/news/
+    searches:
+      - "San Diego biotech"
+
+  - id: animal-research
+    name: Animal Research Policy
+    weight: 1.3
+    kind: core
+    feeds:
+      - https://speakingofresearch.com/feed/
+    searches:
+      - "animal research NIH policy"
+      - "new approach methodologies animal testing"
+      - "FDA animal testing"
+      - "laboratory animal welfare"
+
+  - id: entrepreneurship
+    name: Entrepreneurship
+    weight: 0.9
+    kind: core
+    feeds:
+      - http://www.aaronsw.com/2002/feeds/pgessays.rss
+      - https://www.lennysnewsletter.com/feed
+    searches:
+      - "solo consulting business"
+
+  - id: leadership
+    name: Leadership & Management
+    weight: 0.9
+    kind: core
+    feeds:
+      - https://lethain.com/feeds.xml
+      - https://charity.wtf/feed/
+    searches:
+      - "management leadership lessons"
+
+  - id: outdoors
+    name: Outdoors & Nature
+    weight: 0.8
+    kind: light
+    feeds:
+      - https://www.outsideonline.com/feed/
+      - https://www.adventure-journal.com/feed/
+      - https://www.backpacker.com/feed/
+    searches: []
+
+  - id: maker
+    name: Maker & Hobbies
+    weight: 0.8
+    kind: light
+    feeds:
+      - https://hackaday.com/blog/feed/
+      - https://petapixel.com/feed/
+      - https://blog.adafruit.com/feed/
+    searches: []
+
+  - id: longform
+    name: Longform & Ideas
+    weight: 1.0
+    kind: light
+    feeds:
+      - https://longreads.com/feed/
+      - https://aeon.co/feed.rss
+      - https://nautil.us/feed/
+      - https://www.themarginalian.org/feed/
+      - https://www.newyorker.com/feed/everything
+    searches: []
+
+  - id: parenting
+    name: Parenting & Family
+    weight: 0.8
+    kind: light
+    feeds:
+      - https://parentdata.org/feed/
+      - https://www.afterbabel.com/feed
+      - https://www.theatlantic.com/feed/channel/family/
+    searches: []
