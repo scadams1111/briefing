@@ -1,7 +1,7 @@
 {
  "date": "2026-11-24",
  "llm": true,
- "candidates": 325,
+ "candidates": 352,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -19,7 +19,7 @@
   "https://www.axios.com/feeds/feed.rss": "ok (40)",
   "https://www.economist.com/finance-and-economics/rss.xml": "ok (40)",
   "https://feeds.npr.org/1001/rss.xml": "ok (10)",
-  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (27)",
+  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (29)",
   "https://www.economist.com/international/rss.xml": "ok (40)",
   "https://www.foreignaffairs.com/rss.xml": "ok (20)",
   "https://www.theatlantic.com/feed/channel/politics/": "ok (25)",
@@ -28,7 +28,7 @@
   "https://www.biopharmadive.com/feeds/news/": "ok (10)",
   "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (11)",
   "https://speakingofresearch.com/feed/": "ok (10)",
-  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (7)",
+  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (6)",
   "https://www.bing.com/news/search?q=new+approach+methodologies+animal+testing&format=rss": "ok (9)",
   "https://www.bing.com/news/search?q=FDA+animal+testing&format=rss": "ok (12)",
   "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (9)",
@@ -37,7 +37,7 @@
   "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (2)",
   "https://lethain.com/feeds.xml": "ok (12)",
   "https://charity.wtf/feed/": "ok (20)",
-  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (10)",
+  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (9)",
   "https://www.outsideonline.com/feed/": "ok (10)",
   "https://www.adventure-journal.com/feed/": "ok (10)",
   "https://www.backpacker.com/feed/": "ok (10)",
@@ -52,6 +52,6 @@
   "https://parentdata.org/feed/": "ok (16)",
   "https://www.afterbabel.com/feed": "ok (20)",
   "https://www.theatlantic.com/feed/channel/family/": "ok (25)",
-  "hackernews": "ok (31)"
+  "hackernews": "ok (30)"
  }
 }
