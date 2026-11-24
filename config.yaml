@@ -74,7 +74,6 @@ topics:
     feeds:
       - https://www.noahpinion.blog/feed
       - https://www.axios.com/feeds/feed.rss
-      - https://www.marketplace.org/feed/
       - https://www.economist.com/finance-and-economics/rss.xml
     searches: []
 
@@ -162,7 +161,7 @@ topics:
       - https://aeon.co/feed.rss
       - https://nautil.us/feed/
       - https://www.themarginalian.org/feed/
-      - https://www.newyorker.com/feed/everything
+      - {url: https://www.newyorker.com/feed/everything, name: The New Yorker}
     searches: []
 
   - id: parenting
