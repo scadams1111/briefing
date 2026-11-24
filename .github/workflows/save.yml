@@ -31,6 +31,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           READER_PROFILE: ${{ secrets.READER_PROFILE }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           ISSUE_TEXT: ${{ github.event.issue.title }} ${{ github.event.issue.body }}
         run: python -m curator save "$ISSUE_TEXT"
       - name: Publish

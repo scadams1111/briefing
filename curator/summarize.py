@@ -26,7 +26,8 @@ Return JSON exactly like:
   "room_line": "one sentence the reader could say in conversation that shows they grasp why this matters",
   "why_for_you": "one short sentence on why it matters to this reader specifically, or empty string"
 }}
-Rules: exactly 3 bullets, ordered by importance. Use only facts from the article.
+Rules: write everything in English, even if the article is in another language.
+Exactly 3 bullets, ordered by importance. Use only facts from the article.
 No hype. If it's an opinion piece, attribute the claims to the author.
 """
 

@@ -27,6 +27,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           READER_PROFILE: ${{ secrets.READER_PROFILE }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python -m curator daily
       - name: Publish
         run: |

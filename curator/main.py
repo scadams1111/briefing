@@ -12,7 +12,7 @@ from pathlib import Path
 import yaml
 
 from . import render
-from .extract import extract_all, fetch_article
+from .extract import extract_all, fetch_article, is_english
 from .llm import LLM
 from .rank import dedupe_titles, heuristic, llm_rank, select, shortlist
 from .sources import Candidate, collect, domain, normalize_url
@@ -89,7 +89,7 @@ def daily() -> None:
     per = cfg.get("candidates_per_topic", 6)
     pool = shortlist(cands, cfg, per * 3)   # cheap first cut before fetching pages
     extract_all(pool)
-    pool = [c for c in pool if c.words >= cfg["min_words"]]
+    pool = [c for c in pool if c.words >= cfg["min_words"] and is_english(c.text)]
     pool = dedupe_titles(pool)
     heuristic(pool, cfg)                    # recompute now that we know real length
     pool = shortlist(pool, cfg)             # best few per topic go to the AI

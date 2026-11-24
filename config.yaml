@@ -22,6 +22,10 @@ llm:
   # use is found automatically and used as a backup when these are busy.
   models: ["gemini-3.1-flash-lite"]
   seconds_between_calls: 5   # stays under free-tier per-minute limits
+  # Backup when Gemini is busy (needs the GROQ_API_KEY secret). Other models
+  # your Groq key can use are found automatically.
+  groq_models: ["openai/gpt-oss-120b", "llama-3.3-70b-versatile"]
+  groq_seconds_between_calls: 3
   budget_minutes: 12         # stop using the AI after this long so the run always finishes
 
 # Used when the READER_PROFILE secret isn't set. Keep this one
