@@ -1,0 +1,298 @@
+[
+ {
+  "id": "fd77f33bf073",
+  "url": "https://stalw.art/blog/microsoft-exchange-replacement/",
+  "title": "Stalwart is now a drop-in replacement for Microsoft Exchange",
+  "headline": "Stalwart is now a drop-in replacement for Microsoft Exchange",
+  "source": "stalw.art",
+  "topic": "ai",
+  "topic_name": "AI & Tech",
+  "words": 2742,
+  "minutes": 12,
+  "bullets": [
+   {
+    "point": "For more than twenty years, \u201cthe mail server\u201d in most companies meant Microsoft Exchange, and \u201cthe mail client\u201d meant Outlook.",
+    "detail": "For more than twenty years, \u201cthe mail server\u201d in most companies meant Microsoft Exchange, and \u201cthe mail client\u201d meant Outlook. Today we are releasing Stalwart 1.2.0, and with it Stalwart becomes a drop-in replacement for Microsoft Exchange. Stalwart now implements the protocols that Exchange clients speak: MAPI over HTTP, Exchange Web Services (EWS), Exchange ActiveSync and Autodiscover. Outlook, Apple Mail and the mail apps on phones and tablets connect to Stalwart as they would to an Exchange server, with mail, calendars, contacts, tasks and notes in one account. Users type their email address and password, Autodiscover does the rest, and they keep working in the client they already know."
+   },
+   {
+    "point": "Stalwart now implements the protocols that Exchange clients speak: MAPI over HTTP, Exchange Web Services (EWS), Exchange ActiveSync and Autodiscover.",
+    "detail": "Stalwart now implements the protocols that Exchange clients speak: MAPI over HTTP, Exchange Web Services (EWS), Exchange ActiveSync and Autodiscover. Outlook, Apple Mail and the mail apps on phones and tablets connect to Stalwart as they would to an Exchange server, with mail, calendars, contacts, tasks and notes in one account. Users type their email address and password, Autodiscover does the rest, and they keep working in the client they already know. Before going into what Stalwart now does, it is worth looking at where self-hosted Exchange stands today, because it explains why so many organisations are looking for a way out."
+   },
+   {
+    "point": "Before going into what Stalwart now does, it is worth looking at where self-hosted Exchange stands today, because it explains why so many organisations are looking for a way out.",
+    "detail": "Before going into what Stalwart now does, it is worth looking at where self-hosted Exchange stands today, because it explains why so many organisations are looking for a way out. Microsoft has not announced the end of Exchange Server. On paper, on-premises Exchange still exists. In practice, every road Microsoft is building leads to Exchange Online:"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://stalw.art/og/blog/microsoft-exchange-replacement.png",
+  "author": "Mdecimus"
+ },
+ {
+  "id": "796c738a590e",
+  "url": "https://deucalionn.vercel.app/polymarket-delit-initie-jensen-huang-nvidia/",
+  "title": "Investigation of Polymarket Insider Trading on the Reinstatement of Jensen Huang",
+  "headline": "Investigation of Polymarket Insider Trading on the Reinstatement of Jensen Huang",
+  "source": "deucalionn.vercel.app",
+  "topic": "ai",
+  "topic_name": "AI & Tech",
+  "words": 1457,
+  "minutes": 6,
+  "bullets": [
+   {
+    "point": "Depuis quelque temps, je constate que Polymarket devient un v\u00e9ritable terrain de jeu pour les d\u00e9lits d\u2019initi\u00e9s, et le climat politique autour de la nouvelle administration Trump rend ce type\u2026",
+    "detail": "Depuis quelque temps, je constate que Polymarket devient un v\u00e9ritable terrain de jeu pour les d\u00e9lits d\u2019initi\u00e9s, et le climat politique autour de la nouvelle administration Trump rend ce type d\u2019asym\u00e9trie d\u2019information encore plus propice. J\u2019ai donc d\u00e9velopp\u00e9 un algorithme qui surveille en permanence les march\u00e9s les plus sensibles : chaque transaction y est analys\u00e9e par des mod\u00e8les statistiques et des outils de tra\u00e7age de flux on-chain. J\u2019ai finalis\u00e9 l\u2019algo il y a deux jours \u00e0 peine. Dans la nuit m\u00eame, en voyant l\u2019alerte se d\u00e9clencher, j\u2019ai men\u00e9 une premi\u00e8re analyse \u00e0 chaud sur les transactions\u2026 avant de voir tomber quelques heures plus tard le tweet de Donald Trump confirmant l\u2019asym\u00e9trie. Et vous allez voir que le communiqu\u00e9 officiel de NVIDIA n\u2019\u00e9tait que la cerise sur le g\u00e2teau."
+   },
+   {
+    "point": "J\u2019ai finalis\u00e9 l\u2019algo il y a deux jours \u00e0 peine.",
+    "detail": "J\u2019ai finalis\u00e9 l\u2019algo il y a deux jours \u00e0 peine. Dans la nuit m\u00eame, en voyant l\u2019alerte se d\u00e9clencher, j\u2019ai men\u00e9 une premi\u00e8re analyse \u00e0 chaud sur les transactions\u2026 avant de voir tomber quelques heures plus tard le tweet de Donald Trump confirmant l\u2019asym\u00e9trie. Et vous allez voir que le communiqu\u00e9 officiel de NVIDIA n\u2019\u00e9tait que la cerise sur le g\u00e2teau. - Le timing : Une accumulation de liquidit\u00e9 achev\u00e9e en pleine nuit Transactions Polygon, exactement 89 minutes avant la prise de position publique de Donald Trump sur Truth Social ;"
+   },
+   {
+    "point": "- Le timing : Une accumulation de liquidit\u00e9 achev\u00e9e en pleine nuit Transactions Polygon, exactement 89 minutes avant la prise de position publique de Donald Trump sur Truth Social ;",
+    "detail": "- Le timing : Une accumulation de liquidit\u00e9 achev\u00e9e en pleine nuit Transactions Polygon, exactement 89 minutes avant la prise de position publique de Donald Trump sur Truth Social ; - L\u2019asym\u00e9trie de gain : 4 648 USDC engag\u00e9s sur une probabilit\u00e9 marginale de 6,5 %, d\u00e9nou\u00e9s en 71 518 USDC suite \u00e0 la confirmation unanime du Conseil d\u2019Administration de NVIDIA sur Polymarket ;"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "",
+  "author": ""
+ },
+ {
+  "id": "c445be389a24",
+  "url": "https://www.fiercebiotech.com/biotech/fierce-biotech-fundraising-tracker-26",
+  "title": "Fierce Biotech Fundraising Tracker '26: Ritzey reveals $112.5M; VitriVax scores $87M",
+  "headline": "Fierce Biotech Fundraising Tracker '26: Ritzey reveals $112.5M; VitriVax scores $87M",
+  "source": "Fierce Biotech",
+  "topic": "biotech",
+  "topic_name": "Biotech & Pharma",
+  "words": 12167,
+  "minutes": 53,
+  "bullets": [
+   {
+    "point": "Intra-Cellular founder and former CEO Sharon Mates, Ph.D., has launched Ritzey Therapeutics alongside fellow members of her former senior management team.",
+    "detail": "Intra-Cellular founder and former CEO Sharon Mates, Ph.D., has launched Ritzey Therapeutics alongside fellow members of her former senior management team. The cash will be used to advance a pipeline of DYRK1A inhibitors led by a clinical-stage, oral, once-daily candidate for chronic metabolic and neurologic diseases that Ritzey acquired from France's Perha Pharmaceuticals. Story The Colorado biotech will use the funds to advance its lead Lyme disease vaccine into the clinic. The company is centered on its atomic layering thermostable antigen and adjuvant (ALTA) platform, which is designed to improve immunogenicity, enable single-dose administration and deliver mRNA payloads more efficiently. The latest raise follows a $17.5 million series B in September 2025, and the company has also received backing from big players in the vaccines space like the Gates Foundation, the Coalition for Epidemic Preparedness Innovations (CEPI), and a multi-year contract with the U.S. Department of Defense. Release"
+   },
+   {
+    "point": "The Colorado biotech will use the funds to advance its lead Lyme disease vaccine into the clinic.",
+    "detail": "The Colorado biotech will use the funds to advance its lead Lyme disease vaccine into the clinic. The company is centered on its atomic layering thermostable antigen and adjuvant (ALTA) platform, which is designed to improve immunogenicity, enable single-dose administration and deliver mRNA payloads more efficiently. The latest raise follows a $17.5 million series B in September 2025, and the company has also received backing from big players in the vaccines space like the Gates Foundation, the Coalition for Epidemic Preparedness Innovations (CEPI), and a multi-year contract with the U.S. Department of Defense. Release Investors: Blue Water Life Science Advisors, Illumina Ventures, BEVC, Lightscape Partners, Agent Capital, Cerberus Ventures, Fall Line Capital, Dauntless Ventures, and Altitude Life Science Ventures"
+   },
+   {
+    "point": "Investors: Blue Water Life Science Advisors, Illumina Ventures, BEVC, Lightscape Partners, Agent Capital, Cerberus Ventures, Fall Line Capital, Dauntless Ventures, and Altitude Life Science Ventures",
+    "detail": "Investors: Blue Water Life Science Advisors, Illumina Ventures, BEVC, Lightscape Partners, Agent Capital, Cerberus Ventures, Fall Line Capital, Dauntless Ventures, and Altitude Life Science Ventures Ansa Biotechnologies announced the closing of a $71.5 million series C raise to help the company develop and deliver long, complex synthetic DNA to researchers. The California-based company leverages an enzymatic DNA synthesis platform that enables scientists to build and test increasingly complex designs and advance AI-enabled drug discovery and development. The series C raise brings the company's total funding to $211 million since its launch in 2018. Release"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://qtxasset.com/quartz/qcloud5/media/image/GettyImages-474045836.jpg?VersionId=ZrON.9gb_kdB6Eg3v6PzrOmMBLN2o4F4",
+  "author": "Darren Incorvaia; James Waldron; Marissa Russo; Will Maddox; Gabrielle Masson"
+ },
+ {
+  "id": "4517ee5f5393",
+  "url": "https://www.noahpinion.blog/p/why-the-new-right-is-failing",
+  "title": "Why the New Right is failing",
+  "headline": "Why the New Right is failing",
+  "source": "Noahpinion",
+  "topic": "business",
+  "topic_name": "Business & Economy",
+  "words": 3315,
+  "minutes": 14,
+  "bullets": [
+   {
+    "point": "Art by Thomas Cole via Wikimedia Commons Sometime in the mid-2010s, just as liberalism was getting replaced by &#8220;progressivism&#8221;, the conservatism that I had grown up with was getting replaced\u2026",
+    "detail": "Art by Thomas Cole via Wikimedia Commons Sometime in the mid-2010s, just as liberalism was getting replaced by &#8220;progressivism&#8221;, the conservatism that I had grown up with was getting replaced by something we then called the &#8220;alt-right&#8221;. Whereas the old conservatism was based on Christian faith, libertarian economics, and flag-waving patriotism, the alt-right saw America as a white racial nation-state, rejected the idea of free markets, and was basically irreligious and isolationist. Over the course of two Trump presidencies and one Biden interregnum, the alt-right matured and grew into what I now call the New Right . In doing so, it basically took over from conservatism as the guiding ideology of the GOP base &#8212; though not (yet) of the GOP as a whole. Whereas the alt-right was a naked white-power movement, the New Right sees things in broader &#8220;civilizational&#8221; terms. It has embraced the idea of Christianity, not as a faith or a lifestyle, but as a tribal affiliation defining ingroup and outgroup. Its foreign policy matured into something concrete &#8212; a desire to wield American policy on behalf of &#8220;Western Civilization&#8221; . At the grassroots level, the New Right also added some new components. It merged with the\u2026"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://substackcdn.com/image/fetch/$s_!rMPJ!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4bda677-cd48-49d1-bbbb-edc394fcc30d_961x596.jpeg",
+  "author": "Noah Smith"
+ },
+ {
+  "id": "834f9daf67e6",
+  "url": "https://www.statnews.com/2026/11/24/alaskan-hospitals-artificial-intelligence-bet-improve-stroke-care/?utm_campaign=rss",
+  "title": "How artificial intelligence is offering new hope for stroke patients in the Last Frontier",
+  "headline": "How artificial intelligence is offering new hope for stroke patients in the Last Frontier",
+  "source": "STAT",
+  "topic": "science",
+  "topic_name": "Science & Medicine",
+  "words": 2766,
+  "minutes": 12,
+  "bullets": [
+   {
+    "point": "It was just after lunchtime when the doctor\u2019s phone started to vibrate and chime.",
+    "detail": "It was just after lunchtime when the doctor\u2019s phone started to vibrate and chime. On this summer Wednesday, a neurointerventionalist in Anchorage got the alert: Three hundred miles away, at a hospital deep in Alaska\u2019s interior, a clot in a major artery was blocking the flow of blood to a patient\u2019s brain. He needed it out \u2014 and he\u2019d have to come to the state\u2019s biggest city to get it done. Time is never on a stroke patient\u2019s side. Every minute without blood flow, 2 million brain cells die. And in Alaska \u2014 a state more than double the size of Texas, most of it inaccessible by road \u2014 it can take several hours to arrange a plane, airlift a patient to Ted Stevens airport in Anchorage, and deliver them by ambulance to one of the five neurointerventionalists in the entire state who can extract clots."
+   },
+   {
+    "point": "Time is never on a stroke patient\u2019s side.",
+    "detail": "Time is never on a stroke patient\u2019s side. Every minute without blood flow, 2 million brain cells die. And in Alaska \u2014 a state more than double the size of Texas, most of it inaccessible by road \u2014 it can take several hours to arrange a plane, airlift a patient to Ted Stevens airport in Anchorage, and deliver them by ambulance to one of the five neurointerventionalists in the entire state who can extract clots. In his mid-60s, the patient on the doctor\u2019s phone had arrived at a nearby emergency room after a morning fall, suddenly weak on his left side. Like most patients with stroke symptoms, he got a head CT, which helps diagnose a stroke, whether it\u2019s caused by a clot or a brain bleed, and determine whether that clot can be broken up with drugs or needs to be extracted. Normally, once the scan is complete, it could take 45 precious minutes just to send those thousands of two-dimensional brain snapshots to Anchorage for review \u2014 90 million brain cells before a doctor could accept his transfer."
+   },
+   {
+    "point": "In his mid-60s, the patient on the doctor\u2019s phone had arrived at a nearby emergency room after a morning fall, suddenly weak on his left side.",
+    "detail": "In his mid-60s, the patient on the doctor\u2019s phone had arrived at a nearby emergency room after a morning fall, suddenly weak on his left side. Like most patients with stroke symptoms, he got a head CT, which helps diagnose a stroke, whether it\u2019s caused by a clot or a brain bleed, and determine whether that clot can be broken up with drugs or needs to be extracted. Normally, once the scan is complete, it could take 45 precious minutes just to send those thousands of two-dimensional brain snapshots to Anchorage for review \u2014 90 million brain cells before a doctor could accept his transfer. But this summer day, the patient had a new type of technology on his team. Stroke is the fourth-leading cause of death in the United States, the majority caused by occlusions that block blood flow to the brain, and survival rates are significantly worse for rural patients. In recent years, states have built up stroke networks, including telestroke care and automated artificial intelligence analysis, to try to improve transfer times for patients without access to specialist neurological care. One of the latest additions was in Alaska \u2014 where, starting in 2023, a small network of\u2026"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://www.statnews.com/wp-content/uploads/2026/11/261120_STATNEWS_-100-1024x576.jpg",
+  "author": "Katie Palmer"
+ },
+ {
+  "id": "14cd5e052b07",
+  "url": "https://www.npr.org/2026/11/24/nx-s1-6001723/vitamin-k-deficiency-refusal-vaccine-misinformation-newborn-bleeding",
+  "title": "Doctors struggle to save babies after parents refuse vitamin K",
+  "headline": "Doctors struggle to save babies after parents refuse vitamin K",
+  "source": "NPR Topics: News",
+  "topic": "world",
+  "topic_name": "World & Politics",
+  "words": 1807,
+  "minutes": 8,
+  "bullets": [
+   {
+    "point": "It belonged to a newborn delivered last year, in the bustling labor and delivery unit where LeBlanc worked as a physician at the Corewell Health hospital system in Grand Rapids,\u2026",
+    "detail": "It belonged to a newborn delivered last year, in the bustling labor and delivery unit where LeBlanc worked as a physician at the Corewell Health hospital system in Grand Rapids, Mich. In the early hours the day after the baby girl was born, she suddenly started bleeding \"from everywhere,\" LeBlanc recalled. Her eyes, nose, and rectum all suddenly oozed blood."
+   },
+   {
+    "point": "In the early hours the day after the baby girl was born, she suddenly started bleeding \"from everywhere,\" LeBlanc recalled.",
+    "detail": "In the early hours the day after the baby girl was born, she suddenly started bleeding \"from everywhere,\" LeBlanc recalled. Her eyes, nose, and rectum all suddenly oozed blood. The girl's parents cried out for help from their hospital room. Nurses and doctors on the overnight shift rushed her to the neonatal intensive care unit, where they pumped fresh frozen plasma and other blood products into her small body, trying to replace what she was rapidly losing."
+   },
+   {
+    "point": "The girl's parents cried out for help from their hospital room.",
+    "detail": "The girl's parents cried out for help from their hospital room. Nurses and doctors on the overnight shift rushed her to the neonatal intensive care unit, where they pumped fresh frozen plasma and other blood products into her small body, trying to replace what she was rapidly losing. Her parents had declined a vitamin K injection for their baby, which is given to most newborns within six hours of birth to prevent rare but life-threatening hemorrhaging. With their baby on the verge of bleeding to death roughly 36 hours after birth, the parents agreed to let doctors administer vitamin K."
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/3840x2160+0+360/resize/1400/quality/85/format/webp/?url=https%3A%2F%2Fnpr-production-npr.s3.us-east-1.amazonaws.com%2Fbrightspot%2Faa%2F25%2F59ab748447e1aa73923ee6184801%2Fvitamink-03.jpg",
+  "author": "Kate Wells"
+ },
+ {
+  "id": "874f8abf695b",
+  "url": "https://www.theatlantic.com/health/2026/11/trader-joes-skin-care/689523/?utm_source=feed",
+  "title": "The Best Place to Buy Face Wash and Frozen Orange Chicken",
+  "headline": "The Best Place to Buy Face Wash and Frozen Orange Chicken",
+  "source": "Health | The Atlantic",
+  "topic": "science",
+  "topic_name": "Science & Medicine",
+  "words": 1461,
+  "minutes": 6,
+  "bullets": [
+   {
+    "point": "Earlier this year, when Trader Joe\u2019s released a list of the 11 products its customers loved the most, a bright-pink tub of Brazil Nut Body Butter was featured among the\u2026",
+    "detail": "Earlier this year, when Trader Joe\u2019s released a list of the 11 products its customers loved the most, a bright-pink tub of Brazil Nut Body Butter was featured among the potato chips and ice-cream sandwiches. The $6 moisturizing lotion was much cheaper than similar items on the market, the announcement noted. But its fans already knew that it was a close match for the popular $48 Sol de Janeiro Brazilian Bum Bum Cream and that the TJ\u2019s lotion had both a similar ingredient list and a similar scent of pistachio, salted caramel, and vanilla (if a less embarrassing name). That body butter is just one of the many TJ\u2019s skin-care products that bear a striking resemblance to expensive cult favorites. The $10 vitamin C might stand in for SkinCeuticals\u2019 $185 version. The TJ\u2019s facial sunscreen rubs in as cleanly as a $38 Supergoop formulation. Just as Trader Joe\u2019s snack fanatics have long tried to prove that the grocer uses the same manufacturers as name-brand favorites, people on beauty Subreddits are judging how closely TJ\u2019s beauty offerings mimic the brands they\u2019d find at Sephora. Like most grocery stores, Trader Joe\u2019s has sold a limited selection of personal-care items for years. But\u2026"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "",
+  "author": ""
+ },
+ {
+  "id": "7afaa8128bf8",
+  "url": "https://aeon.co/essays/are-mental-illnesses-universal-or-are-they-culturally-specific",
+  "title": "Is mental illness universal?",
+  "headline": "Is mental illness universal?",
+  "source": "Aeon | a world of ideas",
+  "topic": "longform",
+  "topic_name": "Longform & Ideas",
+  "words": 4108,
+  "minutes": 18,
+  "bullets": [
+   {
+    "point": "On a November day in 1994, a 14-year-old girl in Hong Kong named Charlene Hsu Chi-Ying collapsed on a busy sidewalk, in broad daylight, in her school uniform.",
+    "detail": "On a November day in 1994, a 14-year-old girl in Hong Kong named Charlene Hsu Chi-Ying collapsed on a busy sidewalk, in broad daylight, in her school uniform. She had starved herself to death. Charlene had never been diagnosed with anorexia, not because her self-starvation went unnoticed, but because the diagnosis, in its Western form, was mostly unknown in the East. Her death changed that overnight. Splashed across the front pages were stark headlines such as \u2018Girl Who Died In Street Was A Walking Skeleton\u2019. Local journalists scrambled for an explanation of this tragedy, and quickly found a template ready-made: a Western account of what anorexia was, what it felt like, who got it, what caused it. The ideas spread rapidly \u2013 particularly that anorexia involved distorted self-perceptions about one\u2019s body (dysmorphia) and an intense, borderline delusional, fear of gaining weight, often cued by prevailing beauty standards (notably, a cultural fixation with slender female bodies). Mass public education campaigns followed. Hotlines opened, celebrities spoke out. Anorexia became part of the zeitgeist."
+   },
+   {
+    "point": "Local journalists scrambled for an explanation of this tragedy, and quickly found a template ready-made: a Western account of what anorexia was, what it felt like, who got it, what\u2026",
+    "detail": "Local journalists scrambled for an explanation of this tragedy, and quickly found a template ready-made: a Western account of what anorexia was, what it felt like, who got it, what caused it. The ideas spread rapidly \u2013 particularly that anorexia involved distorted self-perceptions about one\u2019s body (dysmorphia) and an intense, borderline delusional, fear of gaining weight, often cued by prevailing beauty standards (notably, a cultural fixation with slender female bodies). Mass public education campaigns followed. Hotlines opened, celebrities spoke out. Anorexia became part of the zeitgeist. Before Charlene\u2019s death, the psychiatrist Sing Lee had been quietly studying a small number of women in Hong Kong who were starving themselves to dangerous degrees. Most of these women did not obsess over their bodies, nor fear becoming fat. They instead complained of somatic (bodily) ailments: uncomfortable bloating, a profound lack of appetite. The cognitive hallmark of Western anorexia \u2013 a distorted body image \u2013 was largely absent. Lee seemed to be documenting a distinct form of self-starvation with its own local logic. The situation has changed dramatically since then. By 2007, more than three-quarters of the anorexic patients Lee treated cited \u2018fat phobia\u2019 as a central motivation. Today, anorexia in Hong Kong\u2026"
+   },
+   {
+    "point": "Before Charlene\u2019s death, the psychiatrist Sing Lee had been quietly studying a small number of women in Hong Kong who were starving themselves to dangerous degrees.",
+    "detail": "Before Charlene\u2019s death, the psychiatrist Sing Lee had been quietly studying a small number of women in Hong Kong who were starving themselves to dangerous degrees. Most of these women did not obsess over their bodies, nor fear becoming fat. They instead complained of somatic (bodily) ailments: uncomfortable bloating, a profound lack of appetite. The cognitive hallmark of Western anorexia \u2013 a distorted body image \u2013 was largely absent. Lee seemed to be documenting a distinct form of self-starvation with its own local logic. The situation has changed dramatically since then. By 2007, more than three-quarters of the anorexic patients Lee treated cited \u2018fat phobia\u2019 as a central motivation. Today, anorexia in Hong Kong is terrifyingly common, affecting roughly one in 200 schoolgirls \u2013 comparable to trends in the United States. We do not know the form that Charlene\u2019s illness took. What we do know is that her death became a catalyst for the rapid importation of a Western conceptual framework that reshaped how Hong Kong understood and experienced disordered eating in young women."
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://images.aeonmedia.co/images/52cd7554-7970-47c1-b2e1-b1f2609d4c56/essay-2011-04-26t120000z_177609120_gm1e74q1iax01_rtrmadp_3_china.jpg?width=1200&quality=75&format=jpeg",
+  "author": "Alexander Pereira"
+ },
+ {
+  "id": "d1c2e4e80b60",
+  "url": "https://www.outsideonline.com/health/training-performance/endurance-exercise-heart-risks-athletes/",
+  "title": "Endurance Athletes and the Myth of the Invincible Heart",
+  "headline": "Endurance Athletes and the Myth of the Invincible Heart",
+  "source": "Outside Online",
+  "topic": "outdoors",
+  "topic_name": "Outdoors & Nature",
+  "words": 4109,
+  "minutes": 18,
+  "bullets": [
+   {
+    "point": "Seth Ruhling was ten days away from racing in the 2023 World Mountain Running Championships when he first felt the pain.",
+    "detail": "Seth Ruhling was ten days away from racing in the 2023 World Mountain Running Championships when he first felt the pain. It woke him up. It tingled down his arm. It ached along the whole length of his spine. A nurse working out of the operating room at a local hospital in Louisville, Colorado, Ruhling took an aspirin just to be safe. Surely , he thought, this is not a heart thing. He got up and rolled out his back. He didn\u2019t think much of it. He went to sleep. The next morning, Ruhling pulled on his scrubs and went to work. The pain had not relented. He turned to one of the doctors on his floor and described the symptoms. The pain in his chest, the way it hurt when he bent over. At best, the doctor said, it\u2019s nothing. At worst, he continued, you\u2019re having an aortic dissection and you are about to die. Ruhling walked across the building and checked himself into his own hospital\u2019s emergency room. The answer was somewhere in between. Electrocardiograms (EKGs) and blood work told the story of a potential heart attack. Nurses and doctors who Ruhling knew personally turned, in that moment,\u2026"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://cdn.outsideonline.com/wp-content/uploads/2026/11/heart-illo.jpg",
+  "author": "Devin Kelly"
+ },
+ {
+  "id": "9027e43a42c6",
+  "url": "https://www.newyorker.com/news/the-lede/the-long-local-history-behind-scott-colom",
+  "title": "The Long Local History Behind Scott Colom",
+  "headline": "The Long Local History Behind Scott Colom",
+  "source": "The New Yorker",
+  "topic": "longform",
+  "topic_name": "Longform & Ideas",
+  "words": 2578,
+  "minutes": 11,
+  "bullets": [
+   {
+    "point": "A few months ago, a retired newsman turned woodworker named Roger Larsen was busy refurbishing an old brick building that he owns in Columbus, Mississippi, when he saw his former\u2026",
+    "detail": "A few months ago, a retired newsman turned woodworker named Roger Larsen was busy refurbishing an old brick building that he owns in Columbus, Mississippi, when he saw his former neighbor Scott Colom filming an ad for his Democratic senatorial campaign on the steps of the county courthouse, across the street. Larsen is a conservative (\u201cAlan Keyes was the last Presidential candidate I was excited about,\u201d he said), but he admired the job that Colom had been doing as a district attorney for the past decade and said so. \u201cI told him\u2014of course, he wasn\u2019t expected to win\u2014I said, \u2018When you win, Scott, I want you to have my building as your district headquarters.\u2019 \u201d Larsen\u2019s building is likely too small to be of practical use to Colom now that he has indeed won, becoming the state\u2019s first Black senator-elect since Reconstruction. Just a couple of rooms, it was the Curly Top Beauty Shop for many years in the middle of the previous century. But it was originally built as a law office for James Thomas Harrison, a deputy to the Provisional Congress of the Confederate States. \u201cScott said that it would be symbolic,\u201d Larsen recalled. On a recent Saturday,\u2026"
+   },
+   {
+    "point": "On a recent Saturday, Larsen was one of more than a thousand people who attended a block party hosted by the Colom family, near a farmers\u2019 market, to celebrate the\u2026",
+    "detail": "On a recent Saturday, Larsen was one of more than a thousand people who attended a block party hosted by the Colom family, near a farmers\u2019 market, to celebrate the surprising victory. He found the rap music overbearing and didn\u2019t stay long. Another attendee, arguably a bigger celebrity than the candidate himself, was Russ Hudson, a veteran of the war in Afghanistan who starred in the Colom campaign\u2019s most viral ad, flipping burgers on a grill while drawling, \u201cShiiiiiiit, I\u2019d rather pick another senator instead.\u201d (Cindy Hyde-Smith, the Republican incumbent, had answered a question about beef prices by saying, \u201cYou know, you have so many proteins to choose from.\u201d) Still, another partygoer was George Irby, a revered longtime city employee who was drafted by the New York Giants, as a running back, in 1969, and then resettled in his native Columbus after his sports career. \u201cI was amazed at the number of people, Black and white, that showed up,\u201d Irby said. \u201cLet me tell you, it goes beyond Columbus. I played football at Tuskegee, and we have this e-mail thread. One of the guys lives down in Florida now, and he said, \u2018Good things are happening in Mississippi, man. We\u2019re\u2026"
+   },
+   {
+    "point": "Still, another partygoer was George Irby, a revered longtime city employee who was drafted by the New York Giants, as a running back, in 1969, and then resettled in his\u2026",
+    "detail": "Still, another partygoer was George Irby, a revered longtime city employee who was drafted by the New York Giants, as a running back, in 1969, and then resettled in his native Columbus after his sports career. \u201cI was amazed at the number of people, Black and white, that showed up,\u201d Irby said. \u201cLet me tell you, it goes beyond Columbus. I played football at Tuskegee, and we have this e-mail thread. One of the guys lives down in Florida now, and he said, \u2018Good things are happening in Mississippi, man. We\u2019re proud of you.\u2019 \u201d I asked Irby, who is now eighty, how Colom\u2019s election compared in his mind with milestones like the Presidency of Barack Obama. \u201cI think it\u2019s the biggest thing that has happened during my lifetime,\u201d he said. \u201cI\u2019ll put it that way.\u201d"
+   }
+  ],
+  "room_line": "",
+  "why_for_you": "",
+  "date": "2026-11-24",
+  "score": null,
+  "reason": "",
+  "image": "https://media.newyorker.com/photos/6b00cd745d0332a4851b8c6e/16:9/w_1280,c_limit/McGrath_Colom_AP26315710281702.jpg",
+  "author": "Ben McGrath"
+ }
+]
