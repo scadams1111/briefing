@@ -80,6 +80,8 @@ def daily() -> None:
     who = profile(cfg)
     names = {t["id"]: t["name"] for t in cfg["topics"]}
 
+    # Re-running on the same day rebuilds today's picks instead of skipping them
+    st["seen"] = {u: d for u, d in st["seen"].items() if d != date}
     cands, health = collect(cfg, set(st["seen"]))
     log.info("collected %d candidates", len(cands))
     heuristic(cands, cfg)
