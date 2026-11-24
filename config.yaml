@@ -22,6 +22,7 @@ llm:
   # use is found automatically and used as a backup when these are busy.
   models: ["gemini-3.1-flash-lite"]
   seconds_between_calls: 5   # stays under free-tier per-minute limits
+  budget_minutes: 12         # stop using the AI after this long so the run always finishes
 
 # Used when the READER_PROFILE secret isn't set. Keep this one
 # generic because the repo is public; put the personal version

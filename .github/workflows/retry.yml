@@ -1,0 +1,41 @@
+name: Catch-up summaries
+
+# If Gemini was busy during the morning run, these later runs redo any
+# summaries that fell back to the plain version. They do nothing if all is well.
+on:
+  schedule:
+    - cron: "47 14 * * *"   # ~6:47am Pacific (winter)
+    - cron: "47 17 * * *"   # ~9:47am Pacific (winter)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: briefing
+  cancel-in-progress: false
+
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Redo summaries that missed the AI
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          READER_PROFILE: ${{ secrets.READER_PROFILE }}
+        run: python -m curator retry
+      - name: Publish
+        run: |
+          git config user.name "briefing-bot"
+          git config user.email "briefing-bot@users.noreply.github.com"
+          git add -A docs data
+          git commit -m "Catch-up summaries $(date -u +%F)" || exit 0
+          git pull --rebase
+          git push

@@ -53,8 +53,11 @@ def summarize(title: str, source: str, text: str, llm: LLM, profile: str) -> dic
     out = None
     if llm.available and text:
         out = llm.json(PROMPT.format(profile=profile, title=title, source=source, text=text[:14000]))
+    ai = True
     if not out or not isinstance(out.get("bullets"), list) or not out["bullets"]:
         out = extractive(title, text)
+        ai = False
+    out["ai"] = ai
     out["bullets"] = [b for b in out["bullets"] if isinstance(b, dict) and b.get("point")][:3]
     out.setdefault("headline", title)
     out.setdefault("room_line", "")

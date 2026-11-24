@@ -26,6 +26,8 @@ class LLM:
         c = cfg.get("llm", {})
         self.preferred = list(c.get("models", []))
         self.gap = float(c.get("seconds_between_calls", 5))
+        self.deadline = time.time() + 60 * float(c.get("budget_minutes", 12))
+        self.failures = 0
         self.key = os.environ.get("GEMINI_API_KEY", "").strip()
         self.client = None
         self.models: list[str] = []
@@ -57,7 +59,8 @@ class LLM:
 
     @property
     def available(self) -> bool:
-        return self.client is not None and bool(self.models)
+        return (self.client is not None and bool(self.models)
+                and self.failures < 3 and time.time() < self.deadline)
 
     def json(self, prompt: str) -> dict | None:
         if not self.available:
@@ -65,8 +68,8 @@ class LLM:
         from google.genai import errors, types
         conf = types.GenerateContentConfig(response_mime_type="application/json", temperature=0.3)
         tries = 0
-        max_tries = max(4, 2 * len(self.models))
-        while tries < max_tries and self.models:
+        max_tries = len(self.models) + 1
+        while tries < max_tries and self.models and time.time() < self.deadline:
             wait = self.gap - (time.time() - self._last)
             if wait > 0:
                 time.sleep(wait)
@@ -75,6 +78,7 @@ class LLM:
             tries += 1
             try:
                 resp = self.client.models.generate_content(model=model, contents=prompt, config=conf)
+                self.failures = 0
                 return _loads(resp.text)
             except errors.ClientError as ex:
                 code = getattr(ex, "code", None)
@@ -92,12 +96,15 @@ class LLM:
             except errors.ServerError as ex:        # overloaded / temporary: try another model
                 log.warning("model %s busy (%s); rotating", model, getattr(ex, "code", ""))
                 self._rotate()
-                time.sleep(3 if tries < len(self.models) else 20)
+                time.sleep(3)
             except Exception as ex:
                 log.warning("LLM error on %s (%s)", model, ex)
                 self._rotate()
                 time.sleep(5)
+        self.failures += 1
         log.error("LLM gave up on this item; using fallback")
+        if not self.available:
+            log.error("Gemini looks unavailable right now; finishing without it (a catch-up run will retry)")
         return None
 
     def _rotate(self) -> None:

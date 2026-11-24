@@ -53,7 +53,8 @@ def make_item(c_url, title, source, topic, topic_name, text, summ, **extra) -> d
             "title": title, "headline": summ.get("headline") or title, "source": source,
             "topic": topic, "topic_name": topic_name, "words": words,
             "minutes": max(1, round(words / 230)), "bullets": summ["bullets"],
-            "room_line": summ.get("room_line", ""), "why_for_you": summ.get("why_for_you", ""), **extra}
+            "room_line": summ.get("room_line", ""), "why_for_you": summ.get("why_for_you", ""),
+            "ai": summ.get("ai", False), **extra}
 
 
 def last_picks() -> list[dict]:
@@ -108,20 +109,64 @@ def daily() -> None:
     (DATA / "days").mkdir(parents=True, exist_ok=True)
     (DATA / "days" / f"{date}.json").write_text(json.dumps(items, indent=1))
 
-    site = render.site_url(cfg)
-    render.build_epub(cfg, date, items, new_saved)
+    prune(st, cfg.get("keep_days", 30))
+    publish(cfg, st, date, items, new_saved)
     for s in new_saved:
         s["delivered"] = True
-    prune(st, cfg.get("keep_days", 30))
-    archive = [p.stem for p in (render.DOCS / "archive").glob("20*.html")] + [date]
-    render.web(cfg, date, items, st["saved"], sorted(set(archive)))
-    render.feeds(cfg, site, items, st["saved"])
-    render.opds(cfg, site)
+        s["delivered_on"] = date
     (render.DOCS / "health.json").write_text(json.dumps(
         {"date": date, "llm": llm.available, "candidates": len(cands), "picked": len(items), "feeds": health}, indent=1))
     (render.DOCS / ".nojekyll").touch()
     save_state(st)
     log.info("done: %d picks, %d saved items delivered", len(items), len(new_saved))
+
+
+def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[dict]) -> None:
+    site = render.site_url(cfg)
+    render.build_epub(cfg, date, items, new_saved)
+    archive = [p.stem for p in (render.DOCS / "archive").glob("20*.html")] + [date]
+    render.web(cfg, date, items, st["saved"], sorted(set(archive)))
+    render.feeds(cfg, site, items, st["saved"])
+    render.opds(cfg, site)
+
+
+def retry() -> None:
+    """Catch-up run: redo today's summaries that missed out on the AI."""
+    cfg = load_cfg()
+    st = load_state()
+    date = today()
+    path = DATA / "days" / f"{date}.json"
+    if not path.exists():
+        log.info("no briefing for %s yet; nothing to retry", date)
+        return
+    items = json.loads(path.read_text())
+    todo = [i for i in items if not i.get("ai")]
+    saved_todo = [s for s in st["saved"] if not s.get("ai")][:10]
+    if not todo and not saved_todo:
+        log.info("all summaries already AI-written; nothing to do")
+        return
+    llm = LLM(cfg)
+    if not llm.available:
+        return
+    who = profile(cfg)
+    fixed = 0
+    for it in todo + saved_todo:
+        if not llm.available:
+            break
+        try:
+            text, _ = fetch_article(it["url"])
+        except Exception:
+            continue
+        summ = summarize(it["title"], it["source"], text, llm, who)
+        if summ.get("ai"):
+            it.update(headline=summ.get("headline") or it["title"], bullets=summ["bullets"],
+                      room_line=summ.get("room_line", ""), why_for_you=summ.get("why_for_you", ""), ai=True)
+            fixed += 1
+    path.write_text(json.dumps(items, indent=1))
+    save_state(st)
+    if fixed:
+        publish(cfg, st, date, items, [s for s in st["saved"] if s.get("delivered_on") == date])
+    log.info("retry: upgraded %d of %d summaries", fixed, len(todo) + len(saved_todo))
 
 
 def save(url: str) -> None:
