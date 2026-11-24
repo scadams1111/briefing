@@ -1,7 +1,7 @@
 {
  "date": "2026-11-24",
  "llm": true,
- "candidates": 352,
+ "candidates": 358,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -19,7 +19,7 @@
   "https://www.axios.com/feeds/feed.rss": "ok (40)",
   "https://www.economist.com/finance-and-economics/rss.xml": "ok (40)",
   "https://feeds.npr.org/1001/rss.xml": "ok (10)",
-  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (29)",
+  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (31)",
   "https://www.economist.com/international/rss.xml": "ok (40)",
   "https://www.foreignaffairs.com/rss.xml": "ok (20)",
   "https://www.theatlantic.com/feed/channel/politics/": "ok (25)",
@@ -37,7 +37,7 @@
   "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (2)",
   "https://lethain.com/feeds.xml": "ok (12)",
   "https://charity.wtf/feed/": "ok (20)",
-  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (10)",
   "https://www.outsideonline.com/feed/": "ok (10)",
   "https://www.adventure-journal.com/feed/": "ok (10)",
   "https://www.backpacker.com/feed/": "ok (10)",
