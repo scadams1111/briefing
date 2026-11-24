@@ -98,7 +98,8 @@ def daily() -> None:
     for c in picks:
         summ = summarize(c.title, c.source, c.text, llm, who)
         items.append(make_item(c.url, c.title, c.source, c.topic, names.get(c.topic, c.topic), c.text, summ,
-                               date=date, score=c.llm_score, reason=c.llm_reason))
+                               date=date, score=c.llm_score, reason=c.llm_reason,
+                               image=c.extra.get("image", ""), author=c.extra.get("author", "")))
         st["seen"][normalize_url(c.url)] = date
 
     new_saved = [s for s in st["saved"] if not s.get("delivered")]
@@ -139,7 +140,8 @@ def save(url: str) -> None:
     if not summ["bullets"]:
         summ["bullets"] = [{"point": "Couldn't read this page (paywall or blocked) — open the original.", "detail": ""}]
     now = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
-    st["saved"].insert(0, make_item(url, title, source, "saved", "Saved", text, summ, saved_at=now, delivered=False))
+    st["saved"].insert(0, make_item(url, title, source, "saved", "Saved", text, summ, saved_at=now, delivered=False,
+                                     image=meta.get("image") or "", author=meta.get("author") or ""))
     save_state(st)
     site = render.site_url(cfg)
     render.saved_page(cfg, st["saved"])

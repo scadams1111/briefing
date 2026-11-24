@@ -31,44 +31,15 @@ nav{font-size:.9em;margin-bottom:1em}
 """
 
 
-# ── web ────────────────────────────────────────────────────────────
-def _article_html(it: dict) -> str:
-    pts = "".join(
-        f"<li><details><summary>{e(b['point'])}</summary><p>{e(b.get('detail', ''))}</p></details></li>"
-        for b in it["bullets"])
-    room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
-    why = f"<p class='why'>Why for you: {e(it['why_for_you'])}</p>" if it.get("why_for_you") else ""
-    return (f"<article><p class='meta'>{e(it.get('topic_name', ''))} · {e(it['source'])} · {it['minutes']} min</p>"
-            f"<h2><a href='{e(it['url'])}'>{e(it['headline'])}</a></h2>{room}<ol>{pts}</ol>{why}"
-            f"<p><a href='{e(it['url'])}'>Read the original →</a></p></article>")
-
-
-def _page(title: str, body: str) -> str:
-    return (f"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
-            f"<meta name='viewport' content='width=device-width,initial-scale=1'>"
-            f"<title>{e(title)}</title><style>{CSS}</style></head><body>{body}</body></html>")
-
-
+# ── web (see web.py for the design) ────────────────────────────────
 def web(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str]) -> None:
-    nice = dt.date.fromisoformat(date).strftime("%A, %B %-d")
-    nav = "<nav><a href='saved.html'>Saved</a> · <a href='archive/'>Archive</a> · <a href='epub/latest.epub'>Today's EPUB</a></nav>"
-    body = f"<h1>{e(cfg['site_title'])}</h1><p class='meta'>{nice}</p>{nav}"
-    body += "".join(_article_html(i) for i in picks) or "<p>Nothing today.</p>"
-    page = _page(f"{cfg['site_title']} — {nice}", body)
-    (DOCS / "archive").mkdir(parents=True, exist_ok=True)
-    (DOCS / "index.html").write_text(page)
-    (DOCS / "archive" / f"{date}.html").write_text(page.replace("href='saved.html'", "href='../saved.html'")
-                                                   .replace("href='archive/'", "href='./'")
-                                                   .replace("href='epub/", "href='../epub/"))
-    links = "".join(f"<li><a href='{d}.html'>{d}</a></li>" for d in sorted(archive_dates, reverse=True))
-    (DOCS / "archive" / "index.html").write_text(_page("Archive", f"<h1>Archive</h1><nav><a href='../'>Today</a></nav><ul>{links}</ul>"))
-    saved_page(cfg, saved)
+    from . import web as w
+    w.write_all(cfg, date, picks, saved, archive_dates)
 
 
 def saved_page(cfg: dict, saved: list[dict]) -> None:
-    body = "<h1>Saved</h1><nav><a href='./'>Today</a></nav>" + ("".join(_article_html(i) for i in saved[:50]) or "<p>Nothing saved yet.</p>")
-    DOCS.mkdir(exist_ok=True)
-    (DOCS / "saved.html").write_text(_page("Saved", body))
+    from . import web as w
+    w.write_saved(saved)
 
 
 # ── RSS (KOReader News Downloader) ─────────────────────────────────

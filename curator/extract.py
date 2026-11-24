@@ -19,13 +19,16 @@ def fetch_article(url: str) -> tuple[str, dict]:
     meta = {}
     m = trafilatura.extract_metadata(html)
     if m:
-        meta = {"title": m.title, "sitename": m.sitename, "date": m.date, "author": m.author}
+        meta = {"title": m.title, "sitename": m.sitename, "date": m.date, "author": m.author,
+                "image": getattr(m, "image", None) or ""}
     return text, meta
 
 
 def _one(c: Candidate) -> None:
     try:
-        c.text, _ = fetch_article(c.url)
+        c.text, meta = fetch_article(c.url)
+        c.extra["image"] = meta.get("image") or ""
+        c.extra["author"] = meta.get("author") or ""
     except Exception as ex:
         log.info("extract failed %s: %s", c.url, ex)
         c.text = ""
