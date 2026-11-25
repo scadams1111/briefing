@@ -79,16 +79,18 @@ Summary: {summary}
 """
 
 
-def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str,
-                     previews: list | None = None) -> list[dict]:
-    sub = cfg.get("subscriber") or {}
-    feeds = sub.get("feeds") or []
-    if not feeds and not previews:
+def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str, feeds: list,
+                     previews: list | None, n: int, section: str, per_section: int = 1,
+                     per_source: int = 2) -> list[dict]:
+    """Headline-only picks (paywalled): the NYT column, and Premium picks from other top publications."""
+    if n <= 0 or (not feeds and not previews):
         return []
     topics = [{"id": f"sub{k}", "name": f.get("topic", "Subscriber"), "weight": 1.0,
                "feeds": [{"url": f["url"], "name": f.get("name"), "weight": 1.0}]} for k, f in enumerate(feeds)]
-    cands, _ = collect({"topics": topics, "lookback_hours": cfg["lookback_hours"], "hackernews": {}},
-                       set(st["seen"]))
+    cands = []
+    if topics:
+        cands, _ = collect({"topics": topics, "lookback_hours": cfg["lookback_hours"], "hackernews": {}},
+                           set(st["seen"]))
     names = {t["id"]: t["name"] for t in topics}
     topic_names = {t["id"]: t["name"] for t in cfg["topics"]}
     for c in previews or []:                  # paywalled previews from the main feeds
@@ -101,14 +103,14 @@ def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str,
     cands = dedupe_titles(cands)
     pool = sorted(cands, key=lambda c: c.heuristic, reverse=True)[:30]
     llm_rank(pool, llm, who, names)
-    chosen, used = [], set()
+    chosen: list = []
     for c in sorted(pool, key=final_score, reverse=True):
-        if len(chosen) >= sub.get("picks", 3):
+        if len(chosen) >= n:
             break
-        key = (c.source, names[c.topic])
-        if key in used or sum(1 for x in chosen if x.source == c.source) >= 2:
-            continue                # variety: max 2 per publication, 1 per section
-        used.add(key)
+        same_section = sum(1 for x in chosen if (x.source, names[x.topic]) == (c.source, names[c.topic]))
+        same_source = sum(1 for x in chosen if x.source == c.source)
+        if same_section >= per_section or same_source >= per_source:
+            continue                # variety across sections and publications
         chosen.append(c)
     out = []
     for c in chosen:
@@ -117,7 +119,8 @@ def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str,
         out.append({"id": hashlib.sha1(normalize_url(c.url).encode()).hexdigest()[:12], "url": c.url,
                     "title": c.title, "headline": res.get("headline") or c.title,
                     "takeaway": res.get("takeaway") or c.summary[:220], "source": c.source,
-                    "topic_name": names[c.topic], "date": date, "subscriber": True})
+                    "topic_name": names[c.topic], "date": date, "subscriber": True,
+                    "section": section, "score": c.llm_score})
         st["seen"][normalize_url(c.url)] = date
     return out
 
@@ -175,8 +178,15 @@ def daily() -> None:
         st["seen"][normalize_url(c.url)] = date
 
     picked = {normalize_url(c.url) for c in picks}
-    subs = subscriber_picks(cfg, st, llm, who, date,
-                            [c for c in previews if normalize_url(c.url) not in picked])
+    nyt_cfg, prem_cfg = cfg.get("nyt") or {}, cfg.get("premium") or {}
+    # The New York Times column: best + most relevant from its section feeds
+    subs = subscriber_picks(cfg, st, llm, who, date, nyt_cfg.get("feeds") or [], [],
+                            int(nyt_cfg.get("picks", 5)), "nyt", per_section=2, per_source=99)
+    # Premium picks: paywalled stories from other top publications (not NYT)
+    subs += subscriber_picks(cfg, st, llm, who, date, [],
+                             [c for c in previews if normalize_url(c.url) not in picked
+                              and "nytimes.com" not in c.url],
+                             int(prem_cfg.get("picks", 4)), "premium", per_section=1, per_source=2)
     new_saved = [s for s in st["saved"] if not s.get("delivered")]
     (DATA / "days").mkdir(parents=True, exist_ok=True)
     (DATA / "days" / f"{date}.json").write_text(json.dumps(items, indent=1))

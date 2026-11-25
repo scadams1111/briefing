@@ -125,9 +125,12 @@ def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs:
             body += (f"<p class='back'>Full article: {e(it['url'])}</p>"
                      f"<p class='back'><a href='contents.xhtml'>↩ Back to contents</a></p>")
             chapters.append(_x(it["headline"], f, body, css))
-    if subs:
-        contents += "<h3 class='section'>From top publications</h3>"
-        for it in subs:
+    from .web import section_of
+    for sec, label in (("nyt", "The New York Times"), ("premium", "From top publications")):
+        group = [i for i in subs or [] if section_of(i) == sec]
+        if group:
+            contents += f"<h3 class='section'>{label}</h3>"
+        for it in group:
             contents += (f"<p class='meta'>{e(it['source'])} · {e(it.get('topic_name', ''))}</p>"
                          f"<h2>{e(it['headline'])}</h2><p>{e(it.get('takeaway', ''))}</p>"
                          f"<p class='back'>Read on your phone: {e(it['url'])}</p>")

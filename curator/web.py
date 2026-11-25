@@ -179,16 +179,28 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
             + (f"<script>{JS}</script>" if script else "") + "</body></html>")
 
 
-def subs_slide(subs: list[dict], root: str = "") -> str:
+def section_of(it: dict) -> str:
+    return it.get("section") or ("nyt" if "nytimes.com" in it.get("url", "") else "premium")
+
+
+SECTIONS = {
+    "nyt": ("The New York Times", "Today in the Times", "The best and most relevant Times stories today. Opens in your NYT app."),
+    "premium": ("Premium picks", "From top publications", "Paywalled pieces worth opening with your subscription."),
+}
+
+
+def subs_slide(subs: list[dict], root: str = "", section: str = "premium") -> str:
+    pill, title, sub = SECTIONS[section]
     rows = "".join(
-        f"<div class='sub'><a class='subhit' href='{e(i['url'])}'><span class='src'>{e(i['source'])} · {e(i.get('topic_name', ''))}</span>"
-        f"<strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span></a>"
+        f"<div class='sub'><a class='subhit' href='{e(i['url'])}'><span class='src'>"
+        + (e(i.get('topic_name', '')) if section == "nyt" else f"{e(i['source'])} · {e(i.get('topic_name', ''))}")
+        + f"</span><strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span></a>"
         f"<div class='subrow'><a class='open' href='{e(i['url'])}'>Open article {NEXT}</a>"
         f"<a class='chip sm' href='{root}read.html?u={e(quote(i['url'], safe=''))}'>{ARCHIVE}<span>Link broken?</span></a></div></div>"
         for i in subs)
-    return (f"<section class='slide' data-url='' data-label='Premium picks'><article class='card'><div class='scroll'><div class='body'>"
-            f"<span class='pill' style='align-self:flex-start'>Premium picks</span>"
-            f"<h1 class='head'>From top publications</h1><p class='room' style='font-style:normal;font-family:var(--sans);font-size:14px'>Paywalled pieces worth opening with your subscription.</p>"
+    return (f"<section class='slide' data-url='' data-label='{e(pill)}'><article class='card'><div class='scroll'><div class='body'>"
+            f"<span class='pill' style='align-self:flex-start'>{e(pill)}</span>"
+            f"<h1 class='head'>{e(title)}</h1><p class='room' style='font-style:normal;font-family:var(--sans);font-size:14px'>{e(sub)}</p>"
             f"<div class='subs'>{rows}</div></div></div></article></section>")
 
 
@@ -197,11 +209,13 @@ def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None =
     n = len(picks)
     if not n:
         return "<main class='page'><p class='empty'>Nothing yet today.</p></main>"
-    extra = 1 if subs else 0
-    bars = "".join(f"<button type='button' aria-label='Story {k + 1}'><i></i></button>" for k in range(n + 1 + extra))
+    groups = [(sec, [i for i in subs or [] if section_of(i) == sec]) for sec in ("nyt", "premium")]
+    groups = [(sec, items) for sec, items in groups if items]
+    bars = "".join(f"<button type='button' aria-label='Story {k + 1}'><i></i></button>"
+                   for k in range(n + 1 + len(groups)))
     slides = "".join(f"<section class='slide' data-url='{e(i['url'])}'>{card(i, root)}</section>" for i in picks)
-    if subs:
-        slides += subs_slide(subs, root)
+    for sec, items in groups:
+        slides += subs_slide(items, root, sec)
     mins = sum(i.get("minutes", 0) for i in picks)
     toc = "".join(f"<button type='button' data-go='{k}'><span class='k'>{k + 1}</span>"
                   f"<span>{e(i['headline'])}<small>{e(i['source'])} · {i['minutes']} min</small></span></button>"

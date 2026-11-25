@@ -205,12 +205,22 @@ premium_domains: [theatlantic.com, newyorker.com, economist.com, nytimes.com, ws
                   theguardian.com, aeon.co, foreignaffairs.com]
 premium_bonus: 0.6
 
-subscriber:
-  picks: 4
+# The New York Times column (you subscribe). Headline feeds only; each pick
+# gets a one-line takeaway and opens in the NYT app.
+nyt:
+  picks: 5
   feeds:
+    - {url: https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml, name: The New York Times, topic: Top Stories}
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/Science.xml, name: The New York Times, topic: Science}
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/Health.xml, name: The New York Times, topic: Health}
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/Business.xml, name: The New York Times, topic: Business}
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml, name: The New York Times, topic: Technology}
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml, name: The New York Times, topic: World}
+    - {url: https://rss.nytimes.com/services/xml/rss/nyt/US.xml, name: The New York Times, topic: U.S.}
+    - {url: https://rss.nytimes.com/services/xml/rss/nyt/Upshot.xml, name: The New York Times, topic: The Upshot}
+    - {url: https://rss.nytimes.com/services/xml/rss/nyt/Magazine.xml, name: The New York Times, topic: Magazine}
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/Opinion.xml, name: The New York Times, topic: Opinion}
+
+# Premium picks: paywalled stories from the other top publications above.
+premium:
+  picks: 4
