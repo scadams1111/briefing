@@ -192,6 +192,7 @@ def daily() -> None:
          "sources": health_sources}, indent=1))
     (render.DOCS / ".nojekyll").touch()
     save_state(st)
+    (DATA / "last_daily.txt").write_text(date)
     log.info("done: %d picks, %d saved items delivered", len(items), len(new_saved))
 
 

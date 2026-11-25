@@ -1,8 +1,14 @@
 name: Daily briefing
 
 on:
+  # GitHub often delays or skips scheduled runs, so there are backups.
+  # Whichever fires first builds the day; the later ones see it's done and stop.
   schedule:
-    - cron: "17 12 * * *"   # ~4:17am Pacific in winter, 5:17am in summer
+    - cron: "17 11 * * *"   # ~3:17am Pacific (winter)
+    - cron: "47 11 * * *"
+    - cron: "23 12 * * *"
+    - cron: "53 12 * * *"
+    - cron: "37 13 * * *"   # ~5:37am Pacific, last try
   workflow_dispatch: {}      # "Run workflow" button for testing
 
 permissions:
@@ -18,18 +24,29 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Already built today?
+        id: check
+        run: |
+          today=$(date -u -d '-8 hours' +%F)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(cat data/last_daily.txt 2>/dev/null)" = "$today" ]; then
+            echo "Today's briefing already exists; skipping."; echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.check.outputs.skip != 'true'
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install -r requirements.txt
+      - if: steps.check.outputs.skip != 'true'
+        run: pip install -r requirements.txt
       - name: Build today's briefing
+        if: steps.check.outputs.skip != 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           READER_PROFILE: ${{ secrets.READER_PROFILE }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python -m curator daily
       - name: Publish
+        if: steps.check.outputs.skip != 'true'
         run: |
           git config user.name "briefing-bot"
           git config user.email "briefing-bot@users.noreply.github.com"
