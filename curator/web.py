@@ -1,196 +1,231 @@
-"""The web reading experience: a clean, Matter-style briefing page."""
+"""The web reading experience: 'Midnight' story cards. One story per screen,
+swipe or tap Next to move through the day's briefing."""
 from __future__ import annotations
 
 import datetime as dt
 import html
-import json
 from pathlib import Path
+from urllib.parse import urlsplit
 
 DOCS = Path("docs")
 e = html.escape
 
+FONTS = ("<link rel='preconnect' href='https://fonts.googleapis.com'>"
+         "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>"
+         "<link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700"
+         "&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>")
+
 CSS = r"""
 :root{
-  --bg:#F7F5F0; --card:#FFFFFF; --ink:#16140F; --muted:#77736A; --faint:#A8A399;
-  --line:#E9E5DC; --chip:#EFEBE3; --accent:#E8572A; --accent-soft:#FCE9E1;
-  --shadow:0 1px 2px rgba(22,20,15,.04),0 8px 24px rgba(22,20,15,.06);
-  --serif:"New York",ui-serif,"Iowan Old Style","Charter","Georgia",serif;
-  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",system-ui,sans-serif;
+  --bg:#0B1220; --card:#131C2E; --tile:#172136; --tile-open:#1C2740; --ink:#EAF0FA; --muted:#8D9AB3;
+  --detail:#BAC5D8; --accent:#F2B544; --on-accent:#1A1305; --img:#1E2A44; --line:#2A3653;
+  --serif:"Fraunces","New York",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root{
-  --bg:#0F0E0C; --card:#1A1916; --ink:#F1EEE7; --muted:#9C978C; --faint:#6E6A62;
-  --line:#2A2824; --chip:#24221E; --accent:#FF7A4D; --accent-soft:#3A2219;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
-}}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:680px;margin:0 auto;padding:0 18px 80px}
+button{font:inherit;color:inherit;cursor:pointer}
 
-/* top bar */
-.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 82%,transparent);
-  backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);border-bottom:1px solid var(--line)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:54px;padding-bottom:0}
-.brand{font-family:var(--serif);font-weight:700;font-size:20px;letter-spacing:-.01em}
+/* shell */
+.top{max-width:560px;margin:0 auto;padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em}
 .brand span{color:var(--accent)}
-.tabs{display:flex;gap:4px;background:var(--chip);padding:3px;border-radius:999px}
-.tabs a{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;color:var(--muted)}
-.tabs a.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
+.tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
+.tabs a.on{background:var(--line);color:var(--ink)}
 
-/* hero */
-.hero{padding:30px 0 6px}
-.kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.hero h1{font-family:var(--serif);font-size:38px;line-height:1.08;letter-spacing:-.02em;margin:6px 0 8px;font-weight:700}
-.hero p{margin:0;color:var(--muted);font-size:15px}
-
-/* topic chips */
-.chips{display:flex;gap:8px;overflow-x:auto;padding:18px 0 6px;margin:0 -18px;padding-left:18px;padding-right:18px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--muted);font:600 13px var(--sans);
-  padding:7px 13px;border-radius:999px;cursor:pointer;transition:all .15s}
-.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-
-/* cards */
-.card{background:var(--card);border-radius:20px;box-shadow:var(--shadow);margin:18px 0;overflow:hidden;
-  animation:rise .5s both}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.thumb{display:block;aspect-ratio:16/9;background:var(--chip);overflow:hidden}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
-.card:hover .thumb img{transform:scale(1.02)}
-.body{padding:18px 20px 20px}
-.meta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);font-weight:500}
-.meta img{width:18px;height:18px;border-radius:5px;background:var(--chip)}
-.meta .dot{color:var(--faint)}
-.topic{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
-  background:var(--accent-soft);padding:3px 8px;border-radius:6px;white-space:nowrap}
-.card h2{font-family:var(--serif);font-size:23px;line-height:1.22;letter-spacing:-.01em;margin:10px 0 0;font-weight:700}
-.card.lead h2{font-size:28px}
-.room{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:16.5px;line-height:1.5;
-  margin:12px 0 0;padding-left:14px;border-left:3px solid var(--accent)}
-
-/* key points */
-.points{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
-.points li{border-bottom:1px solid var(--line)}
-.points details>summary{list-style:none;display:flex;gap:12px;align-items:flex-start;padding:13px 0;cursor:pointer;
-  font-size:15.5px;line-height:1.45;font-weight:500}
-.points details>summary::-webkit-details-marker{display:none}
-.num{flex:none;width:24px;height:24px;border-radius:50%;background:var(--chip);color:var(--ink);font:700 12px/24px var(--sans);text-align:center;margin-top:1px;transition:all .2s}
-.chev{flex:none;margin-left:auto;margin-top:3px;width:18px;height:18px;color:var(--faint);transition:transform .25s}
-details[open] .num{background:var(--accent);color:#fff}
-details[open] .chev{transform:rotate(180deg)}
-.detail{padding:0 0 16px 36px;font-family:var(--serif);font-size:16.5px;line-height:1.65;color:var(--ink);opacity:.92;
-  animation:fade .3s ease}
-@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:.92;transform:none}}
-
-.foot{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;padding:9px 15px;border-radius:999px;
-  background:var(--ink);color:var(--bg)}
-.why{font-size:13.5px;line-height:1.5;color:var(--muted);margin-top:14px;padding:10px 12px;background:var(--chip);border-radius:12px}
+/* story deck */
+.reader{max-width:560px;margin:0 auto;height:calc(100dvh - 58px);display:flex;flex-direction:column;padding:12px 0 calc(14px + env(safe-area-inset-bottom))}
+.bars{display:flex;gap:4px;padding:0 16px}
+.bars button{flex:1;height:14px;border:0;background:none;padding:5px 0}
+.bars button i{display:block;height:3px;border-radius:2px;background:var(--line);transition:background .2s}
+.bars button.seen i{background:var(--ink)}
+.status{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 10px;font-size:13px;color:var(--muted)}
+.status b{color:var(--ink);font-weight:600}
+.deck{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;padding:0 16px;display:flex}
+.card{flex:1;min-width:0;border-radius:24px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.scroll{overflow-y:auto;flex:1;min-height:0;overscroll-behavior:contain}
+.media{position:relative;height:190px;background:var(--img);display:flex;align-items:flex-end;padding:14px}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pill{position:relative;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--on-accent);padding:5px 9px;border-radius:6px}
+.body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px}
+.src{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.src img{width:16px;height:16px;border-radius:4px;background:var(--tile)}
+h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-height:1.16;letter-spacing:-.01em}
+.room{margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--detail)}
+.points{display:flex;flex-direction:column;gap:8px}
+.points details{border-radius:14px;background:var(--tile)}
+.points details[open]{background:var(--tile-open)}
+.points summary{list-style:none;display:flex;gap:10px;padding:12px;font-size:14.5px;line-height:1.42;font-weight:600;cursor:pointer}
+.points summary::-webkit-details-marker{display:none}
+.points summary .n{color:var(--accent);flex:none;width:12px}
+.points summary svg{flex:none;margin-left:auto;margin-top:2px;color:var(--muted);transition:transform .2s}
+.points details[open] summary svg{transform:rotate(180deg)}
+.points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
+.why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 .why b{color:var(--ink);font-weight:600}
 
-.section{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:34px 0 -4px}
+.actions{display:flex;gap:10px;padding:12px 16px 0}
+.btn{flex:1;height:48px;border-radius:14px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600}
+.btn.icon{flex:none;width:48px}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+.btn[disabled]{opacity:.35}
+
+/* end slide + lists */
+.end h1{margin:4px 0 2px;font-family:var(--serif);font-size:28px}
+.toc{display:flex;flex-direction:column}
+.toc button,.toc a{display:flex;gap:12px;align-items:baseline;text-align:left;width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;font-size:15px;line-height:1.35}
+.toc .k{color:var(--accent);font-weight:700;flex:none;width:18px}
+.toc small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.page{max-width:560px;margin:0 auto;padding:10px 16px 60px}
+.page .card{margin:14px 0}
+.hero{padding:18px 4px 6px}
+.hero .kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:6px 0 4px;font-family:var(--serif);font-size:32px;line-height:1.1}
+.hero p{margin:0;color:var(--muted);font-size:14px}
 .empty{color:var(--muted);text-align:center;padding:60px 0}
-.archive a{display:flex;justify-content:space-between;padding:16px 4px;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:19px}
-.archive a span{color:var(--faint);font-family:var(--sans);font-size:14px}
-footer{text-align:center;color:var(--faint);font-size:12px;margin-top:40px}
-footer a{text-decoration:underline}
-.hide{display:none}
+.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:14px}
+.foot a{text-decoration:underline}
+.subs{display:flex;flex-direction:column;gap:10px}
+.sub{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:var(--tile)}
+.sub strong{font-family:var(--serif);font-size:18px;line-height:1.25}
+.sub .tk{font-size:14px;line-height:1.5;color:var(--detail)}
+.sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
 """
 
-CHEV = "<svg class='chev' viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 7.5l5 5 5-5'/></svg>"
-ARROW = "<svg width='14' height='14' viewBox='0 0 20 20' fill='none' stroke='currentColor' stroke-width='2.2'><path d='M7 13l6-6M8 7h5v5'/></svg>"
+CHEV = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' "
+        "aria-hidden='true'><path d='M6 9l6 6 6-6'/></svg>")
+NEXT = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
+        "aria-hidden='true'><path d='M9 5l7 7-7 7'/></svg>")
+PREV = ("<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
+        "aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg>")
 
-JS = """
-document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
-  document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c));
-  const t=c.dataset.t;
-  document.querySelectorAll('.card').forEach(k=>k.classList.toggle('hide',t!=='all'&&k.dataset.t!==t));
-}));
+JS = r"""
+(()=>{const deck=document.querySelector('.deck');if(!deck)return;
+const slides=[...deck.children],bars=[...document.querySelectorAll('.bars button')],
+ num=document.querySelector('.status b'),prev=document.querySelector('[data-prev]'),
+ next=document.querySelector('[data-next]'),orig=document.querySelector('[data-orig]'),n=slides.length,
+ stories=slides.filter(s=>!s.dataset.label).length;
+const go=i=>deck.scrollTo({left:Math.max(0,Math.min(n-1,i))*deck.clientWidth,behavior:'smooth'});
+let cur=-1;const upd=()=>{const i=Math.round(deck.scrollLeft/deck.clientWidth);if(i===cur)return;cur=i;
+ bars.forEach((b,k)=>b.classList.toggle('seen',k<=i));
+ num.textContent=slides[i].dataset.label||`${i+1} of ${stories}`;
+ prev.disabled=i===0;next.querySelector('span').textContent=i<n-2?'Next story':(i===n-2?'Finish':'Start over');
+ const u=slides[i].dataset.url;orig.style.visibility=u?'visible':'hidden';if(u)orig.href=u;
+ try{history.replaceState(null,'',i?`#${i+1}`:location.pathname)}catch(_){}};
+deck.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
+prev.onclick=()=>go(cur-1);next.onclick=()=>go(cur<n-1?cur+1:0);
+bars.forEach((b,k)=>b.onclick=()=>go(k));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go));
+addEventListener('keydown',ev=>{if(ev.target.closest('input,textarea'))return;
+ if(ev.key==='ArrowRight')go(cur+1);if(ev.key==='ArrowLeft')go(cur-1)});
+addEventListener('resize',()=>{const c=cur;cur=-1;deck.scrollLeft=c*deck.clientWidth;upd()});
+const h=parseInt(location.hash.slice(1));if(h>1){deck.scrollLeft=(h-1)*deck.clientWidth}
+upd();})();
 """
 
 
 def _domain(url: str) -> str:
-    from urllib.parse import urlsplit
     return urlsplit(url).netloc.removeprefix("www.")
 
 
-def card(it: dict, lead: bool = False, delay: int = 0) -> str:
-    img = ""
-    if it.get("image"):
-        img = (f"<a class='thumb' href='{e(it['url'])}'><img src='{e(it['image'])}' alt='' loading='lazy' "
-               f"referrerpolicy='no-referrer' onerror=\"this.parentNode.remove()\"></a>")
+def card(it: dict) -> str:
+    """One story card: image, source, headline, takeaway, 3 expandable points."""
+    img = (f"<img src='{e(it['image'])}' alt='' loading='lazy' referrerpolicy='no-referrer' "
+           f"onerror=\"this.remove()\">") if it.get("image") else ""
     fav = f"https://www.google.com/s2/favicons?domain={e(_domain(it['url']))}&sz=64"
     pts = "".join(
-        f"<li><details><summary><span class='num'>{n}</span><span>{e(b['point'])}</span>{CHEV}</summary>"
-        f"<div class='detail'>{e(b.get('detail', ''))}</div></details></li>"
-        for n, b in enumerate(it["bullets"], 1) if b.get("detail")) or "".join(
-        f"<li><details><summary><span class='num'>{n}</span><span>{e(b['point'])}</span></summary></details></li>"
+        f"<details{' open' if n == 1 else ''}><summary><span class='n'>{n}</span><span>{e(b['point'])}</span>"
+        f"{CHEV if b.get('detail') else ''}</summary>"
+        + (f"<p>{e(b['detail'])}</p>" if b.get("detail") else "") + "</details>"
         for n, b in enumerate(it["bullets"], 1))
-    room = f"<p class='room'>{e(it['room_line'])}</p>" if it.get("room_line") else ""
+    room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
     why = f"<div class='why'><b>Why for you</b> · {e(it['why_for_you'])}</div>" if it.get("why_for_you") else ""
-    return (f"<article class='card{' lead' if lead else ''}' data-t='{e(it.get('topic', ''))}' style='animation-delay:{delay}ms'>{img}"
-            f"<div class='body'><div class='meta'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
-            f"<span>{e(it['source'])}</span><span class='dot'>·</span><span>{it['minutes']} min</span>"
-            f"<span class='topic'>{e(it.get('topic_name', ''))}</span></div>"
-            f"<h2><a href='{e(it['url'])}'>{e(it['headline'])}</a></h2>{room}"
-            f"<ol class='points'>{pts}</ol>"
-            f"{why}<div class='foot'><a class='btn' href='{e(it['url'])}'>Read original {ARROW}</a></div></div></article>")
+    return (f"<article class='card'><div class='scroll'>"
+            f"<div class='media'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
+            f"<div class='body'><div class='src'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
+            f"{e(it['source'])} · {it['minutes']} min read</div>"
+            f"<h1 class='head'><a href='{e(it['url'])}'>{e(it['headline'])}</a></h1>{room}"
+            f"<div class='points'>{pts}</div>{why}</div></div></article>")
 
 
 def shell(title: str, active: str, body: str, root: str = "", script: bool = False) -> str:
     tabs = "".join(f"<a href='{root}{href}' class='{'on' if active == k else ''}'>{label}</a>"
                    for k, label, href in (("today", "Today", "./"), ("saved", "Saved", "saved.html"),
                                           ("archive", "Archive", "archive/")))
-    return (f"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
-            f"<meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>"
-            f"<meta name='theme-color' content='#F7F5F0' media='(prefers-color-scheme: light)'>"
-            f"<meta name='theme-color' content='#0F0E0C' media='(prefers-color-scheme: dark)'>"
-            f"<meta name='apple-mobile-web-app-capable' content='yes'>"
-            f"<title>{e(title)}</title><style>{CSS}</style></head><body>"
-            f"<header class='bar'><div class='wrap'><a class='brand' href='{root}./'>Briefing<span>.</span></a>"
-            f"<nav class='tabs'>{tabs}</nav></div></header><main class='wrap'>{body}</main>"
+    return ("<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
+            "<meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>"
+            "<meta name='theme-color' content='#0B1220'><meta name='apple-mobile-web-app-capable' content='yes'>"
+            "<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>"
+            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body>"
+            f"<header class='top'><a class='brand' href='{root}./'>Briefing<span>.</span></a>"
+            f"<nav class='tabs'>{tabs}</nav></header>{body}"
             + (f"<script>{JS}</script>" if script else "") + "</body></html>")
 
 
-def today_body(date: str, picks: list[dict], root: str = "") -> str:
+def subs_slide(subs: list[dict]) -> str:
+    rows = "".join(
+        f"<a class='sub' href='{e(i['url'])}'><span class='src'>{e(i['source'])} · {e(i.get('topic_name', ''))}</span>"
+        f"<strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span>"
+        f"<span class='open'>Open article {NEXT}</span></a>" for i in subs)
+    return (f"<section class='slide' data-url='' data-label='Your subscriptions'><article class='card'><div class='scroll'><div class='body'>"
+            f"<span class='pill' style='align-self:flex-start'>Your subscriptions</span>"
+            f"<h1 class='head'>Worth opening in the app</h1>"
+            f"<div class='subs'>{rows}</div></div></div></article></section>")
+
+
+def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None = None) -> str:
     d = dt.date.fromisoformat(date)
+    n = len(picks)
+    if not n:
+        return "<main class='page'><p class='empty'>Nothing yet today.</p></main>"
+    extra = 1 if subs else 0
+    bars = "".join(f"<button type='button' aria-label='Story {k + 1}'><i></i></button>" for k in range(n + 1 + extra))
+    slides = "".join(f"<section class='slide' data-url='{e(i['url'])}'>{card(i)}</section>" for i in picks)
+    if subs:
+        slides += subs_slide(subs)
     mins = sum(i.get("minutes", 0) for i in picks)
-    topics = []
-    for i in picks:
-        if (i.get("topic"), i.get("topic_name")) not in topics:
-            topics.append((i.get("topic"), i.get("topic_name")))
-    chips = "<button class='chip on' data-t='all'>All</button>" + "".join(
-        f"<button class='chip' data-t='{e(t)}'>{e(n)}</button>" for t, n in topics)
-    body = (f"<section class='hero'><div class='kicker'>{d.strftime('%A')}</div>"
-            f"<h1>{d.strftime('%B')} {d.day}</h1>"
-            f"<p>{len(picks)} stories worth your time · about {mins} min of reading</p></section>"
-            f"<div class='chips'>{chips}</div>")
-    body += "".join(card(i, lead=(n == 0), delay=min(n, 6) * 60) for n, i in enumerate(picks)) or \
-        "<p class='empty'>Nothing yet today.</p>"
-    body += f"<footer>Curated every morning · <a href='{root}epub/latest.epub'>Download as EPUB</a></footer>"
-    return body
+    toc = "".join(f"<button type='button' data-go='{k}'><span class='k'>{k + 1}</span>"
+                  f"<span>{e(i['headline'])}<small>{e(i['source'])} · {i['minutes']} min</small></span></button>"
+                  for k, i in enumerate(picks))
+    end = (f"<section class='slide end' data-label='All done'><article class='card'><div class='scroll'><div class='body'>"
+           f"<div class='src'>{d.strftime('%A, %B')} {d.day}</div><h1>You're caught up.</h1>"
+           f"<div class='src'>{n} stories · about {mins} min if you read them all</div>"
+           f"<div class='toc'>{toc}</div>"
+           f"<p class='foot'><a href='{root}epub/latest.epub'>Download as EPUB</a> · "
+           f"<a href='{root}archive/'>Past briefings</a></p></div></div></article></section>")
+    return (f"<main class='reader'><div class='bars'>{bars}</div>"
+            f"<div class='status'><b>1 of {n}</b><span>{d.strftime('%a, %b')} {d.day}</span></div>"
+            f"<div class='deck'>{slides}{end}</div>"
+            f"<div class='actions'><button type='button' class='btn icon' data-prev aria-label='Previous story'>{PREV}</button>"
+            f"<a class='btn' data-orig href='#'>Read original</a>"
+            f"<button type='button' class='btn primary' data-next><span>Next story</span>{NEXT}</button></div></main>")
 
 
-def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str]) -> None:
+def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str],
+              subs: list[dict] | None = None) -> None:
     (DOCS / "archive").mkdir(parents=True, exist_ok=True)
     nice = dt.date.fromisoformat(date).strftime("%A, %B %-d")
-    (DOCS / "index.html").write_text(shell(f"Briefing — {nice}", "today", today_body(date, picks), script=True))
+    (DOCS / "index.html").write_text(shell(f"Briefing — {nice}", "today", deck(date, picks, subs=subs), script=True))
     (DOCS / "archive" / f"{date}.html").write_text(
-        shell(f"Briefing — {nice}", "archive", today_body(date, picks, "../"), root="../", script=True))
+        shell(f"Briefing — {nice}", "archive", deck(date, picks, "../", subs), root="../", script=True))
     rows = "".join(
-        f"<a href='{d}.html'>{dt.date.fromisoformat(d).strftime('%A, %B %-d')}<span>›</span></a>"
+        f"<a href='{d}.html'><span class='k'>›</span><span>{dt.date.fromisoformat(d).strftime('%A, %B %-d')}</span></a>"
         for d in sorted(archive_dates, reverse=True))
     (DOCS / "archive" / "index.html").write_text(shell(
-        "Archive", "archive", f"<section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section>"
-        f"<div class='archive'>{rows}</div>", root="../"))
+        "Archive — Briefing", "archive",
+        f"<main class='page'><section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section>"
+        f"<div class='toc'>{rows}</div></main>", root="../"))
     write_saved(saved)
 
 
 def write_saved(saved: list[dict]) -> None:
     DOCS.mkdir(exist_ok=True)
-    body = ("<section class='hero'><div class='kicker'>Your queue</div><h1>Saved</h1>"
+    body = ("<main class='page'><section class='hero'><div class='kicker'>Your queue</div><h1>Saved</h1>"
             f"<p>{len(saved)} article{'s' if len(saved) != 1 else ''} saved for later</p></section>")
-    body += "".join(card(i, delay=min(n, 6) * 60) for n, i in enumerate(saved[:50])) or \
-        "<p class='empty'>Nothing saved yet. Share a link to your Save shortcut and it'll appear here.</p>"
-    (DOCS / "saved.html").write_text(shell("Saved — Briefing", "saved", body))
+    body += "".join(card(i) for i in saved[:50]) or \
+        "<p class='empty'>Nothing saved yet. Share a link to your Save shortcut and it'll show up here.</p>"
+    (DOCS / "saved.html").write_text(shell("Saved — Briefing", "saved", body + "</main>"))

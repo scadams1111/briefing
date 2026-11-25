@@ -14,7 +14,7 @@ import yaml
 from . import render
 from .extract import extract_all, fetch_article, is_english
 from .llm import LLM
-from .rank import dedupe_titles, heuristic, llm_rank, select, shortlist
+from .rank import dedupe_titles, final_score, heuristic, llm_rank, select, shortlist
 from .sources import Candidate, collect, domain, normalize_url
 from .summarize import summarize
 
@@ -58,8 +58,62 @@ def make_item(c_url, title, source, topic, topic_name, text, summ, **extra) -> d
 
 
 def last_picks() -> list[dict]:
-    days = sorted((DATA / "days").glob("*.json"))
+    days = sorted((DATA / "days").glob("????-??-??.json"))
     return json.loads(days[-1].read_text()) if days else []
+
+
+def load_subs(date: str) -> list[dict]:
+    p = DATA / "days" / f"{date}-subs.json"
+    return json.loads(p.read_text()) if p.exists() else []
+
+
+SUB_PROMPT = """Reader: {profile}
+
+From only this headline and summary, write JSON:
+{{"headline": "plain, specific headline, max 14 words",
+  "takeaway": "one sentence on what the piece is about and why it matters, max 30 words"}}
+Write in English. Use only what's given; don't invent details.
+
+Headline: {title}
+Summary: {summary}
+"""
+
+
+def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str) -> list[dict]:
+    sub = cfg.get("subscriber") or {}
+    feeds = sub.get("feeds") or []
+    if not feeds:
+        return []
+    topics = [{"id": f"sub{k}", "name": f.get("topic", "Subscriber"), "weight": 1.0,
+               "feeds": [{"url": f["url"], "name": f.get("name"), "weight": 1.0}]} for k, f in enumerate(feeds)]
+    cands, _ = collect({"topics": topics, "lookback_hours": cfg["lookback_hours"], "hackernews": {}},
+                       set(st["seen"]))
+    names = {t["id"]: t["name"] for t in topics}
+    for c in cands:
+        c.text = c.summary          # headline feed only; never fetch the paywalled page
+        c.words = len(c.text.split())
+    heuristic(cands, {"topics": topics})
+    cands = dedupe_titles(cands)
+    pool = sorted(cands, key=lambda c: c.heuristic, reverse=True)[:30]
+    llm_rank(pool, llm, who, names)
+    chosen, used = [], set()
+    for c in sorted(pool, key=final_score, reverse=True):
+        if len(chosen) >= sub.get("picks", 3):
+            break
+        if names[c.topic] in used:
+            continue                # one per section, for variety
+        used.add(names[c.topic])
+        chosen.append(c)
+    out = []
+    for c in chosen:
+        res = llm.json(SUB_PROMPT.format(profile=who, title=c.title, summary=c.summary[:600])) if llm.available else None
+        res = res or {}
+        out.append({"id": hashlib.sha1(normalize_url(c.url).encode()).hexdigest()[:12], "url": c.url,
+                    "title": c.title, "headline": res.get("headline") or c.title,
+                    "takeaway": res.get("takeaway") or c.summary[:220], "source": c.source,
+                    "topic_name": names[c.topic], "date": date, "subscriber": True})
+        st["seen"][normalize_url(c.url)] = date
+    return out
 
 
 def prune(st: dict, keep_days: int) -> None:
@@ -105,9 +159,11 @@ def daily() -> None:
                                image=c.extra.get("image", ""), author=c.extra.get("author", "")))
         st["seen"][normalize_url(c.url)] = date
 
+    subs = subscriber_picks(cfg, st, llm, who, date)
     new_saved = [s for s in st["saved"] if not s.get("delivered")]
     (DATA / "days").mkdir(parents=True, exist_ok=True)
     (DATA / "days" / f"{date}.json").write_text(json.dumps(items, indent=1))
+    (DATA / "days" / f"{date}-subs.json").write_text(json.dumps(subs, indent=1))
 
     prune(st, cfg.get("keep_days", 30))
     publish(cfg, st, date, items, new_saved)
@@ -123,10 +179,11 @@ def daily() -> None:
 
 def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[dict]) -> None:
     site = render.site_url(cfg)
-    render.build_epub(cfg, date, items, new_saved)
+    subs = load_subs(date)
+    render.build_epub(cfg, date, items, new_saved, subs)
     archive = [p.stem for p in (render.DOCS / "archive").glob("20*.html")] + [date]
-    render.web(cfg, date, items, st["saved"], sorted(set(archive)))
-    render.feeds(cfg, site, items, st["saved"])
+    render.web(cfg, date, items, st["saved"], sorted(set(archive)), subs)
+    render.feeds(cfg, site, items, st["saved"], subs)
     render.opds(cfg, site)
 
 
@@ -192,7 +249,8 @@ def save(url: str) -> None:
     save_state(st)
     site = render.site_url(cfg)
     render.saved_page(cfg, st["saved"])
-    render.feeds(cfg, site, last_picks(), st["saved"])
+    days = sorted((DATA / "days").glob("????-??-??.json"))
+    render.feeds(cfg, site, last_picks(), st["saved"], load_subs(days[-1].stem) if days else [])
     log.info("saved: %s", title)
 
 

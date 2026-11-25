@@ -32,9 +32,10 @@ nav{font-size:.9em;margin-bottom:1em}
 
 
 # ── web (see web.py for the design) ────────────────────────────────
-def web(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str]) -> None:
+def web(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str],
+        subs: list[dict] | None = None) -> None:
     from . import web as w
-    w.write_all(cfg, date, picks, saved, archive_dates)
+    w.write_all(cfg, date, picks, saved, archive_dates, subs or [])
 
 
 def saved_page(cfg: dict, saved: list[dict]) -> None:
@@ -67,11 +68,17 @@ def _brief_body(it: dict) -> str:
     return s + f"<p>Original: {e(it['url'])}</p>"
 
 
-def feeds(cfg: dict, site: str, picks: list[dict], saved: list[dict]) -> None:
+def _sub_body(it: dict) -> str:
+    return (f"<p><i>{e(it['source'])} · {e(it.get('topic_name', ''))} · subscriber article</i></p>"
+            f"<p>{e(it.get('takeaway', ''))}</p><p>Read it on the publisher's site: {e(it['url'])}</p>")
+
+
+def feeds(cfg: dict, site: str, picks: list[dict], saved: list[dict], subs: list[dict] | None = None) -> None:
     recent_saved = saved[:20]
     # 1) the briefing itself: bullets + expansions (KOReader: download_full_article = false)
     (DOCS / "briefing.xml").write_text(_rss(cfg["site_title"], site,
-                                            [(i, _brief_body(i)) for i in picks + recent_saved]))
+                                            [(i, _brief_body(i)) for i in picks + recent_saved]
+                                            + [(i, _sub_body(i)) for i in subs or []]))
     # 2) plain links so KOReader fetches the full originals itself (download_full_article = true)
     (DOCS / "articles.xml").write_text(_rss(cfg["site_title"] + " — full articles", site,
                                             [(i, e(i.get("room_line") or i["headline"])) for i in picks + recent_saved]))
@@ -85,7 +92,7 @@ def _x(title: str, fname: str, body: str, css) -> epub.EpubHtml:
     return ch
 
 
-def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict]) -> Path:
+def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs: list[dict] | None = None) -> Path:
     nice = dt.date.fromisoformat(date).strftime("%a %b %-d")
     book = epub.EpubBook()
     book.set_identifier(f"briefing-{date}")
@@ -120,6 +127,12 @@ def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict]) -> Pa
             body += (f"<p class='back'>Full article: {e(it['url'])}</p>"
                      f"<p class='back'><a href='contents.xhtml'>↩ Back to contents</a></p>")
             chapters.append(_x(it["headline"], f, body, css))
+    if subs:
+        contents += "<h3 class='section'>From your subscriptions</h3>"
+        for it in subs:
+            contents += (f"<p class='meta'>{e(it['source'])} · {e(it.get('topic_name', ''))}</p>"
+                         f"<h2>{e(it['headline'])}</h2><p>{e(it.get('takeaway', ''))}</p>"
+                         f"<p class='back'>Read on your phone: {e(it['url'])}</p>")
     toc_ch = _x("Contents", "contents.xhtml", contents, css)
     for ch in [toc_ch, *chapters]:
         book.add_item(ch)
