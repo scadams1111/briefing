@@ -1,7 +1,7 @@
 {
  "date": "2026-11-25",
  "llm": true,
- "candidates": 351,
+ "candidates": 395,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -25,7 +25,7 @@
   "https://www.economist.com/finance-and-economics/rss.xml": "ok (40)",
   "https://www.theatlantic.com/feed/channel/business/": "ok (25)",
   "https://feeds.npr.org/1001/rss.xml": "ok (10)",
-  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (30)",
+  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (28)",
   "https://www.economist.com/international/rss.xml": "ok (40)",
   "https://www.foreignaffairs.com/rss.xml": "ok (20)",
   "https://www.propublica.org/feeds/propublica/main": "ok (20)",
@@ -34,9 +34,9 @@
   "https://www.fiercebiotech.com/rss/xml": "ok (25)",
   "https://endpts.com/feed/": "ok (24)",
   "https://www.biopharmadive.com/feeds/news/": "ok (10)",
-  "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (11)",
+  "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (10)",
   "https://speakingofresearch.com/feed/": "ok (10)",
-  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (10)",
   "https://www.bing.com/news/search?q=new+approach+methodologies+animal+testing&format=rss": "ok (10)",
   "https://www.bing.com/news/search?q=FDA+animal+testing&format=rss": "ok (12)",
   "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (9)",
@@ -68,24 +68,24 @@
  },
  "sources": {
   "Adafruit Industries \u2013 Makers, hackers, artists, designers and engineers!": {
-   "fetched": 8,
-   "full_text": 1
+   "fetched": 4,
+   "full_text": 0
   },
   "Aeon": {
    "fetched": 1,
    "full_text": 0
   },
   "Ars Technica": {
-   "fetched": 1,
+   "fetched": 4,
    "full_text": 0
   },
   "Axios": {
-   "fetched": 13,
-   "full_text": 5
+   "fetched": 16,
+   "full_text": 6
   },
   "BBC News": {
-   "fetched": 5,
-   "full_text": 3
+   "fetched": 3,
+   "full_text": 2
   },
   "Backpacker": {
    "fetched": 8,
@@ -93,7 +93,7 @@
   },
   "Blog \u2013 Hackaday": {
    "fetched": 5,
-   "full_text": 0
+   "full_text": 1
   },
   "Fierce Biotech": {
    "fetched": 18,
@@ -104,11 +104,11 @@
    "full_text": 4
   },
   "NPR Topics: News": {
-   "fetched": 1,
-   "full_text": 1
+   "fetched": 2,
+   "full_text": 2
   },
   "Nature": {
-   "fetched": 6,
+   "fetched": 9,
    "full_text": 5
   },
   "Outside Online": {
@@ -120,23 +120,27 @@
    "full_text": 0
   },
   "PetaPixel": {
-   "fetched": 5,
-   "full_text": 0
+   "fetched": 9,
+   "full_text": 1
   },
   "ProPublica": {
-   "fetched": 5,
-   "full_text": 5
+   "fetched": 6,
+   "full_text": 6
+  },
+  "Quanta Magazine": {
+   "fetched": 1,
+   "full_text": 1
   },
   "STAT": {
-   "fetched": 9,
-   "full_text": 4
+   "fetched": 4,
+   "full_text": 3
   },
   "Science": {
-   "fetched": 1,
+   "fetched": 2,
    "full_text": 0
   },
   "Techmeme": {
-   "fetched": 7,
+   "fetched": 2,
    "full_text": 0
   },
   "The Atlantic": {
@@ -156,8 +160,8 @@
    "full_text": 0
   },
   "github.com": {
-   "fetched": 1,
-   "full_text": 0
+   "fetched": 3,
+   "full_text": 1
   },
   "gpu-demo-gallery.pages.dev": {
    "fetched": 1,
@@ -167,7 +171,7 @@
    "fetched": 1,
    "full_text": 1
   },
-  "greynoise.io": {
+  "intruder.io": {
    "fetched": 1,
    "full_text": 1
   },
@@ -187,9 +191,9 @@
    "fetched": 1,
    "full_text": 1
   },
-  "twitter.com": {
+  "vox.com": {
    "fetched": 1,
-   "full_text": 0
+   "full_text": 1
   }
  }
 }
