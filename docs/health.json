@@ -1,7 +1,7 @@
 {
  "date": "2026-11-25",
  "llm": true,
- "candidates": 395,
+ "candidates": 420,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -76,7 +76,7 @@
    "full_text": 0
   },
   "Ars Technica": {
-   "fetched": 4,
+   "fetched": 2,
    "full_text": 0
   },
   "Axios": {
@@ -103,13 +103,17 @@
    "fetched": 4,
    "full_text": 4
   },
+  "MIT Technology Review": {
+   "fetched": 1,
+   "full_text": 1
+  },
   "NPR Topics: News": {
    "fetched": 2,
    "full_text": 2
   },
   "Nature": {
    "fetched": 9,
-   "full_text": 5
+   "full_text": 3
   },
   "Outside Online": {
    "fetched": 10,
@@ -184,6 +188,10 @@
    "full_text": 1
   },
   "prismml.com": {
+   "fetched": 1,
+   "full_text": 0
+  },
+  "reddit.com": {
    "fetched": 1,
    "full_text": 0
   },
