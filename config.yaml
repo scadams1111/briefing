@@ -255,3 +255,10 @@ smarter:
     - {url: https://theconversation.com/us/articles.atom, name: The Conversation}
     - {url: https://undark.org/feed/, name: Undark}
     - {url: https://www.scientificamerican.com/platform/syndication/rss/, name: Scientific American}
+
+# Audio briefing: read aloud each morning; also a podcast feed (docs/podcast.xml).
+audio:
+  enabled: true
+  minutes: 9
+  voice: en-US-AndrewMultilingualNeural   # e.g. en-US-AvaMultilingualNeural for a female voice
+  rate: "+4%"

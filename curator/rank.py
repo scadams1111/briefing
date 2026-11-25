@@ -21,7 +21,7 @@ Reward: excellent writing; original reporting or real analysis; durable insight;
 stories informed people will be discussing; relevance to the reader's interests.
 Penalize: press releases, listicles, thin rewrites of wire news, product promos,
 clickbait, and duplicate coverage of the same story (score only the best version high).
-
+{feedback}
 Return JSON: {{"scores": [{{"id": <int>, "score": <number>}}]}}
 
 CANDIDATES:
@@ -50,14 +50,16 @@ def dedupe_titles(cands: list[Candidate]) -> list[Candidate]:
 
 
 def heuristic(cands: list[Candidate], cfg: dict) -> None:
-    tw = {t["id"]: t.get("weight", 1.0) for t in cfg["topics"]}
+    prefs = cfg.get("_prefs") or {}
+    tmult, smult = prefs.get("topic", {}), prefs.get("source", {})
+    tw = {t["id"]: t.get("weight", 1.0) * tmult.get(t["id"], 1.0) for t in cfg["topics"]}
     prem = tuple(cfg.get("premium_domains") or ())
     bonus = float(cfg.get("premium_bonus", 0.0))
     now = time.time()
     for c in cands:
         age_h = max(0.0, (now - c.published) / 3600)
         c.heuristic = (
-            c.source_weight * tw.get(c.topic, 1.0)
+            c.source_weight * smult.get(c.source, 1.0) * tw.get(c.topic, 1.0)
             + min(c.words, 4000) / 2000          # longer, more substantial pieces
             + math.log1p(c.hn_points) / 3         # people are talking about it
             - age_h / 48                          # freshness
@@ -74,7 +76,7 @@ def shortlist(cands: list[Candidate], cfg: dict, per: int | None = None) -> list
     return out
 
 
-def llm_rank(cands: list[Candidate], llm: LLM, profile: str, topic_names: dict) -> None:
+def llm_rank(cands: list[Candidate], llm: LLM, profile: str, topic_names: dict, feedback: str = "") -> None:
     if not llm.available:
         return
     for start in range(0, len(cands), 30):
@@ -84,7 +86,7 @@ def llm_rank(cands: list[Candidate], llm: LLM, profile: str, topic_names: dict) 
             excerpt = " ".join(c.text.split()[:110])
             lines.append(f"[{i}] ({topic_names.get(c.topic, c.topic)} | {c.source} | {c.words} words) "
                          f"{c.title}\n    {excerpt}")
-        res = llm.json(RANK_PROMPT.format(profile=profile, items="\n".join(lines)))
+        res = llm.json(RANK_PROMPT.format(profile=profile, feedback=feedback, items="\n".join(lines)))
         for s in (res or {}).get("scores", []):
             try:
                 c = batch[int(s["id"])]

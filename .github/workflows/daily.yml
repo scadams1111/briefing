@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: briefing
@@ -44,7 +45,24 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           READER_PROFILE: ${{ secrets.READER_PROFILE }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: python -m curator daily
+      - name: Upload the audio briefing
+        if: steps.check.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          shopt -s nullglob
+          for f in build/audio/briefing-*.mp3; do
+            d=$(basename "$f" .mp3); d=${d#briefing-}; tag="audio-$d"
+            gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "Audio briefing $d" --notes "Daily audio briefing" --latest=false
+            gh release upload "$tag" "$f" --clobber
+          done
+          # keep two weeks of audio
+          cutoff=$(date -u -d '-15 days' +%F)
+          gh release list --limit 100 --json tagName -q '.[].tagName' | grep '^audio-' | while read -r t; do
+            [ "${t#audio-}" \< "$cutoff" ] && gh release delete "$t" --cleanup-tag -y || true
+          done
       - name: Publish
         if: steps.check.outputs.skip != 'true'
         run: |

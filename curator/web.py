@@ -69,6 +69,23 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
 .why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 .why b{color:var(--ink);font-weight:600}
+.fb{display:flex;gap:8px;flex-wrap:wrap;padding-top:2px}
+.fbb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);
+  background:transparent;color:var(--muted);font-size:13px;font-weight:600}
+.fbb.on[data-act=more]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.fbb.on[data-act=less]{background:var(--line);border-color:var(--muted);color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:92vw;
+  background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:11px 16px;border-radius:12px;z-index:50;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);text-align:center}
+.toast a{text-decoration:underline}
+.listen{display:flex;align-items:center;gap:12px;margin:0 16px 10px;padding:8px 12px 8px 8px;border-radius:14px;background:var(--tile)}
+.listen .pb{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);
+  display:flex;align-items:center;justify-content:center}
+.listen .lt{flex:1;min-width:0;font-size:13px;font-weight:600}
+.listen .lt small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:2px}
+.listen .bar{height:3px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}
+.listen .bar i{display:block;height:100%;width:0;background:var(--accent)}
+.listen .sp{flex:none;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 7px;background:none}
 .extras{display:flex;align-items:center;gap:10px;padding-top:4px}
 .chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
 .chip svg{color:var(--accent)}
@@ -117,11 +134,49 @@ ARROWUP = ("<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='
            "aria-hidden='true'><path d='M7 17L17 7M8 7h9v9'/></svg>")
 SEARCH_ICON = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
                "stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg>")
+THUMB_UP = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
+            "stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M7 10v11H4V10zM7 10l4-8a3 3 0 0 1 3 3v4h5.5a2 2 0 0 1 2 2.3l-1.4 8A2 2 0 0 1 18 21H7'/></svg>")
+THUMB_DOWN = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
+              "stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M17 14V3h3v11zM17 14l-4 8a3 3 0 0 1-3-3v-4H4.5a2 2 0 0 1-2-2.3l1.4-8A2 2 0 0 1 6 3h11'/></svg>")
+PLAY = "<svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M7 4.5v15l13-7.5z'/></svg>"
+PAUSE = "<svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M6 4h4v16H6zM14 4h4v16h-4z'/></svg>"
 PREV = ("<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg>")
 
 # Article links open in a new tab, so the briefing stays where you left it.
 NEWTAB = r"""document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})"""
+
+FEEDBACK_JS = r"""
+(()=>{const repo=document.body.dataset.repo;const KEY='gh_token';
+const toast=(html,ms=2600)=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
+ t.innerHTML=html;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,ms)};
+const root=document.body.dataset.root||'';
+const get=k=>{try{return localStorage.getItem(k)}catch(_){return null}}, set=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}};
+document.querySelectorAll('.fb').forEach(box=>{const id='fb:'+(box.dataset.id||box.dataset.url),cur=get(id);
+ box.querySelectorAll('.fbb').forEach(b=>{b.classList.toggle('on',b.dataset.act===cur);b.setAttribute('aria-pressed',b.dataset.act===cur)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.fbb');if(!b)return;const box=b.closest('.fb');
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up feedback</a>`,6000);return}
+ const id='fb:'+(box.dataset.id||box.dataset.url),prev=get(id),act=b.dataset.act;
+ const send=async(a)=>{const item={url:box.dataset.url,topic:box.dataset.topic,source:box.dataset.source,title:box.dataset.title};
+  const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'feedback: '+a,body:JSON.stringify(item)})});
+  if(!r.ok)throw new Error(r.status)};
+ try{if(prev)await send('undo-'+prev);
+  if(prev===act){set(id,null);toast('Removed')}else{await send(act);set(id,act);
+   toast(act==='more'?'Got it. More like this from tomorrow':'Got it. Less like this from tomorrow')}
+  box.querySelectorAll('.fbb').forEach(x=>{const on=x.dataset.act===get(id);x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+ }catch(err){toast(`Couldn't send (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}});
+const a=document.querySelector('.listen audio');if(a){const pb=document.querySelector('.listen .pb'),bar=document.querySelector('.listen .bar i'),
+ sp=document.querySelector('.listen .sp'),lab=document.querySelector('.listen .lt small');const rates=[1,1.25,1.5,0.85];let ri=0;
+ const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+ pb.onclick=()=>{a.paused?a.play():a.pause()};a.onplay=()=>{pb.innerHTML=pb.dataset.pause;pb.setAttribute('aria-label','Pause')};
+ a.onpause=()=>{pb.innerHTML=pb.dataset.play;pb.setAttribute('aria-label','Play')};
+ a.ontimeupdate=()=>{if(a.duration){bar.style.width=(100*a.currentTime/a.duration)+'%';lab.textContent=fmt(a.currentTime)+' / '+fmt(a.duration);
+  try{localStorage.setItem('audio:'+a.dataset.date,a.currentTime)}catch(_){}}};
+ a.onloadedmetadata=()=>{const t=+get('audio:'+a.dataset.date);if(t&&t<a.duration-5)a.currentTime=t};
+ sp.onclick=()=>{ri=(ri+1)%rates.length;a.playbackRate=rates[ri];sp.textContent=rates[ri]+'×'}}
+})();
+"""
 
 JS = r"""
 (()=>{const deck=document.querySelector('.deck');if(!deck)return;
@@ -164,6 +219,10 @@ def card(it: dict, root: str = "") -> str:
         for n, b in enumerate(it["bullets"], 1))
     room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
     # Backup if the original page has moved or vanished: Wayback Machine's latest snapshot
+    fbdata = (f"data-id='{e(it.get('id', ''))}' data-url='{e(it['url'])}' data-topic='{e(it.get('topic', ''))}' "
+              f"data-source='{e(it['source'])}' data-title='{e(it.get('headline') or it.get('title', ''))}'")
+    feedback = (f"<div class='fb' {fbdata}><button type='button' class='fbb' data-act='more'>{THUMB_UP}<span>More like this</span></button>"
+                f"<button type='button' class='fbb' data-act='less'>{THUMB_DOWN}<span>Less like this</span></button></div>")
     archived = (f"<div class='extras'><a class='chip' href='https://wallhop.io/{e(it['url'])}'>"
                 f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
     return (f"<article class='card'><div class='scroll'>"
@@ -171,7 +230,7 @@ def card(it: dict, root: str = "") -> str:
             f"<div class='body'><div class='src'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
             f"{e(it['source'])} · {it['minutes']} min read</div>"
             f"<h1 class='head'><a href='{e(it['url'])}'>{e(it['headline'])}</a></h1>{room}"
-            f"<div class='points'>{pts}</div>{archived}</div></div></article>")
+            f"<div class='points'>{pts}</div>{feedback}{archived}</div></div></article>")
 
 
 def shell(title: str, active: str, body: str, root: str = "", script: bool = False) -> str:
@@ -187,10 +246,10 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
             "<meta name='apple-mobile-web-app-title' content='Briefing'>"
             f"<link rel='apple-touch-icon' href='{root}apple-touch-icon.png'>"
             f"<link rel='manifest' href='{root}manifest.webmanifest'>"
-            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body>"
+            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body data-repo='{e(_repo())}' data-root='{e(root)}'>"
             f"<header class='top'><a class='brand' href='{root}./'>Briefing<span>.</span></a>"
             f"<nav class='tabs'>{tabs}</nav></header>{body}"
-            + (f"<script>{JS}</script>" if script else "") + f"<script>{NEWTAB}</script></body></html>")
+            + (f"<script>{JS}</script>" if script else "") + f"<script>{NEWTAB}</script><script>{FEEDBACK_JS}</script></body></html>")
 
 
 def section_of(it: dict) -> str:
@@ -239,6 +298,17 @@ def deep_slide(d: dict, root: str = "") -> str:
             f"<a href='{e(d['wiki_url'])}'>Wikipedia</a> (CC BY-SA).</p></div></div></article></section>")
 
 
+def listen_bar(date: str) -> str:
+    p = Path("data") / "audio" / f"{date}.json"
+    if not p.exists():
+        return ""
+    m = json.loads(p.read_text())
+    return (f"<div class='listen'><button type='button' class='pb' aria-label='Play' data-play=\"{PLAY}\" data-pause=\"{PAUSE}\">{PLAY}</button>"
+            f"<div class='lt'>Listen to today's briefing<small>{max(1, round(m['seconds'] / 60))} min</small>"
+            f"<div class='bar'><i></i></div></div><button type='button' class='sp' aria-label='Playback speed'>1×</button>"
+            f"<audio preload='none' data-date='{e(date)}' src='{e(m['url'])}'></audio></div>")
+
+
 def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None = None,
          smart: dict | None = None) -> str:
     d = dt.date.fromisoformat(date)
@@ -267,8 +337,9 @@ def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None =
            f"<div class='src'>{n} stories · about {mins} min if you read them all</div>"
            f"<div class='toc'>{toc}</div>"
            f"<p class='foot'><a href='{root}epub/latest.epub'>Download as EPUB</a> · "
-           f"<a href='{root}archive/'>Past briefings</a></p></div></div></article></section>")
-    return (f"<main class='reader'><div class='bars'>{bars}</div>"
+           f"<a href='{root}archive/'>Past briefings</a> · <a href='{root}podcast.html'>Podcast</a> · "
+           f"<a href='{root}settings.html'>Settings</a></p></div></div></article></section>")
+    return (f"<main class='reader'>{listen_bar(date)}<div class='bars'>{bars}</div>"
             f"<div class='status'><b>1 of {n}</b><span>{d.strftime('%a, %b')} {d.day}</span></div>"
             f"<div class='deck'>{slides}{end}</div>"
             f"<div class='actions'><button type='button' class='btn icon' data-prev aria-label='Previous story'>{PREV}</button>"
@@ -386,6 +457,8 @@ def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archiv
     write_saved(saved)
     write_reader()
     write_search_page()
+    write_settings_page()
+    write_podcast_page(_site())
 
 
 def write_saved(saved: list[dict]) -> None:
@@ -464,6 +537,11 @@ def _past_searches() -> list[dict]:
     return sorted(items, key=lambda x: x.get("when", ""), reverse=True)
 
 
+def _site() -> str:
+    owner, _, name = _repo().partition("/")
+    return f"https://{owner.lower()}.github.io/{name}"
+
+
 def _repo() -> str:
     import os
     return os.environ.get("GITHUB_REPOSITORY", "") or "scadams1111/briefing"
@@ -488,7 +566,7 @@ def write_search_page() -> None:
                f"Past searches</h3><div class='past'>{rows}</div>" if rows else "")
             + "</main>")
     page = shell("Search — Briefing", "search", body).replace("</style>", SEARCH_CSS + "</style>", 1)
-    page = page.replace("<body>", f"<body data-repo='{e(_repo())}'>", 1).replace("</body>", f"<script>{SEARCH_JS}</script></body>")
+    page = page.replace("</body>", f"<script>{SEARCH_JS}</script></body>")
     DOCS.mkdir(exist_ok=True)
     (DOCS / "search.html").write_text(page)
 
@@ -510,3 +588,53 @@ def write_search_result(data: dict) -> Path:
     (out / f"{data['slug']}.html").write_text(page)
     (out / f"{data['slug']}.json").write_text(json.dumps({"q": data["q"], "when": data["when"]}))
     return out / f"{data['slug']}.html"
+
+
+SETTINGS_JS = r"""
+(()=>{const $=s=>document.querySelector(s),repo=document.body.dataset.repo,KEY='gh_token',st=$('#st');
+const show=(m,ok)=>{st.textContent=m;st.style.color=ok?'var(--accent)':'var(--muted)'};
+const cur=(()=>{try{return localStorage.getItem(KEY)}catch(_){return null}})();
+show(cur?'Feedback is set up on this device.':'Not set up on this device yet.',!!cur);
+$('#save').onclick=async()=>{const t=$('#tok').value.trim();if(!t){show('Paste your key first.');return}
+ show('Checking…');try{const r=await fetch(`https://api.github.com/repos/${repo}`,{headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json'}});
+  if(!r.ok)throw new Error(r.status===401?'key not accepted':'error '+r.status);
+  localStorage.setItem(KEY,t);$('#tok').value='';show('Saved. More / Less like this will work on this device.',true)}
+ catch(err){show("Couldn't verify the key ("+err.message+"). Check it has Issues: Read and write for "+repo+".")}};
+$('#rm').onclick=()=>{try{localStorage.removeItem(KEY)}catch(_){};show('Removed from this device.')};
+})();
+"""
+
+
+def write_settings_page() -> None:
+    repo = _repo()
+    body = ("<main class='page'><section class='hero'><div class='kicker'>Settings</div><h1>Feedback setup</h1>"
+            "<p>One time per device. Lets the More / Less like this buttons send your taps to the curator.</p></section>"
+            "<div class='bg'><div class='src'>1 · Create a key on GitHub</div>"
+            "<p>Tap the button, then: <b>Token name</b> Briefing feedback · <b>Expiration</b> 1 year · "
+            f"<b>Repository access</b> Only select repositories → <b>{e(repo.split('/')[-1])}</b> · "
+            "<b>Permissions</b> → Repository → <b>Issues: Read and write</b>. Tap <b>Generate token</b> and copy it.</p>"
+            "<p style='margin-top:12px'><a class='btn primary' style='display:inline-flex;padding:0 16px' target='_blank' rel='noopener' "
+            "href='https://github.com/settings/personal-access-tokens/new'>Create key on GitHub</a></p></div>"
+            "<div class='bg'><div class='src'>2 · Paste it here</div>"
+            "<form class='sbox' onsubmit='return false'><label for='tok' style='position:absolute;left:-9999px'>GitHub key</label>"
+            "<input id='tok' type='password' placeholder='github_pat_…' autocomplete='off'></form>"
+            "<div style='display:flex;gap:10px'><button id='save' type='button' class='btn primary'>Save</button>"
+            "<button id='rm' type='button' class='btn'>Remove</button></div>"
+            "<p id='st' style='margin-top:12px;font-size:14px'></p>"
+            "<small>The key is stored only in this browser on this device. It is never put on the website. "
+            "Your taps are recorded as short GitHub issues (visible in the repo) and applied each morning.</small></div></main>")
+    page = shell("Settings — Briefing", "", body).replace("</style>", SEARCH_CSS + "</style>", 1)
+    page = page.replace("</body>", f"<script>{SETTINGS_JS}</script></body>")
+    (DOCS / "settings.html").write_text(page)
+
+
+def write_podcast_page(site: str) -> None:
+    feed = f"{site}/podcast.xml"
+    body = ("<main class='page'><section class='hero'><div class='kicker'>Podcast</div><h1>Listen in your podcast app</h1>"
+            "<p>Each morning's briefing, read aloud, about 9 minutes.</p></section>"
+            "<div class='bg'><div class='src'>Apple Podcasts</div><p>Open <b>Podcasts</b> → <b>Library</b> → tap <b>…</b> "
+            "(top right) → <b>Follow a Show by URL</b> → paste the address below.</p></div>"
+            f"<div class='bg'><div class='src'>Feed address</div><p style='word-break:break-all'><b>{e(feed)}</b></p>"
+            "<p style='margin-top:12px'><button type='button' class='btn primary' style='padding:0 16px' "
+            f"onclick=\"navigator.clipboard.writeText('{e(feed)}').then(()=>this.textContent='Copied')\">Copy address</button></p></div></main>")
+    (DOCS / "podcast.html").write_text(shell("Podcast — Briefing", "", body).replace("</style>", SEARCH_CSS + "</style>", 1))

@@ -19,6 +19,8 @@ from .sources import Candidate, collect, domain, normalize_url
 from .summarize import summarize
 from . import smarter
 from . import search as searchmod
+from . import audio as audiomod
+from . import feedback as fb
 
 log = logging.getLogger("curator")
 DATA = Path("data")
@@ -168,6 +170,9 @@ def daily() -> None:
     cfg = load_cfg()
     st = load_state()
     date = today()
+    fb.collect()                              # apply yesterday's More/Less taps
+    cfg["_prefs"] = fb.load()
+    fb_text = fb.prompt_text(cfg["_prefs"])
     llm = LLM(cfg)
     who = profile(cfg)
     names = {t["id"]: t["name"] for t in cfg["topics"]}
@@ -198,7 +203,7 @@ def daily() -> None:
     heuristic(pool, cfg)                    # recompute now that we know real length
     pool = shortlist(pool, cfg)             # best few per topic go to the AI
     log.info("%d candidates after extraction/dedupe", len(pool))
-    llm_rank(pool, llm, who, names)
+    llm_rank(pool, llm, who, names, fb_text)
     picks = select(pool, cfg)
 
     items = []
@@ -232,6 +237,10 @@ def daily() -> None:
     (DATA / "days" / f"{date}-subs.json").write_text(json.dumps(subs, indent=1))
 
     prune(st, cfg.get("keep_days", 30))
+    try:
+        audiomod.make(cfg, date, items, smart, subs, llm)
+    except Exception as ex:
+        log.warning("audio briefing failed: %s", ex)
     publish(cfg, st, date, items, new_saved)
     for s in new_saved:
         s["delivered"] = True
@@ -254,6 +263,7 @@ def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[d
     render.web(cfg, date, items, st["saved"], sorted(set(archive)), subs, smart)
     render.feeds(cfg, site, items, st["saved"], subs, smart)
     render.opds(cfg, site)
+    audiomod.podcast_feed(cfg, site)
     try:
         searchmod.build_index({t["id"]: t["name"] for t in cfg["topics"]})
     except Exception as ex:
