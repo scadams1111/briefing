@@ -68,7 +68,7 @@ topics:
       - https://www.quantamagazine.org/feed/
       - https://www.science.org/rss/news_current.xml
       - https://knowablemagazine.org/rss
-      - https://theconversation.com/us/articles.atom
+      - {url: https://theconversation.com/us/articles.atom, name: The Conversation}
       - https://undark.org/feed/
       - https://www.nature.com/nature.rss
       - https://www.theatlantic.com/feed/channel/health/
@@ -166,9 +166,8 @@ topics:
     kind: light
     feeds:
       - https://longreads.com/feed/
-      - https://aeon.co/feed.rss
+      - {url: https://aeon.co/feed.rss, name: Aeon}
       - https://www.noemamag.com/feed/
-      - https://worksinprogress.co/feed/
       - https://asteriskmag.com/feed
       - https://nautil.us/feed/
       - https://www.themarginalian.org/feed/
