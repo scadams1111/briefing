@@ -122,8 +122,6 @@ def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs:
                 body += f"<p class='room'>“{e(it['room_line'])}”</p>"
             for k, b in enumerate(it["bullets"], 1):
                 body += (f"<h2 id='b{k}'>{k}. {e(b['point'])}</h2><p>{e(b.get('detail', ''))}</p>")
-            if it.get("why_for_you"):
-                body += f"<p class='why'>Why for you: {e(it['why_for_you'])}</p>"
             body += (f"<p class='back'>Full article: {e(it['url'])}</p>"
                      f"<p class='back'><a href='contents.xhtml'>↩ Back to contents</a></p>")
             chapters.append(_x(it["headline"], f, body, css))

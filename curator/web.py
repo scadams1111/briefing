@@ -151,7 +151,6 @@ def card(it: dict) -> str:
         + (f"<p>{e(b['detail'])}</p>" if b.get("detail") else "") + "</details>"
         for n, b in enumerate(it["bullets"], 1))
     room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
-    why = f"<div class='why'><b>Why for you</b> · {e(it['why_for_you'])}</div>" if it.get("why_for_you") else ""
     # Backup if the original page has moved or vanished: Wayback Machine's latest snapshot
     archived = (f"<div class='extras'><a class='chip' href='https://web.archive.org/web/2/{e(it['url'])}' rel='noopener'>"
                 f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
@@ -160,7 +159,7 @@ def card(it: dict) -> str:
             f"<div class='body'><div class='src'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
             f"{e(it['source'])} · {it['minutes']} min read</div>"
             f"<h1 class='head'><a href='{e(it['url'])}'>{e(it['headline'])}</a></h1>{room}"
-            f"<div class='points'>{pts}</div>{why}{archived}</div></div></article>")
+            f"<div class='points'>{pts}</div>{archived}</div></div></article>")
 
 
 def shell(title: str, active: str, body: str, root: str = "", script: bool = False) -> str:

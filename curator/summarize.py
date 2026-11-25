@@ -23,10 +23,10 @@ Return JSON exactly like:
     {{"point": "a key takeaway, concrete, max 28 words",
       "detail": "120-200 words expanding this point with the article's specifics: names, numbers, evidence, caveats"}}
   ],
-  "room_line": "one sentence the reader could say in conversation that shows they grasp why this matters",
-  "why_for_you": "one short sentence on why it matters to this reader specifically, or empty string"
+  "room_line": "one sentence the reader could say in conversation that shows they grasp why this matters"
 }}
-Rules: write everything in English, even if the article is in another language.
+Rules: never mention the reader, their job, employer or personal life; the reader profile is only to judge
+what matters, and this text is published. Write everything in English, even if the article is in another language.
 Exactly 3 bullets, ordered by importance. Use only facts from the article.
 No hype. If it's an opinion piece, attribute the claims to the author.
 """
@@ -47,7 +47,7 @@ def extractive(title: str, text: str) -> dict:
         first = SENT.split(paras[i])[0]
         detail = " ".join(paras[i:i + 2])
         bullets.append({"point": _clip(first, 30), "detail": _clip(detail, 200)})
-    return {"headline": title, "bullets": bullets, "room_line": "", "why_for_you": ""}
+    return {"headline": title, "bullets": bullets, "room_line": ""}
 
 
 def summarize(title: str, source: str, text: str, llm: LLM, profile: str) -> dict:
@@ -62,5 +62,5 @@ def summarize(title: str, source: str, text: str, llm: LLM, profile: str) -> dic
     out["bullets"] = [b for b in out["bullets"] if isinstance(b, dict) and b.get("point")][:3]
     out.setdefault("headline", title)
     out.setdefault("room_line", "")
-    out.setdefault("why_for_you", "")
+    out.pop("why_for_you", None)
     return out

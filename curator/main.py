@@ -53,7 +53,7 @@ def make_item(c_url, title, source, topic, topic_name, text, summ, **extra) -> d
             "title": title, "headline": summ.get("headline") or title, "source": source,
             "topic": topic, "topic_name": topic_name, "words": words,
             "minutes": max(1, round(words / 230)), "bullets": summ["bullets"],
-            "room_line": summ.get("room_line", ""), "why_for_you": summ.get("why_for_you", ""),
+            "room_line": summ.get("room_line", ""),
             "ai": summ.get("ai", False), **extra}
 
 
@@ -67,7 +67,7 @@ def load_subs(date: str) -> list[dict]:
     return json.loads(p.read_text()) if p.exists() else []
 
 
-SUB_PROMPT = """Reader: {profile}
+SUB_PROMPT = """Reader (private; never mention them, their job or their life): {profile}
 
 From only this headline and summary, write JSON:
 {{"headline": "plain, specific headline, max 14 words",
@@ -155,7 +155,7 @@ def daily() -> None:
     for c in picks:
         summ = summarize(c.title, c.source, c.text, llm, who)
         items.append(make_item(c.url, c.title, c.source, c.topic, names.get(c.topic, c.topic), c.text, summ,
-                               date=date, score=c.llm_score, reason=c.llm_reason,
+                               date=date, score=c.llm_score,
                                image=c.extra.get("image", ""), author=c.extra.get("author", "")))
         st["seen"][normalize_url(c.url)] = date
 
@@ -230,7 +230,7 @@ def retry() -> None:
         summ = summarize(it["title"], it["source"], text, llm, who)
         if summ.get("ai"):
             it.update(headline=summ.get("headline") or it["title"], bullets=summ["bullets"],
-                      room_line=summ.get("room_line", ""), why_for_you=summ.get("why_for_you", ""), ai=True)
+                      room_line=summ.get("room_line", ""), ai=True)
             fixed += 1
     path.write_text(json.dumps(items, indent=1))
     save_state(st)

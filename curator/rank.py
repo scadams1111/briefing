@@ -21,7 +21,7 @@ stories informed people will be discussing; relevance to the reader's interests.
 Penalize: press releases, listicles, thin rewrites of wire news, product promos,
 clickbait, and duplicate coverage of the same story (score only the best version high).
 
-Return JSON: {{"scores": [{{"id": <int>, "score": <number>, "reason": "<= 15 words"}}]}}
+Return JSON: {{"scores": [{{"id": <int>, "score": <number>}}]}}
 
 CANDIDATES:
 {items}
