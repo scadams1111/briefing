@@ -155,7 +155,7 @@ def card(it: dict, root: str = "") -> str:
         for n, b in enumerate(it["bullets"], 1))
     room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
     # Backup if the original page has moved or vanished: Wayback Machine's latest snapshot
-    archived = (f"<div class='extras'><a class='chip' href='https://wallhop.io/{e(quote(it['url'], safe=''))}'>"
+    archived = (f"<div class='extras'><a class='chip' href='https://wallhop.io/{e(it['url'])}'>"
                 f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
     return (f"<article class='card'><div class='scroll'>"
             f"<div class='media'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
@@ -196,7 +196,7 @@ def subs_slide(subs: list[dict], root: str = "", section: str = "premium") -> st
         + (e(i.get('topic_name', '')) if section == "nyt" else f"{e(i['source'])} · {e(i.get('topic_name', ''))}")
         + f"</span><strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span></a>"
         f"<div class='subrow'><a class='open' href='{e(i['url'])}'>Open article {NEXT}</a>"
-        f"<a class='chip sm' href='https://wallhop.io/{e(quote(i['url'], safe=''))}'>{ARCHIVE}<span>Link broken?</span></a></div></div>"
+        f"<a class='chip sm' href='https://wallhop.io/{e(i['url'])}'>{ARCHIVE}<span>Link broken?</span></a></div></div>"
         for i in subs)
     return (f"<section class='slide' data-url='' data-label='{e(pill)}'><article class='card'><div class='scroll'><div class='body'>"
             f"<span class='pill' style='align-self:flex-start'>{e(pill)}</span>"
