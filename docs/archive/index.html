@@ -51,6 +51,23 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
 .why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 .why b{color:var(--ink);font-weight:600}
+.fb{display:flex;gap:8px;flex-wrap:wrap;padding-top:2px}
+.fbb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);
+  background:transparent;color:var(--muted);font-size:13px;font-weight:600}
+.fbb.on[data-act=more]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.fbb.on[data-act=less]{background:var(--line);border-color:var(--muted);color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:92vw;
+  background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:11px 16px;border-radius:12px;z-index:50;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);text-align:center}
+.toast a{text-decoration:underline}
+.listen{display:flex;align-items:center;gap:12px;margin:0 16px 10px;padding:8px 12px 8px 8px;border-radius:14px;background:var(--tile)}
+.listen .pb{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);
+  display:flex;align-items:center;justify-content:center}
+.listen .lt{flex:1;min-width:0;font-size:13px;font-weight:600}
+.listen .lt small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:2px}
+.listen .bar{height:3px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}
+.listen .bar i{display:block;height:100%;width:0;background:var(--accent)}
+.listen .sp{flex:none;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 7px;background:none}
 .extras{display:flex;align-items:center;gap:10px;padding-top:4px}
 .chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
 .chip svg{color:var(--accent)}
@@ -86,4 +103,34 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .subrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
 .sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
 .chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
-</style></head><body><header class='top'><a class='brand' href='.././'>Briefing<span>.</span></a><nav class='tabs'><a href='.././' class=''>Today</a><a href='../saved.html' class=''>Saved</a><a href='../archive/' class='on'>Archive</a><a href='../search.html' class='' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><main class='page'><section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section><div class='toc'><a href='2026-11-25.html'><span class='k'>›</span><span>Wednesday, November 25</span></a><a href='2026-11-24.html'><span class='k'>›</span><span>Tuesday, November 24</span></a><a href='2026-11-23.html'><span class='k'>›</span><span>Monday, November 23</span></a></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script></body></html>
+</style></head><body data-repo='scadams1111/briefing' data-root='../'><header class='top'><a class='brand' href='.././'>Briefing<span>.</span></a><nav class='tabs'><a href='.././' class=''>Today</a><a href='../saved.html' class=''>Saved</a><a href='../archive/' class='on'>Archive</a><a href='../search.html' class='' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><main class='page'><section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section><div class='toc'><a href='2026-11-25.html'><span class='k'>›</span><span>Wednesday, November 25</span></a><a href='2026-11-24.html'><span class='k'>›</span><span>Tuesday, November 24</span></a><a href='2026-11-23.html'><span class='k'>›</span><span>Monday, November 23</span></a></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
+(()=>{const repo=document.body.dataset.repo;const KEY='gh_token';
+const toast=(html,ms=2600)=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
+ t.innerHTML=html;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,ms)};
+const root=document.body.dataset.root||'';
+const get=k=>{try{return localStorage.getItem(k)}catch(_){return null}}, set=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}};
+document.querySelectorAll('.fb').forEach(box=>{const id='fb:'+(box.dataset.id||box.dataset.url),cur=get(id);
+ box.querySelectorAll('.fbb').forEach(b=>{b.classList.toggle('on',b.dataset.act===cur);b.setAttribute('aria-pressed',b.dataset.act===cur)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.fbb');if(!b)return;const box=b.closest('.fb');
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up feedback</a>`,6000);return}
+ const id='fb:'+(box.dataset.id||box.dataset.url),prev=get(id),act=b.dataset.act;
+ const send=async(a)=>{const item={url:box.dataset.url,topic:box.dataset.topic,source:box.dataset.source,title:box.dataset.title};
+  const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'feedback: '+a,body:JSON.stringify(item)})});
+  if(!r.ok)throw new Error(r.status)};
+ try{if(prev)await send('undo-'+prev);
+  if(prev===act){set(id,null);toast('Removed')}else{await send(act);set(id,act);
+   toast(act==='more'?'Got it. More like this from tomorrow':'Got it. Less like this from tomorrow')}
+  box.querySelectorAll('.fbb').forEach(x=>{const on=x.dataset.act===get(id);x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+ }catch(err){toast(`Couldn't send (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}});
+const a=document.querySelector('.listen audio');if(a){const pb=document.querySelector('.listen .pb'),bar=document.querySelector('.listen .bar i'),
+ sp=document.querySelector('.listen .sp'),lab=document.querySelector('.listen .lt small');const rates=[1,1.25,1.5,0.85];let ri=0;
+ const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+ pb.onclick=()=>{a.paused?a.play():a.pause()};a.onplay=()=>{pb.innerHTML=pb.dataset.pause;pb.setAttribute('aria-label','Pause')};
+ a.onpause=()=>{pb.innerHTML=pb.dataset.play;pb.setAttribute('aria-label','Play')};
+ a.ontimeupdate=()=>{if(a.duration){bar.style.width=(100*a.currentTime/a.duration)+'%';lab.textContent=fmt(a.currentTime)+' / '+fmt(a.duration);
+  try{localStorage.setItem('audio:'+a.dataset.date,a.currentTime)}catch(_){}}};
+ a.onloadedmetadata=()=>{const t=+get('audio:'+a.dataset.date);if(t&&t<a.duration-5)a.currentTime=t};
+ sp.onclick=()=>{ri=(ri+1)%rates.length;a.playbackRate=rates[ri];sp.textContent=rates[ri]+'×'}}
+})();
+</script></body></html>

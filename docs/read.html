@@ -51,6 +51,23 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
 .why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 .why b{color:var(--ink);font-weight:600}
+.fb{display:flex;gap:8px;flex-wrap:wrap;padding-top:2px}
+.fbb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);
+  background:transparent;color:var(--muted);font-size:13px;font-weight:600}
+.fbb.on[data-act=more]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.fbb.on[data-act=less]{background:var(--line);border-color:var(--muted);color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:92vw;
+  background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:11px 16px;border-radius:12px;z-index:50;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);text-align:center}
+.toast a{text-decoration:underline}
+.listen{display:flex;align-items:center;gap:12px;margin:0 16px 10px;padding:8px 12px 8px 8px;border-radius:14px;background:var(--tile)}
+.listen .pb{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);
+  display:flex;align-items:center;justify-content:center}
+.listen .lt{flex:1;min-width:0;font-size:13px;font-weight:600}
+.listen .lt small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:2px}
+.listen .bar{height:3px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}
+.listen .bar i{display:block;height:100%;width:0;background:var(--accent)}
+.listen .sp{flex:none;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 7px;background:none}
 .extras{display:flex;align-items:center;gap:10px;padding-top:4px}
 .chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
 .chip svg{color:var(--accent)}

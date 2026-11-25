@@ -1,7 +1,7 @@
 {
  "date": "2026-11-25",
- "llm": false,
- "candidates": 420,
+ "llm": true,
+ "candidates": 417,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -25,7 +25,7 @@
   "https://www.economist.com/finance-and-economics/rss.xml": "ok (40)",
   "https://www.theatlantic.com/feed/channel/business/": "ok (25)",
   "https://feeds.npr.org/1001/rss.xml": "ok (10)",
-  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (28)",
+  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (32)",
   "https://www.economist.com/international/rss.xml": "ok (40)",
   "https://www.foreignaffairs.com/rss.xml": "ok (20)",
   "https://www.propublica.org/feeds/propublica/main": "ok (20)",
@@ -34,18 +34,18 @@
   "https://www.fiercebiotech.com/rss/xml": "ok (25)",
   "https://endpts.com/feed/": "ok (24)",
   "https://www.biopharmadive.com/feeds/news/": "ok (10)",
-  "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (10)",
+  "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (11)",
   "https://speakingofresearch.com/feed/": "ok (10)",
-  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (11)",
   "https://www.bing.com/news/search?q=new+approach+methodologies+animal+testing&format=rss": "ok (10)",
   "https://www.bing.com/news/search?q=FDA+animal+testing&format=rss": "ok (12)",
-  "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (8)",
   "http://www.aaronsw.com/2002/feeds/pgessays.rss": "ok (40)",
   "https://www.lennysnewsletter.com/feed": "ok (20)",
-  "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (2)",
+  "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (3)",
   "https://lethain.com/feeds.xml": "ok (12)",
   "https://charity.wtf/feed/": "ok (20)",
-  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (10)",
+  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (11)",
   "https://www.outsideonline.com/feed/": "ok (10)",
   "https://www.adventure-journal.com/feed/": "ok (10)",
   "https://www.backpacker.com/feed/": "ok (10)",
@@ -75,24 +75,24 @@
   "https://www.scientificamerican.com/platform/syndication/rss/": "ok (40)"
  },
  "sources": {
-  "Adafruit Industries \u2013 Makers, hackers, artists, designers and engineers!": {
-   "fetched": 4,
-   "full_text": 0
-  },
-  "Aeon": {
+  "1password.com": {
    "fetched": 1,
+   "full_text": 1
+  },
+  "Adafruit Industries \u2013 Makers, hackers, artists, designers and engineers!": {
+   "fetched": 10,
    "full_text": 0
   },
   "Ars Technica": {
-   "fetched": 3,
-   "full_text": 0
+   "fetched": 1,
+   "full_text": 1
   },
   "Axios": {
-   "fetched": 16,
+   "fetched": 14,
    "full_text": 6
   },
   "BBC News": {
-   "fetched": 3,
+   "fetched": 7,
    "full_text": 2
   },
   "Backpacker": {
@@ -100,7 +100,7 @@
    "full_text": 7
   },
   "Blog \u2013 Hackaday": {
-   "fetched": 5,
+   "fetched": 4,
    "full_text": 1
   },
   "Fierce Biotech": {
@@ -108,20 +108,20 @@
    "full_text": 4
   },
   "Foreign Affairs": {
-   "fetched": 4,
-   "full_text": 4
-  },
-  "MIT Technology Review": {
-   "fetched": 1,
-   "full_text": 1
-  },
-  "NPR Topics: News": {
    "fetched": 2,
    "full_text": 2
   },
+  "NPR Topics: News": {
+   "fetched": 2,
+   "full_text": 1
+  },
   "Nature": {
-   "fetched": 9,
-   "full_text": 3
+   "fetched": 5,
+   "full_text": 0
+  },
+  "Noahpinion": {
+   "fetched": 1,
+   "full_text": 1
   },
   "Outside Online": {
    "fetched": 10,
@@ -132,58 +132,50 @@
    "full_text": 0
   },
   "PetaPixel": {
-   "fetched": 9,
-   "full_text": 1
+   "fetched": 4,
+   "full_text": 3
   },
   "ProPublica": {
-   "fetched": 6,
-   "full_text": 6
+   "fetched": 5,
+   "full_text": 5
   },
   "Quanta Magazine": {
    "fetched": 1,
    "full_text": 1
   },
   "STAT": {
-   "fetched": 4,
-   "full_text": 3
+   "fetched": 6,
+   "full_text": 4
   },
   "Science": {
-   "fetched": 2,
+   "fetched": 4,
    "full_text": 0
   },
   "Techmeme": {
-   "fetched": 1,
+   "fetched": 4,
    "full_text": 0
   },
   "The Atlantic": {
-   "fetched": 10,
-   "full_text": 10
+   "fetched": 13,
+   "full_text": 13
   },
   "The Economist": {
    "fetched": 4,
    "full_text": 0
   },
   "The New Yorker": {
-   "fetched": 10,
-   "full_text": 7
+   "fetched": 9,
+   "full_text": 6
   },
   "buttons.joshwcomeau.com": {
    "fetched": 1,
    "full_text": 0
   },
   "github.com": {
-   "fetched": 3,
+   "fetched": 4,
    "full_text": 1
   },
-  "gpu-demo-gallery.pages.dev": {
-   "fetched": 1,
-   "full_text": 0
-  },
-  "greydanus.github.io": {
-   "fetched": 1,
-   "full_text": 1
-  },
-  "intruder.io": {
+  "iankduncan.com": {
    "fetched": 1,
    "full_text": 1
   },
@@ -191,11 +183,7 @@
    "fetched": 1,
    "full_text": 0
   },
-  "marginalia.nu": {
-   "fetched": 1,
-   "full_text": 1
-  },
-  "prismml.com": {
+  "msn.com": {
    "fetched": 1,
    "full_text": 0
   },
@@ -203,7 +191,11 @@
    "fetched": 1,
    "full_text": 0
   },
-  "rida.dev": {
+  "s.conao3.com": {
+   "fetched": 1,
+   "full_text": 1
+  },
+  "scottaaronson.blog": {
    "fetched": 1,
    "full_text": 1
   },
