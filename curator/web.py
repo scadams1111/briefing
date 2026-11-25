@@ -196,7 +196,7 @@ def subs_slide(subs: list[dict], root: str = "", section: str = "premium") -> st
         + (e(i.get('topic_name', '')) if section == "nyt" else f"{e(i['source'])} · {e(i.get('topic_name', ''))}")
         + f"</span><strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span></a>"
         f"<div class='subrow'><a class='open' href='{e(i['url'])}'>Open article {NEXT}</a>"
-        f"<a class='chip sm' href='https://archive.today={e(quote(i['url'], safe=''))}'>{ARCHIVE}<span>Link broken?</span></a></div></div>"
+        f"<a class='chip sm' href='https://archive.today/{e(quote(i['url'], safe=''))}'>{ARCHIVE}<span>Link broken?</span></a></div></div>"
         for i in subs)
     return (f"<section class='slide' data-url='' data-label='{e(pill)}'><article class='card'><div class='scroll'><div class='body'>"
             f"<span class='pill' style='align-self:flex-start'>{e(pill)}</span>"
