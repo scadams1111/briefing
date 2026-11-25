@@ -1,12 +1,44 @@
 {
  "date": "2026-11-25",
- "deep": null,
+ "deep": {
+  "field": "History",
+  "topic": "Columbian Exchange",
+  "hook": "Understanding how the Columbian Exchange reshaped global ecosystems, economies, and societies reveals the roots of modern globalization.",
+  "headline": "How the Columbian Exchange Reshaped Global Food, Animals, and Populations",
+  "why": "The exchange altered diets, economies, and population growth worldwide, linking continents through crops, livestock, and microbes. Its effects appear in everyday foods, agricultural practices, and the demographic makeup of societies today.",
+  "points": [
+   {
+    "point": "Definition and origins of the exchange",
+    "detail": "The Columbian exchange, also called the Columbian interchange, began after Christopher Columbus\u2019s 1492 voyage and lasted from the late 15th century onward. It describes the massive movement of plants, animals, and microbes between the Americas (the New World) and Afro\u2011Eurasia (the Old World). Some transfers were intentional, such as bringing European livestock to the Americas, while others were accidental, like the spread of pathogens. The term was coined in 1972 by historian Alfred W. Crosby, who highlighted how these biological and cultural flows reshaped ecosystems and societies on both sides of the Atlantic."
+   },
+   {
+    "point": "Transfer of American crops and their impact",
+    "detail": "American crops such as maize, potatoes, tomatoes, tobacco, cassava, sweet potatoes, and chili peppers traveled to the Old World and became staple foods worldwide. Potatoes, unknown outside South America before 1500, were widely cultivated in Europe by the 18th century and later supplied 12\u201125\u202f% of population growth in Afro\u2011Eurasia from 1700 to 1900, also driving urbanization. Maize and cassava spread to Africa and Asia, replacing traditional grains and boosting local populations. In Europe, the new crops diversified diets and increased nutrition, while in the Americas, Old World crops like rice, wheat, and sugarcane were introduced, reshaping agriculture and economies."
+   },
+   {
+    "point": "Animal transfers and new uses",
+    "detail": "Most animal species moved from the Old World to the New, because Eurasia already domesticated many livestock. Horses, donkeys, mules, pigs, cattle, sheep, goats, chickens, dogs, cats, and bees were quickly adopted by Indigenous peoples for transport, food, and work. Plains Indians used horses for hunting, while African slaves taught rice cultivation techniques that relied on water control. In the opposite direction, the turkey and Muscovy duck traveled from the Americas to Europe, becoming common poultry. These animal transfers altered diets, labor systems, and military capabilities, exemplified by the Mapuche\u2019s rapid adoption of horses that enhanced their resistance against Spanish colonizers."
+   },
+   {
+    "point": "Disease exchange and demographic collapse",
+    "detail": "The exchange of pathogens proved far more lethal than that of plants or animals. Old World diseases such as smallpox, measles, whooping cough, chickenpox, bubonic plague, typhus, and malaria arrived in the Americas with European colonists and decimated Indigenous populations. Smallpox alone killed an estimated 40\u202f% of the 200,000 residents of Tenochtitlan in 1520, and overall 80\u201195\u202f% of Native Americans died within the first 150 years after 1492. In contrast, the New World contributed syphilis to Europe and quinine from cinchona bark, the first effective malaria treatment. These disease flows reshaped demographic patterns, enabling European colonization and the trans\u2011Atlantic slave trade."
+   },
+   {
+    "point": "Cultural and demographic transformations",
+    "detail": "The movement of people accompanied the biological exchange, creating profound cultural shifts. European settlers and African slaves replaced many Indigenous communities across the Americas; the number of Africans taken to the New World far exceeded European migrants in the first three centuries. Enslaved Africans brought agricultural knowledge, such as rice cultivation, that became central to Southern plantations. The spread of New World crops like chili peppers and potatoes transformed cuisines in Europe, Africa, and Asia, making dishes such as curry globally common. Likewise, Old World crops\u2014rice, wheat, and sugarcane\u2014restructured American agriculture, while the introduction of coffee and cacao created new commodity economies."
+   }
+  ],
+  "image": "https://upload.wikimedia.org/wikipedia/commons/3/34/VegCorn_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+  "wiki_title": "Columbian exchange",
+  "wiki_url": "https://en.wikipedia.org/wiki/Columbian_exchange",
+  "reading": []
+ },
  "picks": [
   {
    "id": "f90fbc52dc42",
    "url": "https://psyche.co/turning-points/a-screenshot-is-precious-when-my-family-in-iran-is-out-of-reach",
    "title": "Traces of home",
-   "headline": "Traces of home",
+   "headline": "How digital silence reshapes grief and identity during wartime disconnection",
    "source": "Psyche",
    "topic": "smarter",
    "topic_name": "Get smarter",
@@ -14,20 +46,20 @@
    "minutes": 7,
    "bullets": [
     {
-     "point": "It was one of those suspended moments \u2013 I sat still, my thumb scrolling across the screen.",
-     "detail": "It was one of those suspended moments \u2013 I sat still, my thumb scrolling across the screen. The strange thing is this: you know no one is online, no new messages, no new stories. And, still, you scroll, in hopes that something \u2013 anything \u2013 might confirm the world you left behind hasn\u2019t simply vanished. I came across a cooking video my mother had liked before we lost the connection. Seeing her name beneath the post struck me, as if someone had brought news. My eyes filled. I read the recipe for pasta with white sauce in the caption. She must have saved it for one of those evenings when she didn\u2019t know what to cook. I took a screenshot, as if I might need to return to it \u2013 something I didn\u2019t want to lose: yadgari, a keepsake, a trace of her touch pressed into a screen."
+     "point": "The sudden loss of digital contact transforms routine communication into a fragile, life-or-death signal.",
+     "detail": "The author describes a decade of stable connection with parents in Iran via Telegram and video calls, which abruptly ceased on February 28 when war began. This shift turned daily rituals, like the 6 pm call, into memories of a vanished world. The narrative highlights how the 'last seen' status and disappearing names in group chats created a shared awareness of potential finality. The author notes that the silence was not just technical but existential, leaving them feeling 'homeless' and 'backless' in their daily life in India. The text illustrates that in crisis, digital presence becomes the primary metric for survival, where a single unknown phone call from the mother became a profound relief, confirming they were 'all alive.' This underscores the psychological weight of digital infrastructure in maintaining familial bonds across geopolitical conflicts."
     },
     {
-     "point": "I came across a cooking video my mother had liked before we lost the connection.",
-     "detail": "I came across a cooking video my mother had liked before we lost the connection. Seeing her name beneath the post struck me, as if someone had brought news. My eyes filled. I read the recipe for pasta with white sauce in the caption. She must have saved it for one of those evenings when she didn\u2019t know what to cook. I took a screenshot, as if I might need to return to it \u2013 something I didn\u2019t want to lose: yadgari, a keepsake, a trace of her touch pressed into a screen. After 10 years of living in India, my connection to home in Iran had settled into a rhythm. Each morning, I checked our family groups on the messaging app Telegram to see what had unfolded while I slept. During the day, a message from my mother, a brief pause in the flow of things, felt like a small gift."
+     "point": "Grief manifests through digital artifacts, such as screenshots and archived chats, serving as tangible keepsakes of lost connection.",
+     "detail": "The author finds comfort in a screenshot of a cooking video liked by their mother before the disconnection, describing it as a 'yadgari' or keepsake. This object represents a 'trace of her touch pressed into a screen,' offering a tangible link to the past. The narrative details how the author initially avoided viewing their parents' photos, fearing the confirmation of their absence, but eventually returned to archived chats to read old comments and hear their father's voice. This behavior illustrates a specific form of digital mourning where the interface itself becomes a site of memory. The author mentions crying while reading diaspora comments, indicating that the digital space became a communal place for processing loss. The reliance on these static digital traces contrasts sharply with the dynamic, real-time interaction that previously defined their relationship, highlighting how technology mediates even the most intimate forms of grief."
     },
     {
-     "point": "After 10 years of living in India, my connection to home in Iran had settled into a rhythm.",
-     "detail": "After 10 years of living in India, my connection to home in Iran had settled into a rhythm. Each morning, I checked our family groups on the messaging app Telegram to see what had unfolded while I slept. During the day, a message from my mother, a brief pause in the flow of things, felt like a small gift. At night, I scrolled through Persian Instagram \u2013 jokes, cooking videos, fragments of humour that make sense only in our language. I would laugh until I cried, then fall asleep with a quiet reassurance: somewhere, my world was still alive."
+     "point": "The disruption of digital normalcy alters daily behavior, creating a persistent state of alertness and social isolation.",
+     "detail": "Following the disconnection, the author\u2019s routine in Bengaluru changed drastically. They began refreshing news channels and messaging apps constantly, even during conversations or while standing in a school playground. This compulsive checking behavior led to social withdrawal, as other parents learned not to approach them. The author describes moving through ordinary routines differently, with the 'shadow of war' lingering in the background. The text notes that while others treated the situation as news, for the author, it was a constant, inescapable presence. This behavioral shift demonstrates how the loss of digital connectivity can permeate physical spaces, altering one's engagement with the immediate environment. The author\u2019s eventual acceptance of the silence, marked by a willingness to see old photos again, suggests a gradual adaptation to a new, precarious normalcy where connection is intermittent and uncertain."
     }
    ],
-   "room_line": "",
-   "ai": false,
+   "room_line": "This piece captures how the collapse of digital infrastructure during conflict turns routine communication into a primary indicator of survival, reshaping how we grieve and maintain identity across borders.",
+   "ai": true,
    "image": "https://images.aeonmedia.co/images/ae629c29-c170-4cd0-805a-c9dd7a72fe6b/test-v2-.jpg?top=88&left=0&cropWidth=1680&cropHeight=945&width=1200&quality=75&format=jpeg",
    "date": "2026-11-25"
   },
@@ -35,7 +67,7 @@
    "id": "b0da731c8789",
    "url": "https://www.scientificamerican.com/article/two-probes-are-about-to-arrive-at-mercury-for-an-up-close-look-at-this-puzzling-planet/",
    "title": "Two probes are about to arrive at Mercury for an up-close look at this puzzling planet",
-   "headline": "Two probes are about to arrive at Mercury for an up-close look at this puzzling planet",
+   "headline": "Mercury: BepiColombo's mission to unravel Mercury's mysteries",
    "source": "Scientific American",
    "topic": "smarter",
    "topic_name": "Get smarter",
@@ -43,20 +75,12 @@
    "minutes": 6,
    "bullets": [
     {
-     "point": "After eight years of a winding journey across the inner Solar System, a new spacecraft is about to arrive at Mercury\u2014or rather, two spacecraft, one from Europe and one from\u2026",
-     "detail": "After eight years of a winding journey across the inner Solar System, a new spacecraft is about to arrive at Mercury\u2014or rather, two spacecraft, one from Europe and one from Japan, that have traveled together for eight years over some six billion miles (10 billion kilometers). They will be our first visitors to Mercury in more than a decade as they pursue a mission to scour this strange world in greater detail than ever before. What they discover could help enable something unprecedented: a first-ever lander on Mercury. The mission, called BepiColombo, is due to enter into orbit around Mercury on November 21 after an almighty trek. The two spacecraft launched entwined from Earth in October 2018 and have since completed nine planetary flybys\u2014one of Earth, two of Venus and six of Mercury\u2014to gradually slow their precession enough to be captured by Mercury\u2019s orbit."
-    },
-    {
-     "point": "The mission, called BepiColombo, is due to enter into orbit around Mercury on November 21 after an almighty trek.",
-     "detail": "The mission, called BepiColombo, is due to enter into orbit around Mercury on November 21 after an almighty trek. The two spacecraft launched entwined from Earth in October 2018 and have since completed nine planetary flybys\u2014one of Earth, two of Venus and six of Mercury\u2014to gradually slow their precession enough to be captured by Mercury\u2019s orbit. The last spacecraft to visit Mercury, and the only prior spacecraft to orbit it, was NASA\u2019s MESSENGER mission, which circled the planet from 2011 to 2015. The only other spacecraft to venture there, one of the most difficult places to reach in the solar system, given its proximity to the sun, was NASA\u2019s Mariner 10, which flew by Mercury three times in 1974 and 1975."
-    },
-    {
-     "point": "The last spacecraft to visit Mercury, and the only prior spacecraft to orbit it, was NASA\u2019s MESSENGER mission, which circled the planet from 2011 to 2015.",
-     "detail": "The last spacecraft to visit Mercury, and the only prior spacecraft to orbit it, was NASA\u2019s MESSENGER mission, which circled the planet from 2011 to 2015. The only other spacecraft to venture there, one of the most difficult places to reach in the solar system, given its proximity to the sun, was NASA\u2019s Mariner 10, which flew by Mercury three times in 1974 and 1975. If you're enjoying this article, consider supporting our award-winning journalism by subscribing. By purchasing a subscription you are helping to ensure the future of impactful stories about the discoveries and ideas shaping our world today."
+     "point": "BepiColombo's mission will provide a nearly complete picture of Mercury",
+     "detail": "The spacecraft will study Mercury's composition and structure, which is unlike anything we\u2019ve seen in the solar system."
     }
    ],
    "room_line": "",
-   "ai": false,
+   "ai": true,
    "image": "https://static.scientificamerican.com/dam/asset/caa58007-4fea-4b3d-943c-12712275a63b/BepiColumbo.jpg?m=1795127982.588&w=1200",
    "date": "2026-11-25"
   }

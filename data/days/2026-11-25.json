@@ -150,7 +150,7 @@
   "id": "e8385ccb4a40",
   "url": "https://www.fiercebiotech.com/research/iambic-ceo-says-they-have-holy-grail-cdk-inhibitors-cancer-therapies",
   "title": "Why Iambic\u2019s CEO believes preclinical cancer therapy could be \u2018holy grail\u2019 for CDK inhibitors",
-  "headline": "Why Iambic\u2019s CEO believes preclinical cancer therapy could be \u2018holy grail\u2019 for CDK inhibitors",
+  "headline": "Iambic's AI-designed CDK inhibitor outperforms Ibrance in preclinical cancer models",
   "source": "Fierce Biotech",
   "topic": "biotech",
   "topic_name": "Biotech & Pharma",
@@ -158,20 +158,20 @@
   "minutes": 3,
   "bullets": [
    {
-    "point": "Fresh off a $150 million IPO, Iambic Therapeutics has unveiled preclinical data for a potential challenger in one of oncology's most competitive drug classes: cyclin-dependent kinases (CDKs).",
-    "detail": "Fresh off a $150 million IPO, Iambic Therapeutics has unveiled preclinical data for a potential challenger in one of oncology's most competitive drug classes: cyclin-dependent kinases (CDKs). The biotech's newest AI-designed candidate, IAM-C1, curbed tumor growth across multiple hormone-driven cancers and outperformed existing and experimental CDK inhibitors in preclinical studies, according to data presented at the EORTC-NCI-AACR symposium in Spain last week."
+    "point": "IAM-C1, an AI-designed dual CDK2/4 inhibitor, showed superior tumor growth inhibition compared to Pfizer's Ibrance in resistant breast cancer lines.",
+    "detail": "Iambic Therapeutics presented preclinical data for IAM-C1 at the EORTC-NCI-AACR symposium, highlighting its potential to overcome resistance mechanisms common in CDK4/6 inhibitors. In a CDK4 and CDK6 inhibitor-resistant breast cancer line, IAM-C1 achieved 78% tumor growth inhibition, significantly outperforming Ibrance, which showed only 24% inhibition. The compound is a selective dual inhibitor of CDK2 and CDK4, targeting kinases that regulate cell division. CEO Tom Miller described the result as a 'holy grail molecular profile,' noting that cancer cells often use CDK2 as an escape route when CDK4 is blocked, leading to toxicity. The data also showed efficacy in ovarian and endometrial adenocarcinoma models, with the drug depleting cells in the S phase of the cell cycle. This performance suggests the AI platform can identify molecular profiles that address specific resistance pathways, a key challenge in oncology drug development."
    },
    {
-    "point": "The biotech's newest AI-designed candidate, IAM-C1, curbed tumor growth across multiple hormone-driven cancers and outperformed existing and experimental CDK inhibitors in preclinical studies, according to data presented at the EORTC-NCI-AACR\u2026",
-    "detail": "The biotech's newest AI-designed candidate, IAM-C1, curbed tumor growth across multiple hormone-driven cancers and outperformed existing and experimental CDK inhibitors in preclinical studies, according to data presented at the EORTC-NCI-AACR symposium in Spain last week. During the triple meeting, hosted jointly by the European Organisation for Research and Treatment of Cancer (EORTC), the National Cancer Institute (NCI), and the American Association for Cancer Research (AACR), Iambic shared promising preclinical data of IAM-C1 in both cell and mouse models."
+    "point": "Iambic utilizes an automated 'agentic factory' where robots generate data to continuously train its AI, creating a scalable drug discovery loop.",
+    "detail": "The company\u2019s platform is described as an automated, scalable chemistry and biology experimentation system. Once the AI designs a candidate, robots conduct the subsequent biology and chemistry testing. The results from these automated experiments are fed back into the AI platform to refine future designs. CEO Tom Miller characterizes this system as an 'automated agentic factory for the creation of new data,' which expands the company's 'data moat' daily. This approach aims to address the totality of drug discovery by closing the loop between computational design and physical experimentation. The system is central to Iambic's value proposition, allowing for rapid iteration and optimization of molecular candidates like IAM-C1 and IAM-217, distinguishing it from traditional, slower drug discovery pipelines."
    },
    {
-    "point": "During the triple meeting, hosted jointly by the European Organisation for Research and Treatment of Cancer (EORTC), the National Cancer Institute (NCI), and the American Association for Cancer Research (AACR),\u2026",
-    "detail": "During the triple meeting, hosted jointly by the European Organisation for Research and Treatment of Cancer (EORTC), the National Cancer Institute (NCI), and the American Association for Cancer Research (AACR), Iambic shared promising preclinical data of IAM-C1 in both cell and mouse models. IAM-C1 is a selective dual CDK2 and CDK4 inhibitor that was designed by what Iambic describes as its \u201cmolecular superintelligence program.\u201d CDK2 and CDK4 are cyclin-dependent kinases that help to move dividing cells along the growth cycle and are overactive during cancer cell proliferation."
+    "point": "Iambic\u2019s KIF18A inhibitor, IAM-217, received FDA clearance for clinical trials after showing 90% regression in brain metastasis models.",
+    "detail": "In addition to IAM-C1, Iambic presented data on IAM-217, a small molecule targeting KIF18A, a protein regulating chromosome alignment. In an intracranial breast cancer model of brain metastasis, orally administered IAM-217 entered the brain and drove nearly 90% tumor regression. The FDA has granted clearance for IAM-217 to enter clinical trials, with first-to-human dosing planned for the near term. This follows the company\u2019s October IPO, which raised $150 million. Funds are earmarked for phase 3 studies of the lead candidate IAM-1363, a brain-penetrant HER2 inhibitor currently in phase 2, and to advance the KIF18A inhibitor into the clinic. The successful IND clearance validates the platform\u2019s ability to generate clinically viable candidates across different oncology targets."
    }
   ],
-  "room_line": "",
-  "ai": false,
+  "room_line": "Iambic\u2019s recent data suggests their AI-driven 'agentic factory' isn't just a buzzword, as their new CDK inhibitor outperformed Ibrance in resistant models, potentially solving a major resistance hurdle in oncology.",
+  "ai": true,
   "date": "2026-11-25",
   "score": 7.0,
   "image": "https://qtxasset.com/quartz/qcloud5/media/image/cell_division.jpg?VersionId=LhvdSVLdjyaGA5l.KyAiHqEwd.PQc76f",
@@ -212,20 +212,13 @@
   "minutes": 5,
   "bullets": [
    {
-    "point": "A small transformer that writes and sketches from text.",
-    "detail": "A small transformer that writes and sketches from text. The effort was 80% data, 15% speed and 5% architecture: my first project that follows the Bitter Lesson. The text of this post (except the conclusion) was written by Claude. I plan to rewrite it in my own words over Thanksgiving Break but needed to get the project out. So apologies for this move - all of my other posts were written by me, and all future posts will be as well. Even if you find Claude more comprehensible than my meandering thoughts, meander nonetheless I shall."
-   },
-   {
-    "point": "The text of this post (except the conclusion) was written by Claude.",
-    "detail": "The text of this post (except the conclusion) was written by Claude. I plan to rewrite it in my own words over Thanksgiving Break but needed to get the project out. So apologies for this move - all of my other posts were written by me, and all future posts will be as well. Even if you find Claude more comprehensible than my meandering thoughts, meander nonetheless I shall. Last year Zach Wimpee and I trained a tiny GPT to write cursive. It worked but it only knew one hand (mine) and it learned from 3,500 words that I wrote on a trackpad."
-   },
-   {
-    "point": "Last year Zach Wimpee and I trained a tiny GPT to write cursive.",
-    "detail": "Last year Zach Wimpee and I trained a tiny GPT to write cursive. It worked but it only knew one hand (mine) and it learned from 3,500 words that I wrote on a trackpad. So here\u2019s the obvious next question: can one small, ordinary transformer learn to hold a pen in lots of hands and draw as well as write? PenGPT is my attempt. There are two models. A 6M-parameter one writes print and cursive and picks up the handwriting of someone it has never seen from a few of their words. A 54M-parameter one draws from a text prompt."
+    "point": "The model uses a tokenizer that works for handwriting and sketches.",
+    "detail": "The tokenizer is simpler than previous approaches, reducing training time and improving performance.",
+    "caveat": "The model struggles with pen strokes and sketches that are not in the training data."
    }
   ],
-  "room_line": "",
-  "ai": false,
+  "room_line": "This generative model can be used for handwriting and sketches, but it needs more training data to improve.",
+  "ai": true,
   "date": "2026-11-25",
   "score": 6.0,
   "image": "https://greydanus.github.io/assets/pengpt/thumbnail.png",
@@ -235,7 +228,7 @@
   "id": "48cd98b45b4d",
   "url": "https://www.newyorker.com/culture/q-and-a/are-we-really-witnessing-a-cyber-apocalypse",
   "title": "Are We Really Witnessing a Cyber Apocalypse?",
-  "headline": "Are We Really Witnessing a Cyber Apocalypse?",
+  "headline": "AI\u2011Driven Surge in Cyber Vulnerabilities Raises Patch\u2011Race Risks",
   "source": "The New Yorker",
   "topic": "longform",
   "topic_name": "Longform & Ideas",
@@ -243,20 +236,20 @@
   "minutes": 11,
   "bullets": [
    {
-    "point": "Are we entering a new age of cyber mayhem?",
-    "detail": "Are we entering a new age of cyber mayhem? The latest A.I. models are extraordinarily good at finding vulnerabilities in computer systems, and the computer systems have seemed unusually finicky. Lately, outages at the F.A.A., Apple, Microsoft, and Chase, among others, have created an atmosphere of alarm; Java and PHP, two programming languages that underpin much of the internet, were found to have critical security flaws. It\u2019s unclear whether we\u2019re in for a lot of inconvenience, or something more. Andrew Lohn, a senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, has spent years studying cybersecurity and artificial intelligence. He\u2019s worked for the RAND Corporation and the National Security Council. We spoke on the phone, and I asked him to put our unease in context. This conversation has been edited and condensed."
+    "point": "AI models are dramatically increasing the rate of discovered software vulnerabilities.",
+    "detail": "Andrew Lohn, a senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, notes that monthly vulnerability disclosures jumped from roughly four thousand in early 2023 to about six thousand by April, then accelerated to sixteen thousand per month\u2014a four\u2011fold increase. The AI\u2011enhanced tools can locate flaws faster than human analysts, creating a torrent of patches that defenders must apply. Each patch carries a non\u2011zero chance of introducing new failures, so a ten\u2011fold rise in patch frequency could produce ten times more outage incidents, as seen in recent disruptions at the FAA, Apple, Microsoft, and major banks. Lohn emphasizes that the race to deploy fixes often outpaces the ability to test them thoroughly, amplifying systemic fragility across critical infrastructure and commercial platforms."
    },
    {
-    "point": "Andrew Lohn, a senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, has spent years studying cybersecurity and artificial intelligence.",
-    "detail": "Andrew Lohn, a senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, has spent years studying cybersecurity and artificial intelligence. He\u2019s worked for the RAND Corporation and the National Security Council. We spoke on the phone, and I asked him to put our unease in context. This conversation has been edited and condensed. It\u2019s always been a little bit unclear how big the threats are, or what they\u2019ll even be. Hacking goes back to at least the early eighties; back then, people really didn\u2019t think about cybersecurity very much. You heard more about it once people started losing money. Then there were some scary, kind of fancy hacks that shaped a lot of thinking\u2014like the Stuxnet worm, in the two-thousands, which was intended to take out Iranian nuclear centrifuges but then extended its reach and got onto computers elsewhere. At that point, cybersecurity people started talking about a \u201cCyber Pearl Harbor\u201d\u2014a theorized event where all kinds of really nasty things happened. We sometimes see little glimpses of it: in 2015 and 2016, for example, Russia was accused of taking down Ukrainian power grids."
+    "point": "Coordinated vulnerability disclosure windows are shrinking, pressuring defenders to patch faster.",
+    "detail": "Traditional coordinated vulnerability disclosure gives vendors 45 to 90 days to remediate a reported flaw before public disclosure. Lohn explains that Anthropic recently reduced its critical\u2011issue window to thirty days, reflecting a belief that attackers are finding exploits more quickly. This compression forces organizations to accelerate their patch development and deployment pipelines, increasing operational stress and the likelihood of mis\u2011configurations. The faster disclosure also alerts potential adversaries to unpatched weaknesses, creating a feedback loop where attackers can exploit the same vulnerability before most users have applied the fix. Lohn warns that the shortened timeline may erode the defensive advantage historically provided by the disclosure lag, especially for smaller institutions with limited cybersecurity staffing."
    },
    {
-    "point": "It\u2019s always been a little bit unclear how big the threats are, or what they\u2019ll even be.",
-    "detail": "It\u2019s always been a little bit unclear how big the threats are, or what they\u2019ll even be. Hacking goes back to at least the early eighties; back then, people really didn\u2019t think about cybersecurity very much. You heard more about it once people started losing money. Then there were some scary, kind of fancy hacks that shaped a lot of thinking\u2014like the Stuxnet worm, in the two-thousands, which was intended to take out Iranian nuclear centrifuges but then extended its reach and got onto computers elsewhere. At that point, cybersecurity people started talking about a \u201cCyber Pearl Harbor\u201d\u2014a theorized event where all kinds of really nasty things happened. We sometimes see little glimpses of it: in 2015 and 2016, for example, Russia was accused of taking down Ukrainian power grids. But, over time, people started reconsidering the idea. Actually, not that much was happening. There\u2019s a concept called the \u201ccyber squirrel\u201d: yes, there have been rare incidents of sophisticated hackers attacking critical infrastructure, but squirrels take down power substations or transmission lines all the time. There\u2019s even a website where you can go and see all of these squirrel attacks on critical infrastructure. At some point, cybersecurity people started to\u2026"
+    "point": "Economic costs and system resilience are keeping large\u2011scale cyber catastrophes from materializing.",
+    "detail": "Despite the heightened vulnerability discovery rate, Lohn points to several mitigating factors. Ransomware attack frequency has risen, yet average payouts have declined, suggesting that organizations are improving backups and recovery procedures. Health\u2011care breach reports show stable incident numbers but fewer affected individuals, indicating better containment. Moreover, the financial barrier to purchasing zero\u2011day exploits\u2014often hundreds of thousands of dollars\u2014remains prohibitive for many non\u2011state actors, and even if costs fall, the economic incentive to cause widespread disruption may not outweigh the risk of legal repercussions. Resilience measures, such as hardware interlocks that prevent dangerous commands from affecting physical systems, have limited the impact of attacks on water and power infrastructure. These economic and technical safeguards collectively reduce the probability of a true cyber\u2011apocalypse, even as AI accelerates threat discovery."
    }
   ],
-  "room_line": "",
-  "ai": false,
+  "room_line": "The AI\u2011driven acceleration of vulnerability discovery is forcing a faster, riskier patch cycle that could destabilize critical infrastructure if not managed.",
+  "ai": true,
   "date": "2026-11-25",
   "score": 9.0,
   "image": "https://media.newyorker.com/photos/6b0617776dabd14c5e14e80f/16:9/w_1280,c_limit/Rothman---Cyber-Apocalypse---GettyImages-2305197766.jpg",
@@ -266,7 +259,7 @@
   "id": "c383eed8de9d",
   "url": "https://www.newyorker.com/best-books-2026",
   "title": "The Best Books of 2026 So Far",
-  "headline": "The Best Books of 2026 So Far",
+  "headline": "Three Books Reveal Hidden Forces Shaping Policy, Technology, and Economic Booms",
   "source": "The New Yorker",
   "topic": "longform",
   "topic_name": "Longform & Ideas",
@@ -274,20 +267,20 @@
   "minutes": 115,
   "bullets": [
    {
-    "point": "- After the Flush by Nick Kawa (California)Nonfiction We may have become blithely conversant with the toilet as a consumer product, but, as the anthropologist Kawa reminds us, once the\u2026",
-    "detail": "- After the Flush by Nick Kawa (California)Nonfiction We may have become blithely conversant with the toilet as a consumer product, but, as the anthropologist Kawa reminds us, once the handle has been pulled or the button pressed, we tend to give no thought to the fate of our effluents. This \u201cflush and forget\u201d mind-set, Kawa argues, has consequences we can no longer afford to ignore. Packed with lyrical flights and an extended account of an experiment involving a toilet seat perched over a bucket, this decade-long study of sewage and waste treatment makes a compelling case for paying attention to defecation and its afterlife\u2014even if Kawa, like so many, cannot resist the distraction of Wordle while on the can. Read more: \u201cWhat Happens After We Flush?,\u201d by Rebecca Mead - Learning by Courtney Bush (Joyland Editions)Nonfiction A buoyant, humane philosophy uplifts this deb\u00fat novella, which follows a Monday in the life of Courtney, its thirtysomething narrator, as she manages a pack of four-year-olds in a private Harlem day care. \u201cLearning\u201d \u2019s characterization of these children is uncommonly complex; they are understood as neither props nor narrative addenda but, rather, as odd little people in perpetual motion, sensorily and imaginatively\u2026"
+    "point": "\u2018After the Flush\u2019 reveals hidden environmental costs of modern sewage systems",
+    "detail": "Nick Kawa, an anthropologist, spent a decade documenting the life cycle of human waste in \u2018After the Flush.\u2019 The book blends lyrical prose with a hands\u2011on experiment in which a toilet seat sits over a bucket, illustrating how modern societies treat sewage as invisible. Kawa argues that the \u2018flush\u2011and\u2011forget\u2019 mindset obscures the environmental toll of treatment plants, nutrient runoff, and infrastructure strain. He links these issues to broader policy debates about water quality standards and climate\u2011resilient design, noting that even trivial distractions\u2014like playing Wordle on the bathroom wall\u2014can mask systemic neglect. By foregrounding the physics of effluent and the social habits surrounding it, the work calls for more rigorous regulation and public awareness of waste streams, a point especially relevant to anyone involved in animal\u2011research facilities or biotech labs that generate liquid waste."
    },
    {
-    "point": "- Learning by Courtney Bush (Joyland Editions)Nonfiction A buoyant, humane philosophy uplifts this deb\u00fat novella, which follows a Monday in the life of Courtney, its thirtysomething narrator, as she manages\u2026",
-    "detail": "- Learning by Courtney Bush (Joyland Editions)Nonfiction A buoyant, humane philosophy uplifts this deb\u00fat novella, which follows a Monday in the life of Courtney, its thirtysomething narrator, as she manages a pack of four-year-olds in a private Harlem day care. \u201cLearning\u201d \u2019s characterization of these children is uncommonly complex; they are understood as neither props nor narrative addenda but, rather, as odd little people in perpetual motion, sensorily and imaginatively porous, \u201ceating information with their entire beings.\u201d But Bush extends a similarly generous recognition to all her characters, including the disoriented or guilt-ridden adults that swirl around the educational space. The redemptive warmth that she offers each sets her book\u2014and her world view\u2014apart. Read more: \u201cThe Mothers We Pay,\u201d by Jamie Hood - Said the Dead by Doireann N\u00ed Ghr\u00edofa (Farrar, Straus & Giroux)Fiction This genre-bending story resurrects the women who lived, toiled, and died at a Victorian psychiatric hospital in County Cork. N\u00ed Ghr\u00edofa, an Irish poet, uses the case notes of a doctor who worked at the institution to imagine her way into the lives of the patients\u2014women who were confined for insanity that was attributed, variously, to lactation, \u201coverwork attending on her sick husband,\u201d and \u201cmoney troubles.\u201d\u2026"
+    "point": "James Gleick\u2019s \u2018The Telephone\u2019 traces how a single invention reshaped society and control",
+    "detail": "James Gleick\u2019s \u2018The Telephone\u2019 offers a sweeping narrative of the device\u2019s invention, corporate battles, and cultural ripple effects. Starting with early patent disputes, Gleick details a 19th\u2011century injunction that required operators to end calls with the phrase \u2018That is all,\u2019 a rule that shaped conversational etiquette. He then follows the emergence of \u2018invisible interlopers\u2019\u2014government agencies and private firms that tapped lines, raising early privacy concerns that echo today\u2019s digital surveillance debates. The book also chronicles how the telephone spurred new business models, urban planning, and social norms, from the rise of call\u2011centers to the redefinition of intimacy across distances. Gleick\u2019s storytelling is anchored in archival material and interviews, providing concrete examples of how a single technology can become a locus of power struggles, regulatory challenges, and societal transformation, lessons that resonate with current AI\u2011driven communication tools."
    },
    {
-    "point": "- Said the Dead by Doireann N\u00ed Ghr\u00edofa (Farrar, Straus & Giroux)Fiction This genre-bending story resurrects the women who lived, toiled, and died at a Victorian psychiatric hospital in County\u2026",
-    "detail": "- Said the Dead by Doireann N\u00ed Ghr\u00edofa (Farrar, Straus & Giroux)Fiction This genre-bending story resurrects the women who lived, toiled, and died at a Victorian psychiatric hospital in County Cork. N\u00ed Ghr\u00edofa, an Irish poet, uses the case notes of a doctor who worked at the institution to imagine her way into the lives of the patients\u2014women who were confined for insanity that was attributed, variously, to lactation, \u201coverwork attending on her sick husband,\u201d and \u201cmoney troubles.\u201d The author manages to become a \u201cvessel, a jug of living speech,\u201d owing to her belief that she easily \u201cmight have lived within those walls.\u201d The resulting work is an empathetic, probing exploration of the porous contours of history, archives, and sanity itself. - The Absent Woman by Eve Sneider (Norton)Nonfiction This poised biography of the longtime New Yorker staff writer Janet Malcolm brings many of the personal themes of her writing into focus. Malcolm was born in Prague in 1934, and left for New York, with her family, when she was four years old. Sneider reconstructs the most prominent turns in Malcolm\u2019s life: a first marriage to a successful writer; her foray into psychoanalysis; the infamous legal battle that resulted from\u2026"
+    "point": "\u2018The Rush\u2019 links Gold\u2011Rush California to today\u2019s economic and cultural dynamics",
+    "detail": "Nathaniel Philbrick\u2019s \u2018The Rush\u2019 revisits the California Gold Rush, covering roughly 1848\u20111860 and its aftermath, to show how a resource boom reshaped the American West. Philbrick weaves together the experiences of miners, entrepreneurs, Native peoples, and law\u2011enforcement officials, illustrating how violence, speculative finance, and rapid town\u2011building created patterns of boom\u2011and\u2011bust that echo in today\u2019s tech and biotech clusters. He highlights specific episodes\u2014such as the 1850 Sacramento flood and the 1856 Comstock Lode\u2014that illustrate how infrastructure, migration, and state policy interacted. While praised for vivid storytelling, some critics note Philbrick\u2019s occasional over\u2011emphasis on narrative drama at the expense of nuance. Nonetheless, the book underscores the lasting economic and cultural legacies of a resource\u2011driven surge, offering a historical lens for understanding contemporary entrepreneurial ecosystems and regulatory responses."
    }
   ],
-  "room_line": "",
-  "ai": false,
+  "room_line": "These books show how hidden infrastructure, communication tech, and historic economic booms shape policy, innovation, and the societal impacts we face today.",
+  "ai": true,
   "date": "2026-11-25",
   "score": 6.0,
   "image": "https://media.newyorker.com/photos/6966acfff26bd769148e5b23/16:9/w_1280,c_limit/bestbooks2026_headerdesktop_animation_03.gif",
