@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "llm": true,
+ "llm": false,
  "candidates": 420,
  "picked": 10,
  "feeds": {
@@ -36,7 +36,7 @@
   "https://www.biopharmadive.com/feeds/news/": "ok (10)",
   "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (10)",
   "https://speakingofresearch.com/feed/": "ok (10)",
-  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (10)",
+  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (9)",
   "https://www.bing.com/news/search?q=new+approach+methodologies+animal+testing&format=rss": "ok (10)",
   "https://www.bing.com/news/search?q=FDA+animal+testing&format=rss": "ok (12)",
   "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (9)",
@@ -64,7 +64,15 @@
   "https://parentdata.org/feed/": "ok (16)",
   "https://www.afterbabel.com/feed": "ok (20)",
   "https://www.theatlantic.com/feed/channel/family/": "ok (25)",
-  "hackernews": "ok (30)"
+  "hackernews": "ok (30)",
+  "https://psyche.co/feed": "ok (20)",
+  "https://ourworldindata.org/atom.xml": "ok (10)",
+  "https://fs.blog/feed/": "ok (20)",
+  "https://bigthink.com/feed/": "ok (10)",
+  "https://publicdomainreview.org/rss.xml": "ok (40)",
+  "https://www.smithsonianmag.com/rss/latest_articles/": "ok (10)",
+  "https://waitbutwhy.com/feed": "ok (10)",
+  "https://www.scientificamerican.com/platform/syndication/rss/": "ok (40)"
  },
  "sources": {
   "Adafruit Industries \u2013 Makers, hackers, artists, designers and engineers!": {
@@ -76,7 +84,7 @@
    "full_text": 0
   },
   "Ars Technica": {
-   "fetched": 2,
+   "fetched": 3,
    "full_text": 0
   },
   "Axios": {
@@ -144,7 +152,7 @@
    "full_text": 0
   },
   "Techmeme": {
-   "fetched": 2,
+   "fetched": 1,
    "full_text": 0
   },
   "The Atlantic": {

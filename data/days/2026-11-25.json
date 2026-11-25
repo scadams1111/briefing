@@ -3,7 +3,7 @@
   "id": "eff7ffb31734",
   "url": "https://www.statnews.com/2026/11/25/us-china-biotech-race-policy-data/?utm_campaign=rss",
   "title": "Opinion: Washington and Beijing are building walls around biotechnology. That\u2019s the wrong approach",
-  "headline": "U.S. biotech edge eroding as China\u2019s output accelerates",
+  "headline": "Kinch argues domestic research cuts, not Chinese competition, threaten U.S. biotech leadership",
   "source": "STAT",
   "topic": "science",
   "topic_name": "Science & Medicine",
@@ -11,92 +11,30 @@
   "minutes": 5,
   "bullets": [
    {
-    "point": "U.S. biotech leadership is eroding while China\u2019s output surges",
-    "detail": "Michael S. Kinch notes that the Center for Research Innovation in Biotechnology tracked 17,000 drugs entering human trials from 2000\u20112024. Their September 2024 Drug Discovery Today analysis shows China\u2019s annual experimental\u2011drug introductions rose from about 30 in 2013 to over 400 a decade later, matching or exceeding U.S. numbers in cell therapies and monoclonal antibodies, especially multispecific antibodies and drug\u2011conjugates. By contrast, U.S. contributions have flat\u2011lined since 2018, and America retains a larger share only in nucleic\u2011acid drugs and gene therapies\u2014areas built on decades of Western public and private investment such as lipid\u2011nanoparticle platforms and viral vectors. Kinch emphasizes that maintaining this lead will require renewed domestic support and strategic investment."
+    "point": "U.S. drug discovery output has stagnated since 2018 while China\u2019s public sector now outproduces American counterparts.",
+    "detail": "Kinch and colleagues at the Center for Research Innovation in Biotechnology tracked 17,000 new drugs entering human trials between 2000 and 2024. They found that while overall numbers converged, the composition differs significantly. Chinese sponsors have taken a commanding lead in certain monoclonal antibody categories, such as multispecific antibodies and drug conjugates, and often introduced more novel cell therapies than American sponsors by the late 2010s. In 2024, China\u2019s public sector, including universities and state-linked enterprises, contributed more than twice as many new drugs as their American counterparts. This surge contrasts with the flatlining of U.S. contributions since 2018, suggesting that the primary threat to U.S. leadership is the erosion of the domestic research enterprise rather than foreign capital inflows."
    },
    {
-    "point": "Washington and Beijing are proposing investment walls that miss the nuanced competitive landscape",
-    "detail": "Kin\u200bch describes two parallel policy moves: on Oct.\u202f16, 2024 Beijing announced a ban on foreign acquisition of Chinese cell\u2011and gene\u2011therapy platforms, while the U.S. Treasury, within a week, proposed prohibiting American investors from taking equity stakes, forming joint ventures, or making limited\u2011partner investments in Chinese biotech firms and their equipment suppliers. Both measures leave licensing untouched, so American companies can still license Chinese molecules and Chinese firms can sell products abroad. Kin\u200bch argues that these \u201cwalls\u201d treat biotechnology as a monolith, ignoring that the U.S. and China compete in multiple, unevenly paced modalities. He points out that Chinese biotech deals reached $120\u202fbillion through August\u202f2026, a one\u2011third increase year\u2011over\u2011year, suggesting that investment flows remain robust despite the proposed restrictions. The proposals also signal heightened geopolitical tension over strategic health assets."
+    "point": "Recent U.S. and Chinese proposals restrict investment but leave licensing open, creating a division of labor rather than a full decoupling.",
+    "detail": "Beijing proposed barring foreign acquisition of proprietary cell and gene platforms, while the U.S. Treasury proposed restricting American equity stakes and joint ventures in Chinese biotech. However, neither proposal impacts licensing agreements. American firms can still license Chinese molecules, and Chinese companies can sell to U.S. and European partners. Kinch argues this creates a division of labor where China increasingly invents and owns assets, while American firms take licenses, complete late-stage development, and pay royalties. The author notes that foreign deals for Chinese biotech assets reached $120 billion through August 2026, up more than a third from the previous year, indicating that the open door for licensing remains more significant than the walls built around investment."
    },
    {
-    "point": "Targeted policy actions could preserve U.S. advantage better than broad restrictions",
-    "detail": "Kin\u200bch proposes three concrete actions to protect U.S. biotech leadership. First, he urges scientists and industry experts to submit comments during the Treasury\u2019s public comment period ending Dec.\u202f7, urging a narrow focus on platform transfers rather than blanket investment bans and clarity on \u201cNewCo\u201d arrangements where Chinese licensors take stakes in U.S. startups. Second, he calls for renewed, targeted funding for areas where America already leads\u2014nucleic\u2011acid and gene\u2011therapy research\u2014through stable support of NIH translational programs, ARPA\u2011H, and domestic manufacturing capacity, and for addressing domestic barriers that push early\u2011stage cell\u2011therapy trials to China. Third, he recommends that federal agencies develop nuanced metrics, tracking first\u2011in\u2011human trials by drug type and sponsor country, rather than relying on aggregate new\u2011drug counts, to better gauge long\u2011term health and economic impacts. These steps, he argues, would be more effective than broad \u201cwalls.\u201d"
+    "point": "Kinch recommends narrowing restrictions to platform transfers and prioritizing stable funding for U.S. strengths in nucleic acids and gene therapy.",
+    "detail": "The author suggests three steps: first, use the public comment period to press Treasury for narrow rules targeting platform transfers rather than all investment, with clear criteria for review. Second, policymakers should prioritize investment in areas where the U.S. still leads, such as nucleic acid drugs and gene therapy, which rely on decades of Western public and private investment in tools like lipid nanoparticles and CRISPR. Third, Washington should measure the race by drug or disease type rather than aggregate totals, tracking first-in-human trials by sponsor country to identify long-term outcomes like FDA approvals. Kinch emphasizes that stable funding for models like NIH translational research is the most reliable way to protect America\u2019s declining margin in these critical technologies."
    }
   ],
-  "room_line": "The real risk to U.S. biotech isn\u2019t Chinese capital but our own stagnant research pipeline, so nuanced policies matter more than blanket investment bans.",
+  "room_line": "The data suggests our biggest risk isn't Chinese capital, but the fact that our domestic research output has been flat since 2018 while their public sector is scaling rapidly.",
   "ai": true,
   "date": "2026-11-25",
-  "score": 8.0,
+  "score": 9.0,
   "image": "https://www.statnews.com/wp-content/uploads/2026/11/GettyImages-2295093739-1024x576.jpg",
   "author": "Michael S Kinch"
- },
- {
-  "id": "c4ccf232e3bd",
-  "url": "https://www.nature.com/articles/d41586-026-03718-4",
-  "title": "A powerful HIV vaccine is finally within reach \u2014 thanks to these super antibodies",
-  "headline": "New vaccine strategies elicit broadly neutralizing HIV antibodies in monkeys and humans",
-  "source": "Nature",
-  "topic": "science",
-  "topic_name": "Science & Medicine",
-  "words": 1460,
-  "minutes": 6,
-  "bullets": [
-   {
-    "point": "Monkey studies show vaccination can elicit broadly neutralizing HIV antibodies",
-    "detail": "Three independent groups reported that sequential immunisation regimens in rhesus macaques triggered the production of broadly neutralizing antibodies (bnAbs) capable of neutralising diverse HIV strains. The studies, cited as references 2\u20114 in the Nature article, used engineered envelope immunogens to prime and boost B\u2011cell responses, achieving antibody titres that prevented infection in challenge experiments. Rogier Sanders of Amsterdam UMC described the result as \u201ca very important milestone,\u201d noting that no prior vaccine had elicited such breadth in non\u2011human primates. While the work remains pre\u2011clinical, the data provide proof\u2011of\u2011concept that the germline\u2011targeting approach can shape the affinity\u2011matured antibody repertoire needed for protection, moving the field from a \u201cshot in the dark\u201d toward a defined immunological endpoint. These findings also align with earlier human studies that identified similar bnAb lineages, reinforcing the translational relevance of the primate model."
-   },
-   {
-    "point": "Human trials of germline\u2011targeting immunogens generate bnAb precursors",
-    "detail": "Human volunteers receiving the engineered immunogen eOD\u2011GT8, developed by William Schief\u2019s team at Scripps Research and now produced by Moderna, generated antibodies that match the genetic and structural hallmarks of bnAb precursors. In phase\u20111 trials, nearly all participants produced these precursors after the priming dose, and a subsequent booster with a related immunogen induced additional somatic mutations that enhanced binding breadth and neutralisation potency. Schief, also vice\u2011president for protein design at Moderna, described the outcome as \u201cworked beautifully,\u201d highlighting that the approach can steer B\u2011cell evolution toward the desired epitope on the HIV envelope. Although the antibodies have not yet reached the full maturity of naturally occurring bnAbs, the data demonstrate that the germline\u2011targeting strategy is feasible in people and can be built upon for a full vaccine regimen."
-   },
-   {
-    "point": "Funding cuts and prophylactic drugs complicate HIV vaccine development and testing",
-    "detail": "The article notes that the momentum toward an HIV vaccine coincides with two major external pressures. First, the U.S. government has sharply reduced funding for pre\u2011clinical and clinical HIV research, leaving several promising programmes on the brink of suspension, as highlighted by Dennis Burton of Scripps Research. Second, the recent approval of long\u2011acting prophylactic agents such as lenacapavir creates a high bar for vaccine efficacy trials, because demonstrating added benefit over an already effective drug will be difficult and may require larger, more expensive studies. Together, these financial and regulatory challenges could slow translation of the promising bnAb\u2011inducing strategies into licensure, underscoring the need for sustained public\u2011private investment and clear pathways for comparative efficacy testing."
-   }
-  ],
-  "room_line": "The germline\u2011targeting approach is finally producing bnAb precursors in people, offering a realistic path to an HIV vaccine despite funding and drug\u2011competition hurdles.",
-  "ai": true,
-  "date": "2026-11-25",
-  "score": 8.0,
-  "image": "https://media.nature.com/lw1200/magazine-assets/d41586-026-03718-4/d41586-026-03718-4_53988398.jpg",
-  "author": "Callaway; Ewen"
- },
- {
-  "id": "9eb0b093f002",
-  "url": "https://www.propublica.org/article/ambetter-prior-authorization-denials",
-  "title": "Delayed Cancer Treatment. Missed Medication. How a Popular Insurance Plan\u2019s Use of Prior Authorization Hurt Patients.",
-  "headline": "Ambetter\u2019s prior authorization denial rates exceed all other ACA marketplace plans",
-  "source": "ProPublica",
-  "topic": "world",
-  "topic_name": "World & Politics",
-  "words": 3308,
-  "minutes": 14,
-  "bullets": [
-   {
-    "point": "Ambetter denied prior authorization requests at a 25% average rate, significantly higher than the 16% marketplace average.",
-    "detail": "ProPublica\u2019s analysis of federal data reveals that Ambetter, the most popular ACA marketplace plan, has the highest denial rates in most states where it operates. In Texas, denial rates exceeded 32%, while in Iowa they reached 31%. The data, required for the first time this year, highlights a lack of transparency that has persisted since the marketplace launched in 2013. Former state insurance regulators described the outlier rates as \"stunning,\" urging current regulators to examine the improper use of prior authorization. While insurers claim the process ensures cost-effective care, experts describe the decision-making mechanism as a \"black box\" that often blocks access to necessary treatments without clear justification."
-   },
-   {
-    "point": "Only 7% of Ambetter denials are appealed, despite a majority of contested cases being overturned.",
-    "detail": "The article notes that while more than half of Ambetter customers who contest their denials succeed in getting coverage, the vast majority never attempt to appeal. Patients often fail to challenge decisions because they are unaware of their rights or find the process too complex and time-consuming. This dynamic allows insurers to maintain high initial denial rates, effectively using the administrative burden as a barrier to care. The low appeal rate suggests that the system relies on patient exhaustion rather than medical necessity to determine coverage, creating a significant gap between what is medically appropriate and what is actually paid for by the insurer."
-   },
-   {
-    "point": "Denials caused critical delays in cancer and chronic disease treatments, often resolved only after political intervention.",
-    "detail": "Specific cases illustrate the human cost of these administrative hurdles. Richie Jones, a prostate cancer patient, faced an initial denial for proton therapy based on advice from an OB-GYN rather than a specialist; coverage was only granted after he contacted a U.S. senator and the state insurance commissioner. Similarly, Travis Christopher, who died of liver cancer, waited a month for CT scans after three denials, a delay that may have impacted his prognosis. Felicia, an obesity patient, had to contact the CEO directly after exhausting standard appeals. These examples demonstrate that access to care often depends on a patient\u2019s ability to navigate bureaucratic systems or leverage political influence, rather than on clinical guidelines."
-   }
-  ],
-  "room_line": "The new federal data shows that Ambetter\u2019s prior authorization denial rates are an outlier, effectively using administrative friction to deny care that would be approved if patients actually appealed.",
-  "ai": true,
-  "date": "2026-11-25",
-  "score": 7.0,
-  "image": "https://www.propublica.org/wp-content/uploads/2026/11/11102026-Odom-Prior-Auth-053-social_maxHeight_3000_maxWidth_3000.jpg?resize=2000,1050",
-  "author": "Max Blau; Brandon Roberts"
  },
  {
   "id": "872277f9695c",
   "url": "https://www.fiercebiotech.com/biotech/arm-ceo-reflects-wild-12-months-navigating-fdas-shifting-gene-therapy-stance",
   "title": "ARM CEO reflects on \u2018wild 12 months\u2019 pushing back on FDA\u2019s shifting gene therapy stance",
-  "headline": "ARM CEO details FDA's shift from ideological rigor to pragmatic rare disease approvals",
+  "headline": "FDA's New Leadership: Addressing Rare Disease Gene Therapy Challenges",
   "source": "Fierce Biotech",
   "topic": "biotech",
   "topic_name": "Biotech & Pharma",
@@ -104,54 +42,30 @@
   "minutes": 6,
   "bullets": [
    {
-    "point": "FDA rejected several gene therapies in early 2026 due to new demands for control arms in ultra-rare diseases.",
-    "detail": "Tim Hunt, CEO of the Alliance for Regenerative Medicine, described a period where the FDA rejected candidates from Atara Biotherapeutics, Pierre Fabre, and Regenxbio. The agency\u2019s rationale for rejecting Regenxbio\u2019s Hunter syndrome therapy specifically required enrolling more patients and incorporating an untreated control arm, rather than relying on natural history data. Hunt noted these requirements were difficult for ultra-rare populations. This shift created friction, as ARM members reported conflicting experiences, with some facing intact review teams while others encountered significant regulatory hurdles. Hunt characterized this as a new ideology creeping into the FDA, prioritizing methodological rigor and 'perfect answers' over the urgent need for last-resort medicines for deadly conditions affecting children."
+    "point": "ARM CEO Tim Hunt speaks on FDA's positive reviews under new leadership",
+    "detail": "ARM CEO Tim Hunt discusses the positive reviews of the FDA's rare disease gene therapy approvals under the new leadership, including uniQure's Huntington's disease gene therapy, Atara Biotherapeutics' T-cell therapy for multiple sclerosis, and Regenerative Medicine Innovation Center\u2019s (RMIC) regenerative medicine-focused clinical trial."
    },
    {
-    "point": "Leadership turnover at FDA\u2019s CBER and the commissioner\u2019s office created instability before the current team corrected course.",
-    "detail": "The FDA experienced significant churn, remaining without a permanent commissioner since Marty Makary departed in May 2025. The nomination for Heidi Overton was pulled hours before a Senate vote. At the Center for Biologics Evaluation and Research (CBER), Peter Marks resigned in March 2025, followed by an 11-month tenure by Vinay Prasad. It was not until September 2026 that Karim Mikhail was confirmed as permanent CBER chief. Hunt stated that Mikhail 'immediately steadied the ship' and adopted a practical approach. Additionally, acting commissioner Kyle Diamantas met with patient organizations soon after taking office in May, signaling a new day. These leadership changes coincided with a shift in regulatory posture, moving away from the earlier ideological focus toward more constructive engagement with industry and patient groups."
+    "point": "ARM CEO Tim Hunt talks about the FDA's willingness to engage with stakeholders",
+    "detail": "ARM CEO Tim Hunt shares insights on the FDA's willingness to engage with stakeholders, including ARM, to improve the regulatory landscape for rare disease gene therapy."
    },
    {
-    "point": "Recent regulatory decisions show FDA returning to flexibility, including priority review for uniQure\u2019s Huntington\u2019s therapy.",
-    "detail": "Following ARM\u2019s increased vocal advocacy and meetings with senior staff at HHS, the White House, and Congress, the FDA\u2019s stance has softened. Hunt noted that the current leadership has 'corrected course,' resulting in favorable early reviews. Specific examples include uniQure\u2019s Huntington\u2019s disease gene therapy receiving priority review ahead of a May 2027 approval decision, and the FDA agreeing to review Regenxbio\u2019s filing based on existing studies rather than demanding new trials. Hunt described the FDA\u2019s new Rare Disease Framework Initiative as a 'very important initiative' aimed at making development more predictable. He emphasized that the current leadership is inclusive and communicative, allowing ARM to finish the year in a more comfortable position than when it began, though he cautioned to see how it plays out over time."
+    "point": "ARM CEO Tim Hunt highlights the FDA's efforts to address rare disease gene therapy challenges",
+    "detail": "ARM CEO Tim Hunt emphasizes the FDA's efforts to address the challenges faced by the rare disease gene therapy community, including the need for more flexibility and collaboration."
    }
   ],
-  "room_line": "The FDA\u2019s recent rejection of rare disease gene therapies wasn\u2019t just bureaucratic friction; it was a clash between ideological methodological rigor and the practical reality of treating deadly conditions where placebo controls are impossible.",
+  "room_line": "",
   "ai": true,
   "date": "2026-11-25",
-  "score": 7.0,
+  "score": 9.0,
   "image": "https://qtxasset.com/quartz/qcloud5/media/image/arm_tim_hunt.jpg?VersionId=cfT6_sZ65WcOPGx2ZE0NWZbLJ11ClJIc",
   "author": "James Waldron"
- },
- {
-  "id": "b5f4d1de994e",
-  "url": "https://www.axios.com/2026/11/25/anthropic-ai-human-control-debate-free-will",
-  "title": "Rival AI leaders push back against Anthropic vision of surrendering human agency to AI",
-  "headline": "AI Leaders Debate Surrendering Human Agency in Superintelligence Era",
-  "source": "Axios",
-  "topic": "business",
-  "topic_name": "Business & Economy",
-  "words": 848,
-  "minutes": 4,
-  "bullets": [
-   {
-    "point": "AI experts, including Anthropic CEO Dario Amodei, advocate for humans to voluntarily cede control to AI systems in some cases.",
-    "detail": "Amodei suggests humans should hand over decision-making in life-critical situations to AI systems, citing examples like autonomous vehicles.",
-    "author": "Dario Amodei"
-   }
-  ],
-  "room_line": "As AI systems reach superintelligence, the debate on whether humans should surrender control in certain situations, such as autonomous vehicles, is shifting from safety concerns to the question of human agency and free will.",
-  "ai": true,
-  "date": "2026-11-25",
-  "score": 7.0,
-  "image": "",
-  "author": ""
  },
  {
   "id": "47d777843a0a",
   "url": "https://www.foreignaffairs.com/iran/paradox-iranian-power-sadjadpour",
   "title": "The Paradox of Iranian Power",
-  "headline": "Iran\u2019s Revolutionary Regime Gains Cohesion Despite War\u2011Induced Collapse",
+  "headline": "Iran\u2019s war survival paradox: external conflict entrenches theocratic rule",
   "source": "Foreign Affairs",
   "topic": "world",
   "topic_name": "World & Politics",
@@ -159,57 +73,169 @@
   "minutes": 20,
   "bullets": [
    {
-    "point": "War with the U.S. and Israel hardened Iran\u2019s revolutionary elite, not popular support",
-    "detail": "The article notes that in 2026 a joint U.S.\u2013Israeli war eliminated many of Iran\u2019s senior commanders, crippled the conventional armed forces and plunged the economy into deeper recession. Yet, rather than prompting mass dissent, the conflict drove the ruling clerics to double\u2011down on revolutionary rhetoric. After the death of Supreme Leader Ali Khamenei, his son Mojtaba was anointed as the new supreme leader, with chants of \u201cGod\u2019s grace is clear\u201d echoing in Tehran. The author argues that the war served as an external crisis that allowed the regime to close ranks, reinforce its ideological narrative, and marginalize moderate voices, confirming the pattern that revolutionary regimes become more cohesive after severe external shocks. The piece cites Steven Levitsky and Lucan Way\u2019s research that such regimes last three times longer than non\u2011revolutionary ones, underscoring how the war amplified Iran\u2019s internal durability rather than eroding it."
+    "point": "External war hardened Iran\u2019s regime rather than weakening it, creating a dangerous precedent for future conflicts.",
+    "detail": "The article argues that the 2026 U.S.-Israeli war, which eliminated top leaders and decimated Iran\u2019s military, paradoxically strengthened the Islamic Republic. Instead of rallying the impoverished public, the conflict rallied the regime around revolutionary ideology. Tehran concluded that violence, not dialogue, secures concessions, establishing new precedents for attacking neighbors and disrupting global energy supplies via the Strait of Hormuz. The author notes that while Washington can end its war, it cannot end Iran\u2019s ideological confrontation with the U.S., making the current ceasefire an intermission rather than a resolution. This dynamic suggests that future U.S. interventions may further harden Tehran\u2019s stance, as the regime views survival through continuity of revolutionary principles rather than political reform."
    },
    {
-    "point": "Iran\u2019s economy continues to regress while its society becomes more urban, educated and socially liberal",
-    "detail": "The author points out that despite five decades of revolutionary rule, Iran\u2019s per\u2011capita GDP remains about 25\u202f% below its 1976 peak, and inflation has repeatedly eroded the currency. At the same time, the population has nearly tripled, urbanisation has accelerated, and university enrolment rates are among the highest in the region. Social norms are shifting: since the 2022\u201323 \u201cWoman, Life, Freedom\u201d protests, mandatory veiling has become difficult to enforce and many women now appear in public without headscarves. These demographic and cultural changes suggest a society moving beyond the revolution, even as the regime clings to its anti\u2011American, anti\u2011Israeli stance, creating a widening gap between rulers and the ruled. The article notes that this socioeconomic divergence fuels internal pressure for reform, yet the regime\u2019s reliance on the IRGC and a tightly controlled coercive apparatus limits any meaningful policy shift."
+    "point": "Iran\u2019s economy has regressed significantly since 1979, with real GDP per capita a quarter below its 1976 peak.",
+    "detail": "Despite abundant natural resources, Iran\u2019s theocratic rule has led to a case study in squandered national potential. The article highlights that Iran\u2019s real GDP per capita remains nearly 25% below its 1976 level, meaning many citizens are materially worse off than their pre-revolution ancestors. This economic decline contrasts sharply with social progress; the population has tripled, becoming more urban, educated, and socially liberal. The breaking of the mandatory veiling taboo post-2022 signals a society moving beyond the revolution\u2019s constraints, while rulers look backward. This widening gap between a progressive populace and a rigid, crisis-dependent elite creates a volatile equilibrium where the regime relies on continued brutality to suppress the conditions that produce unrest."
+   },
+   {
+    "point": "Revolutionary regimes are statistically more resilient than non-revolutionary ones, relying on cohesive elites and loyal coercive apparatuses.",
+    "detail": "Citing political scientists Steven Levitsky and Lucan Way, the article notes that revolutionary regimes last nearly three times as long as their counterparts, despite being twice as likely to engage in war. The Islamic Republic\u2019s durability stems from three pillars: a cohesive ruling elite, a loyal coercive apparatus (specifically the IRGC), and the destruction of rival power centers. Crises, such as the 1979 hostage crisis and the Iran-Iraq War, served to entrench theocratic government by marginalizing moderates and forging the bonds of the current security elite. With the new, largely invisible leadership of Mojtaba Khamenei, the regime faces an unstable equilibrium, but the absence of high-level defections suggests that the entrenched veto power of the status quo remains formidable against any internal reform movements."
+   }
+  ],
+  "room_line": "The counterintuitive lesson here is that external military pressure often hardens revolutionary regimes rather than breaking them, turning a crisis of legitimacy into a struggle for national survival.",
+  "ai": true,
+  "date": "2026-11-25",
+  "score": 8.0,
+  "image": "https://cdn-live.foreignaffairs.com/sites/default/files/styles/social_share/public/images/2026/11/23/Sadjadpour_Crop.jpg?itok=N9BX2hCj",
+  "author": "Karim Sadjadpour"
+ },
+ {
+  "id": "9eb0b093f002",
+  "url": "https://www.propublica.org/article/ambetter-prior-authorization-denials",
+  "title": "Delayed Cancer Treatment. Missed Medication. How a Popular Insurance Plan\u2019s Use of Prior Authorization Hurt Patients.",
+  "headline": "Ambetter\u2019s Prior-Authorization Denials Outpace Peers, Delaying Critical Cancer Care",
+  "source": "ProPublica",
+  "topic": "world",
+  "topic_name": "World & Politics",
+  "words": 3308,
+  "minutes": 14,
+  "bullets": [
+   {
+    "point": "Ambetter leads ACA marketplace in prior\u2011authorization denials, averaging 25% and exceeding 30% in several states",
+    "detail": "ProPublica\u2019s analysis of nearly 200 federal marketplace plans found Ambetter\u2019s denial rate at 25% on average, far above the 16% rate for all ACA plans. In Texas the plan denied more than 32% of prior\u2011authorization requests, in Iowa 31% and in Kansas 26%. The data come from disclosures that regulators forced insurers to publish for the first time in 2025, intended to shed light on how often insurers block care. Ambetter\u2019s red\u2011highlighted points on the report illustrate that its denial rates are outliers in most states where it reports, making it the most restrictive plan on the marketplace. Because the ACA marketplace launched in 2013, prior\u2011authorization transparency was limited until this reporting requirement. Ambetter\u2019s practice contrasts with industry pledges to cut prior\u2011auth use by 11% across plans by 2026."
    }
   ],
   "room_line": "",
   "ai": true,
   "date": "2026-11-25",
-  "score": 6.0,
-  "image": "https://cdn-live.foreignaffairs.com/sites/default/files/styles/social_share/public/images/2026/11/23/Sadjadpour_Crop.jpg?itok=N9BX2hCj",
-  "author": "Karim Sadjadpour"
+  "score": 8.0,
+  "image": "https://www.propublica.org/wp-content/uploads/2026/11/11102026-Odom-Prior-Auth-053-social_maxHeight_3000_maxWidth_3000.jpg?resize=2000,1050",
+  "author": "Max Blau; Brandon Roberts"
  },
  {
-  "id": "c445be389a24",
-  "url": "https://www.fiercebiotech.com/biotech/fierce-biotech-fundraising-tracker-26",
-  "title": "Fierce Biotech Fundraising Tracker '26: Ritzey reveals $112.5M; VitriVax scores $87M",
-  "headline": "November biotech funding hits $1.1B, led by San Diego gene therapy giant",
+  "id": "50e54604c445",
+  "url": "https://www.statnews.com/2026/11/25/foreign-students-us-biomedical-science-enrollment-drop-trump/?utm_campaign=rss",
+  "title": "Despite stalling in court, Trump restrictions on foreign students have had a chilling effect on enrollment",
+  "headline": "Foreign Graduate Enrollment in U.S. Biomedicine Drops Sharply Amid Immigration Restrictions",
+  "source": "STAT",
+  "topic": "science",
+  "topic_name": "Science & Medicine",
+  "words": 1211,
+  "minutes": 5,
+  "bullets": [
+   {
+    "point": "International graduate enrollment in U.S. biomedical programs fell sharply in 2026",
+    "detail": "Data released by the Institute of International Education (IIE) from a survey of more than 800 U.S. institutions show that total foreign student enrollment for the 2025\u20112026 academic year fell 9% compared with the prior year. The decline is steeper among new entrants, with a 15% drop in newly enrolled students and a 15% reduction in graduate\u2011level enrolments. A separate analysis by the Association of American Medical Colleges (AAMC) of 37 member schools indicates that the number of international students beginning biomedical Ph.D. programs has fallen about 30% since 2024, more than double the 14% overall decline in those programs. An independent review of the Student and Exchange Visitor Information System (SEVIS) by the Presidents\u2019 Alliance on Higher Education and Immigration reports a 6.3% drop in international student numbers between October 2025 and October 2026. Together, these figures represent the largest year\u2011to\u2011year decrease in graduate enrollment in at least two decades."
+   },
+   {
+    "point": "Legal victories have not stopped the chilling effect of immigration policy on foreign scholars",
+    "detail": "Federal judges have recently blocked two of the Trump administration\u2019s most aggressive immigration proposals. On November 16, a judge issued a final ruling that stopped a four\u2011year cap on the duration of status for international students and postdoctoral researchers, finding the rule violated the Administrative Procedure Act. The following day, another judge granted a preliminary injunction preventing the administration from narrowing eligibility for the Optional Practical Training (OPT) work\u2011authorization program, which many foreign students rely on for professional experience. Despite these victories, the administration continued to pursue policies that signal hostility toward foreign scholars, including revoking more than 8,000 student visas, proposing a $70,000 fee for OPT, and attempting to reinstate a $100,000 H\u20111B fee. A Department of Homeland Security spokesperson dismissed the IIE data as \u201cmisleading,\u201d yet independent SEVIS analysis still shows a decline. The combined effect, according to student advocates and immigration attorneys, is a pervasive sense among international scholars that they are unwelcome, which depresses enrollment regardless of court outcomes."
+   },
+   {
+    "point": "U.S. risks losing global biotech talent to Asia as other nations attract foreign students",
+    "detail": "The enrollment trends are reshaping the global competition for scientific talent. While U.S. institutions report declines, surveys indicate that foreign graduate enrollment is rising at many Asian universities, with about 60% of respondents from China and other Asian countries noting increases. The United Kingdom, which has also tightened immigration rules, sees a similar drop in foreign graduate numbers. Analysts warn that the United States could lose its biomedical preeminence as students and researchers choose destinations that appear more welcoming and financially predictable. A shift of even a modest fraction of the roughly one\u2011quarter of life\u2011science Ph.D. graduates who are international could erode the pipeline of talent that fuels biotech innovation in San Diego and elsewhere. The long\u2011term economic impact may extend beyond academia, affecting industry R&D, venture capital investment, and the broader U.S. economy, as other nations capitalize on the talent vacuum."
+   }
+  ],
+  "room_line": "The recent dip in international biomedical Ph.D. students threatens U.S. research leadership and biotech competitiveness.",
+  "ai": true,
+  "date": "2026-11-25",
+  "score": 8.0,
+  "image": "https://www.statnews.com/wp-content/uploads/2026/11/GettyImages-1231721993-1024x576.jpg",
+  "author": "Jonathan Wosen"
+ },
+ {
+  "id": "e8385ccb4a40",
+  "url": "https://www.fiercebiotech.com/research/iambic-ceo-says-they-have-holy-grail-cdk-inhibitors-cancer-therapies",
+  "title": "Why Iambic\u2019s CEO believes preclinical cancer therapy could be \u2018holy grail\u2019 for CDK inhibitors",
+  "headline": "Why Iambic\u2019s CEO believes preclinical cancer therapy could be \u2018holy grail\u2019 for CDK inhibitors",
   "source": "Fierce Biotech",
   "topic": "biotech",
   "topic_name": "Biotech & Pharma",
-  "words": 12167,
-  "minutes": 53,
+  "words": 673,
+  "minutes": 3,
   "bullets": [
    {
-    "point": "San Diego-based Seawolf Therapeutics raised $100M Series A alongside a $1.2B Sanofi collaboration.",
-    "detail": "Seawolf Therapeutics, a San Diego gene therapy company founded in 2021, secured $100 million in Series A financing from investors including Eli Lilly, Novartis Venture Fund, and CRISPR Therapeutics. Simultaneously, the company disclosed a $1.2 billion deal with Sanofi involving a multi-target research collaboration and exclusive license agreement. This agreement focuses on developing undisclosed therapies for bleeding disorders and additional unnamed indications. The funding supports Seawolf\u2019s DNA therapeutic ambitions and its lead program targeting metabolic diseases. This dual milestone\u2014significant VC backing and a massive Big Pharma partnership\u2014highlights the growing value of gene therapy platforms in the San Diego biotech ecosystem, positioning Seawolf as a major player in the region\u2019s life sciences sector."
+    "point": "Fresh off a $150 million IPO, Iambic Therapeutics has unveiled preclinical data for a potential challenger in one of oncology's most competitive drug classes: cyclin-dependent kinases (CDKs).",
+    "detail": "Fresh off a $150 million IPO, Iambic Therapeutics has unveiled preclinical data for a potential challenger in one of oncology's most competitive drug classes: cyclin-dependent kinases (CDKs). The biotech's newest AI-designed candidate, IAM-C1, curbed tumor growth across multiple hormone-driven cancers and outperformed existing and experimental CDK inhibitors in preclinical studies, according to data presented at the EORTC-NCI-AACR symposium in Spain last week."
    },
    {
-    "point": "Neuroscience and metabolic disease dominate November raises, with Ritzey and Delix securing over $100M each.",
-    "detail": "Ritzey Therapeutics, launched by former Intra-Cellular CEO Sharon Mates, Ph.D., raised $112.5 million in a Series A to advance DYRK1A inhibitors for chronic metabolic and neurologic diseases. The company acquired its clinical-stage, oral, once-daily candidate from France\u2019s Perha Pharmaceuticals. Meanwhile, Boston-based Delix Therapeutics raised $100 million in a Series C backed by Johnson & Johnson\u2019s venture arm to advance zalsupindole, a non-hallucinatory psychedelic therapy for depression. Delix plans to initiate a placebo-controlled phase 2b study in major depressive disorder in the first half of 2027. These raises reflect investor confidence in novel mechanisms for complex diseases, moving beyond traditional targets to address metabolic and psychiatric conditions with high unmet needs."
+    "point": "The biotech's newest AI-designed candidate, IAM-C1, curbed tumor growth across multiple hormone-driven cancers and outperformed existing and experimental CDK inhibitors in preclinical studies, according to data presented at the EORTC-NCI-AACR\u2026",
+    "detail": "The biotech's newest AI-designed candidate, IAM-C1, curbed tumor growth across multiple hormone-driven cancers and outperformed existing and experimental CDK inhibitors in preclinical studies, according to data presented at the EORTC-NCI-AACR symposium in Spain last week. During the triple meeting, hosted jointly by the European Organisation for Research and Treatment of Cancer (EORTC), the National Cancer Institute (NCI), and the American Association for Cancer Research (AACR), Iambic shared promising preclinical data of IAM-C1 in both cell and mouse models."
    },
    {
-    "point": "Global expansion is evident as European and Chinese biotechs secure significant capital for clinical trials.",
-    "detail": "European companies captured substantial funding, including OMass Therapeutics (UK) raising $310 million for a melanocortin-2 receptor antagonist in adrenal disorders, and T Therapeutics (UK) raising $133 million for T-cell receptor CD3 bispecifics. In Asia, Hangzhou-based Eli Radiopharma raised 400 million yuan ($60 million) to advance its radiopharma pipeline toward clinical development. Additionally, Netherlands-based VectorY Therapeutics raised $83.5 million for vectorized antibody gene therapies for neurodegenerative diseases like ALS and Huntington\u2019s. This geographic spread indicates that biotech innovation and capital flow are increasingly global, with strong activity in the UK, China, and the Netherlands, rather than being concentrated solely in the United States."
+    "point": "During the triple meeting, hosted jointly by the European Organisation for Research and Treatment of Cancer (EORTC), the National Cancer Institute (NCI), and the American Association for Cancer Research (AACR),\u2026",
+    "detail": "During the triple meeting, hosted jointly by the European Organisation for Research and Treatment of Cancer (EORTC), the National Cancer Institute (NCI), and the American Association for Cancer Research (AACR), Iambic shared promising preclinical data of IAM-C1 in both cell and mouse models. IAM-C1 is a selective dual CDK2 and CDK4 inhibitor that was designed by what Iambic describes as its \u201cmolecular superintelligence program.\u201d CDK2 and CDK4 are cyclin-dependent kinases that help to move dividing cells along the growth cycle and are overactive during cancer cell proliferation."
    }
   ],
-  "room_line": "The $1.2B Sanofi deal with San Diego\u2019s Seawolf shows that gene therapy is no longer just a niche bet but a core strategic priority for Big Pharma.",
-  "ai": true,
+  "room_line": "",
+  "ai": false,
   "date": "2026-11-25",
-  "score": 5.0,
-  "image": "https://qtxasset.com/quartz/qcloud5/media/image/GettyImages-474045836.jpg?VersionId=ZrON.9gb_kdB6Eg3v6PzrOmMBLN2o4F4",
-  "author": "Darren Incorvaia; James Waldron; Marissa Russo; Will Maddox; Gabrielle Masson"
+  "score": 7.0,
+  "image": "https://qtxasset.com/quartz/qcloud5/media/image/cell_division.jpg?VersionId=LhvdSVLdjyaGA5l.KyAiHqEwd.PQc76f",
+  "author": "Marissa Russo"
+ },
+ {
+  "id": "b5f4d1de994e",
+  "url": "https://www.axios.com/2026/11/25/anthropic-ai-human-control-debate-free-will",
+  "title": "Rival AI leaders push back against Anthropic vision of surrendering human agency to AI",
+  "headline": "Rival AI leaders push back against Anthropic vision of surrendering human agency to AI",
+  "source": "Axios",
+  "topic": "business",
+  "topic_name": "Business & Economy",
+  "words": 848,
+  "minutes": 4,
+  "bullets": [
+   {
+    "point": "Top AI executives are increasingly pushing back against a common view inside Anthropic: that humanity should surrender some decision-making power to superintelligent AI systems, sources told Axios.",
+    "detail": "Top AI executives are increasingly pushing back against a common view inside Anthropic: that humanity should surrender some decision-making power to superintelligent AI systems, sources told Axios. That would put us on a slippery slope to forfeiting free will, critics say. Why it matters : The debate has picked up steam as top AI companies develop models certain employees consider too powerful to ever release . Many see Anthropic as the first company that will confront these questions due to its lead at the frontier of AI development. While critics have yet to call out the company by name, their public defenses of human agency and control take direct aim at what some have come to see as the worldview of Anthropic CEO Dario Amodei. When AI systems far surpass human intelligence, Amodei has said repeatedly that it will be preferable to turn over decision-making for \"life-critical\" cases to AI, and also said AI should oversee research and potentially distribute economic resources. Flashback: A product vision slide from several years ago that was revealed during litigation described Anthropic's \"vision for a better world\" as a \"utopia ruled by god in a box.\" The big picture: The thinking for Amodei and\u2026"
+   }
+  ],
+  "room_line": "",
+  "ai": false,
+  "date": "2026-11-25",
+  "score": 7.0,
+  "image": "",
+  "author": ""
+ },
+ {
+  "id": "a58808d0bc10",
+  "url": "https://greydanus.github.io/2026/11/12/pengpt/",
+  "title": "PenGPT: A Generative Transformer for Handwriting and Sketches",
+  "headline": "PenGPT: A Generative Transformer for Handwriting and Sketches",
+  "source": "greydanus.github.io",
+  "topic": "ai",
+  "topic_name": "AI & Tech",
+  "words": 1245,
+  "minutes": 5,
+  "bullets": [
+   {
+    "point": "A small transformer that writes and sketches from text.",
+    "detail": "A small transformer that writes and sketches from text. The effort was 80% data, 15% speed and 5% architecture: my first project that follows the Bitter Lesson. The text of this post (except the conclusion) was written by Claude. I plan to rewrite it in my own words over Thanksgiving Break but needed to get the project out. So apologies for this move - all of my other posts were written by me, and all future posts will be as well. Even if you find Claude more comprehensible than my meandering thoughts, meander nonetheless I shall."
+   },
+   {
+    "point": "The text of this post (except the conclusion) was written by Claude.",
+    "detail": "The text of this post (except the conclusion) was written by Claude. I plan to rewrite it in my own words over Thanksgiving Break but needed to get the project out. So apologies for this move - all of my other posts were written by me, and all future posts will be as well. Even if you find Claude more comprehensible than my meandering thoughts, meander nonetheless I shall. Last year Zach Wimpee and I trained a tiny GPT to write cursive. It worked but it only knew one hand (mine) and it learned from 3,500 words that I wrote on a trackpad."
+   },
+   {
+    "point": "Last year Zach Wimpee and I trained a tiny GPT to write cursive.",
+    "detail": "Last year Zach Wimpee and I trained a tiny GPT to write cursive. It worked but it only knew one hand (mine) and it learned from 3,500 words that I wrote on a trackpad. So here\u2019s the obvious next question: can one small, ordinary transformer learn to hold a pen in lots of hands and draw as well as write? PenGPT is my attempt. There are two models. A 6M-parameter one writes print and cursive and picks up the handwriting of someone it has never seen from a few of their words. A 54M-parameter one draws from a text prompt."
+   }
+  ],
+  "room_line": "",
+  "ai": false,
+  "date": "2026-11-25",
+  "score": 6.0,
+  "image": "https://greydanus.github.io/assets/pengpt/thumbnail.png",
+  "author": "Greydanus"
  },
  {
   "id": "48cd98b45b4d",
   "url": "https://www.newyorker.com/culture/q-and-a/are-we-really-witnessing-a-cyber-apocalypse",
   "title": "Are We Really Witnessing a Cyber Apocalypse?",
-  "headline": "AI Accelerates Vulnerability Discovery, Amplifying Cyber Outages",
+  "headline": "Are We Really Witnessing a Cyber Apocalypse?",
   "source": "The New Yorker",
   "topic": "longform",
   "topic_name": "Longform & Ideas",
@@ -217,22 +243,22 @@
   "minutes": 11,
   "bullets": [
    {
-    "point": "AI models quadruple monthly vulnerability discovery, reaching 16,000 per month",
-    "detail": "Andrew Lohn, senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, reports that vulnerability discovery has risen from ~4,000 per month in early 2023 to 16,000 in early 2024, a four\u2011fold increase. The trend began in April 2023, when new AI\u2011assisted scanners began identifying flaws in widely used languages like Java and PHP. Lohn cites graphs showing a steady exponential rise, suggesting that AI\u2019s ability to emulate human\u2011like bug hunting removes the previous ceiling on discovery rates. This surge coincides with high\u2011profile outages at the FAA, Apple, Microsoft, and Chase, which were attributed to newly found flaws. The article notes that the sheer volume of vulnerabilities overwhelms defenders, as each patch can introduce new instability, leading to a cycle of outages."
+    "point": "Are we entering a new age of cyber mayhem?",
+    "detail": "Are we entering a new age of cyber mayhem? The latest A.I. models are extraordinarily good at finding vulnerabilities in computer systems, and the computer systems have seemed unusually finicky. Lately, outages at the F.A.A., Apple, Microsoft, and Chase, among others, have created an atmosphere of alarm; Java and PHP, two programming languages that underpin much of the internet, were found to have critical security flaws. It\u2019s unclear whether we\u2019re in for a lot of inconvenience, or something more. Andrew Lohn, a senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, has spent years studying cybersecurity and artificial intelligence. He\u2019s worked for the RAND Corporation and the National Security Council. We spoke on the phone, and I asked him to put our unease in context. This conversation has been edited and condensed."
    },
    {
-    "point": "Defensive patching lags, causing more outages than attacks",
-    "detail": "The article explains that patching is a double\u2011edged sword: while AI can write patches faster, implementation reliability is lower. Each new patch carries a risk of breaking existing functionality, and with the number of patches increasing tenfold, the probability of outage rises proportionally. Lohn warns that defenders are already overwhelmed, and the rapid deployment of patches\u2014sometimes within days\u2014does not guarantee stability. The article cites that the patching process often leads to \u2018patch\u2011related outages,\u2019 and that the reliability of AI\u2011generated fixes is still uncertain, amplifying the operational burden on organizations."
+    "point": "Andrew Lohn, a senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, has spent years studying cybersecurity and artificial intelligence.",
+    "detail": "Andrew Lohn, a senior fellow at Georgetown\u2019s Center for Security and Emerging Technology, has spent years studying cybersecurity and artificial intelligence. He\u2019s worked for the RAND Corporation and the National Security Council. We spoke on the phone, and I asked him to put our unease in context. This conversation has been edited and condensed. It\u2019s always been a little bit unclear how big the threats are, or what they\u2019ll even be. Hacking goes back to at least the early eighties; back then, people really didn\u2019t think about cybersecurity very much. You heard more about it once people started losing money. Then there were some scary, kind of fancy hacks that shaped a lot of thinking\u2014like the Stuxnet worm, in the two-thousands, which was intended to take out Iranian nuclear centrifuges but then extended its reach and got onto computers elsewhere. At that point, cybersecurity people started talking about a \u201cCyber Pearl Harbor\u201d\u2014a theorized event where all kinds of really nasty things happened. We sometimes see little glimpses of it: in 2015 and 2016, for example, Russia was accused of taking down Ukrainian power grids."
    },
    {
-    "point": "Open models and coordinated disclosure shorten vulnerability windows, increasing risk",
-    "detail": "Coordinated vulnerability disclosure practices have been shortened by AI labs. Anthropic, for example, reduced its critical\u2011issue window from 45 days to 30 days, arguing that attackers now find vulnerabilities faster. This acceleration means that the public is informed of weaknesses sooner, but also that attackers can exploit them before defenders patch. The article notes that the race between discovery and mitigation has intensified, with AI making it easier to find vulnerabilities but also making it harder to keep systems patched in time, thereby increasing overall risk."
+    "point": "It\u2019s always been a little bit unclear how big the threats are, or what they\u2019ll even be.",
+    "detail": "It\u2019s always been a little bit unclear how big the threats are, or what they\u2019ll even be. Hacking goes back to at least the early eighties; back then, people really didn\u2019t think about cybersecurity very much. You heard more about it once people started losing money. Then there were some scary, kind of fancy hacks that shaped a lot of thinking\u2014like the Stuxnet worm, in the two-thousands, which was intended to take out Iranian nuclear centrifuges but then extended its reach and got onto computers elsewhere. At that point, cybersecurity people started talking about a \u201cCyber Pearl Harbor\u201d\u2014a theorized event where all kinds of really nasty things happened. We sometimes see little glimpses of it: in 2015 and 2016, for example, Russia was accused of taking down Ukrainian power grids. But, over time, people started reconsidering the idea. Actually, not that much was happening. There\u2019s a concept called the \u201ccyber squirrel\u201d: yes, there have been rare incidents of sophisticated hackers attacking critical infrastructure, but squirrels take down power substations or transmission lines all the time. There\u2019s even a website where you can go and see all of these squirrel attacks on critical infrastructure. At some point, cybersecurity people started to\u2026"
    }
   ],
-  "room_line": "AI\u2019s rapid vulnerability discovery is turning patching into a race that can cause more outages than the attacks themselves.",
-  "ai": true,
+  "room_line": "",
+  "ai": false,
   "date": "2026-11-25",
-  "score": 8.0,
+  "score": 9.0,
   "image": "https://media.newyorker.com/photos/6b0617776dabd14c5e14e80f/16:9/w_1280,c_limit/Rothman---Cyber-Apocalypse---GettyImages-2305197766.jpg",
   "author": "Joshua Rothman"
  },
@@ -240,7 +266,7 @@
   "id": "c383eed8de9d",
   "url": "https://www.newyorker.com/best-books-2026",
   "title": "The Best Books of 2026 So Far",
-  "headline": "2026\u2019s Top Books Reveal Hidden Systems, Marginalized Histories, and Tech\u2019s Societal Impact",
+  "headline": "The Best Books of 2026 So Far",
   "source": "The New Yorker",
   "topic": "longform",
   "topic_name": "Longform & Ideas",
@@ -248,46 +274,23 @@
   "minutes": 115,
   "bullets": [
    {
-    "point": "Environmental infrastructure gets literary spotlight in Nick Kawa\u2019s 'After the Flush'.",
-    "detail": "Nick Kawa\u2019s nonfiction work 'After the Flush' treats the humble toilet as a portal into the hidden world of sewage treatment. Drawing on a decade\u2011long experiment that placed a toilet seat over a bucket, Kawa documents how modern society\u2019s \u201cflush and forget\u201d habit obscures the environmental and public\u2011health costs of waste. The narrative blends lyrical description with hard data on water usage, microbial load, and infrastructure strain, arguing that ignoring effluent pathways threatens both ecosystems and urban resilience. Kawa also peppers the text with cultural observations\u2014such as the author\u2019s occasional Wordle breaks while on the commode\u2014to illustrate how everyday habits shape larger policy debates. The book\u2019s emphasis on concrete engineering challenges and regulatory gaps makes it a timely reminder for anyone concerned with NIH/FDA\u2011type oversight of environmental health."
+    "point": "- After the Flush by Nick Kawa (California)Nonfiction We may have become blithely conversant with the toilet as a consumer product, but, as the anthropologist Kawa reminds us, once the\u2026",
+    "detail": "- After the Flush by Nick Kawa (California)Nonfiction We may have become blithely conversant with the toilet as a consumer product, but, as the anthropologist Kawa reminds us, once the handle has been pulled or the button pressed, we tend to give no thought to the fate of our effluents. This \u201cflush and forget\u201d mind-set, Kawa argues, has consequences we can no longer afford to ignore. Packed with lyrical flights and an extended account of an experiment involving a toilet seat perched over a bucket, this decade-long study of sewage and waste treatment makes a compelling case for paying attention to defecation and its afterlife\u2014even if Kawa, like so many, cannot resist the distraction of Wordle while on the can. Read more: \u201cWhat Happens After We Flush?,\u201d by Rebecca Mead - Learning by Courtney Bush (Joyland Editions)Nonfiction A buoyant, humane philosophy uplifts this deb\u00fat novella, which follows a Monday in the life of Courtney, its thirtysomething narrator, as she manages a pack of four-year-olds in a private Harlem day care. \u201cLearning\u201d \u2019s characterization of these children is uncommonly complex; they are understood as neither props nor narrative addenda but, rather, as odd little people in perpetual motion, sensorily and imaginatively\u2026"
+   },
+   {
+    "point": "- Learning by Courtney Bush (Joyland Editions)Nonfiction A buoyant, humane philosophy uplifts this deb\u00fat novella, which follows a Monday in the life of Courtney, its thirtysomething narrator, as she manages\u2026",
+    "detail": "- Learning by Courtney Bush (Joyland Editions)Nonfiction A buoyant, humane philosophy uplifts this deb\u00fat novella, which follows a Monday in the life of Courtney, its thirtysomething narrator, as she manages a pack of four-year-olds in a private Harlem day care. \u201cLearning\u201d \u2019s characterization of these children is uncommonly complex; they are understood as neither props nor narrative addenda but, rather, as odd little people in perpetual motion, sensorily and imaginatively porous, \u201ceating information with their entire beings.\u201d But Bush extends a similarly generous recognition to all her characters, including the disoriented or guilt-ridden adults that swirl around the educational space. The redemptive warmth that she offers each sets her book\u2014and her world view\u2014apart. Read more: \u201cThe Mothers We Pay,\u201d by Jamie Hood - Said the Dead by Doireann N\u00ed Ghr\u00edofa (Farrar, Straus & Giroux)Fiction This genre-bending story resurrects the women who lived, toiled, and died at a Victorian psychiatric hospital in County Cork. N\u00ed Ghr\u00edofa, an Irish poet, uses the case notes of a doctor who worked at the institution to imagine her way into the lives of the patients\u2014women who were confined for insanity that was attributed, variously, to lactation, \u201coverwork attending on her sick husband,\u201d and \u201cmoney troubles.\u201d\u2026"
+   },
+   {
+    "point": "- Said the Dead by Doireann N\u00ed Ghr\u00edofa (Farrar, Straus & Giroux)Fiction This genre-bending story resurrects the women who lived, toiled, and died at a Victorian psychiatric hospital in County\u2026",
+    "detail": "- Said the Dead by Doireann N\u00ed Ghr\u00edofa (Farrar, Straus & Giroux)Fiction This genre-bending story resurrects the women who lived, toiled, and died at a Victorian psychiatric hospital in County Cork. N\u00ed Ghr\u00edofa, an Irish poet, uses the case notes of a doctor who worked at the institution to imagine her way into the lives of the patients\u2014women who were confined for insanity that was attributed, variously, to lactation, \u201coverwork attending on her sick husband,\u201d and \u201cmoney troubles.\u201d The author manages to become a \u201cvessel, a jug of living speech,\u201d owing to her belief that she easily \u201cmight have lived within those walls.\u201d The resulting work is an empathetic, probing exploration of the porous contours of history, archives, and sanity itself. - The Absent Woman by Eve Sneider (Norton)Nonfiction This poised biography of the longtime New Yorker staff writer Janet Malcolm brings many of the personal themes of her writing into focus. Malcolm was born in Prague in 1934, and left for New York, with her family, when she was four years old. Sneider reconstructs the most prominent turns in Malcolm\u2019s life: a first marriage to a successful writer; her foray into psychoanalysis; the infamous legal battle that resulted from\u2026"
    }
   ],
   "room_line": "",
-  "ai": true,
+  "ai": false,
   "date": "2026-11-25",
-  "score": 7.0,
+  "score": 6.0,
   "image": "https://media.newyorker.com/photos/6966acfff26bd769148e5b23/16:9/w_1280,c_limit/bestbooks2026_headerdesktop_animation_03.gif",
   "author": "The New Yorker"
- },
- {
-  "id": "c5123ad37d05",
-  "url": "https://www.outsideonline.com/adventure-travel/destinations/europe/tour-du-mont-blanc-2027-rules-guided-hiking/",
-  "title": "The Tour du Mont Blanc Is Getting New Rules in 2027. Having a Guide Is More Important Than Ever.",
-  "headline": "Tour du Mont Blanc mandates guides and reservations by 2027 to curb overtourism",
-  "source": "Outside Online",
-  "topic": "outdoors",
-  "topic_name": "Outdoors & Nature",
-  "words": 1715,
-  "minutes": 7,
-  "bullets": [
-   {
-    "point": "A new charter requires advance reservations for all trail nights and bans wild camping, replacing informal spots with paid, bookable bivouac areas.",
-    "detail": "Seven French towns along the Tour du Mont Blanc route have drafted a voluntary charter to manage the surge in hikers, which has increased by 50 percent since 2020, reaching roughly 80,000 people annually. The rules, aiming for implementation by spring 2027, mandate that every night on the trail be booked in advance. This system replaces the previous norm of informal wild camping, which has multiplied and caused significant environmental damage, including trail erosion and wildlife disturbance. Chamonix mayor Fran\u00e7ois-Xavier Laffin summarizes the intent as \"To reserve is to preserve,\" noting that similar quotas are being introduced at nearby Lac Blanc. While the charter covers only France for now and depends on local ordinances for enforcement, it signals the end of the era where hikers could simply show up and figure out logistics on the fly, shifting the burden of planning to a structured, reservation-based model."
-   },
-   {
-    "point": "Operators can no longer sell self-guided packages; all groups must be led by guides licensed in France, Italy, and Switzerland, with group sizes capped at twelve.",
-    "detail": "The charter places licensed mountain professionals at the center of trail safety, prohibiting tour operators from selling self-guided packages that only include bookings and transfers. Instead, operators must include a guide certified in all three countries the trail crosses: France, Italy, and Switzerland. Daniel Rodrigues, general director of the Compagnie des Guides de Chamonix, describes this as a major step forward that ensures safety and creates economic value for local inhabitants. The rules also cap guided groups at twelve people. This regulatory shift addresses growing safety concerns, such as increased rockfall activity due to climate change and permafrost thaw, and the congestion that makes it difficult for hikers to navigate narrow ledges. By mandating professional leadership, the charter aims to mitigate risks associated with inexperienced hikers in increasingly hazardous and crowded alpine environments."
-   },
-   {
-    "point": "Guides provide critical logistical advantages, including access to quiet trail variants and local accommodations, which self-guided hikers often miss due to lack of local knowledge.",
-    "detail": "The article highlights that the Tour du Mont Blanc is not a single trail but a network of paths and detours. Guides like Jason Day and Tanya Perret use deep local knowledge to select variants that avoid crowds and offer better experiences, such as the route toward Lac de Roselend. Perret, who has guided the trail over 75 times, notes that guides can quickly adapt to changing weather patterns and identify safe bypasses for dangerous sections, such as the ladders below T\u00eate aux Vents. Additionally, guides manage complex logistics, including booking scarce accommodations like the ten-room Le Chalet de Roselend, which previously required in-person reservations. The charter also encourages operators to buy local and partner with local producers, supporting the regional micro-economy. For hikers, this means that while self-guided trips are still possible, the value of professional guidance increases significantly as the trail becomes more regulated and congested."
-   }
-  ],
-  "room_line": "The new TMB charter is a case study in how destination management is shifting from open access to regulated, reservation-based models to balance tourism revenue with environmental preservation.",
-  "ai": true,
-  "date": "2026-11-25",
-  "score": 5.0,
-  "image": "https://cdn.outsideonline.com/wp-content/uploads/2026/11/GettyImages-2225246898-scaled.jpg",
-  "author": "Kathleen Rellihan"
  }
 ]
