@@ -153,6 +153,43 @@ def _clean_wiki(text: str) -> str:
     return text[:14000]
 
 
+def build_deep(cfg: dict, st: dict, llm: LLM, date: str, lib: list[dict]) -> dict | None:
+    """Pick today's topic (rotating fields), write a Wikipedia-grounded primer, find further reading."""
+    if not llm.available:
+        return None
+    sm = cfg.get("smarter") or {}
+    recent = st.setdefault("smarter_topics", [])[-60:]
+    fields = sm.get("fields") or ["Science"]
+    field = fields[dt.date.fromisoformat(date).toordinal() % len(fields)]
+    pick = llm.json(TOPIC_PROMPT.format(field=field, recent=", ".join(recent) or "none")) or {}
+    art = wiki_article(pick.get("wikipedia_title") or pick.get("topic") or "") if pick else None
+    if not art or len(art["text"].split()) <= 400:
+        return None
+    primer = llm.json(PRIMER_PROMPT.format(topic=art["title"], text=_clean_wiki(art["text"]))) or {}
+    points = [p for p in primer.get("points", []) if isinstance(p, dict) and p.get("point")][:5]
+    if not points:
+        return None
+    topic_toks = _tokens(art["title"] + " " + pick.get("topic", "") + " " + art["text"][:1500])
+    scored = sorted(lib, key=lambda x: len(topic_toks & _tokens(x["title"] + " " + x.get("summary", ""))),
+                    reverse=True)[:30]
+    scored = [x for x in scored if topic_toks & _tokens(x["title"] + " " + x.get("summary", ""))]
+    reading = []
+    if scored and llm.available:
+        res = llm.json(READING_PROMPT.format(topic=art["title"], items=_items_list(scored))) or {}
+        for i in res.get("ids", [])[:4]:
+            try:
+                x = scored[int(i)]
+                reading.append({"url": x["url"], "title": x["title"], "source": x["source"]})
+                x["shown"] = date
+            except (ValueError, IndexError, TypeError):
+                pass
+    recent.append(pick.get("topic") or art["title"])
+    st["smarter_topics"] = recent[-60:]
+    return {"field": field, "topic": pick.get("topic") or art["title"], "hook": pick.get("hook", ""),
+            "headline": primer.get("headline") or art["title"], "why": primer.get("why", ""), "points": points,
+            "image": art["image"], "wiki_title": art["title"], "wiki_url": art["url"], "reading": reading}
+
+
 # ── build today's section ─────────────────────────────────────────────
 def build(cfg: dict, st: dict, llm: LLM, who: str, date: str) -> dict:
     sm = cfg.get("smarter") or {}
@@ -160,39 +197,9 @@ def build(cfg: dict, st: dict, llm: LLM, who: str, date: str) -> dict:
         return {}
     lib, health = grow_library(cfg, load_library())
     out: dict = {"date": date, "deep": None, "picks": []}
-    recent = st.setdefault("smarter_topics", [])[-60:]
-    fields = sm.get("fields") or ["Science"]
-    day_no = dt.date.fromisoformat(date).toordinal()
-    field = fields[day_no % len(fields)]
 
     # 1) deep dive
-    if llm.available:
-        pick = llm.json(TOPIC_PROMPT.format(field=field, recent=", ".join(recent) or "none")) or {}
-        art = wiki_article(pick.get("wikipedia_title") or pick.get("topic") or "") if pick else None
-        if art and len(art["text"].split()) > 400:
-            primer = llm.json(PRIMER_PROMPT.format(topic=art["title"], text=_clean_wiki(art["text"]))) or {}
-            points = [p for p in primer.get("points", []) if isinstance(p, dict) and p.get("point")][:5]
-            if points:
-                # further reading from the library
-                topic_toks = _tokens(art["title"] + " " + pick.get("topic", "") + " " + art["text"][:1500])
-                scored = sorted(lib, key=lambda x: len(topic_toks & _tokens(x["title"] + " " + x.get("summary", ""))),
-                                reverse=True)[:30]
-                scored = [x for x in scored if topic_toks & _tokens(x["title"] + " " + x.get("summary", ""))]
-                reading = []
-                if scored:
-                    res = llm.json(READING_PROMPT.format(topic=art["title"], items=_items_list(scored))) or {}
-                    for i in res.get("ids", [])[:4]:
-                        try:
-                            x = scored[int(i)]
-                            reading.append({"url": x["url"], "title": x["title"], "source": x["source"]})
-                        except (ValueError, IndexError, TypeError):
-                            pass
-                out["deep"] = {"field": field, "topic": pick.get("topic") or art["title"],
-                               "hook": pick.get("hook", ""), "headline": primer.get("headline") or art["title"],
-                               "why": primer.get("why", ""), "points": points, "image": art["image"],
-                               "wiki_title": art["title"], "wiki_url": art["url"], "reading": reading}
-                recent.append(pick.get("topic") or art["title"])
-                st["smarter_topics"] = recent[-60:]
+    out["deep"] = build_deep(cfg, st, llm, date, lib)
 
     # 2) mixed bag: unrelated evergreen explainers, full three-point cards
     n = int(sm.get("evergreen_picks", 2))
@@ -236,10 +243,6 @@ def build(cfg: dict, st: dict, llm: LLM, who: str, date: str) -> dict:
                 "image": meta.get("image") or "", "date": date})
             x["shown"] = date
             st["seen"][normalize_url(x["url"])] = date
-    for r in (out["deep"] or {}).get("reading", []):
-        for x in lib:
-            if normalize_url(x["url"]) == normalize_url(r["url"]):
-                x["shown"] = date
     DATA.mkdir(exist_ok=True)
     LIB.write_text(json.dumps(lib, indent=0))
     out["health"] = health

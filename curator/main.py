@@ -85,6 +85,19 @@ Summary: {summary}
 """
 
 
+SUB_BATCH_PROMPT = """Reader (private; never mention them, their job or their life): {profile}
+
+For each item, from only its headline and summary, write a plain, specific headline (max 14 words)
+and a one-sentence takeaway on what the piece is about and why it matters (max 30 words).
+Write in English. Use only what's given; don't invent details.
+
+Return JSON: {{"items": [{{"id": <int>, "headline": "...", "takeaway": "..."}}]}}
+
+ITEMS:
+{items}
+"""
+
+
 def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str, feeds: list,
                      previews: list | None, n: int, section: str, per_section: int = 1,
                      per_source: int = 2) -> list[dict]:
@@ -118,10 +131,18 @@ def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str, feeds: 
         if same_section >= per_section or same_source >= per_source:
             continue                # variety across sections and publications
         chosen.append(c)
+    batch = {}
+    if chosen and llm.available:            # one request for all takeaways (saves free-tier quota)
+        listing = "\n".join(f"[{k}] Headline: {c.title}\n    Summary: {c.summary[:500]}" for k, c in enumerate(chosen))
+        got = llm.json(SUB_BATCH_PROMPT.format(profile=who, items=listing)) or {}
+        for x in got.get("items", []):
+            try:
+                batch[int(x["id"])] = x
+            except (KeyError, ValueError, TypeError):
+                pass
     out = []
-    for c in chosen:
-        res = llm.json(SUB_PROMPT.format(profile=who, title=c.title, summary=c.summary[:600])) if llm.available else None
-        res = res or {}
+    for k, c in enumerate(chosen):
+        res = batch.get(k) or {}
         out.append({"id": hashlib.sha1(normalize_url(c.url).encode()).hexdigest()[:12], "url": c.url,
                     "title": c.title, "headline": res.get("headline") or c.title,
                     "takeaway": res.get("takeaway") or c.summary[:220], "source": c.source,
@@ -253,9 +274,12 @@ def retry() -> None:
         log.info("no briefing for %s yet; nothing to retry", date)
         return
     items = json.loads(path.read_text())
+    smart = load_smarter(date)
     todo = [i for i in items if not i.get("ai")]
+    smart_todo = [i for i in smart.get("picks", []) if not i.get("ai")]
     saved_todo = [s for s in st["saved"] if not s.get("ai")][:10]
-    if not todo and not saved_todo:
+    need_deep = bool(smart) and not smart.get("deep")
+    if not todo and not smart_todo and not saved_todo and not need_deep:
         log.info("all summaries already AI-written; nothing to do")
         return
     llm = LLM(cfg)
@@ -263,7 +287,13 @@ def retry() -> None:
         return
     who = profile(cfg)
     fixed = 0
-    for it in todo + saved_todo:
+    if need_deep:
+        lib = smarter.load_library()
+        smart["deep"] = smarter.build_deep(cfg, st, llm, date, lib)
+        if smart["deep"]:
+            smarter.LIB.write_text(json.dumps(lib, indent=0))
+            fixed += 1
+    for it in todo + smart_todo + saved_todo:
         if not llm.available:
             break
         try:
@@ -276,6 +306,8 @@ def retry() -> None:
                       room_line=summ.get("room_line", ""), ai=True)
             fixed += 1
     path.write_text(json.dumps(items, indent=1))
+    if smart:
+        (DATA / "days" / f"{date}-smarter.json").write_text(json.dumps(smart, indent=1))
     save_state(st)
     if fixed:
         publish(cfg, st, date, items, [s for s in st["saved"] if s.get("delivered_on") == date])

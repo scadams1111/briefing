@@ -26,7 +26,7 @@ llm:
   # your Groq key can use are found automatically.
   groq_models: ["openai/gpt-oss-120b", "llama-3.3-70b-versatile"]
   groq_seconds_between_calls: 3
-  budget_minutes: 12         # stop using the AI after this long so the run always finishes
+  budget_minutes: 18         # stop using the AI after this long so the run always finishes
 
 # Used when the READER_PROFILE secret isn't set. Keep this one
 # generic because the repo is public; put the personal version

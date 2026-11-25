@@ -5,7 +5,9 @@ name: Catch-up summaries
 on:
   schedule:
     - cron: "47 14 * * *"   # ~6:47am Pacific (winter)
-    - cron: "47 17 * * *"   # ~9:47am Pacific (winter)
+    - cron: "13 16 * * *"   # ~8:13am
+    - cron: "47 17 * * *"   # ~9:47am
+    - cron: "29 20 * * *"   # ~12:29pm
   workflow_dispatch: {}
 
 permissions:
