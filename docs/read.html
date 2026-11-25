@@ -132,9 +132,12 @@ if(!snap||!snap.available){
   <div class='row'><a class='btn primary' href='${esc(saveUrl)}' rel='noopener'>Ask the Archive to save it</a><a class='btn' href='${esc(u)}'>Try the original</a></div></div>`);return}
 const ts=snap.timestamp, when=new Date(Date.UTC(+ts.slice(0,4),+ts.slice(4,6)-1,+ts.slice(6,8)));
 $('#when').textContent='Saved '+when.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
-const pageUrl=snap.url.replace(/^http:/,'https:'), clean=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1id_/');
+const pageUrl=snap.url.replace(/^http:/,'https:'), clean=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1id_/'),
+  // if_ = the Archive's own copy with links kept inside the Archive but no toolbar.
+  // (The raw id_ copy runs the site's original scripts, which can jump to the live site or its app.)
+  framed=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1if_/');
 // If the Archive won't let us build a clean copy, go straight to its page without the toolbar.
-const fallback=()=>{show(`<div class='state'><h2>Opening the archived page…</h2><p>Tip: tap <b>aA</b> in Safari's address bar, then <b>Show Reader</b>, for a clean view.</p></div>`);setTimeout(()=>location.replace(clean),900)};
+const fallback=()=>{show(`<div class='state'><h2>Opening the archived page…</h2><p>Tip: tap <b>aA</b> in Safari's address bar, then <b>Show Reader</b>, for a clean view.</p></div>`);setTimeout(()=>location.replace(framed),900)};
 try{
   const res=await fetch(clean); if(!res.ok) throw new Error(res.status);
   const doc=new DOMParser().parseFromString(await res.text(),'text/html');
