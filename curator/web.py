@@ -111,6 +111,8 @@ NEXT = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='cur
 ARCHIVE = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
            "stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='4' width='18' height='4' rx='1'/>"
            "<path d='M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4'/></svg>")
+ARROWUP = ("<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
+           "aria-hidden='true'><path d='M7 17L17 7M8 7h9v9'/></svg>")
 PREV = ("<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg>")
 
@@ -207,16 +209,44 @@ def subs_slide(subs: list[dict], root: str = "", section: str = "premium") -> st
             f"<div class='subs'>{rows}</div></div></div></article></section>")
 
 
-def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None = None) -> str:
+def deep_slide(d: dict, root: str = "") -> str:
+    img = (f"<img src='{e(d['image'])}' alt='' loading='lazy' referrerpolicy='no-referrer' onerror=\"this.remove()\">"
+           if d.get("image") else "")
+    pts = "".join(
+        f"<details{' open' if n == 1 else ''}><summary><span class='n'>{n}</span><span>{e(p['point'])}</span>{CHEV}</summary>"
+        f"<p>{e(p.get('detail', ''))}</p></details>" for n, p in enumerate(d["points"], 1))
+    reading = [{"url": d["wiki_url"], "title": d["wiki_title"], "source": "Wikipedia"}] + (d.get("reading") or [])
+    rows = "".join(f"<a href='{e(r['url'])}'><span class='k'>{ARROWUP}</span><span>{e(r['title'])}"
+                   f"<small>{e(r['source'])}</small></span></a>" for r in reading)
+    return (f"<section class='slide' data-url='{e(d['wiki_url'])}' data-label='Deep dive'><article class='card'><div class='scroll'>"
+            f"<div class='media'>{img}<span class='pill'>Deep dive · {e(d.get('field', ''))}</span></div>"
+            f"<div class='body'><div class='src'>{e(d.get('topic', ''))}</div>"
+            f"<h1 class='head'>{e(d['headline'])}</h1>"
+            + (f"<p class='room'>{e(d['why'])}</p>" if d.get("why") else "")
+            + f"<div class='points'>{pts}</div>"
+            f"<div class='src' style='margin-top:6px;font-weight:700;color:var(--ink)'>Go deeper</div>"
+            f"<div class='toc'>{rows}</div>"
+            f"<p class='foot' style='text-align:left;margin-top:4px'>Primer based on "
+            f"<a href='{e(d['wiki_url'])}'>Wikipedia</a> (CC BY-SA).</p></div></div></article></section>")
+
+
+def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None = None,
+         smart: dict | None = None) -> str:
     d = dt.date.fromisoformat(date)
     n = len(picks)
     if not n:
         return "<main class='page'><p class='empty'>Nothing yet today.</p></main>"
     groups = [(sec, [i for i in subs or [] if section_of(i) == sec]) for sec in ("nyt", "premium")]
     groups = [(sec, items) for sec, items in groups if items]
-    bars = "".join(f"<button type='button' aria-label='Story {k + 1}'><i></i></button>"
-                   for k in range(n + 1 + len(groups)))
+    smart = smart or {}
+    deep, evergreen = smart.get("deep"), smart.get("picks") or []
+    total = n + (1 if deep else 0) + len(evergreen) + len(groups) + 1
+    bars = "".join(f"<button type='button' aria-label='Slide {k + 1}'><i></i></button>" for k in range(total))
     slides = "".join(f"<section class='slide' data-url='{e(i['url'])}'>{card(i, root)}</section>" for i in picks)
+    if deep:
+        slides += deep_slide(deep, root)
+    slides += "".join(f"<section class='slide' data-url='{e(i['url'])}' data-label='Get smarter'>{card(i, root)}</section>"
+                      for i in evergreen)
     for sec, items in groups:
         slides += subs_slide(items, root, sec)
     mins = sum(i.get("minutes", 0) for i in picks)
@@ -331,12 +361,12 @@ def write_reader() -> None:
 
 
 def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str],
-              subs: list[dict] | None = None) -> None:
+              subs: list[dict] | None = None, smart: dict | None = None) -> None:
     (DOCS / "archive").mkdir(parents=True, exist_ok=True)
     nice = dt.date.fromisoformat(date).strftime("%A, %B %-d")
-    (DOCS / "index.html").write_text(shell(f"Briefing — {nice}", "today", deck(date, picks, subs=subs), script=True))
+    (DOCS / "index.html").write_text(shell(f"Briefing — {nice}", "today", deck(date, picks, subs=subs, smart=smart), script=True))
     (DOCS / "archive" / f"{date}.html").write_text(
-        shell(f"Briefing — {nice}", "archive", deck(date, picks, "../", subs), root="../", script=True))
+        shell(f"Briefing — {nice}", "archive", deck(date, picks, "../", subs, smart), root="../", script=True))
     rows = "".join(
         f"<a href='{d}.html'><span class='k'>›</span><span>{dt.date.fromisoformat(d).strftime('%A, %B %-d')}</span></a>"
         for d in sorted(archive_dates, reverse=True))

@@ -33,9 +33,9 @@ nav{font-size:.9em;margin-bottom:1em}
 
 # ── web (see web.py for the design) ────────────────────────────────
 def web(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str],
-        subs: list[dict] | None = None) -> None:
+        subs: list[dict] | None = None, smart: dict | None = None) -> None:
     from . import web as w
-    w.write_all(cfg, date, picks, saved, archive_dates, subs or [])
+    w.write_all(cfg, date, picks, saved, archive_dates, subs or [], smart or {})
 
 
 def saved_page(cfg: dict, saved: list[dict]) -> None:
@@ -73,12 +73,29 @@ def _sub_body(it: dict) -> str:
             f"<p>{e(it.get('takeaway', ''))}</p><p>Read it on the publisher's site: {e(it['url'])}</p>")
 
 
-def feeds(cfg: dict, site: str, picks: list[dict], saved: list[dict], subs: list[dict] | None = None) -> None:
+def _deep_body(d: dict) -> str:
+    s = f"<p><i>Deep dive · {e(d.get('field', ''))}</i></p><p>{e(d.get('why', ''))}</p><ol>"
+    s += "".join(f"<li><b>{e(p['point'])}</b><br/>{e(p.get('detail', ''))}</li>" for p in d["points"]) + "</ol>"
+    s += f"<p>Primer based on Wikipedia ({e(d['wiki_url'])}), CC BY-SA.</p>"
+    if d.get("reading"):
+        s += "<p><b>Further reading</b></p><ul>" + "".join(
+            f"<li>{e(r['title'])} ({e(r['source'])}): {e(r['url'])}</li>" for r in d["reading"]) + "</ul>"
+    return s
+
+
+def feeds(cfg: dict, site: str, picks: list[dict], saved: list[dict], subs: list[dict] | None = None,
+          smart: dict | None = None) -> None:
     recent_saved = saved[:20]
+    smart = smart or {}
+    evergreen = smart.get("picks") or []
+    deep = smart.get("deep")
+    deep_item = ([({"id": "deep-" + smart.get("date", ""), "headline": "Deep dive: " + deep["headline"],
+                    "url": deep["wiki_url"], "date": smart.get("date")}, _deep_body(deep))] if deep else [])
+    picks = picks + evergreen
     # 1) the briefing itself: bullets + expansions (KOReader: download_full_article = false)
     (DOCS / "briefing.xml").write_text(_rss(cfg["site_title"], site,
                                             [(i, _brief_body(i)) for i in picks + recent_saved]
-                                            + [(i, _sub_body(i)) for i in subs or []]))
+                                            + deep_item + [(i, _sub_body(i)) for i in subs or []]))
     # 2) plain links so KOReader fetches the full originals itself (download_full_article = true)
     (DOCS / "articles.xml").write_text(_rss(cfg["site_title"] + " — full articles", site,
                                             [(i, e(i.get("room_line") or i["headline"])) for i in picks + recent_saved]))
@@ -92,7 +109,8 @@ def _x(title: str, fname: str, body: str, css) -> epub.EpubHtml:
     return ch
 
 
-def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs: list[dict] | None = None) -> Path:
+def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs: list[dict] | None = None,
+               smart: dict | None = None) -> Path:
     nice = dt.date.fromisoformat(date).strftime("%a %b %-d")
     book = epub.EpubBook()
     book.set_identifier(f"briefing-{date}")
@@ -102,7 +120,8 @@ def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs:
     css = epub.EpubItem(uid="css", file_name="style.css", media_type="text/css", content=CSS)
     book.add_item(css)
 
-    allitems = [("Today", picks), ("Saved for later", saved)]
+    smart = smart or {}
+    allitems = [("Today", picks), ("Get smarter", smart.get("picks") or []), ("Saved for later", saved)]
     chapters, contents = [], f"<h1>Briefing</h1><p class='meta'>{nice}</p>"
     n = 0
     for section, items in allitems:
@@ -125,6 +144,20 @@ def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs:
             body += (f"<p class='back'>Full article: {e(it['url'])}</p>"
                      f"<p class='back'><a href='contents.xhtml'>↩ Back to contents</a></p>")
             chapters.append(_x(it["headline"], f, body, css))
+    deep = smart.get("deep")
+    if deep:
+        body = (f"<p class='meta'>Deep dive · {e(deep.get('field', ''))}</p><h1>{e(deep['headline'])}</h1>"
+                f"<p class='room'>{e(deep.get('why', ''))}</p>")
+        for k, pt in enumerate(deep["points"], 1):
+            body += f"<h2>{k}. {e(pt['point'])}</h2><p>{e(pt.get('detail', ''))}</p>"
+        body += f"<p class='back'>Primer based on Wikipedia: {e(deep['wiki_url'])} (CC BY-SA)</p>"
+        if deep.get("reading"):
+            body += "<h3>Further reading</h3>" + "".join(
+                f"<p>{e(r['title'])}, {e(r['source'])}<br/><span class='back'>{e(r['url'])}</span></p>" for r in deep["reading"])
+        body += "<p class='back'><a href='contents.xhtml'>↩ Back to contents</a></p>"
+        chapters.append(_x("Deep dive: " + deep["headline"], "deep.xhtml", body, css))
+        contents += (f"<h3 class='section'>Deep dive</h3><p class='meta'>{e(deep.get('field', ''))}</p>"
+                     f"<h2><a href='deep.xhtml'>{e(deep['headline'])}</a></h2>")
     from .web import section_of
     for sec, label in (("nyt", "The New York Times"), ("premium", "From top publications")):
         group = [i for i in subs or [] if section_of(i) == sec]

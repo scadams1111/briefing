@@ -17,6 +17,7 @@ from .llm import LLM
 from .rank import dedupe_titles, final_score, heuristic, is_premium, llm_rank, select, shortlist
 from .sources import Candidate, collect, domain, normalize_url
 from .summarize import summarize
+from . import smarter
 
 log = logging.getLogger("curator")
 DATA = Path("data")
@@ -60,6 +61,11 @@ def make_item(c_url, title, source, topic, topic_name, text, summ, **extra) -> d
 def last_picks() -> list[dict]:
     days = sorted((DATA / "days").glob("????-??-??.json"))
     return json.loads(days[-1].read_text()) if days else []
+
+
+def load_smarter(date: str) -> dict:
+    p = DATA / "days" / f"{date}-smarter.json"
+    return json.loads(p.read_text()) if p.exists() else {}
 
 
 def load_subs(date: str) -> list[dict]:
@@ -187,8 +193,15 @@ def daily() -> None:
                              [c for c in previews if normalize_url(c.url) not in picked
                               and "nytimes.com" not in c.url],
                              int(prem_cfg.get("picks", 4)), "premium", per_section=1, per_source=2)
+    try:
+        smart = smarter.build(cfg, st, llm, who, date)
+    except Exception as ex:                 # never let this section break the briefing
+        log.exception("get-smarter section failed: %s", ex)
+        smart = {}
+    smart_health = smart.pop("health", {}) if smart else {}
     new_saved = [s for s in st["saved"] if not s.get("delivered")]
     (DATA / "days").mkdir(parents=True, exist_ok=True)
+    (DATA / "days" / f"{date}-smarter.json").write_text(json.dumps(smart, indent=1))
     (DATA / "days" / f"{date}.json").write_text(json.dumps(items, indent=1))
     (DATA / "days" / f"{date}-subs.json").write_text(json.dumps(subs, indent=1))
 
@@ -198,7 +211,7 @@ def daily() -> None:
         s["delivered"] = True
         s["delivered_on"] = date
     (render.DOCS / "health.json").write_text(json.dumps(
-        {"date": date, "llm": llm.available, "candidates": len(cands), "picked": len(items), "feeds": health,
+        {"date": date, "llm": llm.available, "candidates": len(cands), "picked": len(items), "feeds": {**health, **smart_health},
          "sources": health_sources}, indent=1))
     (render.DOCS / ".nojekyll").touch()
     save_state(st)
@@ -209,10 +222,11 @@ def daily() -> None:
 def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[dict]) -> None:
     site = render.site_url(cfg)
     subs = load_subs(date)
-    render.build_epub(cfg, date, items, new_saved, subs)
+    smart = load_smarter(date)
+    render.build_epub(cfg, date, items, new_saved, subs, smart)
     archive = [p.stem for p in (render.DOCS / "archive").glob("20*.html")] + [date]
-    render.web(cfg, date, items, st["saved"], sorted(set(archive)), subs)
-    render.feeds(cfg, site, items, st["saved"], subs)
+    render.web(cfg, date, items, st["saved"], sorted(set(archive)), subs, smart)
+    render.feeds(cfg, site, items, st["saved"], subs, smart)
     render.opds(cfg, site)
 
 
@@ -292,7 +306,8 @@ def save(url: str) -> None:
     site = render.site_url(cfg)
     render.saved_page(cfg, st["saved"])
     days = sorted((DATA / "days").glob("????-??-??.json"))
-    render.feeds(cfg, site, last_picks(), st["saved"], load_subs(days[-1].stem) if days else [])
+    render.feeds(cfg, site, last_picks(), st["saved"], load_subs(days[-1].stem) if days else [],
+                 load_smarter(days[-1].stem) if days else {})
     log.info("saved: %s", title)
 
 

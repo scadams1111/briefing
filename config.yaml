@@ -224,3 +224,34 @@ nyt:
 # Premium picks: paywalled stories from the other top publications above.
 premium:
   picks: 4
+
+# ─────────────────────────────────────────────────────────────
+# Get smarter: a daily deep dive (rotating across fields) with a
+# Wikipedia-grounded primer + further reading, and a couple of
+# evergreen explainers. Explainers come from a library that grows
+# from the feeds below every day.
+# ─────────────────────────────────────────────────────────────
+smarter:
+  enabled: true
+  evergreen_picks: 2
+  fields: [Biology, History, Economics, Psychology, Physics, Technology, Philosophy,
+           Earth & Climate, Medicine, Mathematics, Engineering, Anthropology, Astronomy,
+           Political Science, Chemistry, Art & Culture, Neuroscience, Ecology]
+  evergreen_feeds:
+    - {url: https://www.quantamagazine.org/feed/, name: Quanta}
+    - {url: https://aeon.co/feed.rss, name: Aeon}
+    - {url: https://psyche.co/feed, name: Psyche}
+    - {url: https://knowablemagazine.org/rss, name: Knowable}
+    - {url: https://nautil.us/feed/, name: Nautilus}
+    - {url: https://www.themarginalian.org/feed/, name: The Marginalian}
+    - {url: https://ourworldindata.org/atom.xml, name: Our World in Data}
+    - {url: https://asteriskmag.com/feed, name: Asterisk}
+    - {url: https://fs.blog/feed/, name: Farnam Street}
+    - {url: https://bigthink.com/feed/, name: Big Think}
+    - {url: https://www.noemamag.com/feed/, name: Noema}
+    - {url: https://publicdomainreview.org/rss.xml, name: The Public Domain Review}
+    - {url: https://www.smithsonianmag.com/rss/latest_articles/, name: Smithsonian}
+    - {url: https://waitbutwhy.com/feed, name: Wait But Why}
+    - {url: https://theconversation.com/us/articles.atom, name: The Conversation}
+    - {url: https://undark.org/feed/, name: Undark}
+    - {url: https://www.scientificamerican.com/platform/syndication/rss/, name: Scientific American}
