@@ -1,7 +1,7 @@
 {
  "date": "2026-11-25",
  "llm": true,
- "candidates": 346,
+ "candidates": 351,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -42,7 +42,7 @@
   "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (9)",
   "http://www.aaronsw.com/2002/feeds/pgessays.rss": "ok (40)",
   "https://www.lennysnewsletter.com/feed": "ok (20)",
-  "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (3)",
+  "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (2)",
   "https://lethain.com/feeds.xml": "ok (12)",
   "https://charity.wtf/feed/": "ok (20)",
   "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (10)",
@@ -68,7 +68,7 @@
  },
  "sources": {
   "Adafruit Industries \u2013 Makers, hackers, artists, designers and engineers!": {
-   "fetched": 9,
+   "fetched": 8,
    "full_text": 1
   },
   "Aeon": {
@@ -80,7 +80,7 @@
    "full_text": 0
   },
   "Axios": {
-   "fetched": 14,
+   "fetched": 13,
    "full_text": 5
   },
   "BBC News": {
@@ -95,25 +95,21 @@
    "fetched": 5,
    "full_text": 0
   },
-  "FA RSS": {
-   "fetched": 4,
-   "full_text": 4
-  },
   "Fierce Biotech": {
    "fetched": 18,
    "full_text": 4
   },
-  "Latest News from Science Magazine": {
-   "fetched": 3,
-   "full_text": 0
+  "Foreign Affairs": {
+   "fetched": 4,
+   "full_text": 4
   },
   "NPR Topics: News": {
    "fetched": 1,
    "full_text": 1
   },
   "Nature": {
-   "fetched": 3,
-   "full_text": 3
+   "fetched": 6,
+   "full_text": 5
   },
   "Outside Online": {
    "fetched": 10,
@@ -124,7 +120,7 @@
    "full_text": 0
   },
   "PetaPixel": {
-   "fetched": 4,
+   "fetched": 5,
    "full_text": 0
   },
   "ProPublica": {
@@ -132,8 +128,12 @@
    "full_text": 5
   },
   "STAT": {
-   "fetched": 10,
-   "full_text": 5
+   "fetched": 9,
+   "full_text": 4
+  },
+  "Science": {
+   "fetched": 1,
+   "full_text": 0
   },
   "Techmeme": {
    "fetched": 7,
