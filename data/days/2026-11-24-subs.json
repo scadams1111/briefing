@@ -1,0 +1,35 @@
+[
+ {
+  "id": "60f81063c728",
+  "url": "https://www.nytimes.com/2026/11/24/business/dealbook/ai-task-force.html",
+  "title": "DealBook Summit 2026: Rein in A.I., but Don\u2019t Pause It",
+  "headline": "DealBook Summit 2026: Balancing A.I. Regulation Without Halting Innovation",
+  "takeaway": "Tech leaders discuss navigating A.I. development and A.G.I. risks, providing essential context for professionals monitoring the intersection of emerging technology, policy, and scientific advancement.",
+  "source": "The New York Times",
+  "topic_name": "Business",
+  "date": "2026-11-24",
+  "subscriber": true
+ },
+ {
+  "id": "ff4af82c821e",
+  "url": "https://www.nytimes.com/video/opinion/100000011302829/what-does-it-actually-mean-to-write-like-a-human.html",
+  "title": "What Does It Actually Mean to Write \u2018Like a Human\u2019?",
+  "headline": "Beyond the AI Hype: Redefining What It Means to Write Like a Human",
+  "takeaway": "This essay explores how the tension between AI and human writing reflects deeper, historical struggles to define human expression, moving beyond technical detection to examine the essence of authorship.",
+  "source": "The New York Times",
+  "topic_name": "Opinion",
+  "date": "2026-11-24",
+  "subscriber": true
+ },
+ {
+  "id": "fd57828d974e",
+  "url": "https://www.nytimes.com/2026/11/23/technology/openai-engineer-secret-recordings.html",
+  "title": "OpenAI Engineer Secretly Recorded Dozens of Meetings, Prosecutors Say",
+  "headline": "OpenAI Engineer Allegedly Recorded Private Meetings, Prompting Federal Investigation",
+  "takeaway": "The unauthorized recording of internal OpenAI meetings by a former employee raises significant concerns regarding corporate security, intellectual property protection, and the evolving ethics of AI development.",
+  "source": "The New York Times",
+  "topic_name": "Technology",
+  "date": "2026-11-24",
+  "subscriber": true
+ }
+]
