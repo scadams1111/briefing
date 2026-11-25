@@ -18,6 +18,7 @@ from .rank import dedupe_titles, final_score, heuristic, is_premium, llm_rank, s
 from .sources import Candidate, collect, domain, normalize_url
 from .summarize import summarize
 from . import smarter
+from . import search as searchmod
 
 log = logging.getLogger("curator")
 DATA = Path("data")
@@ -175,6 +176,10 @@ def daily() -> None:
     st["seen"] = {u: d for u, d in st["seen"].items() if d != date}
     cands, health = collect(cfg, set(st["seen"]))
     log.info("collected %d candidates", len(cands))
+    try:
+        searchmod.remember_pool(cands, date)     # everything collected becomes searchable
+    except Exception as ex:
+        log.warning("couldn't update search pool: %s", ex)
     heuristic(cands, cfg)
     per = cfg.get("candidates_per_topic", 6)
     pool = shortlist(cands, cfg, per * 3)   # cheap first cut before fetching pages
@@ -249,6 +254,10 @@ def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[d
     render.web(cfg, date, items, st["saved"], sorted(set(archive)), subs, smart)
     render.feeds(cfg, site, items, st["saved"], subs, smart)
     render.opds(cfg, site)
+    try:
+        searchmod.build_index({t["id"]: t["name"] for t in cfg["topics"]})
+    except Exception as ex:
+        log.warning("couldn't build search index: %s", ex)
 
 
 def rerender() -> None:
@@ -346,3 +355,8 @@ def save(url: str) -> None:
 def find_url(s: str) -> str | None:
     m = re.search(r"https?://\S+", s or "")
     return m.group(0).rstrip(").,>]\"'") if m else None
+
+
+def search(q: str) -> None:
+    cfg = load_cfg()
+    searchmod.run(q, cfg, profile(cfg))

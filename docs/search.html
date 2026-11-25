@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'><meta name='apple-mobile-web-app-title' content='Briefing'><link rel='apple-touch-icon' href='apple-touch-icon.png'><link rel='manifest' href='manifest.webmanifest'><title>Search — Briefing</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><style>
+:root{
+  --bg:#0B1220; --card:#131C2E; --tile:#172136; --tile-open:#1C2740; --ink:#EAF0FA; --muted:#8D9AB3;
+  --detail:#BAC5D8; --accent:#F2B544; --on-accent:#1A1305; --img:#1E2A44; --line:#2A3653;
+  --serif:"Fraunces","New York",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+
+/* shell */
+.top{max-width:560px;margin:0 auto;padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+.tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
+.tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
+.tabs a.on{background:var(--line);color:var(--ink)}
+.tabs a svg{display:block;margin:1px 0}
+
+/* story deck */
+.reader{max-width:560px;margin:0 auto;height:calc(100dvh - 58px);display:flex;flex-direction:column;padding:12px 0 calc(14px + env(safe-area-inset-bottom))}
+.bars{display:flex;gap:4px;padding:0 16px}
+.bars button{flex:1;height:14px;border:0;background:none;padding:5px 0}
+.bars button i{display:block;height:3px;border-radius:2px;background:var(--line);transition:background .2s}
+.bars button.seen i{background:var(--ink)}
+.status{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 10px;font-size:13px;color:var(--muted)}
+.status b{color:var(--ink);font-weight:600}
+.deck{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;padding:0 16px;display:flex}
+.card{flex:1;min-width:0;border-radius:24px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.scroll{overflow-y:auto;flex:1;min-height:0;overscroll-behavior:contain}
+.media{position:relative;height:190px;background:var(--img);display:flex;align-items:flex-end;padding:14px}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pill{position:relative;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--on-accent);padding:5px 9px;border-radius:6px}
+.body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px}
+.src{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.src img{width:16px;height:16px;border-radius:4px;background:var(--tile)}
+h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-height:1.16;letter-spacing:-.01em}
+.room{margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--detail)}
+.points{display:flex;flex-direction:column;gap:8px}
+.points details{border-radius:14px;background:var(--tile)}
+.points details[open]{background:var(--tile-open)}
+.points summary{list-style:none;display:flex;gap:10px;padding:12px;font-size:14.5px;line-height:1.42;font-weight:600;cursor:pointer}
+.points summary::-webkit-details-marker{display:none}
+.points summary .n{color:var(--accent);flex:none;width:12px}
+.points summary svg{flex:none;margin-left:auto;margin-top:2px;color:var(--muted);transition:transform .2s}
+.points details[open] summary svg{transform:rotate(180deg)}
+.points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
+.why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.why b{color:var(--ink);font-weight:600}
+.extras{display:flex;align-items:center;gap:10px;padding-top:4px}
+.chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
+.chip svg{color:var(--accent)}
+.chip:hover,.chip:active{background:var(--tile-open);border-color:var(--muted)}
+.hint{font-size:12px;color:var(--muted)}
+
+.actions{display:flex;gap:10px;padding:12px 16px 0}
+.btn{flex:1;height:48px;border-radius:14px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600}
+.btn.icon{flex:none;width:48px}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+.btn[disabled]{opacity:.35}
+
+/* end slide + lists */
+.end h1{margin:4px 0 2px;font-family:var(--serif);font-size:28px}
+.toc{display:flex;flex-direction:column}
+.toc button,.toc a{display:flex;gap:12px;align-items:baseline;text-align:left;width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;font-size:15px;line-height:1.35}
+.toc .k{color:var(--accent);font-weight:700;flex:none;width:18px}
+.toc small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.page{max-width:560px;margin:0 auto;padding:10px 16px 60px}
+.page .card{margin:14px 0}
+.hero{padding:18px 4px 6px}
+.hero .kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:6px 0 4px;font-family:var(--serif);font-size:32px;line-height:1.1}
+.hero p{margin:0;color:var(--muted);font-size:14px}
+.empty{color:var(--muted);text-align:center;padding:60px 0}
+.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:14px}
+.foot a{text-decoration:underline}
+.subs{display:flex;flex-direction:column;gap:10px}
+.sub{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:var(--tile)}
+.sub strong{font-family:var(--serif);font-size:18px;line-height:1.25}
+.sub .tk{font-size:14px;line-height:1.5;color:var(--detail)}
+.subhit{display:flex;flex-direction:column;gap:6px}
+.subrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
+.chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
+
+[hidden]{display:none!important}
+.sbox{display:flex;gap:8px;margin:8px 0 6px}
+.sbox input{flex:1;min-width:0;height:48px;border-radius:14px;border:1px solid var(--line);background:var(--tile);color:var(--ink);
+  padding:0 14px;font:500 16px var(--sans);outline:none}
+.sbox input:focus{border-color:var(--accent)}
+.hint2{font-size:13px;color:var(--muted);margin:6px 2px 14px}
+.res{display:flex;flex-direction:column}
+.res a{display:block;padding:13px 2px;border-bottom:1px solid var(--line)}
+.res .t{font-family:var(--serif);font-size:17px;line-height:1.3;color:var(--ink)}
+.res .m{font-size:12px;color:var(--muted);margin-top:4px}
+.res .m b{color:var(--accent);font-weight:600}
+.res .x{font-size:13.5px;color:var(--detail);line-height:1.45;margin-top:4px}
+.fresh{display:flex;flex-direction:column;gap:10px;margin:16px 0 4px;padding:16px;border-radius:18px;background:var(--card)}
+.fresh h2{margin:0;font-family:var(--serif);font-size:19px}
+.fresh p{margin:0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.fresh .btn{flex:none}
+.past a{display:flex;justify-content:space-between;gap:10px;padding:12px 2px;border-bottom:1px solid var(--line);font-size:15px}
+.past a span{color:var(--muted);font-size:12px;white-space:nowrap}
+.bg{margin:14px 0 4px;padding:16px;border-radius:18px;background:var(--card)}
+.bg .src{margin-bottom:6px}
+.bg p{margin:0;font-size:14.5px;line-height:1.6;color:var(--detail)}
+.bg small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+.bg small a{text-decoration:underline}
+</style></head><body data-repo='Scadams1111/briefing'><header class='top'><a class='brand' href='./'>Briefing<span>.</span></a><nav class='tabs'><a href='./' class=''>Today</a><a href='saved.html' class=''>Saved</a><a href='archive/' class=''>Archive</a><a href='search.html' class='on' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><main class='page'><section class='hero'><div class='kicker'>Search</div><h1>Find articles</h1><p>Search everything your briefing has collected, or find fresh articles on any topic.</p></section><form id='form' class='sbox' role='search'><label for='q' class='sr' style='position:absolute;left:-9999px'>Search</label><input id='q' type='search' placeholder='e.g. organoids, GLP-1, Roman roads' autocomplete='off' enterkeyhint='search'></form><div id='stat' class='fresh' hidden></div><div id='fresh' class='fresh' hidden><h2>Find fresh articles on “<span id='fq'></span>”</h2><p>Searches the news and your library, then the AI picks the best, most relevant pieces with three-point summaries. Opens GitHub: tap <b>Create</b>, then come back here. Ready in about 2 minutes.</p><a id='go' class='btn primary' href='#' target='_blank' rel='noopener'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg><span>Find fresh articles</span></a></div><div id='res' class='res'></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
+(()=>{const $=s=>document.querySelector(s), inp=$('#q'), out=$('#res'), fresh=$('#fresh'), stat=$('#stat');
+const repo=document.body.dataset.repo;
+const slug=q=>q.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'search';
+const esc=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let idx=null; const load=async()=>{if(!idx){try{idx=await (await fetch('search-index.json',{cache:'no-store'})).json()}catch(_){idx=[]}}return idx};
+const fmt=d=>{try{return new Date(d+'T12:00:00Z').toLocaleDateString(undefined,{month:'short',day:'numeric'})}catch(_){return d}};
+async function run(){const q=inp.value.trim();history.replaceState(null,'',q?'?q='+encodeURIComponent(q):location.pathname);
+ if(!q){out.innerHTML='';fresh.hidden=true;return}
+ const toks=q.toLowerCase().split(/\s+/).filter(w=>w.length>1);const data=await load();
+ const hits=[];for(const r of data){const t=r.t.toLowerCase(),x=(r.x||'').toLowerCase();let ok=true,sc=0;
+  for(const w of toks){const a=t.includes(w),b=x.includes(w);if(!a&&!b){ok=false;break}sc+=a?3:1}
+  if(ok){sc+=r.g==='Briefing pick'||r.g==='Deep dive'?1:0;hits.push([sc,r])}}
+ hits.sort((a,b)=>b[0]-a[0]||(b[1].d>a[1].d?1:-1));
+ out.innerHTML=hits.length?hits.slice(0,40).map(([_,r])=>`<a href="${esc(r.u)}" target="_blank" rel="noopener"><div class="t">${esc(r.t)}</div>
+  <div class="m">${r.g?`<b>${esc(r.g)}</b> · `:''}${esc(r.s)} · ${esc(fmt(r.d))}</div>${r.x?`<div class="x">${esc(r.x)}</div>`:''}</a>`).join('')
+  :`<p class="hint2">Nothing in your briefing library yet. Try finding fresh articles.</p>`;
+ fresh.hidden=false;$('#fq').textContent=q;
+ $('#go').href=`https://github.com/${repo}/issues/new?title=${encodeURIComponent('search: '+q)}&body=${encodeURIComponent('Fresh search from your briefing. Tap Create/Submit; results appear in about 2 minutes.')}`;
+ $('#go').onclick=()=>{try{localStorage.setItem('pendingSearch',JSON.stringify({q,s:slug(q),t:Date.now()}))}catch(_){};setTimeout(poll,1500)}}
+let tm;inp.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(run,200)});
+$('#form').addEventListener('submit',ev=>{ev.preventDefault();run()});
+async function poll(){let p;try{p=JSON.parse(localStorage.getItem('pendingSearch')||'null')}catch(_){}
+ if(!p||Date.now()-p.t>15*60e3){stat.hidden=true;return}
+ stat.hidden=false;
+ try{const r=await fetch(`search/${p.s}.html`,{cache:'no-store',method:'HEAD'});
+  if(r.ok){const meta=await (await fetch(`search/${p.s}.json`,{cache:'no-store'})).json().catch(()=>null);
+   if(!meta||Date.parse(meta.when)>=p.t-120e3){stat.innerHTML=`Results for “${esc(p.q)}” are ready. <a class="btn primary" href="search/${p.s}.html">Open results</a>`;
+    try{localStorage.removeItem('pendingSearch')}catch(_){};return}}}catch(_){}
+ stat.innerHTML=`Searching for “${esc(p.q)}”… this takes about 2 minutes. You can leave this page open.`;setTimeout(poll,15000)}
+const q0=new URLSearchParams(location.search).get('q');if(q0){inp.value=q0;run()}poll();})();
+</script></body></html>

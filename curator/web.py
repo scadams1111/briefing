@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 import html
+import json
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
@@ -34,6 +35,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
 .tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
 .tabs a.on{background:var(--line);color:var(--ink)}
+.tabs a svg{display:block;margin:1px 0}
 
 /* story deck */
 .reader{max-width:560px;margin:0 auto;height:calc(100dvh - 58px);display:flex;flex-direction:column;padding:12px 0 calc(14px + env(safe-area-inset-bottom))}
@@ -113,6 +115,8 @@ ARCHIVE = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='
            "<path d='M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4'/></svg>")
 ARROWUP = ("<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
            "aria-hidden='true'><path d='M7 17L17 7M8 7h9v9'/></svg>")
+SEARCH_ICON = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
+               "stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg>")
 PREV = ("<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg>")
 
@@ -174,6 +178,8 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
     tabs = "".join(f"<a href='{root}{href}' class='{'on' if active == k else ''}'>{label}</a>"
                    for k, label, href in (("today", "Today", "./"), ("saved", "Saved", "saved.html"),
                                           ("archive", "Archive", "archive/")))
+    tabs += (f"<a href='{root}search.html' class='{'on' if active == 'search' else ''}' aria-label='Search'>"
+             f"{SEARCH_ICON}</a>")
     return ("<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
             "<meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>"
             "<meta name='theme-color' content='#0B1220'><meta name='apple-mobile-web-app-capable' content='yes'>"
@@ -379,6 +385,7 @@ def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archiv
         f"<div class='toc'>{rows}</div></main>", root="../"))
     write_saved(saved)
     write_reader()
+    write_search_page()
 
 
 def write_saved(saved: list[dict]) -> None:
@@ -388,3 +395,118 @@ def write_saved(saved: list[dict]) -> None:
     body += "".join(card(i) for i in saved[:50]) or \
         "<p class='empty'>Nothing saved yet. Share a link to your Save shortcut and it'll show up here.</p>"
     (DOCS / "saved.html").write_text(shell("Saved — Briefing", "saved", body + "</main>"))
+
+
+# ── search ─────────────────────────────────────────────────────────────
+SEARCH_CSS = r"""
+[hidden]{display:none!important}
+.sbox{display:flex;gap:8px;margin:8px 0 6px}
+.sbox input{flex:1;min-width:0;height:48px;border-radius:14px;border:1px solid var(--line);background:var(--tile);color:var(--ink);
+  padding:0 14px;font:500 16px var(--sans);outline:none}
+.sbox input:focus{border-color:var(--accent)}
+.hint2{font-size:13px;color:var(--muted);margin:6px 2px 14px}
+.res{display:flex;flex-direction:column}
+.res a{display:block;padding:13px 2px;border-bottom:1px solid var(--line)}
+.res .t{font-family:var(--serif);font-size:17px;line-height:1.3;color:var(--ink)}
+.res .m{font-size:12px;color:var(--muted);margin-top:4px}
+.res .m b{color:var(--accent);font-weight:600}
+.res .x{font-size:13.5px;color:var(--detail);line-height:1.45;margin-top:4px}
+.fresh{display:flex;flex-direction:column;gap:10px;margin:16px 0 4px;padding:16px;border-radius:18px;background:var(--card)}
+.fresh h2{margin:0;font-family:var(--serif);font-size:19px}
+.fresh p{margin:0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.fresh .btn{flex:none}
+.past a{display:flex;justify-content:space-between;gap:10px;padding:12px 2px;border-bottom:1px solid var(--line);font-size:15px}
+.past a span{color:var(--muted);font-size:12px;white-space:nowrap}
+.bg{margin:14px 0 4px;padding:16px;border-radius:18px;background:var(--card)}
+.bg .src{margin-bottom:6px}
+.bg p{margin:0;font-size:14.5px;line-height:1.6;color:var(--detail)}
+.bg small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+.bg small a{text-decoration:underline}
+"""
+
+SEARCH_JS = r"""
+(()=>{const $=s=>document.querySelector(s), inp=$('#q'), out=$('#res'), fresh=$('#fresh'), stat=$('#stat');
+const repo=document.body.dataset.repo;
+const slug=q=>q.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'search';
+const esc=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let idx=null; const load=async()=>{if(!idx){try{idx=await (await fetch('search-index.json',{cache:'no-store'})).json()}catch(_){idx=[]}}return idx};
+const fmt=d=>{try{return new Date(d+'T12:00:00Z').toLocaleDateString(undefined,{month:'short',day:'numeric'})}catch(_){return d}};
+async function run(){const q=inp.value.trim();history.replaceState(null,'',q?'?q='+encodeURIComponent(q):location.pathname);
+ if(!q){out.innerHTML='';fresh.hidden=true;return}
+ const toks=q.toLowerCase().split(/\s+/).filter(w=>w.length>1);const data=await load();
+ const hits=[];for(const r of data){const t=r.t.toLowerCase(),x=(r.x||'').toLowerCase();let ok=true,sc=0;
+  for(const w of toks){const a=t.includes(w),b=x.includes(w);if(!a&&!b){ok=false;break}sc+=a?3:1}
+  if(ok){sc+=r.g==='Briefing pick'||r.g==='Deep dive'?1:0;hits.push([sc,r])}}
+ hits.sort((a,b)=>b[0]-a[0]||(b[1].d>a[1].d?1:-1));
+ out.innerHTML=hits.length?hits.slice(0,40).map(([_,r])=>`<a href="${esc(r.u)}" target="_blank" rel="noopener"><div class="t">${esc(r.t)}</div>
+  <div class="m">${r.g?`<b>${esc(r.g)}</b> · `:''}${esc(r.s)} · ${esc(fmt(r.d))}</div>${r.x?`<div class="x">${esc(r.x)}</div>`:''}</a>`).join('')
+  :`<p class="hint2">Nothing in your briefing library yet. Try finding fresh articles.</p>`;
+ fresh.hidden=false;$('#fq').textContent=q;
+ $('#go').href=`https://github.com/${repo}/issues/new?title=${encodeURIComponent('search: '+q)}&body=${encodeURIComponent('Fresh search from your briefing. Tap Create/Submit; results appear in about 2 minutes.')}`;
+ $('#go').onclick=()=>{try{localStorage.setItem('pendingSearch',JSON.stringify({q,s:slug(q),t:Date.now()}))}catch(_){};setTimeout(poll,1500)}}
+let tm;inp.addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(run,200)});
+$('#form').addEventListener('submit',ev=>{ev.preventDefault();run()});
+async function poll(){let p;try{p=JSON.parse(localStorage.getItem('pendingSearch')||'null')}catch(_){}
+ if(!p||Date.now()-p.t>15*60e3){stat.hidden=true;return}
+ stat.hidden=false;
+ try{const r=await fetch(`search/${p.s}.html`,{cache:'no-store',method:'HEAD'});
+  if(r.ok){const meta=await (await fetch(`search/${p.s}.json`,{cache:'no-store'})).json().catch(()=>null);
+   if(!meta||Date.parse(meta.when)>=p.t-120e3){stat.innerHTML=`Results for “${esc(p.q)}” are ready. <a class="btn primary" href="search/${p.s}.html">Open results</a>`;
+    try{localStorage.removeItem('pendingSearch')}catch(_){};return}}}catch(_){}
+ stat.innerHTML=`Searching for “${esc(p.q)}”… this takes about 2 minutes. You can leave this page open.`;setTimeout(poll,15000)}
+const q0=new URLSearchParams(location.search).get('q');if(q0){inp.value=q0;run()}poll();})();
+"""
+
+
+def _past_searches() -> list[dict]:
+    d = Path("data") / "searches"
+    items = [json.loads(p.read_text()) for p in d.glob("*.json")] if d.exists() else []
+    return sorted(items, key=lambda x: x.get("when", ""), reverse=True)
+
+
+def _repo() -> str:
+    import os
+    return os.environ.get("GITHUB_REPOSITORY", "") or "scadams1111/briefing"
+
+
+def write_search_page() -> None:
+    past = _past_searches()[:30]
+    rows = "".join(f"<a href='search/{e(x['slug'])}.html'>{e(x['q'])}<span>{len(x.get('results', []))} results · "
+                   f"{e(x.get('when', '')[:10])}</span></a>" for x in past)
+    body = ("<main class='page'><section class='hero'><div class='kicker'>Search</div><h1>Find articles</h1>"
+            "<p>Search everything your briefing has collected, or find fresh articles on any topic.</p></section>"
+            "<form id='form' class='sbox' role='search'><label for='q' class='sr' style='position:absolute;left:-9999px'>Search</label>"
+            "<input id='q' type='search' placeholder='e.g. organoids, GLP-1, Roman roads' autocomplete='off' enterkeyhint='search'>"
+            "</form>"
+            "<div id='stat' class='fresh' hidden></div>"
+            "<div id='fresh' class='fresh' hidden><h2>Find fresh articles on “<span id='fq'></span>”</h2>"
+            "<p>Searches the news and your library, then the AI picks the best, most relevant pieces with three-point "
+            "summaries. Opens GitHub: tap <b>Create</b>, then come back here. Ready in about 2 minutes.</p>"
+            f"<a id='go' class='btn primary' href='#' target='_blank' rel='noopener'>{SEARCH_ICON}<span>Find fresh articles</span></a></div>"
+            "<div id='res' class='res'></div>"
+            + (f"<h3 class='kicker' style='margin:28px 2px 4px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)'>"
+               f"Past searches</h3><div class='past'>{rows}</div>" if rows else "")
+            + "</main>")
+    page = shell("Search — Briefing", "search", body).replace("</style>", SEARCH_CSS + "</style>", 1)
+    page = page.replace("<body>", f"<body data-repo='{e(_repo())}'>", 1).replace("</body>", f"<script>{SEARCH_JS}</script></body>")
+    DOCS.mkdir(exist_ok=True)
+    (DOCS / "search.html").write_text(page)
+
+
+def write_search_result(data: dict) -> Path:
+    when = data.get("when", "")[:10]
+    bg = data.get("background")
+    body = (f"<main class='page'><section class='hero'><div class='kicker'>Search</div><h1>{e(data['q'])}</h1>"
+            f"<p>{len(data['results'])} articles picked by relevance and quality · {e(when)}</p></section>")
+    if bg:
+        body += (f"<div class='bg'><div class='src'>Background · {e(bg['title'])}</div><p>{e(bg['text'])}</p>"
+                 f"<small>From <a href='{e(bg['url'])}'>Wikipedia</a> (CC BY-SA)</small></div>")
+    body += "".join(card(i, "../") for i in data["results"]) or \
+        "<p class='empty'>No strong matches this time. Try different or broader words.</p>"
+    body += "<p class='foot'><a href='../search.html'>New search</a></p></main>"
+    page = shell(f"{data['q']} — Search", "search", body, root="../").replace("</style>", SEARCH_CSS + "</style>", 1)
+    out = DOCS / "search"
+    out.mkdir(parents=True, exist_ok=True)
+    (out / f"{data['slug']}.html").write_text(page)
+    (out / f"{data['slug']}.json").write_text(json.dumps({"q": data["q"], "when": data["when"]}))
+    return out / f"{data['slug']}.html"
