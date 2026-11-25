@@ -187,6 +187,19 @@ def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[d
     render.opds(cfg, site)
 
 
+def rerender() -> None:
+    """Rebuild the site from today's saved data (after a design change), no fetching or AI."""
+    cfg = load_cfg()
+    st = load_state()
+    days = sorted((DATA / "days").glob("????-??-??.json"))
+    if not days:
+        return
+    date = days[-1].stem
+    publish(cfg, st, date, json.loads(days[-1].read_text()),
+            [s for s in st["saved"] if s.get("delivered_on") == date])
+    log.info("re-rendered %s", date)
+
+
 def retry() -> None:
     """Catch-up run: redo today's summaries that missed out on the AI."""
     cfg = load_cfg()

@@ -67,6 +67,7 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
 .why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 .why b{color:var(--ink);font-weight:600}
+.arch{font-size:12.5px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;align-self:flex-start;padding:6px 0}
 
 .actions{display:flex;gap:10px;padding:12px 16px 0}
 .btn{flex:1;height:48px;border-radius:14px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600}
@@ -144,12 +145,15 @@ def card(it: dict) -> str:
         for n, b in enumerate(it["bullets"], 1))
     room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
     why = f"<div class='why'><b>Why for you</b> · {e(it['why_for_you'])}</div>" if it.get("why_for_you") else ""
+    # Backup if the original page has moved or vanished: Wayback Machine's latest snapshot
+    archived = (f"<a class='arch' href='https://web.archive.org/web/2/{e(it['url'])}' rel='noopener'>"
+                f"Link broken? Try an archived copy</a>")
     return (f"<article class='card'><div class='scroll'>"
             f"<div class='media'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
             f"<div class='body'><div class='src'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
             f"{e(it['source'])} · {it['minutes']} min read</div>"
             f"<h1 class='head'><a href='{e(it['url'])}'>{e(it['headline'])}</a></h1>{room}"
-            f"<div class='points'>{pts}</div>{why}</div></div></article>")
+            f"<div class='points'>{pts}</div>{why}{archived}</div></div></article>")
 
 
 def shell(title: str, active: str, body: str, root: str = "", script: bool = False) -> str:
