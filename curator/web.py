@@ -116,6 +116,9 @@ ARROWUP = ("<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='
 PREV = ("<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg>")
 
+# Article links open in a new tab, so the briefing stays where you left it.
+NEWTAB = r"""document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})"""
+
 JS = r"""
 (()=>{const deck=document.querySelector('.deck');if(!deck)return;
 const slides=[...deck.children],bars=[...document.querySelectorAll('.bars button')],
@@ -181,7 +184,7 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
             f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body>"
             f"<header class='top'><a class='brand' href='{root}./'>Briefing<span>.</span></a>"
             f"<nav class='tabs'>{tabs}</nav></header>{body}"
-            + (f"<script>{JS}</script>" if script else "") + "</body></html>")
+            + (f"<script>{JS}</script>" if script else "") + f"<script>{NEWTAB}</script></body></html>")
 
 
 def section_of(it: dict) -> str:

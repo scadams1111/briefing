@@ -107,4 +107,4 @@ addEventListener('keydown',ev=>{if(ev.target.closest('input,textarea'))return;
 addEventListener('resize',()=>{const c=cur;cur=-1;deck.scrollLeft=c*deck.clientWidth;upd()});
 const h=parseInt(location.hash.slice(1));if(h>1){deck.scrollLeft=(h-1)*deck.clientWidth}
 upd();})();
-</script></body></html>
+</script><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script></body></html>
