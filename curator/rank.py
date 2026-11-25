@@ -5,6 +5,7 @@ import logging
 import math
 import re
 import time
+from urllib.parse import urlsplit
 
 from .llm import LLM
 from .sources import Candidate
@@ -32,6 +33,11 @@ def _tokens(s: str) -> set[str]:
     return {w for w in re.findall(r"[a-z0-9]+", s.lower()) if len(w) > 3}
 
 
+def is_premium(url: str, domains: tuple) -> bool:
+    host = urlsplit(url).netloc.lower().removeprefix("www.")
+    return any(host == d or host.endswith("." + d) for d in domains)
+
+
 def dedupe_titles(cands: list[Candidate]) -> list[Candidate]:
     """Drop near-identical headlines (same story from several outlets)."""
     kept: list[Candidate] = []
@@ -45,6 +51,8 @@ def dedupe_titles(cands: list[Candidate]) -> list[Candidate]:
 
 def heuristic(cands: list[Candidate], cfg: dict) -> None:
     tw = {t["id"]: t.get("weight", 1.0) for t in cfg["topics"]}
+    prem = tuple(cfg.get("premium_domains") or ())
+    bonus = float(cfg.get("premium_bonus", 0.0))
     now = time.time()
     for c in cands:
         age_h = max(0.0, (now - c.published) / 3600)
@@ -53,6 +61,7 @@ def heuristic(cands: list[Candidate], cfg: dict) -> None:
             + min(c.words, 4000) / 2000          # longer, more substantial pieces
             + math.log1p(c.hn_points) / 3         # people are talking about it
             - age_h / 48                          # freshness
+            + (bonus if prem and is_premium(c.url, prem) else 0.0)
         )
 
 

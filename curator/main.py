@@ -14,7 +14,7 @@ import yaml
 from . import render
 from .extract import extract_all, fetch_article, is_english
 from .llm import LLM
-from .rank import dedupe_titles, final_score, heuristic, llm_rank, select, shortlist
+from .rank import dedupe_titles, final_score, heuristic, is_premium, llm_rank, select, shortlist
 from .sources import Candidate, collect, domain, normalize_url
 from .summarize import summarize
 
@@ -79,16 +79,21 @@ Summary: {summary}
 """
 
 
-def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str) -> list[dict]:
+def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str,
+                     previews: list | None = None) -> list[dict]:
     sub = cfg.get("subscriber") or {}
     feeds = sub.get("feeds") or []
-    if not feeds:
+    if not feeds and not previews:
         return []
     topics = [{"id": f"sub{k}", "name": f.get("topic", "Subscriber"), "weight": 1.0,
                "feeds": [{"url": f["url"], "name": f.get("name"), "weight": 1.0}]} for k, f in enumerate(feeds)]
     cands, _ = collect({"topics": topics, "lookback_hours": cfg["lookback_hours"], "hackernews": {}},
                        set(st["seen"]))
     names = {t["id"]: t["name"] for t in topics}
+    topic_names = {t["id"]: t["name"] for t in cfg["topics"]}
+    for c in previews or []:                  # paywalled previews from the main feeds
+        names[c.topic] = topic_names.get(c.topic, c.topic)
+        cands.append(c)
     for c in cands:
         c.text = c.summary          # headline feed only; never fetch the paywalled page
         c.words = len(c.text.split())
@@ -100,9 +105,10 @@ def subscriber_picks(cfg: dict, st: dict, llm: LLM, who: str, date: str) -> list
     for c in sorted(pool, key=final_score, reverse=True):
         if len(chosen) >= sub.get("picks", 3):
             break
-        if names[c.topic] in used:
-            continue                # one per section, for variety
-        used.add(names[c.topic])
+        key = (c.source, names[c.topic])
+        if key in used or sum(1 for x in chosen if x.source == c.source) >= 2:
+            continue                # variety: max 2 per publication, 1 per section
+        used.add(key)
         chosen.append(c)
     out = []
     for c in chosen:
@@ -143,6 +149,15 @@ def daily() -> None:
     per = cfg.get("candidates_per_topic", 6)
     pool = shortlist(cands, cfg, per * 3)   # cheap first cut before fetching pages
     extract_all(pool)
+    prem = tuple(cfg.get("premium_domains") or ())
+    # paywalled stories from top publications: keep them for the premium slide
+    previews = [c for c in pool if c.words < cfg["min_words"] and prem and is_premium(c.url, prem)
+                and len(c.summary.split()) >= 15 and is_english(c.summary)]
+    by_src: dict[str, list[int]] = {}
+    for c in pool:
+        by_src.setdefault(c.source, []).append(c.words)
+    health_sources = {k: {"fetched": len(v), "full_text": sum(w >= cfg["min_words"] for w in v)}
+                      for k, v in sorted(by_src.items())}
     pool = [c for c in pool if c.words >= cfg["min_words"] and is_english(c.text)]
     pool = dedupe_titles(pool)
     heuristic(pool, cfg)                    # recompute now that we know real length
@@ -159,7 +174,9 @@ def daily() -> None:
                                image=c.extra.get("image", ""), author=c.extra.get("author", "")))
         st["seen"][normalize_url(c.url)] = date
 
-    subs = subscriber_picks(cfg, st, llm, who, date)
+    picked = {normalize_url(c.url) for c in picks}
+    subs = subscriber_picks(cfg, st, llm, who, date,
+                            [c for c in previews if normalize_url(c.url) not in picked])
     new_saved = [s for s in st["saved"] if not s.get("delivered")]
     (DATA / "days").mkdir(parents=True, exist_ok=True)
     (DATA / "days" / f"{date}.json").write_text(json.dumps(items, indent=1))
@@ -171,7 +188,8 @@ def daily() -> None:
         s["delivered"] = True
         s["delivered_on"] = date
     (render.DOCS / "health.json").write_text(json.dumps(
-        {"date": date, "llm": llm.available, "candidates": len(cands), "picked": len(items), "feeds": health}, indent=1))
+        {"date": date, "llm": llm.available, "candidates": len(cands), "picked": len(items), "feeds": health,
+         "sources": health_sources}, indent=1))
     (render.DOCS / ".nojekyll").touch()
     save_state(st)
     log.info("done: %d picks, %d saved items delivered", len(items), len(new_saved))

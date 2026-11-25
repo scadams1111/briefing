@@ -56,6 +56,7 @@ topics:
       - https://www.understandingai.org/feed
       - https://www.oneusefulthing.org/feed
       - https://arstechnica.com/feed/
+      - {url: https://www.theatlantic.com/feed/channel/technology/, name: The Atlantic, weight: 1.2}
       - https://www.techmeme.com/feed.xml
     searches: []
 
@@ -71,7 +72,8 @@ topics:
       - {url: https://theconversation.com/us/articles.atom, name: The Conversation}
       - https://undark.org/feed/
       - https://www.nature.com/nature.rss
-      - https://www.theatlantic.com/feed/channel/health/
+      - {url: https://www.theatlantic.com/feed/channel/health/, name: The Atlantic, weight: 1.2}
+      - {url: https://www.theatlantic.com/feed/channel/science/, name: The Atlantic, weight: 1.2}
     searches: []
 
   - id: business
@@ -81,7 +83,8 @@ topics:
     feeds:
       - https://www.noahpinion.blog/feed
       - https://www.axios.com/feeds/feed.rss
-      - https://www.economist.com/finance-and-economics/rss.xml
+      - {url: https://www.economist.com/finance-and-economics/rss.xml, name: The Economist, weight: 1.2}
+      - {url: https://www.theatlantic.com/feed/channel/business/, name: The Atlantic, weight: 1.2}
     searches: []
 
   - id: world
@@ -91,10 +94,11 @@ topics:
     feeds:
       - https://feeds.npr.org/1001/rss.xml
       - https://feeds.bbci.co.uk/news/world/rss.xml
-      - https://www.economist.com/international/rss.xml
+      - {url: https://www.economist.com/international/rss.xml, name: The Economist, weight: 1.2}
       - https://www.foreignaffairs.com/rss.xml
       - https://www.propublica.org/feeds/propublica/main
-      - https://www.theatlantic.com/feed/channel/politics/
+      - {url: https://www.theatlantic.com/feed/channel/politics/, name: The Atlantic, weight: 1.2}
+      - {url: https://www.theatlantic.com/feed/channel/international/, name: The Atlantic, weight: 1.2}
     searches: []
 
   - id: biotech
@@ -166,12 +170,14 @@ topics:
     kind: light
     feeds:
       - https://longreads.com/feed/
+      - {url: https://www.theatlantic.com/feed/all/, name: The Atlantic, weight: 1.2}
+      - {url: https://www.theguardian.com/world/series/the-long-read/rss, name: The Guardian Long Read, weight: 1.1}
       - {url: https://aeon.co/feed.rss, name: Aeon}
       - https://www.noemamag.com/feed/
       - https://asteriskmag.com/feed
       - https://nautil.us/feed/
       - https://www.themarginalian.org/feed/
-      - {url: https://www.newyorker.com/feed/everything, name: The New Yorker}
+      - {url: https://www.newyorker.com/feed/everything, name: The New Yorker, weight: 1.2}
     searches: []
 
   - id: parenting
@@ -181,7 +187,7 @@ topics:
     feeds:
       - https://parentdata.org/feed/
       - https://www.afterbabel.com/feed
-      - https://www.theatlantic.com/feed/channel/family/
+      - {url: https://www.theatlantic.com/feed/channel/family/, name: The Atlantic, weight: 1.2}
     searches: []
 
 # ─────────────────────────────────────────────────────────────
@@ -190,8 +196,17 @@ topics:
 # site); each pick gets a one-line takeaway and opens on the
 # publisher's site, where you're logged in.
 # ─────────────────────────────────────────────────────────────
+# Top publications. They get a ranking boost; when their page is
+# paywalled (only a preview comes through), the story goes to the
+# premium slide as a headline + takeaway instead of being dropped.
+premium_domains: [theatlantic.com, newyorker.com, economist.com, nytimes.com, wsj.com,
+                  ft.com, bloomberg.com, washingtonpost.com, wired.com, science.org,
+                  nature.com, statnews.com, quantamagazine.org, propublica.org,
+                  theguardian.com, aeon.co, foreignaffairs.com]
+premium_bonus: 0.6
+
 subscriber:
-  picks: 3
+  picks: 4
   feeds:
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/Science.xml, name: The New York Times, topic: Science}
     - {url: https://rss.nytimes.com/services/xml/rss/nyt/Health.xml, name: The New York Times, topic: Health}

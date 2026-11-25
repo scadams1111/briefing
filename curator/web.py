@@ -181,9 +181,9 @@ def subs_slide(subs: list[dict]) -> str:
         f"<a class='sub' href='{e(i['url'])}'><span class='src'>{e(i['source'])} · {e(i.get('topic_name', ''))}</span>"
         f"<strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span>"
         f"<span class='open'>Open article {NEXT}</span></a>" for i in subs)
-    return (f"<section class='slide' data-url='' data-label='Your subscriptions'><article class='card'><div class='scroll'><div class='body'>"
-            f"<span class='pill' style='align-self:flex-start'>Your subscriptions</span>"
-            f"<h1 class='head'>Worth opening in the app</h1>"
+    return (f"<section class='slide' data-url='' data-label='Premium picks'><article class='card'><div class='scroll'><div class='body'>"
+            f"<span class='pill' style='align-self:flex-start'>Premium picks</span>"
+            f"<h1 class='head'>From top publications</h1><p class='room' style='font-style:normal;font-family:var(--sans);font-size:14px'>Paywalled pieces worth opening with your subscription.</p>"
             f"<div class='subs'>{rows}</div></div></div></article></section>")
 
 

@@ -126,7 +126,7 @@ def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs:
                      f"<p class='back'><a href='contents.xhtml'>↩ Back to contents</a></p>")
             chapters.append(_x(it["headline"], f, body, css))
     if subs:
-        contents += "<h3 class='section'>From your subscriptions</h3>"
+        contents += "<h3 class='section'>From top publications</h3>"
         for it in subs:
             contents += (f"<p class='meta'>{e(it['source'])} · {e(it.get('topic_name', ''))}</p>"
                          f"<h2>{e(it['headline'])}</h2><p>{e(it.get('takeaway', ''))}</p>"
