@@ -265,14 +265,14 @@ if(!snap||!snap.available){
 const ts=snap.timestamp, when=new Date(Date.UTC(+ts.slice(0,4),+ts.slice(4,6)-1,+ts.slice(6,8)));
 $('#when').textContent='Saved '+when.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
 const pageUrl=snap.url.replace(/^http:/,'https:'), clean=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1id_/');
-const fallback=(msg)=>show(`<div class='state'><h2>Couldn't make a clean copy</h2><p>${msg}</p>
-  <div class='row'><a class='btn primary' href='${esc(clean)}' rel='noopener'>Open the archived page</a></div></div>`);
+// If the Archive won't let us build a clean copy, go straight to its page without the toolbar.
+const fallback=()=>{show(`<div class='state'><h2>Opening the archived page…</h2><p>Tip: tap <b>aA</b> in Safari's address bar, then <b>Show Reader</b>, for a clean view.</p></div>`);setTimeout(()=>location.replace(clean),900)};
 try{
   const res=await fetch(clean); if(!res.ok) throw new Error(res.status);
   const doc=new DOMParser().parseFromString(await res.text(),'text/html');
   const base=doc.createElement('base');base.href=u;doc.head.prepend(base);
   const art=new Readability(doc).parse();
-  if(!art||!art.content||art.textContent.trim().split(/\s+/).length<80) return fallback('This page didn\'t have enough readable text, or the copy is a paywall or cookie notice.');
+  if(!art||!art.content||art.textContent.trim().split(/\s+/).length<80) return fallback();
   const body=DOMPurify.sanitize(art.content,{FORBID_TAGS:['style','form','input','button','iframe'],FORBID_ATTR:['style','class','id','width','height']});
   const mins=Math.max(1,Math.round(art.textContent.trim().split(/\s+/).length/230));
   show(`<h1>${esc(art.title)}</h1><div class='by'>${esc([art.byline,art.siteName||host,mins+' min read'].filter(Boolean).join(' · '))}</div>
@@ -280,7 +280,7 @@ try{
    <div class='end'><a class='btn' href='${esc(pageUrl)}' rel='noopener'>View on the Archive</a><a class='btn primary' href='${esc(u)}'>Try the original</a></div>`);
   document.querySelectorAll('article a').forEach(a=>{a.rel='noopener';a.target='_blank'});
   document.querySelectorAll('article img').forEach(i=>{i.loading='lazy';i.referrerPolicy='no-referrer';i.onerror=()=>i.remove()});
-}catch(_){fallback('The Archive didn\'t let this page load a copy directly. You can still read it there, without the toolbar.')}
+}catch(_){fallback()}
 })();
 """
 
