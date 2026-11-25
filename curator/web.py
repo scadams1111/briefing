@@ -67,7 +67,11 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
 .why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 .why b{color:var(--ink);font-weight:600}
-.arch{font-size:12.5px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;align-self:flex-start;padding:6px 0}
+.extras{display:flex;align-items:center;gap:10px;padding-top:4px}
+.chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
+.chip svg{color:var(--accent)}
+.chip:hover,.chip:active{background:var(--tile-open);border-color:var(--muted)}
+.hint{font-size:12px;color:var(--muted)}
 
 .actions{display:flex;gap:10px;padding:12px 16px 0}
 .btn{flex:1;height:48px;border-radius:14px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600}
@@ -101,6 +105,9 @@ CHEV = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='cur
         "aria-hidden='true'><path d='M6 9l6 6 6-6'/></svg>")
 NEXT = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M9 5l7 7-7 7'/></svg>")
+ARCHIVE = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
+           "stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='4' width='18' height='4' rx='1'/>"
+           "<path d='M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4'/></svg>")
 PREV = ("<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg>")
 
@@ -146,8 +153,8 @@ def card(it: dict) -> str:
     room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
     why = f"<div class='why'><b>Why for you</b> · {e(it['why_for_you'])}</div>" if it.get("why_for_you") else ""
     # Backup if the original page has moved or vanished: Wayback Machine's latest snapshot
-    archived = (f"<a class='arch' href='https://web.archive.org/web/2/{e(it['url'])}' rel='noopener'>"
-                f"Link broken? Try an archived copy</a>")
+    archived = (f"<div class='extras'><a class='chip' href='https://web.archive.org/web/2/{e(it['url'])}' rel='noopener'>"
+                f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
     return (f"<article class='card'><div class='scroll'>"
             f"<div class='media'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
             f"<div class='body'><div class='src'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
