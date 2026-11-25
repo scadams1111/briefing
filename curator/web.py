@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import html
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import quote, urlsplit
 
 DOCS = Path("docs")
 e = html.escape
@@ -140,7 +140,7 @@ def _domain(url: str) -> str:
     return urlsplit(url).netloc.removeprefix("www.")
 
 
-def card(it: dict) -> str:
+def card(it: dict, root: str = "") -> str:
     """One story card: image, source, headline, takeaway, 3 expandable points."""
     img = (f"<img src='{e(it['image'])}' alt='' loading='lazy' referrerpolicy='no-referrer' "
            f"onerror=\"this.remove()\">") if it.get("image") else ""
@@ -152,7 +152,7 @@ def card(it: dict) -> str:
         for n, b in enumerate(it["bullets"], 1))
     room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
     # Backup if the original page has moved or vanished: Wayback Machine's latest snapshot
-    archived = (f"<div class='extras'><a class='chip' href='https://web.archive.org/web/2/{e(it['url'])}' rel='noopener'>"
+    archived = (f"<div class='extras'><a class='chip' href='{root}read.html?u={e(quote(it['url'], safe=''))}'>"
                 f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
     return (f"<article class='card'><div class='scroll'>"
             f"<div class='media'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
@@ -194,7 +194,7 @@ def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None =
         return "<main class='page'><p class='empty'>Nothing yet today.</p></main>"
     extra = 1 if subs else 0
     bars = "".join(f"<button type='button' aria-label='Story {k + 1}'><i></i></button>" for k in range(n + 1 + extra))
-    slides = "".join(f"<section class='slide' data-url='{e(i['url'])}'>{card(i)}</section>" for i in picks)
+    slides = "".join(f"<section class='slide' data-url='{e(i['url'])}'>{card(i, root)}</section>" for i in picks)
     if subs:
         slides += subs_slide(subs)
     mins = sum(i.get("minutes", 0) for i in picks)
@@ -215,6 +215,96 @@ def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None =
             f"<button type='button' class='btn primary' data-next><span>Next story</span>{NEXT}</button></div></main>")
 
 
+READER_CSS = r"""
+.rd{max-width:640px;margin:0 auto;padding:8px 18px 80px}
+.rd .bar{display:flex;align-items:center;gap:10px;padding:10px 0 14px}
+.rd .back{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--tile)}
+.rd .meta{font-size:12.5px;color:var(--muted);line-height:1.4}
+.rd .meta b{color:var(--ink);font-weight:600}
+.rd .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-accent);background:var(--accent);padding:5px 9px;border-radius:6px}
+.rd h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.15;letter-spacing:-.01em;margin:16px 0 8px}
+.rd .by{font-size:14px;color:var(--muted);margin-bottom:22px}
+.rd article{font-size:17.5px;line-height:1.72;color:var(--detail)}
+.rd article p{margin:0 0 1.1em}
+.rd article h2,.rd article h3{font-family:var(--serif);color:var(--ink);line-height:1.25;margin:1.6em 0 .5em}
+.rd article h2{font-size:23px}.rd article h3{font-size:19px}
+.rd article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.rd article img,.rd article video{max-width:100%;height:auto;border-radius:14px;display:block;margin:1.2em auto}
+.rd article figure{margin:1.4em 0}.rd article figcaption{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+.rd article blockquote{margin:1.4em 0;padding:4px 0 4px 18px;border-left:3px solid var(--accent);font-family:var(--serif);font-style:italic;color:var(--ink)}
+.rd article ul,.rd article ol{padding-left:1.3em}.rd article li{margin:.4em 0}
+.rd article pre,.rd article code{font-size:14px;background:var(--tile);border-radius:8px}
+.rd article pre{padding:12px;overflow:auto}
+.rd article table{display:block;overflow-x:auto;border-collapse:collapse;font-size:14px}
+.rd article td,.rd article th{border:1px solid var(--line);padding:6px 8px}
+.rd .state{margin:40px 0;padding:22px;border-radius:20px;background:var(--card);text-align:center}
+.rd .state h2{font-family:var(--serif);margin:0 0 8px;font-size:22px;color:var(--ink)}
+.rd .state p{color:var(--muted);font-size:14.5px;line-height:1.55;margin:0 0 16px}
+.rd .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.rd .row a{min-width:150px;padding:0 16px}
+.rd .skel{height:14px;border-radius:7px;background:var(--tile);margin:12px 0;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.45}}
+.rd .end{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.rd .end a{flex:1;min-width:150px}
+"""
+
+READER_JS = r"""
+(async()=>{
+const $=s=>document.querySelector(s), u=new URLSearchParams(location.search).get('u')||'';
+const show=(html)=>{$('#out').innerHTML=html};
+const esc=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+if(!/^https?:\/\//.test(u)){show(`<div class='state'><h2>No article link</h2><p>Open this from an "Archived copy" button.</p></div>`);return}
+const host=new URL(u).hostname.replace(/^www\./,'');
+$('#host').textContent=host; document.title='Archived · '+host;
+const saveUrl='https://web.archive.org/save/'+u, rawLatest='https://web.archive.org/web/2/'+u;
+let snap=null;
+try{const r=await fetch('https://archive.org/wayback/available?url='+encodeURIComponent(u));const j=await r.json();snap=j?.archived_snapshots?.closest}catch(_){}
+if(!snap||!snap.available){
+  show(`<div class='state'><h2>Not archived yet</h2><p>The Internet Archive doesn't have a copy of this page. Some publishers block archiving, and new articles may not be captured yet.</p>
+  <div class='row'><a class='btn primary' href='${esc(saveUrl)}' rel='noopener'>Ask the Archive to save it</a><a class='btn' href='${esc(u)}'>Try the original</a></div></div>`);return}
+const ts=snap.timestamp, when=new Date(Date.UTC(+ts.slice(0,4),+ts.slice(4,6)-1,+ts.slice(6,8)));
+$('#when').textContent='Saved '+when.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
+const pageUrl=snap.url.replace(/^http:/,'https:'), clean=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1id_/');
+const fallback=(msg)=>show(`<div class='state'><h2>Couldn't make a clean copy</h2><p>${msg}</p>
+  <div class='row'><a class='btn primary' href='${esc(clean)}' rel='noopener'>Open the archived page</a></div></div>`);
+try{
+  const res=await fetch(clean); if(!res.ok) throw new Error(res.status);
+  const doc=new DOMParser().parseFromString(await res.text(),'text/html');
+  const base=doc.createElement('base');base.href=u;doc.head.prepend(base);
+  const art=new Readability(doc).parse();
+  if(!art||!art.content||art.textContent.trim().split(/\s+/).length<80) return fallback('This page didn\'t have enough readable text, or the copy is a paywall or cookie notice.');
+  const body=DOMPurify.sanitize(art.content,{FORBID_TAGS:['style','form','input','button','iframe'],FORBID_ATTR:['style','class','id','width','height']});
+  const mins=Math.max(1,Math.round(art.textContent.trim().split(/\s+/).length/230));
+  show(`<h1>${esc(art.title)}</h1><div class='by'>${esc([art.byline,art.siteName||host,mins+' min read'].filter(Boolean).join(' · '))}</div>
+   <article>${body}</article>
+   <div class='end'><a class='btn' href='${esc(pageUrl)}' rel='noopener'>View on the Archive</a><a class='btn primary' href='${esc(u)}'>Try the original</a></div>`);
+  document.querySelectorAll('article a').forEach(a=>{a.rel='noopener';a.target='_blank'});
+  document.querySelectorAll('article img').forEach(i=>{i.loading='lazy';i.referrerPolicy='no-referrer';i.onerror=()=>i.remove()});
+}catch(_){fallback('The Archive didn\'t let this page load a copy directly. You can still read it there, without the toolbar.')}
+})();
+"""
+
+
+def write_reader() -> None:
+    """A Midnight-styled reader for Internet Archive copies. The archived page is
+    fetched and cleaned in the reader's own browser; nothing is stored on the site."""
+    body = ("<main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'>"
+            f"{PREV}</a><div class='meta'><span class='badge'>{ARCHIVE} Archived copy</span><br>"
+            "<b id='host'></b> · <span id='when'>Looking it up…</span></div></div>"
+            "<div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div>"
+            "<div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div>"
+            "<div class='skel' style='width:70%'></div></div></main>")
+    page = ("<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
+            "<meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>"
+            "<meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'>"
+            f"<title>Archived copy</title>{FONTS}<style>{CSS}{READER_CSS}</style>"
+            "<script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script>"
+            "<script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script>"
+            f"</head><body>{body}<script>{READER_JS}</script></body></html>")
+    DOCS.mkdir(exist_ok=True)
+    (DOCS / "read.html").write_text(page)
+
+
 def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str],
               subs: list[dict] | None = None) -> None:
     (DOCS / "archive").mkdir(parents=True, exist_ok=True)
@@ -230,6 +320,7 @@ def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archiv
         f"<main class='page'><section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section>"
         f"<div class='toc'>{rows}</div></main>", root="../"))
     write_saved(saved)
+    write_reader()
 
 
 def write_saved(saved: list[dict]) -> None:

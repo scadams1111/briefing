@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'><title>Archived copy</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><style>
+:root{
+  --bg:#0B1220; --card:#131C2E; --tile:#172136; --tile-open:#1C2740; --ink:#EAF0FA; --muted:#8D9AB3;
+  --detail:#BAC5D8; --accent:#F2B544; --on-accent:#1A1305; --img:#1E2A44; --line:#2A3653;
+  --serif:"Fraunces","New York",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+
+/* shell */
+.top{max-width:560px;margin:0 auto;padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+.tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
+.tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
+.tabs a.on{background:var(--line);color:var(--ink)}
+
+/* story deck */
+.reader{max-width:560px;margin:0 auto;height:calc(100dvh - 58px);display:flex;flex-direction:column;padding:12px 0 calc(14px + env(safe-area-inset-bottom))}
+.bars{display:flex;gap:4px;padding:0 16px}
+.bars button{flex:1;height:14px;border:0;background:none;padding:5px 0}
+.bars button i{display:block;height:3px;border-radius:2px;background:var(--line);transition:background .2s}
+.bars button.seen i{background:var(--ink)}
+.status{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 10px;font-size:13px;color:var(--muted)}
+.status b{color:var(--ink);font-weight:600}
+.deck{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;padding:0 16px;display:flex}
+.card{flex:1;min-width:0;border-radius:24px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.scroll{overflow-y:auto;flex:1;min-height:0;overscroll-behavior:contain}
+.media{position:relative;height:190px;background:var(--img);display:flex;align-items:flex-end;padding:14px}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pill{position:relative;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--on-accent);padding:5px 9px;border-radius:6px}
+.body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px}
+.src{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.src img{width:16px;height:16px;border-radius:4px;background:var(--tile)}
+h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-height:1.16;letter-spacing:-.01em}
+.room{margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--detail)}
+.points{display:flex;flex-direction:column;gap:8px}
+.points details{border-radius:14px;background:var(--tile)}
+.points details[open]{background:var(--tile-open)}
+.points summary{list-style:none;display:flex;gap:10px;padding:12px;font-size:14.5px;line-height:1.42;font-weight:600;cursor:pointer}
+.points summary::-webkit-details-marker{display:none}
+.points summary .n{color:var(--accent);flex:none;width:12px}
+.points summary svg{flex:none;margin-left:auto;margin-top:2px;color:var(--muted);transition:transform .2s}
+.points details[open] summary svg{transform:rotate(180deg)}
+.points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
+.why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.why b{color:var(--ink);font-weight:600}
+.extras{display:flex;align-items:center;gap:10px;padding-top:4px}
+.chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
+.chip svg{color:var(--accent)}
+.chip:hover,.chip:active{background:var(--tile-open);border-color:var(--muted)}
+.hint{font-size:12px;color:var(--muted)}
+
+.actions{display:flex;gap:10px;padding:12px 16px 0}
+.btn{flex:1;height:48px;border-radius:14px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600}
+.btn.icon{flex:none;width:48px}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+.btn[disabled]{opacity:.35}
+
+/* end slide + lists */
+.end h1{margin:4px 0 2px;font-family:var(--serif);font-size:28px}
+.toc{display:flex;flex-direction:column}
+.toc button,.toc a{display:flex;gap:12px;align-items:baseline;text-align:left;width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;font-size:15px;line-height:1.35}
+.toc .k{color:var(--accent);font-weight:700;flex:none;width:18px}
+.toc small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.page{max-width:560px;margin:0 auto;padding:10px 16px 60px}
+.page .card{margin:14px 0}
+.hero{padding:18px 4px 6px}
+.hero .kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:6px 0 4px;font-family:var(--serif);font-size:32px;line-height:1.1}
+.hero p{margin:0;color:var(--muted);font-size:14px}
+.empty{color:var(--muted);text-align:center;padding:60px 0}
+.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:14px}
+.foot a{text-decoration:underline}
+.subs{display:flex;flex-direction:column;gap:10px}
+.sub{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:var(--tile)}
+.sub strong{font-family:var(--serif);font-size:18px;line-height:1.25}
+.sub .tk{font-size:14px;line-height:1.5;color:var(--detail)}
+.sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
+
+.rd{max-width:640px;margin:0 auto;padding:8px 18px 80px}
+.rd .bar{display:flex;align-items:center;gap:10px;padding:10px 0 14px}
+.rd .back{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--tile)}
+.rd .meta{font-size:12.5px;color:var(--muted);line-height:1.4}
+.rd .meta b{color:var(--ink);font-weight:600}
+.rd .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-accent);background:var(--accent);padding:5px 9px;border-radius:6px}
+.rd h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.15;letter-spacing:-.01em;margin:16px 0 8px}
+.rd .by{font-size:14px;color:var(--muted);margin-bottom:22px}
+.rd article{font-size:17.5px;line-height:1.72;color:var(--detail)}
+.rd article p{margin:0 0 1.1em}
+.rd article h2,.rd article h3{font-family:var(--serif);color:var(--ink);line-height:1.25;margin:1.6em 0 .5em}
+.rd article h2{font-size:23px}.rd article h3{font-size:19px}
+.rd article a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.rd article img,.rd article video{max-width:100%;height:auto;border-radius:14px;display:block;margin:1.2em auto}
+.rd article figure{margin:1.4em 0}.rd article figcaption{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+.rd article blockquote{margin:1.4em 0;padding:4px 0 4px 18px;border-left:3px solid var(--accent);font-family:var(--serif);font-style:italic;color:var(--ink)}
+.rd article ul,.rd article ol{padding-left:1.3em}.rd article li{margin:.4em 0}
+.rd article pre,.rd article code{font-size:14px;background:var(--tile);border-radius:8px}
+.rd article pre{padding:12px;overflow:auto}
+.rd article table{display:block;overflow-x:auto;border-collapse:collapse;font-size:14px}
+.rd article td,.rd article th{border:1px solid var(--line);padding:6px 8px}
+.rd .state{margin:40px 0;padding:22px;border-radius:20px;background:var(--card);text-align:center}
+.rd .state h2{font-family:var(--serif);margin:0 0 8px;font-size:22px;color:var(--ink)}
+.rd .state p{color:var(--muted);font-size:14.5px;line-height:1.55;margin:0 0 16px}
+.rd .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.rd .row a{min-width:150px;padding:0 16px}
+.rd .skel{height:14px;border-radius:7px;background:var(--tile);margin:12px 0;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.45}}
+.rd .end{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.rd .end a{flex:1;min-width:150px}
+</style><script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script><script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script></head><body><main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg></a><div class='meta'><span class='badge'><svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='4' width='18' height='4' rx='1'/><path d='M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4'/></svg> Archived copy</span><br><b id='host'></b> · <span id='when'>Looking it up…</span></div></div><div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div><div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div><div class='skel' style='width:70%'></div></div></main><script>
+(async()=>{
+const $=s=>document.querySelector(s), u=new URLSearchParams(location.search).get('u')||'';
+const show=(html)=>{$('#out').innerHTML=html};
+const esc=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+if(!/^https?:\/\//.test(u)){show(`<div class='state'><h2>No article link</h2><p>Open this from an "Archived copy" button.</p></div>`);return}
+const host=new URL(u).hostname.replace(/^www\./,'');
+$('#host').textContent=host; document.title='Archived · '+host;
+const saveUrl='https://web.archive.org/save/'+u, rawLatest='https://web.archive.org/web/2/'+u;
+let snap=null;
+try{const r=await fetch('https://archive.org/wayback/available?url='+encodeURIComponent(u));const j=await r.json();snap=j?.archived_snapshots?.closest}catch(_){}
+if(!snap||!snap.available){
+  show(`<div class='state'><h2>Not archived yet</h2><p>The Internet Archive doesn't have a copy of this page. Some publishers block archiving, and new articles may not be captured yet.</p>
+  <div class='row'><a class='btn primary' href='${esc(saveUrl)}' rel='noopener'>Ask the Archive to save it</a><a class='btn' href='${esc(u)}'>Try the original</a></div></div>`);return}
+const ts=snap.timestamp, when=new Date(Date.UTC(+ts.slice(0,4),+ts.slice(4,6)-1,+ts.slice(6,8)));
+$('#when').textContent='Saved '+when.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
+const pageUrl=snap.url.replace(/^http:/,'https:'), clean=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1id_/');
+const fallback=(msg)=>show(`<div class='state'><h2>Couldn't make a clean copy</h2><p>${msg}</p>
+  <div class='row'><a class='btn primary' href='${esc(clean)}' rel='noopener'>Open the archived page</a></div></div>`);
+try{
+  const res=await fetch(clean); if(!res.ok) throw new Error(res.status);
+  const doc=new DOMParser().parseFromString(await res.text(),'text/html');
+  const base=doc.createElement('base');base.href=u;doc.head.prepend(base);
+  const art=new Readability(doc).parse();
+  if(!art||!art.content||art.textContent.trim().split(/\s+/).length<80) return fallback('This page didn\'t have enough readable text, or the copy is a paywall or cookie notice.');
+  const body=DOMPurify.sanitize(art.content,{FORBID_TAGS:['style','form','input','button','iframe'],FORBID_ATTR:['style','class','id','width','height']});
+  const mins=Math.max(1,Math.round(art.textContent.trim().split(/\s+/).length/230));
+  show(`<h1>${esc(art.title)}</h1><div class='by'>${esc([art.byline,art.siteName||host,mins+' min read'].filter(Boolean).join(' · '))}</div>
+   <article>${body}</article>
+   <div class='end'><a class='btn' href='${esc(pageUrl)}' rel='noopener'>View on the Archive</a><a class='btn primary' href='${esc(u)}'>Try the original</a></div>`);
+  document.querySelectorAll('article a').forEach(a=>{a.rel='noopener';a.target='_blank'});
+  document.querySelectorAll('article img').forEach(i=>{i.loading='lazy';i.referrerPolicy='no-referrer';i.onerror=()=>i.remove()});
+}catch(_){fallback('The Archive didn\'t let this page load a copy directly. You can still read it there, without the toolbar.')}
+})();
+</script></body></html>
