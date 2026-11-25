@@ -98,7 +98,10 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .sub{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:var(--tile)}
 .sub strong{font-family:var(--serif);font-size:18px;line-height:1.25}
 .sub .tk{font-size:14px;line-height:1.5;color:var(--detail)}
+.subhit{display:flex;flex-direction:column;gap:6px}
+.subrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
 .sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
+.chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
 """
 
 CHEV = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' "
@@ -176,11 +179,13 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
             + (f"<script>{JS}</script>" if script else "") + "</body></html>")
 
 
-def subs_slide(subs: list[dict]) -> str:
+def subs_slide(subs: list[dict], root: str = "") -> str:
     rows = "".join(
-        f"<a class='sub' href='{e(i['url'])}'><span class='src'>{e(i['source'])} · {e(i.get('topic_name', ''))}</span>"
-        f"<strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span>"
-        f"<span class='open'>Open article {NEXT}</span></a>" for i in subs)
+        f"<div class='sub'><a class='subhit' href='{e(i['url'])}'><span class='src'>{e(i['source'])} · {e(i.get('topic_name', ''))}</span>"
+        f"<strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span></a>"
+        f"<div class='subrow'><a class='open' href='{e(i['url'])}'>Open article {NEXT}</a>"
+        f"<a class='chip sm' href='{root}read.html?u={e(quote(i['url'], safe=''))}'>{ARCHIVE}<span>Link broken?</span></a></div></div>"
+        for i in subs)
     return (f"<section class='slide' data-url='' data-label='Premium picks'><article class='card'><div class='scroll'><div class='body'>"
             f"<span class='pill' style='align-self:flex-start'>Premium picks</span>"
             f"<h1 class='head'>From top publications</h1><p class='room' style='font-style:normal;font-family:var(--sans);font-size:14px'>Paywalled pieces worth opening with your subscription.</p>"
@@ -196,7 +201,7 @@ def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None =
     bars = "".join(f"<button type='button' aria-label='Story {k + 1}'><i></i></button>" for k in range(n + 1 + extra))
     slides = "".join(f"<section class='slide' data-url='{e(i['url'])}'>{card(i, root)}</section>" for i in picks)
     if subs:
-        slides += subs_slide(subs)
+        slides += subs_slide(subs, root)
     mins = sum(i.get("minutes", 0) for i in picks)
     toc = "".join(f"<button type='button' data-go='{k}'><span class='k'>{k + 1}</span>"
                   f"<span>{e(i['headline'])}<small>{e(i['source'])} · {i['minutes']} min</small></span></button>"
