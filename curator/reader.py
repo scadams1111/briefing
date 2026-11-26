@@ -79,7 +79,7 @@ HL_CSS = r"""
 .player .pp{background:var(--accent);color:var(--on-accent);width:46px;height:46px;border-radius:50%}
 .player .pl{order:-1;flex:1 1 100%;min-width:0;font-size:12px;color:var(--muted);line-height:1.3;padding:0 6px 6px}
 .player .pl b{display:block;color:var(--ink);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.player .pg{height:3px;border-radius:2px;background:var(--line);margin-top:5px;overflow:hidden}
+.player .pg{cursor:pointer;height:3px;border-radius:2px;background:var(--line);margin-top:5px;overflow:hidden}
 .player .pg i{display:block;height:100%;width:0;background:var(--accent)}
 body.playing .hlbar{bottom:calc(140px + env(safe-area-inset-bottom))}
 body.playing .rd{padding-bottom:170px}
@@ -213,8 +213,43 @@ A.addEventListener('click',ev=>{const m=ev.target.closest('mark');if(!m||!getSel
   if(b.dataset.a==='del'){list.splice(list.indexOf(h),1);save(list);paint();closeSheet()}})});
 paint();
 
+// ── real audio file for this article (keeps playing with the screen locked) ──
+const AU=P.get('a')||'';
+if(AU)(()=>{const I={play:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M7 4.5v15l13-7.5z'/></svg>",
+  pause:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M6 4h4v16H6zM14 4h4v16h-4z'/></svg>",
+  spk:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' aria-hidden='true'><path d='M3 18v-6a9 9 0 0 1 18 0v6'/><path d='M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z'/></svg>"};
+ const a=new Audio();a.preload='metadata';a.src=AU;const POS='ta:'+u,RATES=[1,1.25,1.5,0.85];let rate=+(localStorage.getItem('tts:rate')||1),player=null;
+ const fmt=s=>isFinite(s)?`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`:'–:––';
+ const setMS=()=>{if(!('mediaSession' in navigator))return;try{navigator.mediaSession.metadata=new MediaMetadata({title,artist:art.siteName||host,album:'Briefing',
+   artwork:[{src:new URL((root||'')+'icon-512.png',location.href).href,sizes:'512x512',type:'image/png'}]});
+  navigator.mediaSession.setActionHandler('play',()=>a.play());navigator.mediaSession.setActionHandler('pause',()=>a.pause());
+  navigator.mediaSession.setActionHandler('seekbackward',()=>{a.currentTime=Math.max(0,a.currentTime-15)});
+  navigator.mediaSession.setActionHandler('seekforward',()=>{a.currentTime=Math.min(a.duration||1e9,a.currentTime+30)})}catch(_){}};
+ const upd=()=>{if(!player)return;player.querySelector('.pp').innerHTML=a.paused?I.play:I.pause;
+  player.querySelector('.pl span').textContent=`${fmt(a.currentTime)} / ${fmt(a.duration)} · natural voice`;
+  if(a.duration)player.querySelector('.pg i').style.width=(100*a.currentTime/a.duration)+'%'};
+ a.addEventListener('timeupdate',()=>{upd();try{localStorage.setItem(POS,a.currentTime)}catch(_){}});
+ a.addEventListener('play',upd);a.addEventListener('pause',upd);a.addEventListener('loadedmetadata',()=>{const t=+localStorage.getItem(POS);if(t&&t<a.duration-5)a.currentTime=t;upd()});
+ a.addEventListener('ended',()=>{try{localStorage.removeItem(POS)}catch(_){}});
+ a.addEventListener('error',()=>{if(player)player.querySelector('.pl span').textContent="Couldn't load the audio. Try again shortly."});
+ function open(){if(player)return;player=document.createElement('div');player.className='player';
+  player.innerHTML=`<button type='button' class='bk' aria-label='Back 15 seconds'>−15</button><button type='button' class='pp' aria-label='Play or pause'>${I.play}</button>
+   <button type='button' class='fw' aria-label='Forward 30 seconds'>+30</button><div class='pl'><b>${esc(title)}</b><span>Loading…</span><div class='pg'><i></i></div></div>
+   <button type='button' class='rt' aria-label='Speed'>${rate}×</button><button type='button' class='cl' aria-label='Close player'>×</button>`;
+  document.body.appendChild(player);document.body.classList.add('playing');
+  player.querySelector('.pp').onclick=()=>a.paused?a.play():a.pause();
+  player.querySelector('.bk').onclick=()=>{a.currentTime=Math.max(0,a.currentTime-15)};
+  player.querySelector('.fw').onclick=()=>{a.currentTime=Math.min(a.duration||1e9,a.currentTime+30)};
+  player.querySelector('.rt').onclick=e=>{rate=RATES[(RATES.indexOf(rate)+1)%RATES.length];a.playbackRate=rate;e.currentTarget.textContent=rate+'×';try{localStorage.setItem('tts:rate',rate)}catch(_){}};
+  player.querySelector('.cl').onclick=()=>{a.pause();player.remove();player=null;document.body.classList.remove('playing')};
+  player.querySelector('.pg').onclick=e=>{if(a.duration){const r=e.currentTarget.getBoundingClientRect();a.currentTime=a.duration*(e.clientX-r.left)/r.width}}}
+ const btn=document.createElement('button');btn.type='button';btn.className='lsn';btn.innerHTML=I.spk+'<span>Listen</span>';
+ document.querySelector('.rd .bar').appendChild(btn);
+ btn.onclick=()=>{open();a.playbackRate=rate;setMS();a.play().catch(()=>{});upd()};
+})();
+
 // ── read aloud (the phone's built-in voices) ──
-(()=>{if(!('speechSynthesis' in window))return;const S=speechSynthesis;
+(()=>{if(AU||!('speechSynthesis' in window))return;const S=speechSynthesis;
  const I={play:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M7 4.5v15l13-7.5z'/></svg>",
   pause:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M6 4h4v16H6zM14 4h4v16h-4z'/></svg>",
   back:"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><path d='M11 17l-5-5 5-5M18 17l-5-5 5-5'/></svg>",

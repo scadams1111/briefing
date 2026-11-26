@@ -241,6 +241,12 @@ def daily() -> None:
         audiomod.make(cfg, date, items, smart, subs, llm)
     except Exception as ex:
         log.warning("audio briefing failed: %s", ex)
+    try:                                    # each story read aloud, for listening with the screen locked
+        texts = {it["id"]: c.text for it, c in zip(items, picks)}
+        if audiomod.make_articles(cfg, items, texts, f"audio-{date}"):
+            (DATA / "days" / f"{date}.json").write_text(json.dumps(items, indent=1))
+    except Exception as ex:
+        log.warning("article audio failed: %s", ex)
     publish(cfg, st, date, items, new_saved)
     for s in new_saved:
         s["delivered"] = True
@@ -355,6 +361,11 @@ def save(url: str) -> None:
                                      image=meta.get("image") or "", author=meta.get("author") or ""))
     save_state(st)
     site = render.site_url(cfg)
+    try:
+        if audiomod.make_articles(cfg, st["saved"][:1], {st["saved"][0]["id"]: text}, "saved-audio"):
+            save_state(st)
+    except Exception as ex:
+        log.warning("saved article audio failed: %s", ex)
     render.saved_page(cfg, st["saved"])
     days = sorted((DATA / "days").glob("????-??-??.json"))
     render.feeds(cfg, site, last_picks(), st["saved"], load_subs(days[-1].stem) if days else [],

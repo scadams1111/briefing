@@ -90,7 +90,7 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .listen .bar{height:3px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}
 .listen .bar i{display:block;height:100%;width:0;background:var(--accent)}
 .listen .sp{flex:none;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 7px;background:none}
-.extras{display:flex;align-items:center;gap:10px;padding-top:4px}
+.extras{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:4px}
 .chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
 .chip svg{color:var(--accent)}
 .chip:hover,.chip:active{background:var(--tile-open);border-color:var(--muted)}
@@ -144,6 +144,10 @@ THUMB_DOWN = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' strok
               "stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M17 14V3h3v11zM17 14l-4 8a3 3 0 0 1-3-3v-4H4.5a2 2 0 0 1-2-2.3l1.4-8A2 2 0 0 1 6 3h11'/></svg>")
 PLAY = "<svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M7 4.5v15l13-7.5z'/></svg>"
 PAUSE = "<svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M6 4h4v16H6zM14 4h4v16h-4z'/></svg>"
+HEADPHONES = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
+              "stroke-linecap='round' aria-hidden='true'><path d='M3 18v-6a9 9 0 0 1 18 0v6'/><path d='M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z'/></svg>")
+BOOK = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
+        "stroke-linecap='round' aria-hidden='true'><path d='M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2zM22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z'/></svg>")
 PREV = ("<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg>")
 
@@ -193,7 +197,7 @@ let cur=-1;const upd=()=>{const i=Math.round(deck.scrollLeft/deck.clientWidth);i
  bars.forEach((b,k)=>b.classList.toggle('seen',k<=i));
  num.textContent=slides[i].dataset.label||`${i+1} of ${stories}`;
  prev.disabled=i===0;next.querySelector('span').textContent=i<n-2?'Next story':(i===n-2?'Finish':'Start over');
- const u=slides[i].dataset.url;orig.style.visibility=u?'visible':'hidden';if(u)orig.href=((document.body.dataset.root||'')+'read.html?u=')+encodeURIComponent(u);
+ const u=slides[i].dataset.url;orig.style.visibility=u?'visible':'hidden';if(u)orig.href=((document.body.dataset.root||'')+'read.html?u=')+encodeURIComponent(u)+(slides[i].dataset.audio?'&a='+encodeURIComponent(slides[i].dataset.audio):'');
  try{history.replaceState(null,'',i?`#${i+1}`:location.pathname)}catch(_){}};
 deck.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
 prev.onclick=()=>go(cur-1);next.onclick=()=>go(cur<n-1?cur+1:0);
@@ -227,7 +231,10 @@ def card(it: dict, root: str = "") -> str:
               f"data-source='{e(it['source'])}' data-title='{e(it.get('headline') or it.get('title', ''))}'")
     feedback = (f"<div class='fb' {fbdata}><button type='button' class='fbb' data-act='more'>{THUMB_UP}<span>More like this</span></button>"
                 f"<button type='button' class='fbb' data-act='less'>{THUMB_DOWN}<span>Less like this</span></button></div>")
-    archived = (f"<div class='extras'><a class='chip' href='https://wallhop.io/{e(it['url'])}'>"
+    au = (it.get("audio") or {}).get("url", "")
+    read_href = f"{root}read.html?u={e(quote(it['url'], safe=''))}" + (f"&amp;a={e(quote(au, safe=''))}" if au else "")
+    read_chip = (f"<a class='chip' href='{read_href}'>{HEADPHONES if au else BOOK}<span>{'Read or listen' if au else 'Read'}</span></a>")
+    archived = (f"<div class='extras'>{read_chip}<a class='chip' href='https://wallhop.io/{e(it['url'])}'>"
                 f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
     return (f"<article class='card'><div class='scroll'>"
             f"<div class='media'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
@@ -325,7 +332,8 @@ def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None =
     deep, evergreen = smart.get("deep"), smart.get("picks") or []
     total = n + (1 if deep else 0) + len(evergreen) + len(groups) + 1
     bars = "".join(f"<button type='button' aria-label='Slide {k + 1}'><i></i></button>" for k in range(total))
-    slides = "".join(f"<section class='slide' data-url='{e(i['url'])}'>{card(i, root)}</section>" for i in picks)
+    slides = "".join(f"<section class='slide' data-url='{e(i['url'])}' data-audio='{e((i.get('audio') or {}).get('url', ''))}'>"
+                     f"{card(i, root)}</section>" for i in picks)
     if deep:
         slides += deep_slide(deep, root)
     slides += "".join(f"<section class='slide' data-url='{e(i['url'])}' data-label='Get smarter'>{card(i, root)}</section>"

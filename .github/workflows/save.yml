@@ -34,6 +34,21 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           ISSUE_TEXT: ${{ github.event.issue.title }} ${{ github.event.issue.body }}
         run: python -m curator save "$ISSUE_TEXT"
+      - name: Upload audio
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f build/audio/upload.txt ] || exit 0
+          while IFS=$'\t' read -r tag f; do
+            [ -f "$f" ] || continue
+            gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "$tag" --notes "Briefing audio" --latest=false
+            gh release upload "$tag" "$f" --clobber
+          done < build/audio/upload.txt
+          # keep two weeks of daily audio (saved-article audio is kept)
+          cutoff=$(date -u -d '-15 days' +%F)
+          gh release list --limit 100 --json tagName -q '.[].tagName' | grep '^audio-' | while read -r t; do
+            [ "${t#audio-}" \< "$cutoff" ] && gh release delete "$t" --cleanup-tag -y || true
+          done
       - name: Publish
         run: |
           git config user.name "briefing-bot"

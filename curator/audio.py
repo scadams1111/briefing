@@ -99,6 +99,7 @@ def make(cfg: dict, date: str, items: list[dict], smart: dict, subs: list[dict],
     except Exception:
         seconds = len(script.split()) * 60 // 150
     repo = os.environ.get("GITHUB_REPOSITORY", "scadams1111/briefing")
+    queue_upload(f"audio-{date}", out)
     meta = {"date": date, "title": f"Briefing — {nice}", "file": out.name, "bytes": out.stat().st_size,
             "seconds": seconds, "url": f"https://github.com/{repo}/releases/download/audio-{date}/{out.name}",
             "summary": "; ".join(i["headline"] for i in items[:5])}
@@ -137,3 +138,73 @@ def podcast_feed(cfg: dict, site: str, keep: int = 14) -> None:
         "<itunes:author>Briefing</itunes:author><itunes:explicit>false</itunes:explicit>"
         f"<itunes:image href='{e(site)}/podcast-cover.jpg'/><itunes:category text='News'/>"
         f"{items}</channel></rss>")
+
+
+# ── per-article audio ──────────────────────────────────────────────────
+def queue_upload(tag: str, path: Path) -> None:
+    """The workflow uploads every file listed here to the named GitHub release."""
+    BUILD.mkdir(parents=True, exist_ok=True)
+    with open(BUILD / "upload.txt", "a") as f:
+        f.write(f"{tag}\t{path}\n")
+
+
+def _article_script(it: dict, text: str, max_words: int) -> str:
+    words = text.split()
+    body = text if len(words) <= max_words else " ".join(words[:max_words]) + \
+        " ... That's where this reading ends. The full article continues on the original site."
+    return f"{it.get('headline') or it.get('title')}. From {it.get('source', '')}.\n\n{body}"
+
+
+async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc: int = 4) -> None:
+    import edge_tts
+    sem = asyncio.Semaphore(conc)
+
+    async def one(text, out):
+        async with sem:
+            for attempt in range(2):
+                try:
+                    await edge_tts.Communicate(text, voice, rate=rate).save(str(out))
+                    return
+                except Exception as ex:
+                    log.warning("article audio failed (%s), attempt %d", ex, attempt + 1)
+                    if out.exists():
+                        out.unlink()
+    await asyncio.gather(*(one(t, o) for t, o in jobs))
+
+
+def make_articles(cfg: dict, items: list[dict], texts: dict, tag: str) -> int:
+    """Give each item an 'audio' entry {url, seconds} by reading its full text aloud."""
+    ac = cfg.get("audio") or {}
+    if not ac.get("articles", True):
+        return 0
+    repo = os.environ.get("GITHUB_REPOSITORY", "scadams1111/briefing")
+    BUILD.mkdir(parents=True, exist_ok=True)
+    jobs, todo = [], []
+    for it in items:
+        text = texts.get(it["id"], "")
+        if len(text.split()) < 150:
+            continue
+        out = BUILD / f"art-{it['id']}.mp3"
+        jobs.append((_article_script(it, text, int(ac.get("article_max_words", 4500))), out))
+        todo.append((it, out))
+    if not jobs:
+        return 0
+    try:
+        asyncio.run(_speak_many(jobs, ac.get("voice", "en-US-AndrewMultilingualNeural"), ac.get("rate", "+4%")))
+    except Exception as ex:
+        log.warning("article audio failed: %s", ex)
+        return 0
+    n = 0
+    for it, out in todo:
+        if not out.exists() or out.stat().st_size < 2000:
+            continue
+        try:
+            from mutagen.mp3 import MP3
+            secs = int(MP3(str(out)).info.length)
+        except Exception:
+            secs = 0
+        it["audio"] = {"url": f"https://github.com/{repo}/releases/download/{tag}/{out.name}", "seconds": secs}
+        queue_upload(tag, out)
+        n += 1
+    log.info("article audio: %d of %d articles", n, len(items))
+    return n

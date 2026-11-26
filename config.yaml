@@ -264,3 +264,5 @@ audio:
   minutes: 9
   voice: en-US-AndrewMultilingualNeural   # e.g. en-US-AvaMultilingualNeural for a female voice
   rate: "+4%"
+  articles: true            # also read each main story and each saved article aloud
+  article_max_words: 4500

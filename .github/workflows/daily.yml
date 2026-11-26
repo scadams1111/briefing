@@ -22,7 +22,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - name: Already built today?
@@ -47,18 +47,18 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
         run: python -m curator daily
-      - name: Upload the audio briefing
+      - name: Upload audio
         if: steps.check.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          shopt -s nullglob
-          for f in build/audio/briefing-*.mp3; do
-            d=$(basename "$f" .mp3); d=${d#briefing-}; tag="audio-$d"
-            gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "Audio briefing $d" --notes "Daily audio briefing" --latest=false
+          [ -f build/audio/upload.txt ] || exit 0
+          while IFS=$'\t' read -r tag f; do
+            [ -f "$f" ] || continue
+            gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "$tag" --notes "Briefing audio" --latest=false
             gh release upload "$tag" "$f" --clobber
-          done
-          # keep two weeks of audio
+          done < build/audio/upload.txt
+          # keep two weeks of daily audio (saved-article audio is kept)
           cutoff=$(date -u -d '-15 days' +%F)
           gh release list --limit 100 --json tagName -q '.[].tagName' | grep '^audio-' | while read -r t; do
             [ "${t#audio-}" \< "$cutoff" ] && gh release delete "$t" --cleanup-tag -y || true
