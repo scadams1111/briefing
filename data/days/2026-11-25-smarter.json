@@ -2,115 +2,100 @@
  "date": "2026-11-25",
  "deep": {
   "field": "History",
-  "topic": "The Great Divergence",
-  "hook": "Understand the historical mechanisms that allowed Western Europe to pull ahead of the rest of the world in economic development after 1750.",
-  "headline": "The Great Divergence: How Western Europe Became the World's Economic Powerhouse",
-  "why": "This shift explains the origins of modern global wealth inequality and the rise of Western dominance. It highlights how specific regions transitioned from comparable development to vastly different economic outcomes.",
+  "topic": "The Resource Curse",
+  "hook": "Understanding why countries with abundant natural resources often experience worse economic growth and political instability than those without them.",
+  "headline": "The Resource Curse: Why Natural Wealth Can Hinder National Development",
+  "why": "The resource curse challenges the assumption that abundant natural wealth guarantees prosperity. It highlights why many resource-rich nations struggle with economic growth and political stability compared to resource-poor peers.",
   "points": [
    {
-    "point": "The Great Divergence describes the period where Western Europe surpassed other major civilizations in wealth and power.",
-    "detail": "Beginning in the modern era, Western Europe and its settler colonies in North America and Australasia experienced a socioeconomic shift that allowed them to overcome pre-modern growth constraints. This process saw them eclipse previously dominant Eurasian powers like Qing China, Mughal India, the Ottoman Empire, and Tokugawa Japan. Scholars debate the exact timing of this phenomenon, with some pointing to the 15th or 16th century, while others argue the most significant changes occurred during the 18th and 19th-century Industrial Revolution. Regardless of the specific start date, the result was a fundamental restructuring of the global order, establishing Western Europe as the most prosperous and technologically advanced civilization on earth."
+    "point": "The resource curse hypothesis suggests that abundant natural resources can lead to lower economic growth and poorer development outcomes.",
+    "detail": "First identified in 1993 by Richard Auty, this concept, also called the paradox of plenty, questions why countries rich in fossil fuels or minerals often fail to translate that wealth into broad economic success. While early studies found a strong correlation between resource abundance and poor growth, modern research shows the effect is not universal or inevitable. Experts now focus on why some nations succeed while others fail, noting that outcomes depend on institutional quality, government systems, and how resource income is managed. As of 2023, there is no academic consensus on the phenomenon, with many studies finding contradictory evidence depending on the time period and methods used."
    },
    {
-    "point": "Technological innovation and energy usage were critical drivers that separated the West from the rest of the world.",
-    "detail": "Western Eurasia embraced technological advances in mining, agriculture, and transportation to a higher degree than eastern regions. A major factor in this head start was Britain's early transition to coal as a substitute for wood in the 18th century, which provided a massive advantage in modern energy production. This shift fueled increased industrialization and economic complexity. While other regions like India remained highly efficient in traditional industries like textile manufacturing, they often lacked the immediate pressure to adopt coal-based energy. Consequently, the West\u2019s ability to leverage new energy sources and industrial processes created a widening gap in productivity and economic output that other civilizations struggled to match."
+    "point": "Dutch disease occurs when a booming resource sector makes other industries less competitive, leading to economic decline.",
+    "detail": "Named after the Netherlands' experience with natural gas in the 1950s, Dutch disease happens when a surge in resource exports causes a country's currency to appreciate. This makes other exports, such as manufactured goods, more expensive and less competitive on the global market. As the country focuses on the lucrative resource sector, other industries shrink, leading to job losses and a loss of manufacturing capabilities. To compensate, governments may spend heavily on public infrastructure or welfare, which can create economic burdens if managed inefficiently or corruptly. This process leaves the entire economy vulnerable to price changes in the resource market, creating a dangerous cycle of dependency."
    },
    {
-    "point": "Before the divergence, highly developed regions in Asia were economically comparable to Western Europe.",
-    "detail": "Historians note that before the 19th century, parts of Asia were not necessarily behind Europe in terms of economic development. Regions such as the Yangtze Delta in Qing China and the Bengal Subah in South Asia maintained living standards and wage levels that were often on par with European counterparts. For instance, grain wages\u2014a measure of buying power for basic subsistence goods\u2014showed that advanced Asian regions were competitive with Europe until the 18th century. It was only after this period that the gap widened significantly. This evidence challenges the idea that Europe was always inherently more advanced, suggesting instead that the divergence was a process that accelerated over time."
+    "point": "Extreme revenue volatility from resource exports can destabilize government planning and erode the rule of law.",
+    "detail": "Natural resource prices are subject to wild fluctuations, as seen in the dramatic boom-and-bust cycles of crude oil. When a government relies almost entirely on these revenues, sudden price drops can force the breaking of contracts, the cancellation of social programs, and an inability to service foreign debt. Many nations, such as Nigeria and Venezuela, have faced severe debt crises after borrowing heavily during price booms only to find themselves unable to pay when prices collapsed. This instability erodes public trust and the rule of law. While financial tools like hedging can mitigate these risks, inefficient or corrupt management often turns these potential blessings into economic ruin."
    },
    {
-    "point": "Institutional and cultural factors, including trade and financial innovation, played a significant role in European growth.",
-    "detail": "Long before the Industrial Revolution, Europe developed foundational institutions that supported economic expansion. During the High Middle Ages, Europe saw the rise of universities, the spread of movable type printing, and the growth of new towns. Innovations such as joint-stock companies and sophisticated financial institutions helped commerce flourish. By 1500, Europe\u2019s political and economic organization had already provided it with a decisive edge. Meanwhile, other civilizations had their own strengths; for example, China experienced an agricultural and technological revolution during the Song dynasty. However, the specific combination of European institutional development, colonial expansion, and the rise of mercantilism created a unique trajectory that eventually led to sustained economic dominance."
+    "point": "Resource extraction often functions as an economic enclave with few connections to the broader national economy.",
+    "detail": "An economic enclave is a sector that operates with limited linkages to other industries, meaning the wealth generated does not easily spread to the rest of the country. Because resource extraction is highly profitable, it outcompetes other sectors for investment and human capital, often causing authorities to neglect economic diversification. When governments do attempt to diversify, they may resort to misguided white elephant projects. Over time, the state becomes increasingly dependent on the extractive industry to maintain its finances. Because these industries add few jobs compared to the massive revenue they generate, the rest of the economy remains underdeveloped and vulnerable to the sector's performance."
    },
    {
-    "point": "The divergence was not inevitable, as shown by failed attempts at autonomous industrialization in other regions.",
-    "detail": "The path to modern economic power was not closed to all non-Western nations. In the early 19th century, Ottoman Egypt under Muhammad Ali launched state-sponsored industrialization programs, including the construction of cotton mills, iron foundries, and the adoption of steam engines. These efforts aimed to build an autonomous capitalist economy. However, after these programs declined, Egypt was integrated into the global market as a raw material supplier rather than an industrial power. This illustrates that the Great Divergence was shaped by complex historical circumstances, policy decisions, and external pressures. Had these industrialization efforts succeeded, nations like Egypt might have preserved their independence and achieved a different economic outcome, similar to the path taken by Japan."
+    "point": "Resource wealth can influence political strategy, often discouraging investment in education and democratic liberalization.",
+    "detail": "According to selectorate theory, autocratic rulers with abundant resources may prioritize buying the loyalty of support groups over investing in the population. Because these rulers do not rely on taxes from a productive populace, they have little incentive to invest in education, healthcare, or civil liberties, which could empower opposition movements. Conversely, resource-poor dictatorships may be forced to liberalize and invest in a skilled workforce to remain competitive. Furthermore, resource-driven economies may suffer from the crowding out of human capital, as policymakers neglect long-term education in favor of short-term gains. While some argue that resource rents can fund education, evidence shows that increased spending does not always lead to better outcomes."
    }
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Maddison_GDP_per_capita_1500-1950.svg/1280px-Maddison_GDP_per_capita_1500-1950.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "wiki_title": "Great Divergence",
-  "wiki_url": "https://en.wikipedia.org/wiki/Great_Divergence",
+  "image": "",
+  "wiki_title": "Resource curse",
+  "wiki_url": "https://en.wikipedia.org/wiki/Resource_curse",
   "reading": [
    {
-    "url": "https://theconversation.com/as-us-farms-consolidate-small-town-america-has-been-losing-out-291275",
-    "title": "As US farms consolidate, small-town America has been losing out",
-    "source": "The Conversation"
-   },
-   {
-    "url": "https://www.noemamag.com/the-sediment-of-culture-shapes-political-order",
-    "title": "The Sediment Of Culture Shapes Political Order",
-    "source": "Noema"
-   },
-   {
-    "url": "https://www.noemamag.com/serbias-experiment-combining-democracy-meritocracy",
-    "title": "Serbia\u2019s Experiment: Combining Democracy & Meritocracy",
-    "source": "Noema"
-   },
-   {
-    "url": "https://www.noemamag.com/the-shenzhen-summit-supplants-yalta",
-    "title": "The Shenzhen Summit Supplants Yalta",
-    "source": "Noema"
+    "url": "https://undark.org/2026/10/30/amazonian-highway-pathogens/",
+    "title": "Could an Amazonian Highway Open a Pandora\u2019s Box of Pathogens?",
+    "source": "Undark"
    }
   ]
  },
  "picks": [
   {
-   "id": "e901a1348f15",
-   "url": "https://publicdomainreview.org/essay/animal-vegetable-lamb",
-   "title": "Animal, Vegetable, Lamb: The Zoophyte from Tartary",
-   "headline": "The Vegetable Lamb of Tartary: A Case Study in Scientific Myth-Making",
-   "source": "The Public Domain Review",
+   "id": "e070923eaef6",
+   "url": "https://ourworldindata.org/2026-lpi-update",
+   "title": "A 73% average decline in wildlife populations: an overview of the 2026 Living Planet Index report",
+   "headline": "Understanding the 73% decline in wildlife populations: data interpretation and critical nuances",
+   "source": "Our World in Data",
    "topic": "smarter",
    "topic_name": "Get smarter",
-   "words": 2564,
-   "minutes": 11,
+   "words": 1296,
+   "minutes": 6,
    "bullets": [
     {
-     "point": "The 'Vegetable Lamb' illustrates how early naturalists struggled to categorize organisms that blurred the lines between plant and animal life.",
-     "detail": "The concept of the 'zoophyte' emerged in antiquity, with Aristotle and Theophrastus grappling with sessile organisms like coral that defied the Great Chain of Being. Medieval and early modern thinkers, including Mandeville and Scaliger, expanded this into the myth of the 'borametz'\u2014a lamb-plant hybrid from Tartary. These accounts often relied on hearsay and fantastical descriptions, such as the creature being tethered to the ground by a stem, grazing on surrounding vegetation, and bleeding real blood. While some, like Cardano, were open to the possibility of such hybrids in dense atmospheres, others like Scaliger used the legend to explore the limits of nature, even while questioning the anatomical impossibility of a four-legged plant. This period highlights a transition where natural history shifted from relying on ancient texts and fables to demanding empirical evidence, as scholars began to treat these accounts as either monstrous anomalies or outright fabrications."
+     "point": "The 73% headline figure represents an average decline across studied populations since 1970, not a total loss of 73% of all wildlife or species.",
+     "detail": "The 2026 Living Planet Index (LPI) reports a 73% average decline across 35,803 studied wildlife populations. It is critical to distinguish this metric from extinction rates or total population counts. The index does not measure the number of species lost, the percentage of species in decline, or the number of individuals lost. Instead, it calculates the geometric mean of rates of change across diverse populations. Because the index relies on varying data quality and availability, the headline figure is frequently misinterpreted by media outlets as a total loss of wildlife. In reality, the index serves as a tool to track trends in biodiversity rather than a census of global biomass or species survival."
     },
     {
-     "point": "Skepticism and empirical investigation eventually reduced the myth to three plausible origins: fern rhizomes, fetal lamb pelts, or the cotton plant.",
-     "detail": "By the late 17th century, naturalists began dismantling the myth through direct observation. Sir Hans Sloane, examining a specimen in 1698, identified it as a crafted hoax made from the rhizomes of a fern, specifically the Cibotium barometz. Engelbert Kaempfer proposed a sociological explanation, suggesting the 'vegetable lamb' was a euphemism used to sanitize the trade of soft, fetal Karakul lamb pelts. Finally, in 1887, Henry Lee argued that the entire legend originated from a linguistic and conceptual misunderstanding of the cotton plant. Drawing on Herodotus, Lee posited that early descriptions of 'wool growing on trees' were gradually exaggerated by the European imagination into the literal belief that lambs grew on stalks. These debunking efforts reflect the broader evolution of scientific methodology, moving from the acceptance of marvelous tales to the rigorous classification and physical analysis that defined the Enlightenment era."
+     "point": "The LPI is not a static trend line; it shifts significantly as researchers incorporate new data and expand geographic coverage.",
+     "detail": "The reported 73% decline remains identical to the 2024 figure, but this does not imply that biodiversity loss has stalled. The LPI is highly sensitive to the composition of the dataset. For the 2026 update, researchers added approximately 1,000 populations and 300 species, with a specific focus on increasing representation from Africa. This expansion resulted in a 14% increase in African populations and a 38% increase in African species coverage. Because the entire trend line shifts when new data is integrated, comparing the 2026 report to previous years is not a simple extension of a fixed trajectory. The index is a living database that evolves as scientific monitoring improves, meaning historical comparisons must account for these structural changes in the underlying data."
     },
     {
-     "point": "The myth\u2019s persistence in scientific literature demonstrates the tension between traditional authority and the emerging empirical method.",
-     "detail": "Even as the vegetable lamb was being debunked, it remained a fixture in intellectual discourse. It was included in cabinets of curiosity alongside fossils and artifacts, and even earned a place in Diderot\u2019s Encyclop\u00e9die, where it served as a pedagogical tool to illustrate the necessity of empirical observation over superstition. Carl Linnaeus further cemented the myth\u2019s legacy by incorporating the name 'barometz' into his binomial nomenclature for the Chinese woolly fern. This inclusion highlights a fascinating paradox: while the creature itself was proven to be a fiction, the nomenclature and the debates surrounding it became permanent parts of the scientific record. The history of the vegetable lamb serves as a reminder that science is not merely a collection of facts, but a process of refining knowledge, where even discarded myths leave traces in the language and systems we use to organize the natural world today."
+     "point": "Half of all studied wildlife populations are currently increasing or stable, challenging the narrative that all species are in decline.",
+     "detail": "While the 73% average decline figure is stark, it masks a more complex reality regarding individual population health. According to the 2026 data, exactly 50% of the 35,803 studied populations are in decline, while 43% are increasing and 7% remain stable. This distribution suggests that conservation efforts should be targeted toward specific populations in crisis rather than assuming a universal decline across all taxa. By identifying the factors that allow 50% of populations to remain stable or thrive, researchers can better direct resources toward effective restorative and protective strategies. This nuanced view of the data is essential for moving beyond alarmist headlines and toward evidence-based interventions that address the specific drivers of population loss in the most vulnerable regions and species."
     }
    ],
-   "room_line": "The history of the Vegetable Lamb of Tartary is a perfect example of how early science used myths to bridge the gap between observation and our limited understanding of biological classification.",
+   "room_line": "The 73% figure is a useful indicator of population trends, but it's a mistake to conflate an average rate of change with a total loss of species or individuals.",
    "ai": true,
-   "image": "https://pdr-assets.b-cdn.net/essays/animal-vegetable-lamb/vegetable-lamb-thumb.jpg",
+   "image": "https://ourworldindata.org/cdn-cgi/imagedelivery/qLq-8BTgXU8yG0N6HnOy8g/d040574f-0ac6-4478-620a-8c0681700500/public",
    "date": "2026-11-25"
   },
   {
-   "id": "0c72e41b78e0",
-   "url": "https://www.noemamag.com/building-the-new-equilibrium-economy",
-   "title": "How Aristotle Anticipated The AI Era",
-   "headline": "The 30/30 Equilibrium: Reconciling Demographic Decline with the AI Labor Revolution",
-   "source": "Noema",
+   "id": "ab2322a4444f",
+   "url": "https://www.scientificamerican.com/article/what-the-riemann-hypothesis-proof-really-means-about-ai-and-the-future/",
+   "title": "What the Riemann hypothesis proof really means about AI and the future",
+   "headline": "AI-assisted proof of the Riemann Hypothesis signals a shift in scientific discovery",
+   "source": "Scientific American",
    "topic": "smarter",
    "topic_name": "Get smarter",
-   "words": 3916,
-   "minutes": 17,
+   "words": 868,
+   "minutes": 4,
    "bullets": [
     {
-     "point": "AI and robotics may render labor-based economic models obsolete by making intelligence and physical work abundant, cheap, and scalable, challenging the foundational role of human wage labor.",
-     "detail": "The author argues that we are shifting from an industrial era where labor was the scarcest factor of production to an intelligence economy where cognition and coordination become abundant. Unlike previous technological revolutions, which created new industries to absorb displaced workers, AI\u2014specifically 'agentic' systems\u2014can perform entire workflows with minimal human intervention. White-collar roles, such as financial analysts or lawyers, are already being disrupted by models that operate at a fraction of the cost of human professionals. Simultaneously, the physical economy faces disruption from humanoid robots, with manufacturers like Tesla and Unitree targeting operating costs below $2 per hour. The IMF estimates that 60% of jobs in advanced economies will be affected by AI, with potential total employment reductions of 30% or more. This transition threatens the 20th-century social contract, where wages were the primary mechanism for financing welfare, pensions, and social integration."
+     "point": "Anthropic researcher Levent Alp\u00f6ge claims to have proven the generalized Riemann hypothesis using Claude, marking a potential milestone in AI-driven mathematical discovery.",
+     "detail": "Levent Alp\u00f6ge, an American mathematician and researcher at Anthropic, announced on his personal website that he has discovered a proof for the generalized Riemann hypothesis (GRH). To support this claim, he provided a proof generated with the assistance of Claude, written in the Lean programming language to ensure logical consistency. While the mathematical community is currently racing to independently verify the work, preliminary responses suggest the proof may be correct. The Riemann hypothesis, one of the seven Millennium Prize Problems, has remained unsolved for 167 years. Proving the GRH would have significant implications for computational number theory and algebraic number fields, confirming many interlocking mathematical assumptions. However, the author notes that while this is a monumental achievement for mathematics, it does not immediately threaten current RSA-based cryptographic security, as understanding prime distribution is distinct from the computational difficulty of factoring the massive numbers used in modern encryption."
     },
     {
-     "point": "The '30/30 equilibrium' suggests that population decline could act as a necessary macroeconomic corrective to the labor displacement caused by widespread AI and robotics adoption.",
-     "detail": "While governments currently view falling fertility rates as an existential economic crisis, the author proposes that demographic decline might actually be an essential adjustment mechanism. The '30/30 equilibrium' posits that if an advanced economy\u2019s population shrinks by approximately 30% while AI and robotics reduce labor demand by a similar magnitude, the historical ratio between productive labor and the total population could remain stable. This would prevent the collapse of welfare systems that currently rely on a large working population to support dependents. However, the author notes that this stabilization does not inherently create prosperity. To ensure rising GDP per capita in a shrinking society, capital productivity must increase significantly\u2014specifically, a 45% increase in capital productivity would be required to offset a 30% labor force decline, leveraging the rapid learning curves seen in semiconductors and computing power."
+     "point": "The proof demonstrates that AI can move beyond assisting with calculations to generating genuinely new, complex scientific knowledge.",
+     "detail": "The significance of this development lies less in the solution to a specific math problem and more in the capability of large language models to perform original intellectual work. The Riemann hypothesis has resisted over 150 years of effort by the world's most brilliant mathematicians, suggesting that solving it requires novel conceptual leaps rather than just brute-force computation. If verified, this achievement serves as strong evidence that AI models can synthesize the existing corpus of human thought to establish new knowledge in ways that may exceed human capacity. The author highlights that this transition\u2014from AI as a tool for calculation to an autonomous scientist\u2014could fundamentally alter how research is conducted across theoretical physics, engineering, and computer science. This shift raises profound questions about whether future AI-generated scientific breakthroughs will remain interpretable or understandable to human researchers, potentially signaling a new era where machines supersede human intellectual limits."
     },
     {
-     "point": "Nations like South Korea and Japan are currently testing the limits of industrial-era policies by aggressively pursuing automation to compensate for shrinking workforces.",
-     "detail": "South Korea and Japan serve as real-world laboratories for the intelligence economy. South Korea, facing a record-low fertility rate of 0.75, has become the world\u2019s most robot-intensive economy, deploying over 1,000 industrial robots per 10,000 manufacturing workers. Japan follows a similar trajectory, with over 400 robots per 10,000 workers. These governments are simultaneously spending billions on pro-natalist incentives to boost birth rates while investing heavily in automation to maintain international competitiveness. The author observes that while these dual policies make sense within the traditional industrial framework, they highlight a fundamental contradiction: societies are investing in technologies designed to eliminate the very human labor they are simultaneously trying to preserve through migration and family subsidies. As AI advances, these nations may eventually find that demographic decline and automation are not opposing forces, but rather complementary components of a new, post-labor economic reality."
+     "point": "The broader impact of this breakthrough will be felt in the methodology of scientific investigation rather than in immediate daily life.",
+     "detail": "For the general public, the resolution of the Riemann hypothesis will not result in sudden changes to digital infrastructure, banking security, or daily technology. The author emphasizes that the practical benefits of the proof, while mathematically profound, will be largely invisible to most people. Instead, the true consequence of this event is the realization that we are entering a future where machines may become the primary drivers of fundamental scientific discovery. This prospect is viewed with apprehension by some in the mathematical community, who fear the implications of an AI capable of solving problems that have historically defined the limits of human cognition. The article concludes that this development is a sobering reminder that we are approaching a threshold where the nature of scientific progress is being rewritten, moving away from human-led inquiry toward a model where AI systems execute entire lines of theoretical investigation independently."
     }
    ],
-   "room_line": "We treat demographic decline as a catastrophe, but if AI truly makes labor abundant, a smaller population might actually be the only way to maintain our current social safety nets.",
+   "room_line": "If the Riemann proof is verified, the real story isn't the math itself, but the transition of AI from a research assistant to an autonomous agent capable of generating novel scientific knowledge.",
    "ai": true,
-   "image": "https://noemamag.imgix.net/2026/11/The-Self-Weaving-Loom-Portrait-scaled.jpg?fit=crop&fm=pjpg&h=628&ixlib=php-3.3.1&rect=0%2C212%2C2046%2C1070&w=1200&wpsize=noema-social-facebook&s=15f3bde6107ccc2a9cb67edb09f26de4",
+   "image": "https://static.scientificamerican.com/dam/asset/0da4a6d7-37e6-4bb8-a0f6-39a50b5826f3/AI-Brain.jpg?m=1795199923.893&w=1200",
    "date": "2026-11-25"
   }
  ]

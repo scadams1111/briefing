@@ -1,7 +1,7 @@
 {
  "date": "2026-11-25",
  "llm": true,
- "candidates": 417,
+ "candidates": 370,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -25,13 +25,13 @@
   "https://www.economist.com/finance-and-economics/rss.xml": "ok (40)",
   "https://www.theatlantic.com/feed/channel/business/": "ok (25)",
   "https://feeds.npr.org/1001/rss.xml": "ok (10)",
-  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (32)",
+  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (30)",
   "https://www.economist.com/international/rss.xml": "ok (40)",
   "https://www.foreignaffairs.com/rss.xml": "ok (20)",
   "https://www.propublica.org/feeds/propublica/main": "ok (20)",
   "https://www.theatlantic.com/feed/channel/politics/": "ok (25)",
   "https://www.theatlantic.com/feed/channel/international/": "ok (25)",
-  "https://www.fiercebiotech.com/rss/xml": "ok (25)",
+  "https://www.fiercebiotech.com/rss/xml": "error: HTTPError: 403 Client Error: Forbidden for url: https://www.fiercebiotech.com/rss/xml",
   "https://endpts.com/feed/": "ok (24)",
   "https://www.biopharmadive.com/feeds/news/": "ok (10)",
   "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (11)",
@@ -39,13 +39,13 @@
   "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (11)",
   "https://www.bing.com/news/search?q=new+approach+methodologies+animal+testing&format=rss": "ok (10)",
   "https://www.bing.com/news/search?q=FDA+animal+testing&format=rss": "ok (12)",
-  "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (8)",
+  "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (9)",
   "http://www.aaronsw.com/2002/feeds/pgessays.rss": "ok (40)",
   "https://www.lennysnewsletter.com/feed": "ok (20)",
-  "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (3)",
+  "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (2)",
   "https://lethain.com/feeds.xml": "ok (12)",
   "https://charity.wtf/feed/": "ok (20)",
-  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (11)",
+  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (10)",
   "https://www.outsideonline.com/feed/": "ok (10)",
   "https://www.adventure-journal.com/feed/": "ok (10)",
   "https://www.backpacker.com/feed/": "ok (10)",
@@ -80,40 +80,36 @@
    "full_text": 1
   },
   "Adafruit Industries \u2013 Makers, hackers, artists, designers and engineers!": {
-   "fetched": 10,
+   "fetched": 9,
    "full_text": 0
-  },
-  "Ars Technica": {
-   "fetched": 1,
-   "full_text": 1
   },
   "Axios": {
    "fetched": 14,
    "full_text": 6
   },
   "BBC News": {
-   "fetched": 7,
-   "full_text": 2
+   "fetched": 9,
+   "full_text": 8
   },
   "Backpacker": {
    "fetched": 8,
    "full_text": 7
   },
-  "Blog \u2013 Hackaday": {
-   "fetched": 4,
-   "full_text": 1
+  "BioPharma Dive - Latest News": {
+   "fetched": 3,
+   "full_text": 0
   },
-  "Fierce Biotech": {
-   "fetched": 18,
-   "full_text": 4
+  "Blog \u2013 Hackaday": {
+   "fetched": 5,
+   "full_text": 0
+  },
+  "Endpoints News": {
+   "fetched": 14,
+   "full_text": 0
   },
   "Foreign Affairs": {
    "fetched": 2,
    "full_text": 2
-  },
-  "NPR Topics: News": {
-   "fetched": 2,
-   "full_text": 1
   },
   "Nature": {
    "fetched": 5,
@@ -148,16 +144,16 @@
    "full_text": 4
   },
   "Science": {
-   "fetched": 4,
+   "fetched": 5,
    "full_text": 0
   },
   "Techmeme": {
-   "fetched": 4,
+   "fetched": 6,
    "full_text": 0
   },
   "The Atlantic": {
-   "fetched": 13,
-   "full_text": 13
+   "fetched": 12,
+   "full_text": 12
   },
   "The Economist": {
    "fetched": 4,
@@ -167,27 +163,23 @@
    "fetched": 9,
    "full_text": 6
   },
-  "buttons.joshwcomeau.com": {
-   "fetched": 1,
-   "full_text": 0
-  },
   "github.com": {
-   "fetched": 4,
+   "fetched": 3,
    "full_text": 1
   },
   "iankduncan.com": {
    "fetched": 1,
    "full_text": 1
   },
-  "lesswrong.com": {
+  "modaic.dev": {
    "fetched": 1,
    "full_text": 0
   },
   "msn.com": {
-   "fetched": 1,
+   "fetched": 2,
    "full_text": 0
   },
-  "reddit.com": {
+  "openwall.com": {
    "fetched": 1,
    "full_text": 0
   },
@@ -198,6 +190,10 @@
   "scottaaronson.blog": {
    "fetched": 1,
    "full_text": 1
+  },
+  "theverge.com": {
+   "fetched": 1,
+   "full_text": 0
   },
   "vox.com": {
    "fetched": 1,
