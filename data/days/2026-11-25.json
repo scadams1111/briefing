@@ -28,7 +28,11 @@
   "date": "2026-11-25",
   "score": 9.0,
   "image": "https://www.statnews.com/wp-content/uploads/2026/11/GettyImages-2295093739-1024x576.jpg",
-  "author": "Michael S Kinch"
+  "author": "Michael S Kinch",
+  "audio": {
+   "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-eff7ffb31734.mp3",
+   "seconds": 508
+  }
  },
  {
   "id": "50e54604c445",
@@ -59,7 +63,11 @@
   "date": "2026-11-25",
   "score": 9.0,
   "image": "https://www.statnews.com/wp-content/uploads/2026/11/GettyImages-1231721993-1024x576.jpg",
-  "author": "Jonathan Wosen"
+  "author": "Jonathan Wosen",
+  "audio": {
+   "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-50e54604c445.mp3",
+   "seconds": 476
+  }
  },
  {
   "id": "53257a9101f1",
@@ -90,7 +98,11 @@
   "date": "2026-11-25",
   "score": 8.0,
   "image": "https://cdn-live.foreignaffairs.com/sites/default/files/styles/social_share/public/images/2026/11/24/2026-11-18T101028Z_842397171_RC2IGOARYWEQ_RTRMADP_3_YEAR-END-2026-PHOTOS-BEST.JPG?itok=pHD2t7vD",
-  "author": "Larry M Bartels"
+  "author": "Larry M Bartels",
+  "audio": {
+   "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-53257a9101f1.mp3",
+   "seconds": 1060
+  }
  },
  {
   "id": "8978fdb5982c",
@@ -121,7 +133,11 @@
   "date": "2026-11-25",
   "score": 8.0,
   "image": "https://www.propublica.org/wp-content/uploads/2026/11/h_16356361_77a636.jpg?resize=2000,1050",
-  "author": "Robert Faturechi; Aaron C Davis"
+  "author": "Robert Faturechi; Aaron C Davis",
+  "audio": {
+   "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-8978fdb5982c.mp3",
+   "seconds": 817
+  }
  },
  {
   "id": "b5f4d1de994e",
@@ -183,7 +199,11 @@
   "date": "2026-11-25",
   "score": 7.0,
   "image": "https://iankduncan.com/portrait.jpg",
-  "author": "Ian Duncan"
+  "author": "Ian Duncan",
+  "audio": {
+   "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-8f292f63946e.mp3",
+   "seconds": 645
+  }
  },
  {
   "id": "f13df2f7366e",
@@ -214,7 +234,11 @@
   "date": "2026-11-25",
   "score": 6.0,
   "image": "https://s.conao3.com/og/blog/2026/e4f733.png",
-  "author": "Naoya Yamashita"
+  "author": "Naoya Yamashita",
+  "audio": {
+   "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-f13df2f7366e.mp3",
+   "seconds": 852
+  }
  },
  {
   "id": "91899f0c9bd1",
@@ -276,7 +300,11 @@
   "date": "2026-11-25",
   "score": 9.0,
   "image": "https://media.newyorker.com/photos/6b0617776dabd14c5e14e80f/16:9/w_1280,c_limit/Rothman---Cyber-Apocalypse---GettyImages-2305197766.jpg",
-  "author": "Joshua Rothman"
+  "author": "Joshua Rothman",
+  "audio": {
+   "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-48cd98b45b4d.mp3",
+   "seconds": 846
+  }
  },
  {
   "id": "5df55e63748b",
