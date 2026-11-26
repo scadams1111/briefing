@@ -1,5 +1,86 @@
 [
 {
+"url": "https://www.scientificamerican.com/article/the-hidden-math-behind-this-paradoxical-black-friday-sale-strategy/",
+"title": "The hidden math behind this paradoxical Black Friday sale strategy",
+"source": "Scientific American",
+"summary": "Game theory explains why price-matching offers could paradoxically cost consumers more and why many stores switch them off for Black Friday",
+"published": 1795690800.0,
+"added": 1795696437.7595675,
+"shown": null
+},
+{
+"url": "https://bigthink.com/starts-with-a-bang/5-what-ifs-change-cosmic-history/",
+"title": "These 5 \u201cwhat ifs\u201d could have changed cosmic history",
+"source": "Big Think",
+"summary": "13.8 billion years ago, what we know today as our observable Universe began with the most important origin event in cosmic history: the hot Big Bang. Once the Universe became filled with matter, antimatter, and radiation in an almost-perfectly uniform fashion, it expanded and gravitated in nearly perfect balance. As the Universe cooled, the matter and antimatter annihilated away, leaving a tiny, minuscule, but significant amount of matter behind. After 9.2 billion years, what would become our So",
+"published": 1795676400.0,
+"added": 1795696434.8690145,
+"shown": null
+},
+{
+"url": "https://fs.blog/knowledge-project-podcast/outliers-david-ogilvy/",
+"title": "[Outliers] How to Persuade Like David Ogilvy",
+"source": "Farnam Street",
+"summary": "Everyone asks themselves the same thing: what\u2019s in it for me?&nbsp; David Ogilvy spent his whole career answering that question. People call him the father of advertising, and for good reason. He wrote iconic campaigns for Rolls-Royce, Dove, and Hathaway shirts, and his book, Ogilvy on Advertising, is still in print forty years later.&nbsp; Yet at 38, he was an unemployed college dropout.&nbsp; He didn\u2019t learn persuasion in a classroom or even a boardroom. He learned it on doorsteps in Scotland,",
+"published": 1795690500.0,
+"added": 1795696433.960374,
+"shown": null
+},
+{
+"url": "https://www.themarginalian.org/2026/11/25/robert-penn-warren-democracy-poetry-finding-yourself/",
+"title": "The Paradox of \u201cFinding Yourself\u201d",
+"source": "The Marginalian",
+"summary": "&#8220;The self is a style of being, continually expanding in a vital process of definition, affirmation, revision, and growth&#8230;&#8221; \u201cNo one can build you the bridge on which you, and only you, must cross the river of life,\u201d thirty-year-old Nietzsche wrote in his treatise on how to find yourself . And yet in the century and a half since, a curious dissonance has begun to reverberate across culture: On the one hand, we have grown increasingly fixated on the self as the focal lens for inte",
+"published": 1795648557.0,
+"added": 1795696432.976844,
+"shown": null
+},
+{
+"url": "https://www.themarginalian.org/2026/11/25/rachel-hebert-thanks/",
+"title": "How to Love the World More: Artist and Poet Rachel H\u00e9bert\u2019s Breathtaking Catalogue of Gratitudes",
+"source": "The Marginalian",
+"summary": "Here we are, living these lives bright and perishable as a poppy, hard and shimmering as obsidian. We know that they are entirely improbable , that we bless that bright improbability with each flash of gratitude for it all, that if we pay attention closely and generously enough we are always repaid in gladness, that it is the handle of the door to the world. And yet over and over we choose to live in the cage of complaint, too preoccupied with how the will of life betrayed our wishes, the wantin",
+"published": 1795660150.0,
+"added": 1795696432.9768298,
+"shown": null
+},
+{
+"url": "https://psyche.co/ideas/what-exile-was-like-for-the-first-people-called-refugees",
+"title": "What exile was like for the first people called \u2018refugees\u2019",
+"source": "Psyche",
+"summary": "Persecuted in 17th-century France, the Huguenots fled their homeland. Their memoirs reveal how they suffered and survived - by Nora Baker Read on Psyche",
+"published": 1795690800.0,
+"added": 1795696431.4709034,
+"shown": null
+},
+{
+"url": "https://psyche.co/notes-to-self/im-moving-back-where-i-grew-up-i-know-it-wont-be-the-same",
+"title": "There and back",
+"source": "Psyche",
+"summary": "A lost home lives on in spikes of joy and longing; it shifts in memory as life changes. But it\u2019s never the same - by Pam Weintraub Read on Psyche",
+"published": 1795690800.0,
+"added": 1795696431.4708908,
+"shown": null
+},
+{
+"url": "https://aeon.co/essays/falsely-claiming-indigenous-identity-is-a-grave-form-of-theft",
+"title": "The pretendian wars",
+"source": "Aeon",
+"summary": "To falsely claim Indigenous identity is not a frivolous mistake. It\u2019s a grave theft, and the stakes are getting higher - by Dina Gilio-Whitaker Read on Aeon",
+"published": 1795690800.0,
+"added": 1795696431.266076,
+"shown": null
+},
+{
+"url": "https://aeon.co/videos/a-lebanese-architects-mission-to-build-structures-that-heal",
+"title": "Lina Ghotmeh: archaeology of the future",
+"source": "Aeon",
+"summary": "In the work of the Lebanese architect Lina Ghotmeh, the scars of the past inform resilient buildings for the future - by Aeon Video Watch on Aeon",
+"published": 1795690860.0,
+"added": 1795696431.2660618,
+"shown": null
+},
+{
 "url": "https://www.scientificamerican.com/article/in-2022-nasa-struck-an-asteroid-now-we-are-finally-seeing-the-massive-impact-up-close/",
 "title": "In 2022 NASA struck an asteroid. Now we are finally seeing the massive impact up close",
 "source": "Scientific American",
@@ -96,7 +177,7 @@
 "summary": "A new study has upended the classic story of how language is produced in the brain",
 "published": 1795114800.0,
 "added": 1795627826.7147083,
-"shown": null
+"shown": "2026-11-26"
 },
 {
 "url": "https://www.scientificamerican.com/article/voyager-1-is-a-light-day-away-what-now/",
@@ -456,7 +537,7 @@
 "summary": "Brazil has plans to repave a neglected 550-mile road in the South American rainforest to help connect the region and boost economic growth. But some scientists are concerned the project \u2014 which would likely increase access between humans, livestock, and wildlife \u2014 might be a biosecurity risk.",
 "published": 1793343631.0,
 "added": 1795627826.5914032,
-"shown": "2026-11-25"
+"shown": "2026-11-26"
 },
 {
 "url": "https://undark.org/2026/10/30/cancer-survivors/",
@@ -609,7 +690,7 @@
 "summary": "The farmer-poet Wendell Berry once described a dystopian world where society is singularly directed toward \u201c the objective \u201d \u2013 a relentless drive for industrial extraction that leads to the destruction of nature and communities. The idea captured Berry\u2019s concerns about the industrialization of agriculture and the expansion of natural resource extraction that became prominent across rural America in the latter decades of the 20th century. Over nine decades , Berry watched how agribusinesses\u2019 and ",
 "published": 1795438971.0,
 "added": 1795627826.5247674,
-"shown": "2026-11-25"
+"shown": "2026-11-26"
 },
 {
 "url": "https://theconversation.com/stevie-wonders-songs-in-the-key-of-life-which-spread-an-audacious-message-of-love-turns-50-as-the-motown-legend-goes-on-tour-293078",
@@ -1851,7 +1932,7 @@
 "summary": "The past and future of the \u201cworld\u2019s back office.\u201d",
 "published": 1791244800.0,
 "added": 1795627822.659607,
-"shown": null
+"shown": "2026-11-26"
 },
 {
 "url": "https://asteriskmag.com/issues/15/chinas-last-bus",
@@ -1950,7 +2031,7 @@
 "summary": "Most beef production in Brazil is to meet domestic rather than international demand.",
 "published": 1788134400.0,
 "added": 1795627822.6038916,
-"shown": null
+"shown": "2026-11-26"
 },
 {
 "url": "https://ourworldindata.org/a-never-ending-childhood-of-malaria",
