@@ -140,17 +140,48 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .rd .end a{flex:1;min-width:150px}
 
 [hidden]{display:none!important}
-.rd article mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:var(--ink);border-radius:3px;padding:0 1px;cursor:pointer}
-.rd article mark.note{box-shadow:inset 0 -2px 0 var(--accent)}
-.hlbar{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:6px;
-  padding:6px;border-radius:14px;background:var(--ink);box-shadow:0 10px 30px rgba(0,0,0,.45);z-index:40}
-.hlbar button{white-space:nowrap;border:0;border-radius:10px;padding:10px 14px;font:700 14px var(--sans);background:transparent;color:var(--bg)}
-.hlbar button.hl{background:var(--accent);color:var(--on-accent)}
+:root{--hl-amber:rgba(242,181,68,.42);--hl-mint:rgba(94,214,160,.38);--hl-sky:rgba(110,168,255,.40);--hl-rose:rgba(255,128,150,.38)}
+.rd article mark{color:inherit;background:none;cursor:pointer;border-radius:4px;padding:0 .08em;margin:0 -.04em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background .2s}
+.rd article mark.c-amber{background:linear-gradient(104deg,transparent .4%,var(--hl-amber) 2.4%,var(--hl-amber) 97%,transparent 99.6%)}
+.rd article mark.c-mint{background:linear-gradient(104deg,transparent .4%,var(--hl-mint) 2.4%,var(--hl-mint) 97%,transparent 99.6%)}
+.rd article mark.c-sky{background:linear-gradient(104deg,transparent .4%,var(--hl-sky) 2.4%,var(--hl-sky) 97%,transparent 99.6%)}
+.rd article mark.c-rose{background:linear-gradient(104deg,transparent .4%,var(--hl-rose) 2.4%,var(--hl-rose) 97%,transparent 99.6%)}
+.rd article mark.note.last::after{content:"";display:inline-block;width:7px;height:7px;margin-left:3px;border-radius:50%;
+  background:var(--accent);vertical-align:super}
+.hlbar{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:4px;
+  padding:6px;border-radius:999px;background:#1B2438;border:1px solid var(--line);box-shadow:0 12px 32px rgba(0,0,0,.5);z-index:40;white-space:nowrap}
+.hlbar .dot{width:34px;height:34px;border-radius:50%;border:0;padding:0;display:flex;align-items:center;justify-content:center;background:none}
+.hlbar .dot i{display:block;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+.hlbar .sep{width:1px;height:22px;background:var(--line);margin:0 4px}
+.hlbar .tb{border:0;border-radius:999px;padding:9px 12px;font:600 13.5px var(--sans);background:none;color:var(--ink);display:flex;align-items:center;gap:6px}
+.hlbar .tb:active,.hlbar .dot:active{background:var(--line)}
+.sw-amber{background:#F2B544}.sw-mint{background:#5ED6A0}.sw-sky{background:#6EA8FF}.sw-rose{background:#FF8096}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:18px 18px calc(18px + env(safe-area-inset-bottom));
+  background:var(--card);border-top:1px solid var(--line);border-radius:22px 22px 0 0;box-shadow:0 -16px 40px rgba(0,0,0,.5);
+  max-height:70vh;overflow:auto;animation:up .2s ease}
+@keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.sheet .grab{width:38px;height:4px;border-radius:2px;background:var(--line);margin:-6px auto 12px}
+.sheet .x{position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:50%;border:0;background:var(--tile);color:var(--muted);font-size:20px}
+.sheet h3{margin:0;font-family:var(--serif);font-size:26px;color:var(--ink)}
+.sheet .ph{color:var(--muted);font-size:14px;margin:4px 0 8px}
+.sheet .pos{display:inline-block;margin:12px 0 4px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.sheet ol{margin:4px 0 0;padding-left:20px;color:var(--detail);font-size:15px;line-height:1.55}
+.sheet ol li{margin:6px 0}
+.sheet .ex{display:block;color:var(--muted);font-style:italic;font-size:14px;margin-top:3px}
+.sheet .more{display:inline-block;margin-top:14px;font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:underline}
+.sheet .q{font-family:var(--serif);font-size:16px;line-height:1.5;color:var(--ink);padding-left:12px;border-left:3px solid var(--accent);margin:4px 30px 14px 0}
+.sheet .row2{display:flex;gap:10px;align-items:center;margin:10px 0}
+.sheet .row2 .btn{flex:1}
+.sheet .dots{display:flex;gap:10px}
+.sheet .dots button{width:40px;height:40px;border-radius:50%;border:3px solid transparent;padding:0}
+.sheet .dots button.on{border-color:var(--ink)}
 .notes{margin-top:34px;padding:16px;border-radius:18px;background:var(--card)}
 .notes h2{font-family:var(--serif);font-size:20px;margin:0 0 10px;color:var(--ink)}
 .notes .n{padding:10px 0;border-bottom:1px solid var(--line)}
 .notes .n:last-of-type{border-bottom:0}
 .notes blockquote{margin:0;padding-left:12px;border-left:3px solid var(--accent);font-family:var(--serif);font-size:15.5px;line-height:1.55;color:var(--ink)}
+.notes blockquote.c-mint{border-color:#5ED6A0}.notes blockquote.c-sky{border-color:#6EA8FF}.notes blockquote.c-rose{border-color:#FF8096}
 .notes .nt{margin-top:6px;font-size:14px;color:var(--detail)}
 .notes .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .notes .acts .btn{flex:1;min-width:140px}
@@ -192,43 +223,92 @@ show(`<h1>${esc(title)}</h1><div class='by'>${esc([art.byline,art.siteName||host
 document.querySelectorAll('#art a').forEach(a=>{a.target='_blank';a.rel='noopener'});
 document.querySelectorAll('#art img').forEach(i=>{i.loading='lazy';i.referrerPolicy='no-referrer';i.onerror=()=>i.remove()});
 
-// ── highlights & notes (saved in this browser) ──
-const A=$('#art'), KEY='hl:'+u, INDEX='hl:index';
+// ── highlights, notes & dictionary (saved in this browser) ──
+const A=$('#art'), KEY='hl:'+u, INDEX='hl:index', COLORS=['amber','mint','sky','rose'];
 const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(_){return[]}};
 const save=list=>{try{localStorage.setItem(KEY,JSON.stringify(list));const ix=JSON.parse(localStorage.getItem(INDEX)||'{}');
  if(list.length)ix[u]={title,host,at:Date.now(),n:list.length};else delete ix[u];localStorage.setItem(INDEX,JSON.stringify(ix))}catch(_){}};
 const nodes=()=>{const t=document.createTreeWalker(A,NodeFilter.SHOW_TEXT);const a=[];let n;while(n=t.nextNode())a.push(n);return a};
-function wrap(start,end,h){let pos=0;for(const n of nodes()){const len=n.data.length,s=Math.max(start-pos,0),e2=Math.min(end-pos,len);
+function wrap(start,end,h){let pos=0,last=null;for(const n of nodes()){const len=n.data.length,s=Math.max(start-pos,0),e2=Math.min(end-pos,len);
  if(s<e2){let x=n;if(s>0)x=x.splitText(s);if(e2-s<x.data.length)x.splitText(e2-s);const m=document.createElement('mark');m.dataset.h=h.id;
-  if(h.note)m.className='note';x.parentNode.insertBefore(m,x);m.appendChild(x)}pos+=len;if(pos>=end)break}}
+  m.className='c-'+(h.color||'amber')+(h.note?' note':'');x.parentNode.insertBefore(m,x);m.appendChild(x);last=m}pos+=len;if(pos>=end)break}
+ if(last)last.classList.add('last')}
 function locate(h){const txt=A.textContent;if(txt.slice(h.start,h.end)===h.text)return[h.start,h.end];const i=txt.indexOf(h.text);return i<0?null:[i,i+h.text.length]}
 function paint(){const list=load();A.querySelectorAll('mark').forEach(m=>{m.replaceWith(...m.childNodes)});A.normalize();
  for(const h of list){const at=locate(h);if(at)wrap(at[0],at[1],h)}renderNotes(list)}
 function md(list){let s=`# ${title}\n\nSource: ${u}\nSaved: ${new Date().toISOString().slice(0,10)}\n\n`;
  for(const h of list){s+=`> ${h.text.replace(/\n+/g,' ')}\n`;if(h.note)s+=`\n${h.note}\n`;s+='\n'}return s}
 function renderNotes(list){const box=$('#notes');
- if(!list.length){box.innerHTML=`<h2>Highlights</h2><p class='empty2'>Select any text in the article to highlight it or add a note.</p>`;return}
- box.innerHTML=`<h2>Highlights (${list.length})</h2>`+list.map(h=>`<div class='n'><blockquote>${esc(h.text)}</blockquote>${h.note?`<div class='nt'>${esc(h.note)}</div>`:''}</div>`).join('')+
+ if(!list.length){box.innerHTML=`<h2>Highlights</h2><p class='empty2'>Select any text to highlight it, add a note, or look up a word.</p>`;return}
+ box.innerHTML=`<h2>Highlights (${list.length})</h2>`+list.map(h=>`<div class='n'><blockquote class='c-${h.color||'amber'}'>${esc(h.text)}</blockquote>${h.note?`<div class='nt'>${esc(h.note)}</div>`:''}</div>`).join('')+
  `<div class='acts'><a class='btn primary' id='obs' href='#'>Send to Obsidian</a><button type='button' class='btn' id='cp'>Copy Markdown</button></div>`;
  const name=('Briefing/'+title).replace(/[\\/:*?"<>|#^\[\]]+/g,' ').replace('Briefing ','Briefing/').slice(0,120);
  $('#obs').href='obsidian://new?file='+encodeURIComponent(name)+'&content='+encodeURIComponent(md(list))+'&overwrite=true';
  $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(md(list));$('#cp').textContent='Copied'}catch(_){$('#cp').textContent='Copy failed'}}}
+
+// selection bar: colours · note · define
+const NOTE_I="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' aria-hidden='true'><path d='M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z'/></svg>";
+const BOOK_I="<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' aria-hidden='true'><path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5'/></svg>";
 const bar=document.createElement('div');bar.className='hlbar';bar.hidden=true;
-bar.innerHTML=`<button type='button' class='hl' data-a='hl'>Highlight</button><button type='button' data-a='note'>Add note</button>`;document.body.appendChild(bar);
+bar.innerHTML=COLORS.map(c=>`<button type='button' class='dot' data-c='${c}' aria-label='Highlight ${c}'><i class='sw-${c}'></i></button>`).join('')+
+ `<span class='sep'></span><button type='button' class='tb' data-a='note'>${NOTE_I}Note</button><button type='button' class='tb' data-a='def'>${BOOK_I}Define</button>`;
+document.body.appendChild(bar);
 let pending=null;
 function current(){const s=getSelection();if(!s||s.isCollapsed||!s.rangeCount)return null;const r=s.getRangeAt(0);
- if(!A.contains(r.commonAncestorContainer))return null;const text=r.toString().trim();if(text.length<3)return null;
+ if(!A.contains(r.commonAncestorContainer))return null;const text=r.toString().trim();if(text.length<2)return null;
  const pre=document.createRange();pre.selectNodeContents(A);pre.setEnd(r.startContainer,r.startOffset);
  let start=pre.toString().length;const raw=r.toString();start+=raw.indexOf(text);return{start,end:start+text.length,text:text.slice(0,1500)}}
-document.addEventListener('selectionchange',()=>{pending=current();bar.hidden=!pending});
+document.addEventListener('selectionchange',()=>{if(sheet)return;pending=current();bar.hidden=!pending;
+ if(pending)bar.querySelector('[data-a=def]').hidden=pending.text.split(/\s+/).length>4});
 bar.addEventListener('pointerdown',ev=>ev.preventDefault());
-bar.addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b||!pending)return;let note='';
- if(b.dataset.a==='note'){note=prompt('Your note')||'';if(!note)return}
- const list=load();list.push({id:Date.now().toString(36),...pending,note,at:Date.now()});list.sort((a,b)=>a.start-b.start);save(list);
- getSelection().removeAllRanges();bar.hidden=true;pending=null;paint()});
-A.addEventListener('click',ev=>{const m=ev.target.closest('mark');if(!m||!getSelection().isCollapsed)return;const list=load(),h=list.find(x=>x.id===m.dataset.h);if(!h)return;
- const v=prompt('Edit the note, or clear it and tap OK to keep the highlight. Cancel does nothing. Type DELETE to remove the highlight.',h.note||'');
- if(v===null)return;if(v.trim().toUpperCase()==='DELETE')list.splice(list.indexOf(h),1);else h.note=v.trim();save(list);paint()});
+function add(color,note){const list=load();list.push({id:Date.now().toString(36),...pending,color,note:note||'',at:Date.now()});
+ list.sort((a,b)=>a.start-b.start);save(list);getSelection().removeAllRanges();bar.hidden=true;pending=null;paint()}
+bar.addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b||!pending)return;
+ if(b.dataset.c)return add(b.dataset.c);
+ if(b.dataset.a==='note'){const n=prompt('Your note');if(n)add('amber',n);return}
+ if(b.dataset.a==='def'){const w=pending.text;getSelection().removeAllRanges();bar.hidden=true;define(w)}});
+
+// bottom sheet helper
+let sheet=null;
+function openSheet(html){closeSheet();sheet=document.createElement('div');sheet.className='sheet';sheet.setAttribute('role','dialog');
+ sheet.innerHTML=`<div class='grab'></div><button type='button' class='x' aria-label='Close'>×</button>`+html;document.body.appendChild(sheet);
+ sheet.querySelector('.x').onclick=closeSheet;return sheet}
+function closeSheet(){if(sheet){sheet.remove();sheet=null}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+
+// dictionary: Free Dictionary API, Wikipedia fallback for names/phrases
+async function define(raw){const w=raw.replace(/[^\p{L}\p{N}\s'-]/gu,'').trim();if(!w)return;
+ const sh=openSheet(`<h3>${esc(w)}</h3><p class='ph'>Looking up…</p>`);
+ try{const r=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(w.toLowerCase()));
+  if(!r.ok)throw 0;const data=await r.json();const e0=data[0];
+  const ph=(e0.phonetic||(e0.phonetics||[]).map(p=>p.text).find(Boolean)||'');
+  const audio=(e0.phonetics||[]).map(p=>p.audio).find(Boolean);
+  let html=`<h3>${esc(e0.word)}</h3><p class='ph'>${esc(ph)} ${audio?`<button type='button' class='tb' id='say' style='display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:none;color:var(--ink);font:600 12px var(--sans)'>Listen</button>`:''}</p>`;
+  for(const m of data.flatMap(d=>d.meanings).slice(0,3)){html+=`<span class='pos'>${esc(m.partOfSpeech)}</span><ol>`+
+   m.definitions.slice(0,3).map(d=>`<li>${esc(d.definition)}${d.example?`<span class='ex'>“${esc(d.example)}”</span>`:''}</li>`).join('')+`</ol>`}
+  html+=`<a class='more' href='https://en.wiktionary.org/wiki/${encodeURIComponent(e0.word)}' target='_blank' rel='noopener'>More on Wiktionary</a>`;
+  if(sheet===sh){sh.innerHTML=`<div class='grab'></div><button type='button' class='x' aria-label='Close'>×</button>`+html;sh.querySelector('.x').onclick=closeSheet;
+   const s=sh.querySelector('#say');if(s)s.onclick=()=>new Audio(audio).play()}
+ }catch(_){try{const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(w));if(!r.ok)throw 0;const j=await r.json();
+  if(!j.extract||j.type==='disambiguation')throw 0;if(sheet!==sh)return;
+  sh.innerHTML=`<div class='grab'></div><button type='button' class='x' aria-label='Close'>×</button><h3>${esc(j.title)}</h3>${j.description?`<p class='ph'>${esc(j.description)}</p>`:''}
+   <p style='color:var(--detail);font-size:15px;line-height:1.55'>${esc(j.extract)}</p><a class='more' href='${esc((j.content_urls||{}).mobile?.page||'https://en.wikipedia.org/wiki/'+encodeURIComponent(w))}' target='_blank' rel='noopener'>Read on Wikipedia</a>`;
+  sh.querySelector('.x').onclick=closeSheet}
+ catch(__){if(sheet===sh){sh.querySelector('.ph').textContent='No definition found.'}}}}
+
+// tap a highlight: recolour, note, define, remove
+A.addEventListener('click',ev=>{const m=ev.target.closest('mark');if(!m||!getSelection().isCollapsed)return;ev.preventDefault();
+ const list=load(),h=list.find(x=>x.id===m.dataset.h);if(!h)return;
+ const sh=openSheet(`<p class='q'>${esc(h.text)}</p>${h.note?`<p style='color:var(--detail);font-size:14.5px;margin:0 0 10px'>${esc(h.note)}</p>`:''}
+  <div class='row2'><div class='dots'>${COLORS.map(c=>`<button type='button' class='sw-${c}${(h.color||'amber')===c?' on':''}' data-c='${c}' aria-label='${c}'></button>`).join('')}</div></div>
+  <div class='row2'><button type='button' class='btn' data-a='note'>${h.note?'Edit note':'Add note'}</button>
+  ${h.text.split(/\s+/).length<=4?`<button type='button' class='btn' data-a='def'>Define</button>`:''}
+  <button type='button' class='btn' data-a='del' style='color:#FF8096'>Remove</button></div>`);
+ sh.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.classList.contains('x'))return;
+  if(b.dataset.c){h.color=b.dataset.c;save(list);paint();closeSheet();return}
+  if(b.dataset.a==='note'){const n=prompt('Your note',h.note||'');if(n===null)return;h.note=n.trim();save(list);paint();closeSheet();return}
+  if(b.dataset.a==='def'){define(h.text);return}
+  if(b.dataset.a==='del'){list.splice(list.indexOf(h),1);save(list);paint();closeSheet()}})});
 paint();
 })();
 </script></body></html>
