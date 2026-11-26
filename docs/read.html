@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'><link rel='apple-touch-icon' href='apple-touch-icon.png'><title>Reader</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><link href='https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap' rel='stylesheet'><style>
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'><link rel='apple-touch-icon' href='apple-touch-icon.png'><title>Reader</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><style>
 :root{
   --bg:#0B1220; --card:#131C2E; --tile:#172136; --tile-open:#1C2740; --ink:#EAF0FA; --muted:#8D9AB3;
   --detail:#BAC5D8; --accent:#F2B544; --on-accent:#1A1305; --img:#1E2A44; --line:#2A3653;
@@ -108,51 +108,6 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
 .chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
 
-/* ── design system: one set of tokens and components for every page ── */
-:root{--sp1:4px;--sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;
-  --rad-s:10px;--rad-m:14px;--rad-l:20px;--rad-xl:24px;--tap:44px;
-  --fs-xs:12px;--fs-s:13.5px;--fs-m:15px;--fs-l:17px;--ease:cubic-bezier(.2,.7,.2,1)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
-::selection{background:color-mix(in srgb,var(--accent) 35%,transparent)}
-button,.btn,.chip,.fbb,.tabs a,.toc a,.toc button{-webkit-tap-highlight-color:transparent;transition:transform .12s var(--ease),background .15s,border-color .15s,color .15s}
-button:active,.btn:active,.chip:active,.fbb:active{transform:scale(.97)}
-/* header: same on every page, sticky and blurred on scrolling pages */
-body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
-  padding:calc(12px + env(safe-area-inset-top)) max(16px,calc((100% - 528px)/2)) 12px;
-  background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
-  border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
-.tabs a{min-height:32px;display:flex;align-items:center}
-/* buttons and chips share sizes, corners and type */
-.btn{height:48px;border-radius:var(--rad-m);font-size:var(--fs-m)}
-.chip,.fbb{height:40px;border-radius:12px;padding:0 14px;font-size:var(--fs-s);font-weight:600;gap:7px}
-.chip{background:var(--tile);border:1px solid var(--line);color:var(--detail)}
-.fbb{background:transparent}
-.chip.sm{height:34px;padding:0 11px;font-size:var(--fs-xs);border-radius:10px}
-/* surfaces */
-.card{border-radius:var(--rad-xl)}
-.bg,.fresh{border-radius:var(--rad-l)}
-.page .card{margin:var(--sp4) 0}
-.body{padding:var(--sp4) 18px 20px;gap:var(--sp3)}
-.extras,.fb{gap:var(--sp2)}
-/* page titles and section labels */
-.hero{padding:var(--sp5) 2px var(--sp2)}
-.hero h1{font-size:32px;letter-spacing:-.015em}
-.hero p{font-size:var(--fs-s);line-height:1.5}
-.label{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:var(--sp6) 2px var(--sp1)}
-/* story image fallback: quiet tile with the topic's initial */
-.media.noimg::after{content:attr(data-k);position:absolute;right:14px;top:-18px;font-family:var(--serif);font-weight:700;
-  font-size:150px;line-height:1;color:color-mix(in srgb,var(--ink) 7%,transparent);pointer-events:none}
-.media.noimg{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 9%,var(--img)),var(--img) 60%)}
-/* empty and loading states */
-.empty{padding:56px 20px;font-size:var(--fs-m);line-height:1.5}
-.empty::before{content:"";display:block;width:44px;height:44px;margin:0 auto 14px;border-radius:50%;
-  background:color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
-.skel{background:linear-gradient(90deg,var(--tile) 0%,var(--tile-open) 50%,var(--tile) 100%);background-size:200% 100%;animation:shimmer 1.3s linear infinite!important}
-@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
-.toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
-@keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
 .rd{max-width:640px;margin:0 auto;padding:8px 18px 80px}
 .rd .bar{display:flex;align-items:center;gap:10px;padding:10px 0 14px}
 .rd .back{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--tile)}
@@ -185,37 +140,6 @@ body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
 .rd .end a{flex:1;min-width:150px}
 
 [hidden]{display:none!important}
-/* reader settings: size, font, spacing, theme */
-.rd article{font-size:var(--r-size,17.5px)!important;line-height:var(--r-lh,1.72)!important;font-family:var(--r-font,var(--sans))}
-.rd h1{font-family:var(--serif)}
-html.t-dusk{--bg:#18181B;--card:#232327;--tile:#2A2A2F;--tile-open:#323238;--ink:#EDEDEF;--muted:#9C9CA4;--detail:#D4D4D8;--line:#38383F;--img:#2A2A2F}
-html.t-sepia{--bg:#F3EBD9;--card:#FAF4E6;--tile:#EDE2C9;--tile-open:#E6D8B8;--ink:#3A2E21;--muted:#7D6A55;--detail:#4A3B2C;--line:#DECFAE;
-  --img:#E6D8B8;--accent:#B5651D;--on-accent:#FFF8EE}
-html.t-paper{--bg:#FAFAF7;--card:#FFFFFF;--tile:#F1F1EC;--tile-open:#E8E8E1;--ink:#16140F;--muted:#6B675E;--detail:#2C2924;--line:#E2E0D8;
-  --img:#EDEDE6;--accent:#C4532D;--on-accent:#FFFFFF}
-html.t-sepia .rd article mark,html.t-paper .rd article mark{color:inherit}
-.hlbar,.player{background:var(--card)!important;color:var(--ink)}
-.hlbar .tb,.player button{color:var(--ink)}
-.player .pp{color:var(--on-accent)!important}
-.aa{display:inline-flex;align-items:center;justify-content:center;width:44px;height:40px;border-radius:12px;border:1px solid var(--line);
-  background:var(--tile);color:var(--ink);font:700 16px var(--serif);margin-left:auto}
-.aa+.lsn{margin-left:8px}
-.rs .grp{margin:16px 0 0}
-.rs .grp>span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.rs .seg{display:flex;gap:6px;background:var(--tile);padding:4px;border-radius:14px}
-.rs .seg button{flex:1;height:40px;border:0;border-radius:10px;background:none;color:var(--muted);font:600 14px var(--sans)}
-.rs .seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
-.rs .size{display:flex;align-items:center;gap:10px}
-.rs .size button{width:48px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font-family:var(--serif);font-weight:700}
-.rs .size .val{flex:1;text-align:center;font-size:14px;color:var(--detail)}
-.rs .themes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.rs .themes button{height:64px;border-radius:14px;border:2px solid var(--line);font:600 12px var(--sans);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:4px}
-.rs .themes button b{font:700 18px var(--serif)}
-.rs .themes button.on{border-color:var(--accent)}
-.rs .preview{margin-top:16px;padding:14px;border-radius:14px;background:var(--bg);color:var(--detail);font-size:var(--r-size,17.5px);
-  line-height:var(--r-lh,1.72);font-family:var(--r-font,var(--sans))}
-
 /* reader header: stays at the top, clear of the iPhone status bar */
 .rd{padding-top:0}
 .rd .bar{position:sticky;top:0;z-index:30;margin:0 -18px;padding:calc(10px + env(safe-area-inset-top)) 18px 10px;
@@ -224,7 +148,6 @@ html.t-sepia .rd article mark,html.t-paper .rd article mark{color:inherit}
 .rd .bar .meta{min-width:0;flex:1}
 .rd .bar .meta b{display:inline-block;max-width:52vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
 .rd h1{margin-top:18px}
-@media (max-width:440px){.rd .bar .when{display:none}.rd .bar .meta b{max-width:34vw}}
 :root{--hl-amber:rgba(242,181,68,.42);--hl-mint:rgba(94,214,160,.38);--hl-sky:rgba(110,168,255,.40);--hl-rose:rgba(255,128,150,.38)}
 .rd article mark{color:inherit;background:none;cursor:pointer;border-radius:4px;padding:0 .08em;margin:0 -.04em;
   -webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background .2s}
@@ -293,12 +216,7 @@ body.playing .rd{padding-bottom:170px}
 .vlist small{color:var(--muted);font-size:12px}
 .via{font-size:12px;color:var(--muted);margin-top:4px}
 .via a{text-decoration:underline}
-</style><script>(()=>{try{const p=JSON.parse(localStorage.getItem('reader:prefs')||'{}'),h=document.documentElement;
-const F={serif:"'Literata','Charter','Iowan Old Style',Georgia,serif",sans:"'Inter',-apple-system,system-ui,sans-serif",system:"-apple-system,BlinkMacSystemFont,system-ui,sans-serif"};
-const T={midnight:'#0B1220',dusk:'#18181B',sepia:'#F3EBD9',paper:'#FAFAF7'};
-if(p.theme&&p.theme!=='midnight')h.classList.add('t-'+p.theme);h.style.setProperty('--r-size',(p.size||17.5)+'px');
-h.style.setProperty('--r-lh',p.lh||1.72);h.style.setProperty('--r-font',F[p.font||'sans']);
-document.querySelector('meta[name=theme-color]').content=T[p.theme||'midnight']}catch(_){}})()</script><script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script><script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script></head><body data-relay='https://briefing-relay.scadams1111.workers.dev' data-root=''><main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg></a><div class='meta'><span class='badge'>Reader</span><br><b id='host'></b><span class='when'> · <span id='when'>Loading…</span></span></div></div><div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div><div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div><div class='skel' style='width:70%'></div></div></main><script>
+</style><script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script><script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script></head><body data-relay='https://briefing-relay.scadams1111.workers.dev' data-root=''><main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg></a><div class='meta'><span class='badge'>Reader</span><br><b id='host'></b> · <span id='when'>Loading…</span></div></div><div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div><div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div><div class='skel' style='width:70%'></div></div></main><script>
 (async()=>{
 const $=s=>document.querySelector(s), P=new URLSearchParams(location.search), u=P.get('u')||'', want=P.get('src')||'live';
 const RELAY=document.body.dataset.relay||'', root=document.body.dataset.root||'';
@@ -420,34 +338,6 @@ A.addEventListener('click',ev=>{const m=ev.target.closest('mark');if(!m||!getSel
   if(b.dataset.a==='def'){define(h.text);return}
   if(b.dataset.a==='del'){list.splice(list.indexOf(h),1);save(list);paint();closeSheet()}})});
 paint();
-
-// ── reader settings ──
-(()=>{const h=document.documentElement,KEY='reader:prefs';
- const F={serif:"'Literata','Charter','Iowan Old Style',Georgia,serif",sans:"'Inter',-apple-system,system-ui,sans-serif",system:"-apple-system,BlinkMacSystemFont,system-ui,sans-serif"};
- const T={midnight:'#0B1220',dusk:'#18181B',sepia:'#F3EBD9',paper:'#FAFAF7'};
- const SIZES=[15,16,17.5,19,20.5,22,24],LH={compact:1.5,normal:1.72,airy:1.95};
- let p={};try{p=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(_){}
- p={size:17.5,font:'sans',lh:1.72,theme:'midnight',...p};
- const apply=()=>{['dusk','sepia','paper'].forEach(t=>h.classList.toggle('t-'+t,p.theme===t));
-  h.style.setProperty('--r-size',p.size+'px');h.style.setProperty('--r-lh',p.lh);h.style.setProperty('--r-font',F[p.font]);
-  const m=document.querySelector('meta[name=theme-color]');if(m)m.content=T[p.theme];try{localStorage.setItem(KEY,JSON.stringify(p))}catch(_){}};
- const aa=document.createElement('button');aa.type='button';aa.className='aa';aa.textContent='Aa';aa.setAttribute('aria-label','Text and theme settings');
- const bar=document.querySelector('.rd .bar');bar.appendChild(aa);
- function render(sh){const on=(c)=>c?' on':'';const lhName=Object.keys(LH).find(k=>LH[k]==p.lh)||'normal';
-  sh.querySelector('.rs').innerHTML=`<h3 style='font-size:22px'>Reading</h3>
-  <div class='grp'><span>Text size</span><div class='size'><button type='button' data-sz='-1' aria-label='Smaller text' style='font-size:14px'>A</button>
-   <div class='val'>${p.size}px</div><button type='button' data-sz='1' aria-label='Larger text' style='font-size:21px'>A</button></div></div>
-  <div class='grp'><span>Font</span><div class='seg'>${[['serif','Serif'],['sans','Sans'],['system','System']].map(([k,l])=>`<button type='button' data-f='${k}' class='${on(p.font===k)}' style="font-family:${F[k]}">${l}</button>`).join('')}</div></div>
-  <div class='grp'><span>Line spacing</span><div class='seg'>${[['compact','Compact'],['normal','Normal'],['airy','Airy']].map(([k,l])=>`<button type='button' data-lh='${k}' class='${on(lhName===k)}'>${l}</button>`).join('')}</div></div>
-  <div class='grp'><span>Theme</span><div class='themes'>${[['midnight','Midnight','#0B1220','#EAF0FA'],['dusk','Dusk','#18181B','#EDEDEF'],['sepia','Sepia','#F3EBD9','#3A2E21'],['paper','Paper','#FAFAF7','#16140F']]
-   .map(([k,l,bg,fg])=>`<button type='button' data-t='${k}' class='${on(p.theme===k)}' style='background:${bg};color:${fg}'><b>Aa</b>${l}</button>`).join('')}</div></div>
-  <div class='preview'>The quick brown fox jumps over the lazy dog, and the reader settles in for a long, comfortable read.</div>`}
- aa.onclick=()=>{const sh=openSheet(`<div class='rs'></div>`);render(sh);
-  sh.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.classList.contains('x'))return;
-   if(b.dataset.sz){const i=SIZES.indexOf(+p.size);p.size=SIZES[Math.max(0,Math.min(SIZES.length-1,(i<0?2:i)+(+b.dataset.sz)))]}
-   if(b.dataset.f)p.font=b.dataset.f;if(b.dataset.lh)p.lh=LH[b.dataset.lh];if(b.dataset.t)p.theme=b.dataset.t;apply();render(sh)})};
- apply();
-})();
 
 // ── real audio file for this article (keeps playing with the screen locked) ──
 const AU=P.get('a')||'';
