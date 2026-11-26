@@ -29,7 +29,11 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer}
 
 /* shell */
-.top{max-width:560px;margin:0 auto;padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top{max-width:560px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+/* story pages: a fixed app frame, so the page itself never scrolls out of reach */
+body.app{position:fixed;inset:0;display:flex;flex-direction:column;overflow:hidden;overscroll-behavior:none}
+body.app .top{flex:none;width:100%}
+body.app .reader{flex:1;min-height:0;height:auto;width:100%}
 .brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em}
 .brand span{color:var(--accent)}
 .tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
@@ -246,7 +250,7 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
             "<meta name='apple-mobile-web-app-title' content='Briefing'>"
             f"<link rel='apple-touch-icon' href='{root}apple-touch-icon.png'>"
             f"<link rel='manifest' href='{root}manifest.webmanifest'>"
-            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body data-repo='{e(_repo())}' data-root='{e(root)}'>"
+            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body class='{'app' if script else ''}' data-repo='{e(_repo())}' data-root='{e(root)}'>"
             f"<header class='top'><a class='brand' href='{root}./'>Briefing<span>.</span></a>"
             f"<nav class='tabs'>{tabs}</nav></header>{body}"
             + (f"<script>{JS}</script>" if script else "") + f"<script>{NEWTAB}</script><script>{FEEDBACK_JS}</script></body></html>")
