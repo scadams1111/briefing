@@ -241,12 +241,11 @@ def daily() -> None:
         audiomod.make(cfg, date, items, smart, subs, llm)
     except Exception as ex:
         log.warning("audio briefing failed: %s", ex)
-    try:                                    # each story read aloud, for listening with the screen locked
-        texts = {it["id"]: c.text for it, c in zip(items, picks)}
-        if audiomod.make_articles(cfg, items, texts, f"audio-{date}"):
-            (DATA / "days" / f"{date}.json").write_text(json.dumps(items, indent=1))
+    try:                                    # texts for the separate article-audio step
+        Path("build").mkdir(exist_ok=True)
+        Path("build/texts.json").write_text(json.dumps({it["id"]: c.text for it, c in zip(items, picks)}))
     except Exception as ex:
-        log.warning("article audio failed: %s", ex)
+        log.warning("couldn't keep article texts: %s", ex)
     publish(cfg, st, date, items, new_saved)
     for s in new_saved:
         s["delivered"] = True
@@ -381,3 +380,19 @@ def find_url(s: str) -> str | None:
 def search(q: str) -> None:
     cfg = load_cfg()
     searchmod.run(q, cfg, profile(cfg))
+
+
+def article_audio() -> None:
+    """Separate step after the daily build: read each of today's stories aloud, then re-render."""
+    cfg = load_cfg()
+    days = sorted((DATA / "days").glob("????-??-??.json"))
+    tp = Path("build/texts.json")
+    if not days or not tp.exists():
+        log.info("nothing to read aloud")
+        return
+    date, items = days[-1].stem, json.loads(days[-1].read_text())
+    texts = json.loads(tp.read_text())
+    todo = [i for i in items if not i.get("audio")]
+    if audiomod.make_articles(cfg, todo, texts, f"audio-{date}"):
+        days[-1].write_text(json.dumps(items, indent=1))
+        rerender()

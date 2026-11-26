@@ -155,20 +155,28 @@ def _article_script(it: dict, text: str, max_words: int) -> str:
     return f"{it.get('headline') or it.get('title')}. From {it.get('source', '')}.\n\n{body}"
 
 
-async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc: int = 4) -> None:
+async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc: int = 2,
+                      per_job: int = 240, budget: int = 900) -> None:
+    """Speak each (text, out) job with a time limit per file and for the whole batch."""
+    import time as _t
     import edge_tts
     sem = asyncio.Semaphore(conc)
+    deadline = _t.monotonic() + budget
 
     async def one(text, out):
         async with sem:
             for attempt in range(2):
+                if _t.monotonic() > deadline:
+                    log.warning("article audio: out of time, skipping %s", out.name)
+                    return
                 try:
-                    await edge_tts.Communicate(text, voice, rate=rate).save(str(out))
+                    await asyncio.wait_for(edge_tts.Communicate(text, voice, rate=rate).save(str(out)), timeout=per_job)
                     return
                 except Exception as ex:
-                    log.warning("article audio failed (%s), attempt %d", ex, attempt + 1)
+                    log.warning("article audio %s failed (%s), attempt %d", out.name, type(ex).__name__, attempt + 1)
                     if out.exists():
                         out.unlink()
+                    await asyncio.sleep(5)
     await asyncio.gather(*(one(t, o) for t, o in jobs))
 
 

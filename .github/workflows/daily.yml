@@ -40,6 +40,7 @@ jobs:
       - if: steps.check.outputs.skip != 'true'
         run: pip install -r requirements.txt
       - name: Build today's briefing
+        id: build
         if: steps.check.outputs.skip != 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -47,8 +48,15 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
         run: python -m curator daily
-      - name: Upload audio
+      - name: Read each story aloud
         if: steps.check.outputs.skip != 'true'
+        continue-on-error: true
+        timeout-minutes: 18
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python -m curator article-audio
+      - name: Upload audio
+        if: "!cancelled() && steps.build.outcome == 'success'"
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -64,7 +72,7 @@ jobs:
             [ "${t#audio-}" \< "$cutoff" ] && gh release delete "$t" --cleanup-tag -y || true
           done
       - name: Publish
-        if: steps.check.outputs.skip != 'true'
+        if: "!cancelled() && steps.build.outcome == 'success'"
         run: |
           git config user.name "briefing-bot"
           git config user.email "briefing-bot@users.noreply.github.com"
