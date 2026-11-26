@@ -20,6 +20,14 @@ e = w.e
 
 HL_CSS = r"""
 [hidden]{display:none!important}
+/* reader header: stays at the top, clear of the iPhone status bar */
+.rd{padding-top:0}
+.rd .bar{position:sticky;top:0;z-index:30;margin:0 -18px;padding:calc(10px + env(safe-area-inset-top)) 18px 10px;
+  background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);
+  border-bottom:1px solid var(--line)}
+.rd .bar .meta{min-width:0;flex:1}
+.rd .bar .meta b{display:inline-block;max-width:52vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
+.rd h1{margin-top:18px}
 :root{--hl-amber:rgba(242,181,68,.42);--hl-mint:rgba(94,214,160,.38);--hl-sky:rgba(110,168,255,.40);--hl-rose:rgba(255,128,150,.38)}
 .rd article mark{color:inherit;background:none;cursor:pointer;border-radius:4px;padding:0 .08em;margin:0 -.04em;
   -webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background .2s}

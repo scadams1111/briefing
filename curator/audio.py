@@ -155,28 +155,64 @@ def _article_script(it: dict, text: str, max_words: int) -> str:
     return f"{it.get('headline') or it.get('title')}. From {it.get('source', '')}.\n\n{body}"
 
 
-async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc: int = 2,
-                      per_job: int = 240, budget: int = 900) -> None:
-    """Speak each (text, out) job with a time limit per file and for the whole batch."""
+def _pieces(text: str, size: int = 700) -> list[str]:
+    """Split into ~size-word pieces on paragraph (then sentence) boundaries."""
+    out, cur, n = [], [], 0
+    for para in [p for p in text.split("\n") if p.strip()]:
+        w = len(para.split())
+        if w > size:                      # very long paragraph: split by sentences
+            for sent in __import__("re").split(r"(?<=[.!?])\s+", para):
+                sw = len(sent.split())
+                if n + sw > size and cur:
+                    out.append(" ".join(cur)); cur, n = [], 0
+                cur.append(sent); n += sw
+            continue
+        if n + w > size and cur:
+            out.append("\n".join(cur)); cur, n = [], 0
+        cur.append(para); n += w
+    if cur:
+        out.append("\n".join(cur))
+    return out
+
+
+async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc: int = 3,
+                      per_piece: int = 120, budget: int = 900) -> None:
+    """Speak each (text, out) job in ~700-word pieces (long single requests stall),
+    joined into one MP3. Time limits per piece and for the whole batch."""
     import time as _t
     import edge_tts
     sem = asyncio.Semaphore(conc)
     deadline = _t.monotonic() + budget
 
-    async def one(text, out):
+    async def piece(text, path):
         async with sem:
-            for attempt in range(2):
+            for attempt in range(3):
                 if _t.monotonic() > deadline:
-                    log.warning("article audio: out of time, skipping %s", out.name)
-                    return
+                    return False
                 try:
-                    await asyncio.wait_for(edge_tts.Communicate(text, voice, rate=rate).save(str(out)), timeout=per_job)
-                    return
+                    await asyncio.wait_for(edge_tts.Communicate(text, voice, rate=rate).save(str(path)), timeout=per_piece)
+                    if path.exists() and path.stat().st_size > 1000:
+                        return True
                 except Exception as ex:
-                    log.warning("article audio %s failed (%s), attempt %d", out.name, type(ex).__name__, attempt + 1)
-                    if out.exists():
-                        out.unlink()
-                    await asyncio.sleep(5)
+                    log.warning("audio piece %s failed (%s), attempt %d", path.name, type(ex).__name__, attempt + 1)
+                if path.exists():
+                    path.unlink()
+                await asyncio.sleep(3 + 4 * attempt)
+            return False
+
+    async def one(text, out):
+        parts = _pieces(text)
+        paths = [out.with_name(f"{out.stem}.part{k:02d}.mp3") for k in range(len(parts))]
+        ok = await asyncio.gather(*(piece(t, pth) for t, pth in zip(parts, paths)))
+        if all(ok):
+            with open(out, "wb") as f:              # MP3 frames concatenate cleanly
+                for pth in paths:
+                    f.write(pth.read_bytes())
+        else:
+            log.warning("article audio %s: %d of %d pieces failed; skipping", out.name, ok.count(False), len(ok))
+        for pth in paths:
+            if pth.exists():
+                pth.unlink()
     await asyncio.gather(*(one(t, o) for t, o in jobs))
 
 

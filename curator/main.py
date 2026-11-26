@@ -386,13 +386,19 @@ def article_audio() -> None:
     """Separate step after the daily build: read each of today's stories aloud, then re-render."""
     cfg = load_cfg()
     days = sorted((DATA / "days").glob("????-??-??.json"))
-    tp = Path("build/texts.json")
-    if not days or not tp.exists():
+    if not days:
         log.info("nothing to read aloud")
         return
     date, items = days[-1].stem, json.loads(days[-1].read_text())
-    texts = json.loads(tp.read_text())
+    tp = Path("build/texts.json")
+    texts = json.loads(tp.read_text()) if tp.exists() else {}
     todo = [i for i in items if not i.get("audio")]
+    for it in todo:                         # run on its own: fetch the texts again
+        if it["id"] not in texts:
+            try:
+                texts[it["id"]], _ = fetch_article(it["url"])
+            except Exception:
+                pass
     if audiomod.make_articles(cfg, todo, texts, f"audio-{date}"):
         days[-1].write_text(json.dumps(items, indent=1))
         rerender()
