@@ -20,6 +20,37 @@ e = w.e
 
 HL_CSS = r"""
 [hidden]{display:none!important}
+/* reader settings: size, font, spacing, theme */
+.rd article{font-size:var(--r-size,17.5px)!important;line-height:var(--r-lh,1.72)!important;font-family:var(--r-font,var(--sans))}
+.rd h1{font-family:var(--serif)}
+html.t-dusk{--bg:#18181B;--card:#232327;--tile:#2A2A2F;--tile-open:#323238;--ink:#EDEDEF;--muted:#9C9CA4;--detail:#D4D4D8;--line:#38383F;--img:#2A2A2F}
+html.t-sepia{--bg:#F3EBD9;--card:#FAF4E6;--tile:#EDE2C9;--tile-open:#E6D8B8;--ink:#3A2E21;--muted:#7D6A55;--detail:#4A3B2C;--line:#DECFAE;
+  --img:#E6D8B8;--accent:#B5651D;--on-accent:#FFF8EE}
+html.t-paper{--bg:#FAFAF7;--card:#FFFFFF;--tile:#F1F1EC;--tile-open:#E8E8E1;--ink:#16140F;--muted:#6B675E;--detail:#2C2924;--line:#E2E0D8;
+  --img:#EDEDE6;--accent:#C4532D;--on-accent:#FFFFFF}
+html.t-sepia .rd article mark,html.t-paper .rd article mark{color:inherit}
+.hlbar,.player{background:var(--card)!important;color:var(--ink)}
+.hlbar .tb,.player button{color:var(--ink)}
+.player .pp{color:var(--on-accent)!important}
+.aa{display:inline-flex;align-items:center;justify-content:center;width:44px;height:40px;border-radius:12px;border:1px solid var(--line);
+  background:var(--tile);color:var(--ink);font:700 16px var(--serif);margin-left:auto}
+.aa+.lsn{margin-left:8px}
+.rs .grp{margin:16px 0 0}
+.rs .grp>span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.rs .seg{display:flex;gap:6px;background:var(--tile);padding:4px;border-radius:14px}
+.rs .seg button{flex:1;height:40px;border:0;border-radius:10px;background:none;color:var(--muted);font:600 14px var(--sans)}
+.rs .seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.rs .size{display:flex;align-items:center;gap:10px}
+.rs .size button{width:48px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font-family:var(--serif);font-weight:700}
+.rs .size .val{flex:1;text-align:center;font-size:14px;color:var(--detail)}
+.rs .themes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.rs .themes button{height:64px;border-radius:14px;border:2px solid var(--line);font:600 12px var(--sans);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px}
+.rs .themes button b{font:700 18px var(--serif)}
+.rs .themes button.on{border-color:var(--accent)}
+.rs .preview{margin-top:16px;padding:14px;border-radius:14px;background:var(--bg);color:var(--detail);font-size:var(--r-size,17.5px);
+  line-height:var(--r-lh,1.72);font-family:var(--r-font,var(--sans))}
+
 /* reader header: stays at the top, clear of the iPhone status bar */
 .rd{padding-top:0}
 .rd .bar{position:sticky;top:0;z-index:30;margin:0 -18px;padding:calc(10px + env(safe-area-inset-top)) 18px 10px;
@@ -28,6 +59,7 @@ HL_CSS = r"""
 .rd .bar .meta{min-width:0;flex:1}
 .rd .bar .meta b{display:inline-block;max-width:52vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
 .rd h1{margin-top:18px}
+@media (max-width:440px){.rd .bar .when{display:none}.rd .bar .meta b{max-width:34vw}}
 :root{--hl-amber:rgba(242,181,68,.42);--hl-mint:rgba(94,214,160,.38);--hl-sky:rgba(110,168,255,.40);--hl-rose:rgba(255,128,150,.38)}
 .rd article mark{color:inherit;background:none;cursor:pointer;border-radius:4px;padding:0 .08em;margin:0 -.04em;
   -webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background .2s}
@@ -221,6 +253,34 @@ A.addEventListener('click',ev=>{const m=ev.target.closest('mark');if(!m||!getSel
   if(b.dataset.a==='del'){list.splice(list.indexOf(h),1);save(list);paint();closeSheet()}})});
 paint();
 
+// ── reader settings ──
+(()=>{const h=document.documentElement,KEY='reader:prefs';
+ const F={serif:"'Literata','Charter','Iowan Old Style',Georgia,serif",sans:"'Inter',-apple-system,system-ui,sans-serif",system:"-apple-system,BlinkMacSystemFont,system-ui,sans-serif"};
+ const T={midnight:'#0B1220',dusk:'#18181B',sepia:'#F3EBD9',paper:'#FAFAF7'};
+ const SIZES=[15,16,17.5,19,20.5,22,24],LH={compact:1.5,normal:1.72,airy:1.95};
+ let p={};try{p=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(_){}
+ p={size:17.5,font:'sans',lh:1.72,theme:'midnight',...p};
+ const apply=()=>{['dusk','sepia','paper'].forEach(t=>h.classList.toggle('t-'+t,p.theme===t));
+  h.style.setProperty('--r-size',p.size+'px');h.style.setProperty('--r-lh',p.lh);h.style.setProperty('--r-font',F[p.font]);
+  const m=document.querySelector('meta[name=theme-color]');if(m)m.content=T[p.theme];try{localStorage.setItem(KEY,JSON.stringify(p))}catch(_){}};
+ const aa=document.createElement('button');aa.type='button';aa.className='aa';aa.textContent='Aa';aa.setAttribute('aria-label','Text and theme settings');
+ const bar=document.querySelector('.rd .bar');bar.appendChild(aa);
+ function render(sh){const on=(c)=>c?' on':'';const lhName=Object.keys(LH).find(k=>LH[k]==p.lh)||'normal';
+  sh.querySelector('.rs').innerHTML=`<h3 style='font-size:22px'>Reading</h3>
+  <div class='grp'><span>Text size</span><div class='size'><button type='button' data-sz='-1' aria-label='Smaller text' style='font-size:14px'>A</button>
+   <div class='val'>${p.size}px</div><button type='button' data-sz='1' aria-label='Larger text' style='font-size:21px'>A</button></div></div>
+  <div class='grp'><span>Font</span><div class='seg'>${[['serif','Serif'],['sans','Sans'],['system','System']].map(([k,l])=>`<button type='button' data-f='${k}' class='${on(p.font===k)}' style="font-family:${F[k]}">${l}</button>`).join('')}</div></div>
+  <div class='grp'><span>Line spacing</span><div class='seg'>${[['compact','Compact'],['normal','Normal'],['airy','Airy']].map(([k,l])=>`<button type='button' data-lh='${k}' class='${on(lhName===k)}'>${l}</button>`).join('')}</div></div>
+  <div class='grp'><span>Theme</span><div class='themes'>${[['midnight','Midnight','#0B1220','#EAF0FA'],['dusk','Dusk','#18181B','#EDEDEF'],['sepia','Sepia','#F3EBD9','#3A2E21'],['paper','Paper','#FAFAF7','#16140F']]
+   .map(([k,l,bg,fg])=>`<button type='button' data-t='${k}' class='${on(p.theme===k)}' style='background:${bg};color:${fg}'><b>Aa</b>${l}</button>`).join('')}</div></div>
+  <div class='preview'>The quick brown fox jumps over the lazy dog, and the reader settles in for a long, comfortable read.</div>`}
+ aa.onclick=()=>{const sh=openSheet(`<div class='rs'></div>`);render(sh);
+  sh.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.classList.contains('x'))return;
+   if(b.dataset.sz){const i=SIZES.indexOf(+p.size);p.size=SIZES[Math.max(0,Math.min(SIZES.length-1,(i<0?2:i)+(+b.dataset.sz)))]}
+   if(b.dataset.f)p.font=b.dataset.f;if(b.dataset.lh)p.lh=LH[b.dataset.lh];if(b.dataset.t)p.theme=b.dataset.t;apply();render(sh)})};
+ apply();
+})();
+
 // ── real audio file for this article (keeps playing with the screen locked) ──
 const AU=P.get('a')||'';
 if(AU)(()=>{const I={play:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M7 4.5v15l13-7.5z'/></svg>",
@@ -327,10 +387,18 @@ const cp=document.querySelector('#cpall');cp.hidden=false;cp.onclick=async()=>{t
 """
 
 
+EARLY = r"""<script>(()=>{try{const p=JSON.parse(localStorage.getItem('reader:prefs')||'{}'),h=document.documentElement;
+const F={serif:"'Literata','Charter','Iowan Old Style',Georgia,serif",sans:"'Inter',-apple-system,system-ui,sans-serif",system:"-apple-system,BlinkMacSystemFont,system-ui,sans-serif"};
+const T={midnight:'#0B1220',dusk:'#18181B',sepia:'#F3EBD9',paper:'#FAFAF7'};
+if(p.theme&&p.theme!=='midnight')h.classList.add('t-'+p.theme);h.style.setProperty('--r-size',(p.size||17.5)+'px');
+h.style.setProperty('--r-lh',p.lh||1.72);h.style.setProperty('--r-font',F[p.font||'sans']);
+document.querySelector('meta[name=theme-color]').content=T[p.theme||'midnight']}catch(_){}})()</script>"""
+
+
 def write_reader(relay: str = "") -> None:
     body = ("<main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'>"
             f"{w.PREV}</a><div class='meta'><span class='badge'>Reader</span><br>"
-            "<b id='host'></b> · <span id='when'>Loading…</span></div></div>"
+            "<b id='host'></b><span class='when'> · <span id='when'>Loading…</span></span></div></div>"
             "<div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div>"
             "<div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div>"
             "<div class='skel' style='width:70%'></div></div></main>")
@@ -338,8 +406,10 @@ def write_reader(relay: str = "") -> None:
             "<meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>"
             "<meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'>"
             f"<link rel='apple-touch-icon' href='apple-touch-icon.png'>"
-            f"<title>Reader</title>{w.FONTS}<style>{w.CSS}{w.READER_CSS}{HL_CSS}</style>"
-            "<script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script>"
+            f"<title>Reader</title>{w.FONTS}"
+            "<link href='https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap' rel='stylesheet'>"
+            f"<style>{w.CSS}{w.READER_CSS}{HL_CSS}</style>"
+            f"{EARLY}<script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script>"
             "<script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script>"
             f"</head><body data-relay='{e(relay)}' data-root=''>{body}<script>{READER_JS}</script></body></html>")
     w.DOCS.mkdir(exist_ok=True)

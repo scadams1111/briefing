@@ -125,6 +125,51 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .subrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
 .sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
 .chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
+
+/* ── design system: one set of tokens and components for every page ── */
+:root{--sp1:4px;--sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;
+  --rad-s:10px;--rad-m:14px;--rad-l:20px;--rad-xl:24px;--tap:44px;
+  --fs-xs:12px;--fs-s:13.5px;--fs-m:15px;--fs-l:17px;--ease:cubic-bezier(.2,.7,.2,1)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:color-mix(in srgb,var(--accent) 35%,transparent)}
+button,.btn,.chip,.fbb,.tabs a,.toc a,.toc button{-webkit-tap-highlight-color:transparent;transition:transform .12s var(--ease),background .15s,border-color .15s,color .15s}
+button:active,.btn:active,.chip:active,.fbb:active{transform:scale(.97)}
+/* header: same on every page, sticky and blurred on scrolling pages */
+body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
+  padding:calc(12px + env(safe-area-inset-top)) max(16px,calc((100% - 528px)/2)) 12px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
+  border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.tabs a{min-height:32px;display:flex;align-items:center}
+/* buttons and chips share sizes, corners and type */
+.btn{height:48px;border-radius:var(--rad-m);font-size:var(--fs-m)}
+.chip,.fbb{height:40px;border-radius:12px;padding:0 14px;font-size:var(--fs-s);font-weight:600;gap:7px}
+.chip{background:var(--tile);border:1px solid var(--line);color:var(--detail)}
+.fbb{background:transparent}
+.chip.sm{height:34px;padding:0 11px;font-size:var(--fs-xs);border-radius:10px}
+/* surfaces */
+.card{border-radius:var(--rad-xl)}
+.bg,.fresh{border-radius:var(--rad-l)}
+.page .card{margin:var(--sp4) 0}
+.body{padding:var(--sp4) 18px 20px;gap:var(--sp3)}
+.extras,.fb{gap:var(--sp2)}
+/* page titles and section labels */
+.hero{padding:var(--sp5) 2px var(--sp2)}
+.hero h1{font-size:32px;letter-spacing:-.015em}
+.hero p{font-size:var(--fs-s);line-height:1.5}
+.label{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:var(--sp6) 2px var(--sp1)}
+/* story image fallback: quiet tile with the topic's initial */
+.media.noimg::after{content:attr(data-k);position:absolute;right:14px;top:-18px;font-family:var(--serif);font-weight:700;
+  font-size:150px;line-height:1;color:color-mix(in srgb,var(--ink) 7%,transparent);pointer-events:none}
+.media.noimg{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 9%,var(--img)),var(--img) 60%)}
+/* empty and loading states */
+.empty{padding:56px 20px;font-size:var(--fs-m);line-height:1.5}
+.empty::before{content:"";display:block;width:44px;height:44px;margin:0 auto 14px;border-radius:50%;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
+.skel{background:linear-gradient(90deg,var(--tile) 0%,var(--tile-open) 50%,var(--tile) 100%);background-size:200% 100%;animation:shimmer 1.3s linear infinite!important}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
+@keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 """
 
 CHEV = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' "
@@ -218,7 +263,7 @@ def _domain(url: str) -> str:
 def card(it: dict, root: str = "") -> str:
     """One story card: image, source, headline, takeaway, 3 expandable points."""
     img = (f"<img src='{e(it['image'])}' alt='' loading='lazy' referrerpolicy='no-referrer' "
-           f"onerror=\"this.remove()\">") if it.get("image") else ""
+           f"onerror=\"this.parentNode.classList.add('noimg');this.remove()\">") if it.get("image") else ""
     fav = f"https://www.google.com/s2/favicons?domain={e(_domain(it['url']))}&sz=64"
     pts = "".join(
         f"<details{' open' if n == 1 else ''}><summary><span class='n'>{n}</span><span>{e(b['point'])}</span>"
@@ -236,8 +281,9 @@ def card(it: dict, root: str = "") -> str:
     read_chip = (f"<a class='chip' href='{read_href}'>{HEADPHONES if au else BOOK}<span>{'Read or listen' if au else 'Read'}</span></a>")
     archived = (f"<div class='extras'>{read_chip}<a class='chip' href='https://wallhop.io/{e(it['url'])}'>"
                 f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
+    initial = e((it.get("topic_name") or it.get("source") or "B")[:1].upper())
     return (f"<article class='card'><div class='scroll'>"
-            f"<div class='media'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
+            f"<div class='media{'' if img else ' noimg'}' data-k='{initial}'>{img}<span class='pill'>{e(it.get('topic_name') or 'Story')}</span></div>"
             f"<div class='body'><div class='src'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
             f"{e(it['source'])} · {it['minutes']} min read</div>"
             f"<h1 class='head'><a href='{e(it['url'])}'>{e(it['headline'])}</a></h1>{room}"
@@ -303,7 +349,7 @@ def deep_slide(d: dict, root: str = "") -> str:
             f"<h1 class='head'>{e(d['headline'])}</h1>"
             + (f"<p class='room'>{e(d['why'])}</p>" if d.get("why") else "")
             + f"<div class='points'>{pts}</div>"
-            f"<div class='src' style='margin-top:6px;font-weight:700;color:var(--ink)'>Go deeper</div>"
+            f"<div class='label' style='margin:6px 0 0'>Go deeper</div>"
             f"<div class='toc'>{rows}</div>"
             f"<p class='foot' style='text-align:left;margin-top:4px'>Primer based on "
             f"<a href='{e(d['wiki_url'])}'>Wikipedia</a> (CC BY-SA).</p></div></div></article></section>")
@@ -565,7 +611,7 @@ def write_search_page() -> None:
             "summaries. Opens GitHub: tap <b>Create</b>, then come back here. Ready in about 2 minutes.</p>"
             f"<a id='go' class='btn primary' href='#' target='_blank' rel='noopener'>{SEARCH_ICON}<span>Find fresh articles</span></a></div>"
             "<div id='res' class='res'></div>"
-            + (f"<h3 class='kicker' style='margin:28px 2px 4px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)'>"
+            + (f"<h3 class='label'>"
                f"Past searches</h3><div class='past'>{rows}</div>" if rows else "")
             + "</main>")
     page = shell("Search — Briefing", "search", body).replace("</style>", SEARCH_CSS + "</style>", 1)
