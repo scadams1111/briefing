@@ -108,6 +108,51 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
 .chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
 
+/* ── design system: one set of tokens and components for every page ── */
+:root{--sp1:4px;--sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;
+  --rad-s:10px;--rad-m:14px;--rad-l:20px;--rad-xl:24px;--tap:44px;
+  --fs-xs:12px;--fs-s:13.5px;--fs-m:15px;--fs-l:17px;--ease:cubic-bezier(.2,.7,.2,1)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:color-mix(in srgb,var(--accent) 35%,transparent)}
+button,.btn,.chip,.fbb,.tabs a,.toc a,.toc button{-webkit-tap-highlight-color:transparent;transition:transform .12s var(--ease),background .15s,border-color .15s,color .15s}
+button:active,.btn:active,.chip:active,.fbb:active{transform:scale(.97)}
+/* header: same on every page, sticky and blurred on scrolling pages */
+body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
+  padding:calc(12px + env(safe-area-inset-top)) max(16px,calc((100% - 528px)/2)) 12px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
+  border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.tabs a{min-height:32px;display:flex;align-items:center}
+/* buttons and chips share sizes, corners and type */
+.btn{height:48px;border-radius:var(--rad-m);font-size:var(--fs-m)}
+.chip,.fbb{height:40px;border-radius:12px;padding:0 14px;font-size:var(--fs-s);font-weight:600;gap:7px}
+.chip{background:var(--tile);border:1px solid var(--line);color:var(--detail)}
+.fbb{background:transparent}
+.chip.sm{height:34px;padding:0 11px;font-size:var(--fs-xs);border-radius:10px}
+/* surfaces */
+.card{border-radius:var(--rad-xl)}
+.bg,.fresh{border-radius:var(--rad-l)}
+.page .card{margin:var(--sp4) 0}
+.body{padding:var(--sp4) 18px 20px;gap:var(--sp3)}
+.extras,.fb{gap:var(--sp2)}
+/* page titles and section labels */
+.hero{padding:var(--sp5) 2px var(--sp2)}
+.hero h1{font-size:32px;letter-spacing:-.015em}
+.hero p{font-size:var(--fs-s);line-height:1.5}
+.label{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:var(--sp6) 2px var(--sp1)}
+/* story image fallback: quiet tile with the topic's initial */
+.media.noimg::after{content:attr(data-k);position:absolute;right:14px;top:-18px;font-family:var(--serif);font-weight:700;
+  font-size:150px;line-height:1;color:color-mix(in srgb,var(--ink) 7%,transparent);pointer-events:none}
+.media.noimg{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 9%,var(--img)),var(--img) 60%)}
+/* empty and loading states */
+.empty{padding:56px 20px;font-size:var(--fs-m);line-height:1.5}
+.empty::before{content:"";display:block;width:44px;height:44px;margin:0 auto 14px;border-radius:50%;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
+.skel{background:linear-gradient(90deg,var(--tile) 0%,var(--tile-open) 50%,var(--tile) 100%);background-size:200% 100%;animation:shimmer 1.3s linear infinite!important}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
+@keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
 [hidden]{display:none!important}
 .sbox{display:flex;gap:8px;margin:8px 0 6px}
 .sbox input{flex:1;min-width:0;height:48px;border-radius:14px;border:1px solid var(--line);background:var(--tile);color:var(--ink);
@@ -131,7 +176,7 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 .bg p{margin:0;font-size:14.5px;line-height:1.6;color:var(--detail)}
 .bg small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
 .bg small a{text-decoration:underline}
-</style></head><body class='' data-repo='scadams1111/briefing' data-root=''><header class='top'><a class='brand' href='./'>Briefing<span>.</span></a><nav class='tabs'><a href='./' class=''>Today</a><a href='saved.html' class=''>Saved</a><a href='archive/' class=''>Archive</a><a href='search.html' class='on' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><main class='page'><section class='hero'><div class='kicker'>Search</div><h1>Find articles</h1><p>Search everything your briefing has collected, or find fresh articles on any topic.</p></section><form id='form' class='sbox' role='search'><label for='q' class='sr' style='position:absolute;left:-9999px'>Search</label><input id='q' type='search' placeholder='e.g. organoids, GLP-1, Roman roads' autocomplete='off' enterkeyhint='search'></form><div id='stat' class='fresh' hidden></div><div id='fresh' class='fresh' hidden><h2>Find fresh articles on “<span id='fq'></span>”</h2><p>Searches the news and your library, then the AI picks the best, most relevant pieces with three-point summaries. Opens GitHub: tap <b>Create</b>, then come back here. Ready in about 2 minutes.</p><a id='go' class='btn primary' href='#' target='_blank' rel='noopener'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg><span>Find fresh articles</span></a></div><div id='res' class='res'></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
+</style></head><body class='' data-repo='Scadams1111/briefing' data-root=''><header class='top'><a class='brand' href='./'>Briefing<span>.</span></a><nav class='tabs'><a href='./' class=''>Today</a><a href='saved.html' class=''>Saved</a><a href='archive/' class=''>Archive</a><a href='search.html' class='on' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><main class='page'><section class='hero'><div class='kicker'>Search</div><h1>Find articles</h1><p>Search everything your briefing has collected, or find fresh articles on any topic.</p></section><form id='form' class='sbox' role='search'><label for='q' class='sr' style='position:absolute;left:-9999px'>Search</label><input id='q' type='search' placeholder='e.g. organoids, GLP-1, Roman roads' autocomplete='off' enterkeyhint='search'></form><div id='stat' class='fresh' hidden></div><div id='fresh' class='fresh' hidden><h2>Find fresh articles on “<span id='fq'></span>”</h2><p>Searches the news and your library, then the AI picks the best, most relevant pieces with three-point summaries. Opens GitHub: tap <b>Create</b>, then come back here. Ready in about 2 minutes.</p><a id='go' class='btn primary' href='#' target='_blank' rel='noopener'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg><span>Find fresh articles</span></a></div><div id='res' class='res'></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
 (()=>{const repo=document.body.dataset.repo;const KEY='gh_token';
 const toast=(html,ms=2600)=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
  t.innerHTML=html;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,ms)};
