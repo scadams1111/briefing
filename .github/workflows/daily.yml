@@ -22,7 +22,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - name: Already built today?
@@ -51,7 +51,7 @@ jobs:
       - name: Read each story aloud
         if: steps.check.outputs.skip != 'true'
         continue-on-error: true
-        timeout-minutes: 18
+        timeout-minutes: 26
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python -m curator article-audio

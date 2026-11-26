@@ -175,10 +175,11 @@ def _pieces(text: str, size: int = 700) -> list[str]:
     return out
 
 
-async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc: int = 3,
-                      per_piece: int = 120, budget: int = 900) -> None:
-    """Speak each (text, out) job in ~700-word pieces (long single requests stall),
-    joined into one MP3. Time limits per piece and for the whole batch."""
+async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc: int = 6,
+                      per_piece: int = 480, budget: int = 1320) -> None:
+    """Speak each (text, out) job in ~700-word pieces, several at once (the free voice
+    service runs at about real-time speed), joined into one MP3. Pieces start in story
+    order, so the top stories finish first if time runs out."""
     import time as _t
     import edge_tts
     sem = asyncio.Semaphore(conc)
@@ -186,7 +187,7 @@ async def _speak_many(jobs: list[tuple[str, Path]], voice: str, rate: str, conc:
 
     async def piece(text, path):
         async with sem:
-            for attempt in range(3):
+            for attempt in range(2):
                 if _t.monotonic() > deadline:
                     return False
                 try:

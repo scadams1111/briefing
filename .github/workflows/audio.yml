@@ -15,7 +15,7 @@ concurrency:
 jobs:
   audio:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,7 +25,7 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Read each story aloud
         continue-on-error: true
-        timeout-minutes: 18
+        timeout-minutes: 26
         run: python -m curator article-audio
       - name: Upload audio
         env:
