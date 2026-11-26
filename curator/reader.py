@@ -66,6 +66,26 @@ HL_CSS = r"""
 .notes .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .notes .acts .btn{flex:1;min-width:140px}
 .notes .empty2{font-size:14px;color:var(--muted);margin:0}
+
+/* read aloud */
+.lsn{display:inline-flex;align-items:center;gap:7px;margin-left:auto;height:40px;padding:0 14px;border-radius:12px;border:0;
+  background:var(--accent);color:var(--on-accent);font:700 14px var(--sans)}
+.rd article .speaking{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent)}
+.player{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));width:min(560px,calc(100% - 24px));
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px;padding:10px 10px 8px;border-radius:20px;background:#1B2438;border:1px solid var(--line);
+  box-shadow:0 12px 32px rgba(0,0,0,.5);z-index:45}
+.player button{border:0;background:none;color:var(--ink);height:40px;min-width:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font:700 13px var(--sans)}
+.player button:active{background:var(--line)}
+.player .pp{background:var(--accent);color:var(--on-accent);width:46px;height:46px;border-radius:50%}
+.player .pl{order:-1;flex:1 1 100%;min-width:0;font-size:12px;color:var(--muted);line-height:1.3;padding:0 6px 6px}
+.player .pl b{display:block;color:var(--ink);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .pg{height:3px;border-radius:2px;background:var(--line);margin-top:5px;overflow:hidden}
+.player .pg i{display:block;height:100%;width:0;background:var(--accent)}
+body.playing .hlbar{bottom:calc(140px + env(safe-area-inset-bottom))}
+body.playing .rd{padding-bottom:170px}
+.vlist button{display:flex;justify-content:space-between;width:100%;padding:12px 4px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);font:500 15px var(--sans);text-align:left}
+.vlist button.on{color:var(--accent);font-weight:700}
+.vlist small{color:var(--muted);font-size:12px}
 .via{font-size:12px;color:var(--muted);margin-top:4px}
 .via a{text-decoration:underline}
 """
@@ -192,6 +212,59 @@ A.addEventListener('click',ev=>{const m=ev.target.closest('mark');if(!m||!getSel
   if(b.dataset.a==='def'){define(h.text);return}
   if(b.dataset.a==='del'){list.splice(list.indexOf(h),1);save(list);paint();closeSheet()}})});
 paint();
+
+// ── read aloud (the phone's built-in voices) ──
+(()=>{if(!('speechSynthesis' in window))return;const S=speechSynthesis;
+ const I={play:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M7 4.5v15l13-7.5z'/></svg>",
+  pause:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M6 4h4v16H6zM14 4h4v16h-4z'/></svg>",
+  back:"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><path d='M11 17l-5-5 5-5M18 17l-5-5 5-5'/></svg>",
+  fwd:"<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><path d='M13 17l5-5-5-5M6 17l5-5-5-5'/></svg>",
+  spk:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' aria-hidden='true'><path d='M11 5L6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13'/></svg>"};
+ const blocks=[{el:document.querySelector('.rd h1'),t:title},...[...A.querySelectorAll('p,h2,h3,h4,li,blockquote')]
+   .filter(el=>!el.closest('li p')&&!(el.tagName==='LI'&&el.querySelector('p'))&&!el.parentElement.closest('blockquote'))
+   .map(el=>({el,t:el.textContent.replace(/\s+/g,' ').trim()})).filter(b=>b.t.length>1)];
+ if(blocks.length<3)return;
+ const POS='tts:'+u, RATES=[1,1.25,1.5,0.85];let idx=+(localStorage.getItem(POS)||0);if(idx>=blocks.length)idx=0;
+ let playing=false,rate=+(localStorage.getItem('tts:rate')||1),voices=[],voice=null,player=null,token=0;
+ const en=()=>S.getVoices().filter(v=>/^en(-|_|$)/i.test(v.lang));
+ const rank=v=>(/premium/i.test(v.name)?0:/enhanced/i.test(v.name)?1:/siri/i.test(v.name)?2:v.localService?3:4)+(/en-US/i.test(v.lang)?0:.5);
+ function pickVoice(){voices=en().sort((a,b)=>rank(a)-rank(b)||a.name.localeCompare(b.name));const saved=localStorage.getItem('tts:voice');
+  voice=voices.find(v=>v.voiceURI===saved)||voices[0]||null}
+ pickVoice();if(S.onvoiceschanged!==undefined)S.onvoiceschanged=pickVoice;
+ const chunks=t=>{const out=[];let cur='';for(const s of t.match(/[^.!?;:]+[.!?;:]*\s*/g)||[t]){if((cur+s).length>220&&cur){out.push(cur);cur=''}cur+=s}if(cur)out.push(cur);return out};
+ function mark(){blocks.forEach((b,i)=>b.el.classList.toggle('speaking',playing&&i===idx));
+  if(player){player.querySelector('.pg i').style.width=(100*idx/(blocks.length-1))+'%';
+   player.querySelector('.pl span').textContent=`Paragraph ${idx+1} of ${blocks.length}`}}
+ function setPP(){if(player){const b=player.querySelector('.pp');b.innerHTML=playing?I.pause:I.play;b.setAttribute('aria-label',playing?'Pause':'Play')}}
+ function stop(){token++;S.cancel();playing=false;setPP();mark()}
+ function speakFrom(i){S.cancel();idx=Math.max(0,Math.min(blocks.length-1,i));try{localStorage.setItem(POS,idx)}catch(_){}
+  const my=++token;const b=blocks[idx];playing=true;document.body.classList.add('playing');setPP();mark();
+  b.el.scrollIntoView({behavior:'smooth',block:'center'});const parts=chunks(b.t);let k=0;
+  const next=()=>{if(my!==token)return;if(k<parts.length){const ut=new SpeechSynthesisUtterance(parts[k++]);if(voice)ut.voice=voice;ut.lang=voice?.lang||'en-US';
+    ut.rate=rate;ut.onend=next;ut.onerror=e=>{if(e.error!=='interrupted'&&e.error!=='canceled')next()};S.speak(ut)}
+   else if(idx<blocks.length-1)speakFrom(idx+1);else{stop();idx=0;try{localStorage.removeItem(POS)}catch(_){}mark()}};next()}
+ function openPlayer(){if(player)return;player=document.createElement('div');player.className='player';
+  player.innerHTML=`<button type='button' class='bk' aria-label='Previous paragraph'>${I.back}</button><button type='button' class='pp' aria-label='Play'>${I.play}</button>
+   <button type='button' class='fw' aria-label='Next paragraph'>${I.fwd}</button><div class='pl'><b>${esc(title)}</b><span></span><div class='pg'><i></i></div></div>
+   <button type='button' class='rt' aria-label='Speed'>${rate}×</button><button type='button' class='vc' aria-label='Voice'>Voice</button><button type='button' class='cl' aria-label='Close player'>×</button>`;
+  document.body.appendChild(player);document.body.classList.add('playing');
+  player.querySelector('.pp').onclick=()=>playing?stop():speakFrom(idx);
+  player.querySelector('.bk').onclick=()=>speakFrom(idx-1);player.querySelector('.fw').onclick=()=>speakFrom(idx+1);
+  player.querySelector('.rt').onclick=e=>{rate=RATES[(RATES.indexOf(rate)+1)%RATES.length];e.currentTarget.textContent=rate+'×';
+   try{localStorage.setItem('tts:rate',rate)}catch(_){}if(playing)speakFrom(idx);else mark()};
+  player.querySelector('.vc').onclick=()=>{pickVoice();const sh=openSheet(`<h3 style='font-size:22px'>Voice</h3>
+   <p class='ph'>For better voices: iPhone Settings → Accessibility → Spoken Content → Voices → English, and download an <b>Enhanced</b> or <b>Premium</b> voice.</p>
+   <div class='vlist'>${voices.map((v,i)=>`<button type='button' data-i='${i}' class='${v===voice?'on':''}'>${esc(v.name)}<small>${esc(v.lang)}</small></button>`).join('')||'<p class=ph>No English voices found.</p>'}</div>`);
+   sh.querySelector('.vlist')?.addEventListener('click',e=>{const b=e.target.closest('button[data-i]');if(!b)return;voice=voices[+b.dataset.i];
+    try{localStorage.setItem('tts:voice',voice.voiceURI)}catch(_){}closeSheet();if(playing)speakFrom(idx)})};
+  player.querySelector('.cl').onclick=()=>{stop();player.remove();player=null;document.body.classList.remove('playing')};mark()}
+ const btn=document.createElement('button');btn.type='button';btn.className='lsn';btn.innerHTML=I.spk+'<span>Listen</span>';
+ document.querySelector('.rd .bar').appendChild(btn);
+ btn.onclick=()=>{openPlayer();speakFrom(idx)};
+ A.addEventListener('click',e=>{if(!player||e.target.closest('mark,a')||!getSelection().isCollapsed)return;
+  const i=blocks.findIndex(b=>b.el===e.target.closest('p,h2,h3,h4,li,blockquote'));if(i>=0)speakFrom(i)});
+ addEventListener('pagehide',()=>S.cancel());
+})();
 })();
 """
 
