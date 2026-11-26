@@ -7,6 +7,8 @@
 site_title: "The Daily Briefing"
 # Leave blank on GitHub — it's worked out from the repo name.
 site_url: ""
+# Your Cloudflare relay (relay/worker.js), used by the reader view.
+relay_url: "https://briefing-relay.scadams1111.workers.dev"
 
 daily_picks: 10          # articles in each day's briefing
 max_per_topic: 2         # so one busy topic can't take over the day

@@ -193,7 +193,7 @@ let cur=-1;const upd=()=>{const i=Math.round(deck.scrollLeft/deck.clientWidth);i
  bars.forEach((b,k)=>b.classList.toggle('seen',k<=i));
  num.textContent=slides[i].dataset.label||`${i+1} of ${stories}`;
  prev.disabled=i===0;next.querySelector('span').textContent=i<n-2?'Next story':(i===n-2?'Finish':'Start over');
- const u=slides[i].dataset.url;orig.style.visibility=u?'visible':'hidden';if(u)orig.href=u;
+ const u=slides[i].dataset.url;orig.style.visibility=u?'visible':'hidden';if(u)orig.href=((document.body.dataset.root||'')+'read.html?u=')+encodeURIComponent(u);
  try{history.replaceState(null,'',i?`#${i+1}`:location.pathname)}catch(_){}};
 deck.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
 prev.onclick=()=>go(cur-1);next.onclick=()=>go(cur<n-1?cur+1:0);
@@ -341,13 +341,13 @@ def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None =
            f"<div class='src'>{n} stories · about {mins} min if you read them all</div>"
            f"<div class='toc'>{toc}</div>"
            f"<p class='foot'><a href='{root}epub/latest.epub'>Download as EPUB</a> · "
-           f"<a href='{root}archive/'>Past briefings</a> · <a href='{root}podcast.html'>Podcast</a> · "
+           f"<a href='{root}archive/'>Past briefings</a> · <a href='{root}highlights.html'>Highlights</a> · <a href='{root}podcast.html'>Podcast</a> · "
            f"<a href='{root}settings.html'>Settings</a></p></div></div></article></section>")
     return (f"<main class='reader'>{listen_bar(date)}<div class='bars'>{bars}</div>"
             f"<div class='status'><b>1 of {n}</b><span>{d.strftime('%a, %b')} {d.day}</span></div>"
             f"<div class='deck'>{slides}{end}</div>"
             f"<div class='actions'><button type='button' class='btn icon' data-prev aria-label='Previous story'>{PREV}</button>"
-            f"<a class='btn' data-orig href='#'>Read original</a>"
+            f"<a class='btn' data-orig href='#'>Read</a>"
             f"<button type='button' class='btn primary' data-next><span>Next story</span>{NEXT}</button></div></main>")
 
 
@@ -425,23 +425,14 @@ try{
 
 
 def write_reader() -> None:
-    """A Midnight-styled reader for Internet Archive copies. The archived page is
-    fetched and cleaned in the reader's own browser; nothing is stored on the site."""
-    body = ("<main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'>"
-            f"{PREV}</a><div class='meta'><span class='badge'>{ARCHIVE} Archived copy</span><br>"
-            "<b id='host'></b> · <span id='when'>Looking it up…</span></div></div>"
-            "<div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div>"
-            "<div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div>"
-            "<div class='skel' style='width:70%'></div></div></main>")
-    page = ("<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
-            "<meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'>"
-            "<meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'>"
-            f"<title>Archived copy</title>{FONTS}<style>{CSS}{READER_CSS}</style>"
-            "<script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script>"
-            "<script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script>"
-            f"</head><body>{body}<script>{READER_JS}</script></body></html>")
-    DOCS.mkdir(exist_ok=True)
-    (DOCS / "read.html").write_text(page)
+    import yaml
+    from . import reader
+    try:
+        relay = (yaml.safe_load(open("config.yaml")) or {}).get("relay_url", "")
+    except Exception:
+        relay = ""
+    reader.write_reader(relay)
+    reader.write_highlights_page()
 
 
 def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str],

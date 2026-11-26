@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'><title>Archived copy</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><style>
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='referrer' content='no-referrer'><link rel='apple-touch-icon' href='apple-touch-icon.png'><title>Reader</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><style>
 :root{
   --bg:#0B1220; --card:#131C2E; --tile:#172136; --tile-open:#1C2740; --ink:#EAF0FA; --muted:#8D9AB3;
   --detail:#BAC5D8; --accent:#F2B544; --on-accent:#1A1305; --img:#1E2A44; --line:#2A3653;
@@ -138,41 +138,97 @@ h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-he
 @keyframes pulse{50%{opacity:.45}}
 .rd .end{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
 .rd .end a{flex:1;min-width:150px}
-</style><script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script><script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script></head><body><main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg></a><div class='meta'><span class='badge'><svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='4' width='18' height='4' rx='1'/><path d='M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4'/></svg> Archived copy</span><br><b id='host'></b> · <span id='when'>Looking it up…</span></div></div><div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div><div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div><div class='skel' style='width:70%'></div></div></main><script>
+
+[hidden]{display:none!important}
+.rd article mark{background:color-mix(in srgb,var(--accent) 32%,transparent);color:var(--ink);border-radius:3px;padding:0 1px;cursor:pointer}
+.rd article mark.note{box-shadow:inset 0 -2px 0 var(--accent)}
+.hlbar{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:6px;
+  padding:6px;border-radius:14px;background:var(--ink);box-shadow:0 10px 30px rgba(0,0,0,.45);z-index:40}
+.hlbar button{white-space:nowrap;border:0;border-radius:10px;padding:10px 14px;font:700 14px var(--sans);background:transparent;color:var(--bg)}
+.hlbar button.hl{background:var(--accent);color:var(--on-accent)}
+.notes{margin-top:34px;padding:16px;border-radius:18px;background:var(--card)}
+.notes h2{font-family:var(--serif);font-size:20px;margin:0 0 10px;color:var(--ink)}
+.notes .n{padding:10px 0;border-bottom:1px solid var(--line)}
+.notes .n:last-of-type{border-bottom:0}
+.notes blockquote{margin:0;padding-left:12px;border-left:3px solid var(--accent);font-family:var(--serif);font-size:15.5px;line-height:1.55;color:var(--ink)}
+.notes .nt{margin-top:6px;font-size:14px;color:var(--detail)}
+.notes .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.notes .acts .btn{flex:1;min-width:140px}
+.notes .empty2{font-size:14px;color:var(--muted);margin:0}
+.via{font-size:12px;color:var(--muted);margin-top:4px}
+.via a{text-decoration:underline}
+</style><script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script><script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script></head><body data-relay='https://briefing-relay.scadams1111.workers.dev' data-root=''><main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg></a><div class='meta'><span class='badge'>Reader</span><br><b id='host'></b> · <span id='when'>Loading…</span></div></div><div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div><div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div><div class='skel' style='width:70%'></div></div></main><script>
 (async()=>{
-const $=s=>document.querySelector(s), u=new URLSearchParams(location.search).get('u')||'';
-const show=(html)=>{$('#out').innerHTML=html};
+const $=s=>document.querySelector(s), P=new URLSearchParams(location.search), u=P.get('u')||'', want=P.get('src')||'live';
+const RELAY=document.body.dataset.relay||'', root=document.body.dataset.root||'';
+const show=html=>{$('#out').innerHTML=html};
 const esc=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-if(!/^https?:\/\//.test(u)){show(`<div class='state'><h2>No article link</h2><p>Open this from an "Archived copy" button.</p></div>`);return}
-const host=new URL(u).hostname.replace(/^www\./,'');
-$('#host').textContent=host; document.title='Archived · '+host;
-const saveUrl='https://web.archive.org/save/'+u, rawLatest='https://web.archive.org/web/2/'+u;
-let snap=null;
-try{const r=await fetch('https://archive.org/wayback/available?url='+encodeURIComponent(u));const j=await r.json();snap=j?.archived_snapshots?.closest}catch(_){}
-if(!snap||!snap.available){
-  show(`<div class='state'><h2>Not archived yet</h2><p>The Internet Archive doesn't have a copy of this page. Some publishers block archiving, and new articles may not be captured yet.</p>
-  <div class='row'><a class='btn primary' href='${esc(saveUrl)}' rel='noopener'>Ask the Archive to save it</a><a class='btn' href='${esc(u)}'>Try the original</a></div></div>`);return}
-const ts=snap.timestamp, when=new Date(Date.UTC(+ts.slice(0,4),+ts.slice(4,6)-1,+ts.slice(6,8)));
-$('#when').textContent='Saved '+when.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
-const pageUrl=snap.url.replace(/^http:/,'https:'), clean=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1id_/'),
-  // if_ = the Archive's own copy with links kept inside the Archive but no toolbar.
-  // (The raw id_ copy runs the site's original scripts, which can jump to the live site or its app.)
-  framed=pageUrl.replace(/\/web\/(\d+)\//,'/web/$1if_/');
-// If the Archive won't let us build a clean copy, go straight to its page without the toolbar.
-const fallback=()=>{show(`<div class='state'><h2>Opening the archived page…</h2><p>Tip: tap <b>aA</b> in Safari's address bar, then <b>Show Reader</b>, for a clean view.</p></div>`);setTimeout(()=>location.replace(framed),900)};
-try{
-  const res=await fetch(clean); if(!res.ok) throw new Error(res.status);
-  const doc=new DOMParser().parseFromString(await res.text(),'text/html');
-  const base=doc.createElement('base');base.href=u;doc.head.prepend(base);
-  const art=new Readability(doc).parse();
-  if(!art||!art.content||art.textContent.trim().split(/\s+/).length<80) return fallback();
-  const body=DOMPurify.sanitize(art.content,{FORBID_TAGS:['style','form','input','button','iframe'],FORBID_ATTR:['style','class','id','width','height']});
-  const mins=Math.max(1,Math.round(art.textContent.trim().split(/\s+/).length/230));
-  show(`<h1>${esc(art.title)}</h1><div class='by'>${esc([art.byline,art.siteName||host,mins+' min read'].filter(Boolean).join(' · '))}</div>
-   <article>${body}</article>
-   <div class='end'><a class='btn' href='${esc(pageUrl)}' rel='noopener'>View on the Archive</a><a class='btn primary' href='${esc(u)}'>Try the original</a></div>`);
-  document.querySelectorAll('article a').forEach(a=>{a.rel='noopener';a.target='_blank'});
-  document.querySelectorAll('article img').forEach(i=>{i.loading='lazy';i.referrerPolicy='no-referrer';i.onerror=()=>i.remove()});
-}catch(_){fallback()}
+if(!/^https?:\/\//.test(u)){show(`<div class='state'><h2>No article link</h2><p>Open this from a story's Read button.</p></div>`);return}
+const host=new URL(u).hostname.replace(/^www\./,'');$('#host').textContent=host;document.title='Read · '+host;
+const viaRelay=x=>RELAY?RELAY+'?url='+encodeURIComponent(x):x;
+async function grab(url){const r=await fetch(viaRelay(url));if(!r.ok)throw new Error('HTTP '+r.status);return await r.text()}
+function parse(html,base){const doc=new DOMParser().parseFromString(html,'text/html');const b=doc.createElement('base');b.href=base;doc.head.prepend(b);
+ const a=new Readability(doc).parse();if(!a||!a.content)return null;const words=a.textContent.trim().split(/\s+/).length;return words<150?null:{...a,words}}
+async function live(){try{return parse(await grab(u),u)}catch(_){return null}}
+let snapUrl=null,snapWhen=null;
+async function archived(){try{const j=await (await fetch('https://archive.org/wayback/available?url='+encodeURIComponent(u))).json();
+ const s=j?.archived_snapshots?.closest;if(!s||!s.available)return null;snapUrl=s.url.replace(/^http:/,'https:');snapWhen=s.timestamp;
+ const raw=snapUrl.replace(/\/web\/(\d+)\//,'/web/$1id_/');return parse(await grab(raw),u)}catch(_){return null}}
+let art=null,src='';
+if(want==='archive'){art=await archived();src=art?'archive':'';if(!art){art=await live();src=art?'live':''}}
+else{art=await live();src=art?'live':'';if(!art){art=await archived();src=art?'archive':''}}
+const when=ts=>ts?new Date(Date.UTC(+ts.slice(0,4),+ts.slice(4,6)-1,+ts.slice(6,8))).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}):'';
+if(!art){$('#when').textContent='Not available';
+ show(`<div class='state'><h2>Couldn't open a clean copy</h2><p>The site may be paywalled or blocking readers, and there's no usable archived copy.</p>
+ <div class='row'><a class='btn primary' href='${esc(u)}' target='_blank' rel='noopener'>Open the original</a>${snapUrl?`<a class='btn' href='${esc(snapUrl)}' target='_blank' rel='noopener'>Archive page</a>`:''}</div></div>`);return}
+$('#when').textContent=src==='archive'?'Archived copy · '+when(snapWhen):'Reader view';
+const body=DOMPurify.sanitize(art.content,{FORBID_TAGS:['style','form','input','button','iframe','script'],FORBID_ATTR:['style','class','id','width','height']});
+const mins=Math.max(1,Math.round(art.words/230)), title=art.title||host;
+show(`<h1>${esc(title)}</h1><div class='by'>${esc([art.byline,art.siteName||host,mins+' min read'].filter(Boolean).join(' · '))}</div>
+ <article id='art'>${body}</article>
+ <div class='notes' id='notes'></div>
+ <div class='end'><a class='btn' href='${esc(u)}' target='_blank' rel='noopener'>Open original</a>${src==='archive'&&snapUrl?`<a class='btn' href='${esc(snapUrl)}' target='_blank' rel='noopener'>View on the Archive</a>`:''}</div>
+ <p class='via'>Tip: select text to highlight it or add a note. <a href='${root}highlights.html'>All highlights</a></p>`);
+document.querySelectorAll('#art a').forEach(a=>{a.target='_blank';a.rel='noopener'});
+document.querySelectorAll('#art img').forEach(i=>{i.loading='lazy';i.referrerPolicy='no-referrer';i.onerror=()=>i.remove()});
+
+// ── highlights & notes (saved in this browser) ──
+const A=$('#art'), KEY='hl:'+u, INDEX='hl:index';
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(_){return[]}};
+const save=list=>{try{localStorage.setItem(KEY,JSON.stringify(list));const ix=JSON.parse(localStorage.getItem(INDEX)||'{}');
+ if(list.length)ix[u]={title,host,at:Date.now(),n:list.length};else delete ix[u];localStorage.setItem(INDEX,JSON.stringify(ix))}catch(_){}};
+const nodes=()=>{const t=document.createTreeWalker(A,NodeFilter.SHOW_TEXT);const a=[];let n;while(n=t.nextNode())a.push(n);return a};
+function wrap(start,end,h){let pos=0;for(const n of nodes()){const len=n.data.length,s=Math.max(start-pos,0),e2=Math.min(end-pos,len);
+ if(s<e2){let x=n;if(s>0)x=x.splitText(s);if(e2-s<x.data.length)x.splitText(e2-s);const m=document.createElement('mark');m.dataset.h=h.id;
+  if(h.note)m.className='note';x.parentNode.insertBefore(m,x);m.appendChild(x)}pos+=len;if(pos>=end)break}}
+function locate(h){const txt=A.textContent;if(txt.slice(h.start,h.end)===h.text)return[h.start,h.end];const i=txt.indexOf(h.text);return i<0?null:[i,i+h.text.length]}
+function paint(){const list=load();A.querySelectorAll('mark').forEach(m=>{m.replaceWith(...m.childNodes)});A.normalize();
+ for(const h of list){const at=locate(h);if(at)wrap(at[0],at[1],h)}renderNotes(list)}
+function md(list){let s=`# ${title}\n\nSource: ${u}\nSaved: ${new Date().toISOString().slice(0,10)}\n\n`;
+ for(const h of list){s+=`> ${h.text.replace(/\n+/g,' ')}\n`;if(h.note)s+=`\n${h.note}\n`;s+='\n'}return s}
+function renderNotes(list){const box=$('#notes');
+ if(!list.length){box.innerHTML=`<h2>Highlights</h2><p class='empty2'>Select any text in the article to highlight it or add a note.</p>`;return}
+ box.innerHTML=`<h2>Highlights (${list.length})</h2>`+list.map(h=>`<div class='n'><blockquote>${esc(h.text)}</blockquote>${h.note?`<div class='nt'>${esc(h.note)}</div>`:''}</div>`).join('')+
+ `<div class='acts'><a class='btn primary' id='obs' href='#'>Send to Obsidian</a><button type='button' class='btn' id='cp'>Copy Markdown</button></div>`;
+ const name=('Briefing/'+title).replace(/[\\/:*?"<>|#^\[\]]+/g,' ').replace('Briefing ','Briefing/').slice(0,120);
+ $('#obs').href='obsidian://new?file='+encodeURIComponent(name)+'&content='+encodeURIComponent(md(list))+'&overwrite=true';
+ $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(md(list));$('#cp').textContent='Copied'}catch(_){$('#cp').textContent='Copy failed'}}}
+const bar=document.createElement('div');bar.className='hlbar';bar.hidden=true;
+bar.innerHTML=`<button type='button' class='hl' data-a='hl'>Highlight</button><button type='button' data-a='note'>Add note</button>`;document.body.appendChild(bar);
+let pending=null;
+function current(){const s=getSelection();if(!s||s.isCollapsed||!s.rangeCount)return null;const r=s.getRangeAt(0);
+ if(!A.contains(r.commonAncestorContainer))return null;const text=r.toString().trim();if(text.length<3)return null;
+ const pre=document.createRange();pre.selectNodeContents(A);pre.setEnd(r.startContainer,r.startOffset);
+ let start=pre.toString().length;const raw=r.toString();start+=raw.indexOf(text);return{start,end:start+text.length,text:text.slice(0,1500)}}
+document.addEventListener('selectionchange',()=>{pending=current();bar.hidden=!pending});
+bar.addEventListener('pointerdown',ev=>ev.preventDefault());
+bar.addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b||!pending)return;let note='';
+ if(b.dataset.a==='note'){note=prompt('Your note')||'';if(!note)return}
+ const list=load();list.push({id:Date.now().toString(36),...pending,note,at:Date.now()});list.sort((a,b)=>a.start-b.start);save(list);
+ getSelection().removeAllRanges();bar.hidden=true;pending=null;paint()});
+A.addEventListener('click',ev=>{const m=ev.target.closest('mark');if(!m||!getSelection().isCollapsed)return;const list=load(),h=list.find(x=>x.id===m.dataset.h);if(!h)return;
+ const v=prompt('Edit the note, or clear it and tap OK to keep the highlight. Cancel does nothing. Type DELETE to remove the highlight.',h.note||'');
+ if(v===null)return;if(v.trim().toUpperCase()==='DELETE')list.splice(list.indexOf(h),1);else h.note=v.trim();save(list);paint()});
+paint();
 })();
 </script></body></html>
