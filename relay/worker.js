@@ -6,8 +6,37 @@ const ALLOWED_ORIGINS = ["https://scadams1111.github.io"];
 const MAX_BYTES = 6_000_000;
 const PRIVATE_HOST = /^(localhost|0\.|127\.|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|\[?::1\]?$)/i;
 
+// Audio: GitHub serves release files as generic downloads, which iPhone won't play.
+// /audio?url=<a briefing release file> streams it as real audio, with seeking (Range) support.
+const AUDIO_PREFIX = "https://github.com/scadams1111/briefing/releases/download/";
+
+async function audio(request) {
+  const target = new URL(request.url).searchParams.get("url") || "";
+  if (!target.toLowerCase().startsWith(AUDIO_PREFIX.toLowerCase()) || !/\.mp3$/i.test(target)) {
+    return new Response("Not allowed", { status: 400 });
+  }
+  const headers = { "User-Agent": "BriefingRelay/1.0" };
+  const range = request.headers.get("Range");
+  if (range) headers["Range"] = range;
+  const up = await fetch(target, { headers, redirect: "follow", cf: { cacheTtl: 86400, cacheEverything: true } });
+  if (!up.ok && up.status !== 206) return new Response("Audio not found", { status: up.status });
+  const h = new Headers();
+  h.set("Content-Type", "audio/mpeg");
+  h.set("Accept-Ranges", "bytes");
+  h.set("Cache-Control", "public, max-age=86400");
+  h.set("Access-Control-Allow-Origin", "*");
+  for (const k of ["Content-Length", "Content-Range", "ETag", "Last-Modified"]) {
+    const v = up.headers.get(k);
+    if (v) h.set(k, v);
+  }
+  return new Response(request.method === "HEAD" ? null : up.body, { status: up.status, headers: h });
+}
+
 export default {
   async fetch(request, env, ctx) {
+    if (new URL(request.url).pathname === "/audio" && (request.method === "GET" || request.method === "HEAD")) {
+      return audio(request);
+    }
     const origin = request.headers.get("Origin") || "";
     const allowed = ALLOWED_ORIGINS.includes(origin);
     const cors = {

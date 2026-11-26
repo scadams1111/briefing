@@ -360,10 +360,21 @@ def listen_bar(date: str) -> str:
     if not p.exists():
         return ""
     m = json.loads(p.read_text())
+    m["url"] = relay_audio(m["url"])
     return (f"<div class='listen'><button type='button' class='pb' aria-label='Play' data-play=\"{PLAY}\" data-pause=\"{PAUSE}\">{PLAY}</button>"
             f"<div class='lt'>Listen to today's briefing<small>{max(1, round(m['seconds'] / 60))} min</small>"
             f"<div class='bar'><i></i></div></div><button type='button' class='sp' aria-label='Playback speed'>1×</button>"
             f"<audio preload='none' data-date='{e(date)}' src='{e(m['url'])}'></audio></div>")
+
+
+def relay_audio(url: str) -> str:
+    """Stream release audio through the Cloudflare relay (GitHub serves it as a download iPhone won't play)."""
+    try:
+        import yaml
+        relay = (yaml.safe_load(open("config.yaml")) or {}).get("relay_url", "")
+    except Exception:
+        relay = ""
+    return f"{relay.rstrip('/')}/audio?url={quote(url, safe='')}" if relay and url else url
 
 
 def deck(date: str, picks: list[dict], root: str = "", subs: list[dict] | None = None,

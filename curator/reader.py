@@ -286,7 +286,7 @@ const AU=P.get('a')||'';
 if(AU)(()=>{const I={play:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M7 4.5v15l13-7.5z'/></svg>",
   pause:"<svg width='18' height='18' viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M6 4h4v16H6zM14 4h4v16h-4z'/></svg>",
   spk:"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' aria-hidden='true'><path d='M3 18v-6a9 9 0 0 1 18 0v6'/><path d='M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z'/></svg>"};
- const a=new Audio();a.preload='metadata';a.src=AU;const POS='ta:'+u,RATES=[1,1.25,1.5,0.85];let rate=+(localStorage.getItem('tts:rate')||1),player=null;
+ const a=new Audio();a.preload='metadata';a.src=RELAY?RELAY+'/audio?url='+encodeURIComponent(AU):AU;const POS='ta:'+u,RATES=[1,1.25,1.5,0.85];let rate=+(localStorage.getItem('tts:rate')||1),player=null;
  const fmt=s=>isFinite(s)?`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`:'–:––';
  const setMS=()=>{if(!('mediaSession' in navigator))return;try{navigator.mediaSession.metadata=new MediaMetadata({title,artist:art.siteName||host,album:'Briefing',
    artwork:[{src:new URL((root||'')+'icon-512.png',location.href).href,sizes:'512x512',type:'image/png'}]});

@@ -115,6 +115,12 @@ def load(date: str) -> dict | None:
     return json.loads(p.read_text()) if p.exists() else None
 
 
+def _relay(cfg: dict, url: str) -> str:
+    from urllib.parse import quote
+    r = (cfg.get("relay_url") or "").rstrip("/")
+    return f"{r}/audio?url={quote(url, safe='')}" if r else url
+
+
 def podcast_feed(cfg: dict, site: str, keep: int = 14) -> None:
     eps = sorted((json.loads(p.read_text()) for p in DATA.glob("????-??-??.json")),
                  key=lambda m: m["date"], reverse=True)[:keep] if DATA.exists() else []
@@ -124,7 +130,7 @@ def podcast_feed(cfg: dict, site: str, keep: int = 14) -> None:
     title = cfg.get("site_title", "The Daily Briefing")
     items = "".join(
         f"<item><title>{e(m['title'])}</title><description>{e(m.get('summary', ''))}</description>"
-        f"<enclosure url='{e(m['url'])}' length='{m['bytes']}' type='audio/mpeg'/>"
+        f"<enclosure url='{e(_relay(cfg, m['url']))}' length='{m['bytes']}' type='audio/mpeg'/>"
         f"<guid isPermaLink='false'>briefing-audio-{m['date']}</guid>"
         f"<pubDate>{format_datetime(dt.datetime.fromisoformat(m['date'] + 'T12:00:00+00:00'))}</pubDate>"
         f"<itunes:duration>{m['seconds']}</itunes:duration><itunes:explicit>false</itunes:explicit></item>"
