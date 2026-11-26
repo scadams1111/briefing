@@ -1,7 +1,7 @@
 name: Catch-up summaries
 
 # If Gemini was busy during the morning run, these later runs redo any
-# summaries that fell back to the plain version. They do nothing if all is well.
+# summaries that fell back to the plain version. They do nothing if all is swell.
 on:
   schedule:
     - cron: "47 14 * * *"   # ~6:47am Pacific (winter)
