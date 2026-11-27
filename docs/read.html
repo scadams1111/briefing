@@ -151,6 +151,9 @@ body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
 @keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
 .toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
 @keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.offline{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));left:50%;white-space:nowrap;transform:translateX(-50%);z-index:70;
+  background:var(--tile);border:1px solid var(--line);color:var(--detail);font:600 12.5px var(--sans);padding:7px 12px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 .rd{max-width:640px;margin:0 auto;padding:8px 18px 80px}
@@ -537,4 +540,19 @@ if(AU)(()=>{const I={play:"<svg width='18' height='18' viewBox='0 0 24 24' fill=
  addEventListener('pagehide',()=>S.cancel());
 })();
 })();
+</script><script>
+(()=>{if(!('serviceWorker' in navigator))return;const root=document.body.dataset.root||'';
+navigator.serviceWorker.register(root+'sw.js').then(reg=>{
+ const warm=()=>{const sw=navigator.serviceWorker.controller||reg.active;if(!sw||!navigator.onLine)return;
+  const relay=document.body.dataset.relay||'';
+  const assets=[...document.querySelectorAll('img[src]')].map(i=>i.src).filter(s=>/^https?:/.test(s));
+  const articles=relay?[...document.querySelectorAll('.slide[data-url]')].map(s=>s.dataset.url).filter(Boolean)
+    .map(u=>relay.replace(/\/$/,'')+'/?url='+encodeURIComponent(u)):[];
+  const pages=['','saved.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
+  sw.postMessage({type:'warm',assets:[...assets,...pages],articles})};
+ if(document.querySelector('.deck'))(navigator.serviceWorker.ready.then(()=>setTimeout(warm,2500)));
+}).catch(()=>{});
+const badge=()=>{let b=document.querySelector('.offline');if(navigator.onLine){if(b)b.remove();return}
+ if(!b){b=document.createElement('div');b.className='offline';b.textContent='Offline · saved copy';document.body.appendChild(b)}};
+addEventListener('online',badge);addEventListener('offline',badge);badge();})();
 </script></body></html>

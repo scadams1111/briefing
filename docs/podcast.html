@@ -151,6 +151,9 @@ body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
 @keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
 .toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
 @keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.offline{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));left:50%;white-space:nowrap;transform:translateX(-50%);z-index:70;
+  background:var(--tile);border:1px solid var(--line);color:var(--detail);font:600 12.5px var(--sans);padding:7px 12px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 [hidden]{display:none!important}
@@ -176,7 +179,7 @@ body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
 .bg p{margin:0;font-size:14.5px;line-height:1.6;color:var(--detail)}
 .bg small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
 .bg small a{text-decoration:underline}
-</style></head><body class='' data-repo='scadams1111/briefing' data-root=''><header class='top'><a class='brand' href='./'>Briefing<span>.</span></a><nav class='tabs'><a href='./' class=''>Today</a><a href='saved.html' class=''>Saved</a><a href='archive/' class=''>Archive</a><a href='search.html' class='' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><main class='page'><section class='hero'><div class='kicker'>Podcast</div><h1>Listen in your podcast app</h1><p>Each morning's briefing, read aloud, about 9 minutes.</p></section><div class='bg'><div class='src'>Apple Podcasts</div><p>Open <b>Podcasts</b> → <b>Library</b> → tap <b>…</b> (top right) → <b>Follow a Show by URL</b> → paste the address below.</p></div><div class='bg'><div class='src'>Feed address</div><p style='word-break:break-all'><b>https://scadams1111.github.io/briefing/podcast.xml</b></p><p style='margin-top:12px'><button type='button' class='btn primary' style='padding:0 16px' onclick="navigator.clipboard.writeText('https://scadams1111.github.io/briefing/podcast.xml').then(()=>this.textContent='Copied')">Copy address</button></p></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
+</style></head><body class='' data-repo='Scadams1111/briefing' data-root='' data-relay='https://briefing-relay.scadams1111.workers.dev'><header class='top'><a class='brand' href='./'>Briefing<span>.</span></a><nav class='tabs'><a href='./' class=''>Today</a><a href='saved.html' class=''>Saved</a><a href='archive/' class=''>Archive</a><a href='search.html' class='' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><main class='page'><section class='hero'><div class='kicker'>Podcast</div><h1>Listen in your podcast app</h1><p>Each morning's briefing, read aloud, about 9 minutes.</p></section><div class='bg'><div class='src'>Apple Podcasts</div><p>Open <b>Podcasts</b> → <b>Library</b> → tap <b>…</b> (top right) → <b>Follow a Show by URL</b> → paste the address below.</p></div><div class='bg'><div class='src'>Feed address</div><p style='word-break:break-all'><b>https://scadams1111.github.io/briefing/podcast.xml</b></p><p style='margin-top:12px'><button type='button' class='btn primary' style='padding:0 16px' onclick="navigator.clipboard.writeText('https://scadams1111.github.io/briefing/podcast.xml').then(()=>this.textContent='Copied')">Copy address</button></p></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
 (()=>{const repo=document.body.dataset.repo;const KEY='gh_token';
 const toast=(html,ms=2600)=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
  t.innerHTML=html;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,ms)};
@@ -206,4 +209,19 @@ const a=document.querySelector('.listen audio');if(a){const pb=document.querySel
  a.onloadedmetadata=()=>{const t=+get('audio:'+a.dataset.date);if(t&&t<a.duration-5)a.currentTime=t};
  sp.onclick=()=>{ri=(ri+1)%rates.length;a.playbackRate=rates[ri];sp.textContent=rates[ri]+'×'}}
 })();
+</script><script>
+(()=>{if(!('serviceWorker' in navigator))return;const root=document.body.dataset.root||'';
+navigator.serviceWorker.register(root+'sw.js').then(reg=>{
+ const warm=()=>{const sw=navigator.serviceWorker.controller||reg.active;if(!sw||!navigator.onLine)return;
+  const relay=document.body.dataset.relay||'';
+  const assets=[...document.querySelectorAll('img[src]')].map(i=>i.src).filter(s=>/^https?:/.test(s));
+  const articles=relay?[...document.querySelectorAll('.slide[data-url]')].map(s=>s.dataset.url).filter(Boolean)
+    .map(u=>relay.replace(/\/$/,'')+'/?url='+encodeURIComponent(u)):[];
+  const pages=['','saved.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
+  sw.postMessage({type:'warm',assets:[...assets,...pages],articles})};
+ if(document.querySelector('.deck'))(navigator.serviceWorker.ready.then(()=>setTimeout(warm,2500)));
+}).catch(()=>{});
+const badge=()=>{let b=document.querySelector('.offline');if(navigator.onLine){if(b)b.remove();return}
+ if(!b){b=document.createElement('div');b.className='offline';b.textContent='Offline · saved copy';document.body.appendChild(b)}};
+addEventListener('online',badge);addEventListener('offline',badge);badge();})();
 </script></body></html>

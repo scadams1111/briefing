@@ -411,7 +411,8 @@ def write_reader(relay: str = "") -> None:
             f"<style>{w.CSS}{w.READER_CSS}{HL_CSS}</style>"
             f"{EARLY}<script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script>"
             "<script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script>"
-            f"</head><body data-relay='{e(relay)}' data-root=''>{body}<script>{READER_JS}</script></body></html>")
+            f"</head><body data-relay='{e(relay)}' data-root=''>{body}<script>{READER_JS}</script>"
+            f"<script>{w._offline().REGISTER}</script></body></html>")
     w.DOCS.mkdir(exist_ok=True)
     (w.DOCS / "read.html").write_text(page)
 

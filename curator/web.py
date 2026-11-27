@@ -169,6 +169,9 @@ body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
 @keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
 .toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
 @keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.offline{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));left:50%;white-space:nowrap;transform:translateX(-50%);z-index:70;
+  background:var(--tile);border:1px solid var(--line);color:var(--detail);font:600 12.5px var(--sans);padding:7px 12px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 """
 
@@ -303,10 +306,10 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
             "<meta name='apple-mobile-web-app-title' content='Briefing'>"
             f"<link rel='apple-touch-icon' href='{root}apple-touch-icon.png'>"
             f"<link rel='manifest' href='{root}manifest.webmanifest'>"
-            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body class='{'app' if script else ''}' data-repo='{e(_repo())}' data-root='{e(root)}'>"
+            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body class='{'app' if script else ''}' data-repo='{e(_repo())}' data-root='{e(root)}' data-relay='{e(_relay_url())}'>"
             f"<header class='top'><a class='brand' href='{root}./'>Briefing<span>.</span></a>"
             f"<nav class='tabs'>{tabs}</nav></header>{body}"
-            + (f"<script>{JS}</script>" if script else "") + f"<script>{NEWTAB}</script><script>{FEEDBACK_JS}</script></body></html>")
+            + (f"<script>{JS}</script>" if script else "") + f"<script>{NEWTAB}</script><script>{FEEDBACK_JS}</script><script>{_offline().REGISTER}</script></body></html>")
 
 
 def section_of(it: dict) -> str:
@@ -515,6 +518,7 @@ def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archiv
         f"<main class='page'><section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section>"
         f"<div class='toc'>{rows}</div></main>", root="../"))
     write_saved(saved)
+    _offline().write_sw()
     write_reader()
     write_search_page()
     write_settings_page()
@@ -595,6 +599,19 @@ def _past_searches() -> list[dict]:
     d = Path("data") / "searches"
     items = [json.loads(p.read_text()) for p in d.glob("*.json")] if d.exists() else []
     return sorted(items, key=lambda x: x.get("when", ""), reverse=True)
+
+
+def _offline():
+    from . import offline
+    return offline
+
+
+def _relay_url() -> str:
+    try:
+        import yaml
+        return (yaml.safe_load(open("config.yaml")) or {}).get("relay_url", "") or ""
+    except Exception:
+        return ""
 
 
 def _site() -> str:
