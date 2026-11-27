@@ -20,8 +20,24 @@ jobs:
           T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           if [ -z "$T" ]; then echo "::warning::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets first."; echo "ok=false" >> "$GITHUB_OUTPUT"; else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Check alarm-clock key
+        id: d
+        env:
+          D: ${{ secrets.DISPATCH_TOKEN }}
+        run: if [ -n "$D" ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "::warning::Add the DISPATCH_TOKEN secret to turn on the alarm clock."; echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Deploy (with alarm clock)
+        if: steps.s.outputs.ok == 'true' && steps.d.outputs.ok == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: relay
+          secrets: |
+            DISPATCH_TOKEN
+        env:
+          DISPATCH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
       - name: Deploy
-        if: steps.s.outputs.ok == 'true'
+        if: steps.s.outputs.ok == 'true' && steps.d.outputs.ok != 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

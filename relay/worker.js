@@ -32,7 +32,32 @@ async function audio(request) {
   return new Response(request.method === "HEAD" ? null : up.body, { status: up.status, headers: h });
 }
 
+// Alarm clock: Cloudflare's timers are punctual (GitHub's free scheduler can be hours late).
+// Each timer starts a GitHub workflow using the DISPATCH_TOKEN secret.
+const REPO = "scadams1111/briefing";
+const TIMERS = { "17 11 * * *": "daily.yml", "47 14 * * *": "retry.yml" };
+
+async function dispatch(env, workflow) {
+  if (!env.DISPATCH_TOKEN) return console.log("no DISPATCH_TOKEN set");
+  const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${workflow}/dispatches`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.DISPATCH_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "User-Agent": "briefing-relay",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ref: "main" }),
+  });
+  console.log(`dispatch ${workflow}: ${r.status}`);
+}
+
 export default {
+  async scheduled(event, env, ctx) {
+    const wf = TIMERS[event.cron];
+    if (wf) ctx.waitUntil(dispatch(env, wf));
+  },
+
   async fetch(request, env, ctx) {
     if (new URL(request.url).pathname === "/audio" && (request.method === "GET" || request.method === "HEAD")) {
       return audio(request);

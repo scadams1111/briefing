@@ -2,3 +2,8 @@ name = "briefing-relay"
 main = "worker.js"
 compatibility_date = "2026-11-01"
 workers_dev = true
+
+# 11:17 UTC = 5:17am Belize / 3:17am Pacific (winter): daily briefing.
+# 14:47 UTC = 8:47am Belize: catch-up run.
+[triggers]
+crons = ["17 11 * * *", "47 14 * * *"]
