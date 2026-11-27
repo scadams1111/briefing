@@ -1,0 +1,79 @@
+Good morning. Here's your briefing for Friday, November 27.
+
+Story 1, from Foreign Affairs: Why Pursuing Absolute U.S. AI Dominance Over China Increases Catastrophic Risk.
+
+Pursuing total U.S. AI dominance over China creates dangerous military flashpoints, ignores containment failures, and cannot neutralize China's nuclear deterrent.
+
+China’s obsession with political stability and control makes Beijing willing to sacrifice technological speed to mitigate the catastrophic risks of unbridled superintelligence.
+
+The U.S. should extend its hardware edge via targeted export controls while pursuing parallel domestic regulation and risk-sharing dialogues with Beijing.
+
+Story 2, from STAT: Synthetic protein system restores chromosome stability in aging eggs, showing potential for IVF.
+
+Researchers engineered synthetic proteins to replace lost cohesin in aging oocytes, restoring normal chromosome tethering in old mouse eggs.
+
+Two European startups are vying to commercialize molecular approaches to prevent chromosomal errors before in-vitro fertilization.
+
+Translating chromosome stabilization into clinical IVF treatments requires overcoming technical hurdles regarding oocyte maturation timing and stringent safety regulations.
+
+Story 3, from STAT: Montana’s expanded ‘right to try’ law threatens clinical trial integrity and patient finances.
+
+RAND researchers warn Montana's expanded right-to-try law could undermine FDA clinical trials by allowing unapproved therapies without rigorous data collection or patient protections.
+
+Under Montana's SB535, patients face total out-of-pocket financial liability for experimental treatments and potential long-term complications, despite ambiguous insurer coverage rules.
+
+The authors advocate for policy safeguards like mandatory registries, standardized cost disclosures, and 15-year outcome tracking modeled on existing CMS and FDA frameworks.
+
+Story 4, from Fierce Biotech: Vyriad lands Big Pharma partnerships for in vivo CAR-T cell delivery platforms.
+
+Vyriad is advancing in vivo CAR-T therapies using a proprietary lentiviral platform that targets T cells directly inside a patient's body.
+
+Strategic partnerships with Regeneron and Novartis validate Vyriad's targeted lentiviral vector technology despite the biotech maintaining a low public profile.
+
+Vyriad is intentionally prioritizing oncology over the popular biotech trend of applying CAR-T therapies to autoimmune diseases due to safety considerations.
+
+Story 5, from worksinprogress.co: Pakistani architect Kamil Khan Mumtaz abandoned modernism to revive centuries-old traditional craftsmanship..
+
+Kamil Khan Mumtaz transitioned from Western modernism and Marxist activism to reviving traditional South Asian architectural heritage after a mid-career philosophical turning point.
+
+Mumtaz collaborated with remaining hereditary craft families to systematically rediscover architectural techniques that had been unpracticed for up to three centuries.
+
+Despite widespread domestic admiration and early preservation successes like saving Lahore's Walled City, Mumtaz's extensive body of work remains largely unknown internationally.
+
+Story 6, from krebsonsecurity.com: Ransomware recovery firm CTO indicted for secretly paying hackers and charging massive markups.
+
+The CTO of RansomwareHelp faces wire fraud charges for tricking desperate ransomware victims while secretly negotiating with and paying threat actors.
+
+RansomwareHelp used farcical technical jargon and active network manipulation to hide their fraud from non-technical clients facing catastrophic data loss.
+
+The indictment reflects a growing Department of Justice crackdown on predatory cybersecurity firms and dishonest third-party ransomware negotiators.
+
+Story 7, from Aeon: Brain metabolism and thermodynamic limits constrain viable computational models of human mind.
+
+Cognitive models often treat the mind as software independent of hardware, ignoring the heavy metabolic costs required to maintain real-world biological signals.
+
+Prominent mathematical models of synaptic memory, such as Fusi and Benna's beaker model, incorrectly rely on systems that decay into thermodynamic equilibrium.
+
+Jan Karbowski’s cyclic model uses nonequilibrium thermodynamics to demonstrate how ATP-driven state changes allow synapses to store long-term memories at low energy costs.
+
+Story 8, from The New Yorker: The Monumental Achievement of the Stanford Encyclopedia of Philosophy.
+
+The Hungarian mathematician Paul Erdős liked to talk about “the Book,” an imaginary volume in which God kept the most beautiful proof of every mathematical theorem.
+
+One of the first entries I read was “Forgiveness.” I had just submitted an earnest paper exploring the conditions under which you can, without surrendering your dignity, forgive someone who…
+
+I scanned the entries and clicked on the page for the “Sorites Paradox.” Suppose you have a heap of sand.
+
+Story 9, from Outside Online: My Local Trail Is Crumbling. Should I Fix It Without Approval?.
+
+What should you do when your favorite trails aren’t being maintained?
+
+Story 10, from PetaPixel: Investigation Reveals Who Betrayed Photographer Secretly Documenting Nazi-Occupied France.
+
+A new investigation has uncovered how a brave photographer, who risked his life taking hundreds of pictures of Nazi-occupied France, may have been betrayed by two neighbors.
+
+In April 2020, a mysterious album containing hundreds of photos of daily life during the German Nazi occupation of Paris from 1940 to 1942 was discovered in a flea market…
+
+Le Monde journalist Philippe Broussard began a four-year investigation to identify the photographer, who had taken at least 700 pictures of Paris during the first two years of the Occupation.
+
+That's the briefing. Have a good day.
