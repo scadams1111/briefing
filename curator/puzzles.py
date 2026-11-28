@@ -465,7 +465,9 @@ def build(date: str, items: list[dict], llm=None) -> dict:
     bank = BANK[:]
     rng.shuffle(bank)
     xw = crossword(words, date, theme or "Mixed bag", extra=bank[:12] if words else bank[:24])
-    return {"date": date, "ai": bool(words),
+    from .puzzles_more import build_more
+    more = build_more(date, items, llm)
+    return {**more, "date": date, "ai": bool(words),
             "crossword": xw,
             "whodunit": whodunit(date, 3 if wd < 3 else 4),
             "murdermap": murdermap(date),

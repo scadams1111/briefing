@@ -8,6 +8,7 @@ import logging
 from pathlib import Path
 
 from . import puzzles
+from . import games_more as more
 
 log = logging.getLogger(__name__)
 e = html.escape
@@ -25,7 +26,8 @@ def ensure(date: str, items: list[dict], llm=None, force: bool = False) -> dict 
     path = DATA / f"{date}.json"
     if path.exists() and not force:
         g = json.loads(path.read_text())
-        if g.get("ai") or llm is None or not getattr(llm, "available", False):
+        fresh = all(k in g for k in ("queens", "hive", "groups"))
+        if fresh and (g.get("ai") or llm is None or not getattr(llm, "available", False)):
             return g
     try:
         g = puzzles.build(date, items, llm)
@@ -46,8 +48,9 @@ def load(date: str) -> dict | None:
 # ── web ───────────────────────────────────────────────────────────────────
 CSS = r"""
 [hidden]{display:none!important}
-.seg{display:flex;gap:4px;background:var(--tile);padding:4px;border-radius:14px;margin:12px 0 14px;position:sticky;top:calc(env(safe-area-inset-top) + 56px);z-index:5}
-.seg button{flex:1;border:0;background:none;color:var(--muted);font:600 13px var(--sans);padding:9px 4px;border-radius:10px}
+.seg{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:var(--tile);padding:4px;border-radius:14px;margin:12px 0 14px;position:sticky;top:calc(env(safe-area-inset-top) + 56px);z-index:5}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:none;white-space:nowrap;border:0;background:none;color:var(--muted);font:600 13px var(--sans);padding:9px 12px;border-radius:10px}
 .seg button.on{background:var(--line);color:var(--ink)}
 .seg button .ok{color:var(--accent);margin-left:3px}
 .game h2{font-family:var(--serif);font-size:24px;margin:4px 2px 2px}
@@ -143,7 +146,8 @@ const segs=$$('.seg button');
 const show=id=>{segs.forEach(b=>b.classList.toggle('on',b.dataset.g===id));$$('.game').forEach(s=>s.hidden=s.id!==id);try{localStorage.setItem('lastGame',id)}catch(_){}};
 segs.forEach(b=>b.onclick=()=>{show(b.dataset.g);scrollTo({top:0})});
 let first=location.hash.slice(1);try{first=first||localStorage.getItem('lastGame')}catch(_){}
-show(['xw','wd','mm','sd'].includes(first)?first:'xw');
+show(segs.some(b=>b.dataset.g===first)?first:segs[0].dataset.g);
+const on=segs.find(b=>b.classList.contains('on'));on&&on.scrollIntoView({inline:'center',block:'nearest'});
 
 /* ── crossword ── */
 (()=>{const X=G.crossword,R=X.rows,C=X.cols,S=X.solution,board=$('#xw .xboard'),inp=$('#xw .kb');
@@ -320,20 +324,26 @@ def _sd_html(s: dict) -> str:
 
 def page_body(g: dict, root: str, past: list[str]) -> str:
     nice = dt.date.fromisoformat(g["date"]).strftime("%A, %B %-d")
-    seg = "".join(f"<button data-g='{k}'>{label}</button>" for k, label in
-                  (("xw", "Crossword"), ("wd", "Whodunit"), ("mm", "Map"), ("sd", "Sudoku")))
-    data = json.dumps({k: g[k] for k in ("date", "crossword", "whodunit", "murdermap", "sudoku")}).replace("</", "<\\/")
+    extra = more.sections(g)
+    order = [("qz", "Quiz"), ("gr", "Groups"), ("xw", "Crossword"), ("hv", "Hive"), ("wd", "Whodunit"), ("mm", "Map"),
+             ("cg", "Cryptogram"), ("ld", "Ladder"), ("sd", "Sudoku"), ("ft", "Futoshiki"), ("qn", "Queens"), ("ng", "Nonogram")]
+    order = [(k, l) for k, l in order if k in extra or k in ("xw", "wd", "mm", "sd")]
+    seg = "".join(f"<button data-g='{k}'>{label}</button>" for k, label in order)
+    keys = ("date", "crossword", "whodunit", "murdermap", "sudoku", "quiz", "groups", "hive", "cryptogram", "ladder",
+            "nonogram", "futoshiki", "queens")
+    data = json.dumps({k: g[k] for k in keys if k in g}).replace("</", "<\\/")
+    extra_html = "".join(f"<section class='game' id='{k}' hidden>{v}</section>" for k, v in extra.items())
     past_html = ""
     if past:
         past_html = ("<div class='past'><h3>Past puzzles</h3><div class='toc'>" + "".join(
             f"<a href='{root}games/{d}.html'><span class='k'>›</span><span>{dt.date.fromisoformat(d).strftime('%A, %B %-d')}</span></a>"
             for d in past) + "</div></div>")
-    return (f"<style>{CSS}</style><main class='page'><section class='hero'><div class='kicker'>Games · {e(nice)}</div>"
-            "<h1>Puzzles</h1><p>Four new puzzles every morning. They're also at the end of your Kobo briefing.</p></section>"
+    return (f"<style>{CSS}{more.CSS}</style><main class='page'><section class='hero'><div class='kicker'>Games · {e(nice)}</div>"
+            "<h1>Puzzles</h1><p>New puzzles every morning. They're also at the end of your Kobo briefing.</p></section>"
             f"<div class='seg'>{seg}</div>"
             + _xw_html(g["crossword"]) + _wd_html(g["whodunit"]) + _mm_html(g["murdermap"]) + _sd_html(g["sudoku"])
-            + past_html + f"</main><script type='application/json' id='gdata'>{data}</script>"
-            f"<script>{JS_SAFE}</script>")
+            + extra_html + past_html + f"</main><script type='application/json' id='gdata'>{data}</script>"
+            f"<script>{JS_SAFE}</script><script>{more.JS_SAFE}</script>")
 
 
 def write_pages(shell, date: str) -> None:
@@ -441,6 +451,8 @@ def epub_pages(g: dict) -> list[tuple[str, str, str]]:
         ("Sudoku", "g_sd.xhtml",
          f"<p class='meta'>Puzzles · Sudoku</p><h1>Sudoku</h1><p class='small'>{s['givens']} clues.</p>{_sd_grid(s)}{back}"),
     ]
+    extra_pages, extra_ans = more.epub_pages(g)
+    pages = extra_pages[:2] + pages + extra_pages[2:]
     sol = w["solution"]
     k = sol["killer"]
     table = "".join(f"<p class='clue'>{e(su['name'])}: {e(w['weapons'][sol['weapon'][i]])}, {e(w['places'][sol['place'][i]])}</p>"
@@ -452,6 +464,6 @@ def epub_pages(g: dict) -> list[tuple[str, str, str]]:
                   f"<h2>Whodunit</h2><p><b>{e(w['suspects'][k]['name'])}</b>, with the {e(w['weapons'][sol['weapon'][k]])}, "
                   f"in the {e(w['places'][w['crime_place']])}.</p>{table}"
                   f"<h2>Murder map</h2>{_mm_grid(m, True)}<p><b>{e(m['people'][mk]['name'])}</b> did it.</p>"
-                  f"<h2>Sudoku</h2>{_sd_grid(s, True)}"
+                  f"<h2>Sudoku</h2>{_sd_grid(s, True)}{extra_ans}"
                   "<p class='back'><a href='contents.xhtml'>↩ Back to contents</a></p>"))
     return pages
