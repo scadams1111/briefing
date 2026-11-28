@@ -32,7 +32,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-eff7ffb31734.mp3",
    "seconds": 508
-  }
+  },
+  "tags": [
+   "China\u2013United States relations",
+   "Biotechnology",
+   "Drug development",
+   "BIOSECURE Act"
+  ]
  },
  {
   "id": "50e54604c445",
@@ -67,7 +73,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-50e54604c445.mp3",
    "seconds": 476
-  }
+  },
+  "tags": [
+   "International student",
+   "Immigration policy of the second Trump administration",
+   "Doctor of Philosophy",
+   "Biomedical sciences"
+  ]
  },
  {
   "id": "53257a9101f1",
@@ -102,7 +114,12 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-53257a9101f1.mp3",
    "seconds": 1060
-  }
+  },
+  "tags": [
+   "Democratic backsliding",
+   "Authoritarianism",
+   "Economic voting"
+  ]
  },
  {
   "id": "8978fdb5982c",
@@ -137,7 +154,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-8978fdb5982c.mp3",
    "seconds": 817
-  }
+  },
+  "tags": [
+   "United States Department of Defense",
+   "Hadrian Automation",
+   "Donald Trump Jr.",
+   "Defense industry of the United States"
+  ]
  },
  {
   "id": "b5f4d1de994e",
@@ -168,7 +191,13 @@
   "date": "2026-11-25",
   "score": 8.0,
   "image": "",
-  "author": ""
+  "author": "",
+  "tags": [
+   "Anthropic",
+   "Superintelligence",
+   "AI safety",
+   "AI alignment"
+  ]
  },
  {
   "id": "8f292f63946e",
@@ -203,7 +232,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-8f292f63946e.mp3",
    "seconds": 645
-  }
+  },
+  "tags": [
+   "Generative artificial intelligence",
+   "Software engineering",
+   "Technical debt",
+   "Downtime"
+  ]
  },
  {
   "id": "f13df2f7366e",
@@ -238,7 +273,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-f13df2f7366e.mp3",
    "seconds": 852
-  }
+  },
+  "tags": [
+   "Lean (proof assistant)",
+   "Formal verification",
+   "Clojure",
+   "Software bug"
+  ]
  },
  {
   "id": "91899f0c9bd1",
@@ -269,7 +310,13 @@
   "date": "2026-11-25",
   "score": 6.0,
   "image": "",
-  "author": ""
+  "author": "",
+  "tags": [
+   "Benjamin Netanyahu",
+   "Gaza Strip",
+   "Second Trump administration",
+   "Israel\u2013United States relations"
+  ]
  },
  {
   "id": "48cd98b45b4d",
@@ -304,7 +351,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-25/art-48cd98b45b4d.mp3",
    "seconds": 846
-  }
+  },
+  "tags": [
+   "Vulnerability (computer security)",
+   "Artificial intelligence",
+   "Cyberwarfare",
+   "Patch (computing)"
+  ]
  },
  {
   "id": "5df55e63748b",
@@ -335,6 +388,12 @@
   "date": "2026-11-25",
   "score": 7.0,
   "image": "",
-  "author": ""
+  "author": "",
+  "tags": [
+   "Hannah Arendt",
+   "Friendship",
+   "Political philosophy",
+   "Plurality (philosophy)"
+  ]
  }
 ]

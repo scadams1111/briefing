@@ -28,7 +28,12 @@
   "date": "2026-11-24",
   "score": 10.0,
   "image": "https://bioengineer.org/wp-content/uploads/2026/11/stackrss-featured-25561.png",
-  "author": ""
+  "author": "",
+  "tags": [
+   "Laboratory rat",
+   "Animal welfare",
+   "Animal testing"
+  ]
  },
  {
   "id": "3c6728c1bfd1",
@@ -59,7 +64,13 @@
   "date": "2026-11-24",
   "score": 9.0,
   "image": "https://images.ctfassets.net/kftzwdyauwt9/Eg5mCwwaA3KqnznOVCh0n/8e6deaef25fd508d9853ff86a95187c1/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities-social.png?w=1600&h=900&fit=fill",
-  "author": ""
+  "author": "",
+  "tags": [
+   "OpenAI",
+   "Protein design",
+   "Large language model",
+   "Artificial intelligence in healthcare"
+  ]
  },
  {
   "id": "e42290d71815",
@@ -90,7 +101,13 @@
   "date": "2026-11-24",
   "score": 9.0,
   "image": "https://qtxasset.com/quartz/qcloud5/media/image/GettyImages-1074411040.jpg?VersionId=7NS4TwEEeaeML.KRm8.26SEPGJ02Rcsk",
-  "author": "Fraiser Kansteiner"
+  "author": "Fraiser Kansteiner",
+  "tags": [
+   "Food and Drug Administration",
+   "Capricor Therapeutics",
+   "Duchenne muscular dystrophy",
+   "Cell therapy"
+  ]
  },
  {
   "id": "80505f3b977e",
@@ -121,7 +138,14 @@
   "date": "2026-11-24",
   "score": 9.0,
   "image": "https://qtxasset.com/quartz/qcloud5/media/image/Sanofi_2.jpg?VersionId=rE23zCddbZSaOvHueK7G6Jz1OPLLu5oW",
-  "author": "Nick Paul Taylor"
+  "author": "Nick Paul Taylor",
+  "tags": [
+   "Sanofi",
+   "Insmed",
+   "Dupilumab",
+   "Mergers and acquisitions",
+   "Pharmaceutical industry"
+  ]
  },
  {
   "id": "9986080c4727",
@@ -152,7 +176,13 @@
   "date": "2026-11-24",
   "score": 9.0,
   "image": "",
-  "author": ""
+  "author": "",
+  "tags": [
+   "OpenAI",
+   "Anthropic",
+   "AI safety",
+   "Frontier model"
+  ]
  },
  {
   "id": "1eef7317285c",
@@ -183,7 +213,13 @@
   "date": "2026-11-24",
   "score": 8.0,
   "image": "https://images.theconversation.com/files/773737/original/file-20261123-62-op3d0l.jpg?ixlib=rb-4.1.1&rect=0%2C401%2C6000%2C3000&q=45&auto=format&w=1356&h=668&fit=crop",
-  "author": "Jeffrey Young"
+  "author": "Jeffrey Young",
+  "tags": [
+   "Nvidia",
+   "CUDA",
+   "Graphics processing unit",
+   "Foundation model"
+  ]
  },
  {
   "id": "fae9585de076",
@@ -214,7 +250,13 @@
   "date": "2026-11-24",
   "score": 8.0,
   "image": "https://images.theconversation.com/files/773213/original/file-20261120-62-xf47bg.jpg?ixlib=rb-4.1.1&rect=0%2C296%2C5760%2C2880&q=45&auto=format&w=1356&h=668&fit=crop",
-  "author": "Baldeep K Dhaliwal; Sarah Elizabeth Scales"
+  "author": "Baldeep K Dhaliwal; Sarah Elizabeth Scales",
+  "tags": [
+   "Ebola",
+   "Democratic Republic of the Congo",
+   "Health care workers",
+   "Bioethics"
+  ]
  },
  {
   "id": "4517ee5f5393",
@@ -245,7 +287,12 @@
   "date": "2026-11-24",
   "score": 7.0,
   "image": "https://substackcdn.com/image/fetch/$s_!rMPJ!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4bda677-cd48-49d1-bbbb-edc394fcc30d_961x596.jpeg",
-  "author": "Noah Smith"
+  "author": "Noah Smith",
+  "tags": [
+   "Noah Smith (writer)",
+   "New Right",
+   "Conservatism in the United States"
+  ]
  },
  {
   "id": "7afaa8128bf8",
@@ -276,7 +323,13 @@
   "date": "2026-11-24",
   "score": 9.0,
   "image": "https://images.aeonmedia.co/images/52cd7554-7970-47c1-b2e1-b1f2609d4c56/essay-2011-04-26t120000z_177609120_gm1e74q1iax01_rtrmadp_3_china.jpg?width=1200&quality=75&format=jpeg",
-  "author": "Alexander Pereira"
+  "author": "Alexander Pereira",
+  "tags": [
+   "Culture and mental illness",
+   "Looping effect",
+   "Psychiatry",
+   "Ian Hacking"
+  ]
  },
  {
   "id": "af693dfe96f6",
@@ -307,6 +360,12 @@
   "date": "2026-11-24",
   "score": 8.0,
   "image": "https://media.newyorker.com/photos/6b04941607ab238ecd29dd9d/16:9/w_1280,c_limit/Screentime_Final.jpg",
-  "author": "Jay Caspian Kang"
+  "author": "Jay Caspian Kang",
+  "tags": [
+   "Luddite Club",
+   "Screen time",
+   "Digital detox",
+   "OECD"
+  ]
  }
 ]

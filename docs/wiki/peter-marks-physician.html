@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'><meta name='apple-mobile-web-app-title' content='Briefing'><link rel='apple-touch-icon' href='../apple-touch-icon.png'><link rel='manifest' href='../manifest.webmanifest'><title>Peter Marks (physician) — Briefing</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><style>
+:root{
+  --bg:#0B1220; --card:#131C2E; --tile:#172136; --tile-open:#1C2740; --ink:#EAF0FA; --muted:#8D9AB3;
+  --detail:#BAC5D8; --accent:#F2B544; --on-accent:#1A1305; --img:#1E2A44; --line:#2A3653;
+  --serif:"Fraunces","New York",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+
+/* shell */
+.top{max-width:560px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+/* story pages: a fixed app frame, so the page itself never scrolls out of reach */
+body.app{position:fixed;inset:0;display:flex;flex-direction:column;overflow:hidden;overscroll-behavior:none}
+body.app .top{flex:none;width:100%}
+body.app .reader{flex:1;min-height:0;height:auto;width:100%}
+.brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+.tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
+.tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
+.tabs a.on{background:var(--line);color:var(--ink)}
+@media (max-width:430px){.tabs a{padding:7px 9px}}
+.tabs a svg{display:block;margin:1px 0}
+
+/* story deck */
+.reader{max-width:560px;margin:0 auto;height:calc(100dvh - 58px);display:flex;flex-direction:column;padding:12px 0 calc(14px + env(safe-area-inset-bottom))}
+.bars{display:flex;gap:4px;padding:0 16px}
+.bars button{flex:1;height:14px;border:0;background:none;padding:5px 0}
+.bars button i{display:block;height:3px;border-radius:2px;background:var(--line);transition:background .2s}
+.bars button.seen i{background:var(--ink)}
+.status{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 10px;font-size:13px;color:var(--muted)}
+.status b{color:var(--ink);font-weight:600}
+.deck{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;padding:0 16px;display:flex}
+.card{flex:1;min-width:0;border-radius:24px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.scroll{overflow-y:auto;flex:1;min-height:0;overscroll-behavior:contain}
+.media{position:relative;height:190px;background:var(--img);display:flex;align-items:flex-end;padding:14px}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pill{position:relative;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--on-accent);padding:5px 9px;border-radius:6px}
+.body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px}
+.src{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.src img{width:16px;height:16px;border-radius:4px;background:var(--tile)}
+h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-height:1.16;letter-spacing:-.01em}
+.room{margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--detail)}
+.points{display:flex;flex-direction:column;gap:8px}
+.points details{border-radius:14px;background:var(--tile)}
+.points details[open]{background:var(--tile-open)}
+.points summary{list-style:none;display:flex;gap:10px;padding:12px;font-size:14.5px;line-height:1.42;font-weight:600;cursor:pointer}
+.points summary::-webkit-details-marker{display:none}
+.points summary .n{color:var(--accent);flex:none;width:12px}
+.points summary svg{flex:none;margin-left:auto;margin-top:2px;color:var(--muted);transition:transform .2s}
+.points details[open] summary svg{transform:rotate(180deg)}
+.points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
+.why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.why b{color:var(--ink);font-weight:600}
+.fb{display:flex;gap:8px;flex-wrap:wrap;padding-top:2px}
+.fbb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);
+  background:transparent;color:var(--muted);font-size:13px;font-weight:600}
+.fbb.on[data-act=more]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.fbb.on[data-act=less]{background:var(--line);border-color:var(--muted);color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:92vw;
+  background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:11px 16px;border-radius:12px;z-index:50;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);text-align:center}
+.toast a{text-decoration:underline}
+.listen{display:flex;align-items:center;gap:12px;margin:0 16px 10px;padding:8px 12px 8px 8px;border-radius:14px;background:var(--tile)}
+.listen .pb{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);
+  display:flex;align-items:center;justify-content:center}
+.listen .lt{flex:1;min-width:0;font-size:13px;font-weight:600}
+.listen .lt small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:2px}
+.listen .bar{height:3px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}
+.listen .bar i{display:block;height:100%;width:0;background:var(--accent)}
+.listen .sp{flex:none;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 7px;background:none}
+.extras{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:4px}
+.chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
+.chip svg{color:var(--accent)}
+.chip:hover,.chip:active{background:var(--tile-open);border-color:var(--muted)}
+.hint{font-size:12px;color:var(--muted)}
+
+.actions{display:flex;gap:10px;padding:12px 16px 0}
+.btn{flex:1;height:48px;border-radius:14px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600}
+.btn.icon{flex:none;width:48px}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+.btn[disabled]{opacity:.35}
+
+/* end slide + lists */
+.end h1{margin:4px 0 2px;font-family:var(--serif);font-size:28px}
+.toc{display:flex;flex-direction:column}
+.toc button,.toc a{display:flex;gap:12px;align-items:baseline;text-align:left;width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;font-size:15px;line-height:1.35}
+.toc .k{color:var(--accent);font-weight:700;flex:none;width:18px}
+.toc small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.page{max-width:560px;margin:0 auto;padding:10px 16px 60px}
+.page .card{margin:14px 0}
+.hero{padding:18px 4px 6px}
+.hero .kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:6px 0 4px;font-family:var(--serif);font-size:32px;line-height:1.1}
+.hero p{margin:0;color:var(--muted);font-size:14px}
+.empty{color:var(--muted);text-align:center;padding:60px 0}
+.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:14px}
+.foot a{text-decoration:underline}
+.subs{display:flex;flex-direction:column;gap:10px}
+.sub{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:var(--tile)}
+.sub strong{font-family:var(--serif);font-size:18px;line-height:1.25}
+.sub .tk{font-size:14px;line-height:1.5;color:var(--detail)}
+.subhit{display:flex;flex-direction:column;gap:6px}
+.subrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
+.chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
+
+/* ── design system: one set of tokens and components for every page ── */
+:root{--sp1:4px;--sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;
+  --rad-s:10px;--rad-m:14px;--rad-l:20px;--rad-xl:24px;--tap:44px;
+  --fs-xs:12px;--fs-s:13.5px;--fs-m:15px;--fs-l:17px;--ease:cubic-bezier(.2,.7,.2,1)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:color-mix(in srgb,var(--accent) 35%,transparent)}
+button,.btn,.chip,.fbb,.tabs a,.toc a,.toc button{-webkit-tap-highlight-color:transparent;transition:transform .12s var(--ease),background .15s,border-color .15s,color .15s}
+button:active,.btn:active,.chip:active,.fbb:active{transform:scale(.97)}
+/* header: same on every page, sticky and blurred on scrolling pages */
+body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
+  padding:calc(12px + env(safe-area-inset-top)) max(16px,calc((100% - 528px)/2)) 12px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
+  border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.tabs a{min-height:32px;display:flex;align-items:center}
+/* buttons and chips share sizes, corners and type */
+.btn{height:48px;border-radius:var(--rad-m);font-size:var(--fs-m)}
+.chip,.fbb{height:40px;border-radius:12px;padding:0 14px;font-size:var(--fs-s);font-weight:600;gap:7px}
+.chip{background:var(--tile);border:1px solid var(--line);color:var(--detail)}
+.savebtn{font-family:inherit;cursor:pointer}
+.savebtn.on{color:var(--accent);border-color:var(--accent)}
+.savebtn.on svg{fill:currentColor}
+.fbb{background:transparent}
+.chip.sm{height:34px;padding:0 11px;font-size:var(--fs-xs);border-radius:10px}
+/* surfaces */
+.card{border-radius:var(--rad-xl)}
+.bg,.fresh{border-radius:var(--rad-l)}
+.page .card{margin:var(--sp4) 0}
+.body{padding:var(--sp4) 18px 20px;gap:var(--sp3)}
+.extras,.fb{gap:var(--sp2)}
+/* page titles and section labels */
+.hero{padding:var(--sp5) 2px var(--sp2)}
+.hero h1{font-size:32px;letter-spacing:-.015em}
+.hero p{font-size:var(--fs-s);line-height:1.5}
+.label{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:var(--sp6) 2px var(--sp1)}
+/* story image fallback: quiet tile with the topic's initial */
+.media.noimg::after{content:attr(data-k);position:absolute;right:14px;top:-18px;font-family:var(--serif);font-weight:700;
+  font-size:150px;line-height:1;color:color-mix(in srgb,var(--ink) 7%,transparent);pointer-events:none}
+.media.noimg{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 9%,var(--img)),var(--img) 60%)}
+/* empty and loading states */
+.empty{padding:56px 20px;font-size:var(--fs-m);line-height:1.5}
+.empty::before{content:"";display:block;width:44px;height:44px;margin:0 auto 14px;border-radius:50%;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
+.skel{background:linear-gradient(90deg,var(--tile) 0%,var(--tile-open) 50%,var(--tile) 100%);background-size:200% 100%;animation:shimmer 1.3s linear infinite!important}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
+@keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.offline{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));left:50%;white-space:nowrap;transform:translateX(-50%);z-index:70;
+  background:var(--tile);border:1px solid var(--line);color:var(--detail);font:600 12.5px var(--sans);padding:7px 12px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+a.wl{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.tchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 4px}
+.tl{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:4px;width:100%}
+.tchip{display:inline-flex;align-items:center;height:32px;padding:0 11px;border-radius:999px;background:var(--tile);border:1px solid var(--line);color:var(--ink);font-size:13px;font-weight:600}
+.rels{display:flex;flex-direction:column;gap:6px;margin:14px 0 4px}
+.rel{display:block;padding:10px 12px;border-radius:12px;background:var(--tile);border:1px solid var(--line)}
+.rel span{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
+.rel b{font-size:14.5px;line-height:1.35;color:var(--ink);font-weight:600}
+.wk .lead{background:var(--card);border-radius:18px;padding:16px;margin:0 0 18px}
+.wk .lead p{margin:0 0 8px;font-size:15.5px;line-height:1.55;color:var(--detail)}
+.wk .lead small{color:var(--muted);font-size:12.5px}
+.wk .lead small a{text-decoration:underline}
+.wk h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:22px 2px 8px}
+.wk .story{background:var(--card);border-radius:16px;padding:14px;margin:0 0 10px}
+.wk .story .m{font-size:12.5px;color:var(--muted)}
+.wk .story b{display:block;font-size:16px;line-height:1.35;margin:3px 0 6px;color:var(--ink)}
+.wk .story p{margin:0 0 10px;font-size:14px;line-height:1.5;color:var(--detail)}
+.wk .story .acts{display:flex;gap:8px;flex-wrap:wrap}
+.wk [hidden]{display:none!important}
+.wk .az{display:flex;flex-wrap:wrap;gap:6px}
+.wk input.find{width:100%;height:46px;border-radius:14px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font:500 16px var(--sans);padding:0 14px;margin:0 0 14px;box-sizing:border-box}
+.wk .tchip i{font-style:normal;color:var(--muted);margin-left:6px;font-weight:500}
+</style></head><body class='' data-repo='scadams1111/briefing' data-root='../' data-relay='https://briefing-relay.scadams1111.workers.dev'><header class='top'><a class='brand' href='.././'>Briefing<span>.</span></a><nav class='tabs'><a href='.././' class=''>Today</a><a href='../saved.html' class=''>Saved</a><a href='../archive/' class='on'>Archive</a><a href='../games.html' class='' aria-label='Games'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='3' width='18' height='18' rx='3'/><path d='M3 9h18M3 15h18M9 3v18M15 3v18'/></svg></a><a href='../search.html' class='' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><style>
+a.wl{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.tchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 4px}
+.tl{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:4px;width:100%}
+.tchip{display:inline-flex;align-items:center;height:32px;padding:0 11px;border-radius:999px;background:var(--tile);border:1px solid var(--line);color:var(--ink);font-size:13px;font-weight:600}
+.rels{display:flex;flex-direction:column;gap:6px;margin:14px 0 4px}
+.rel{display:block;padding:10px 12px;border-radius:12px;background:var(--tile);border:1px solid var(--line)}
+.rel span{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
+.rel b{font-size:14.5px;line-height:1.35;color:var(--ink);font-weight:600}
+.wk .lead{background:var(--card);border-radius:18px;padding:16px;margin:0 0 18px}
+.wk .lead p{margin:0 0 8px;font-size:15.5px;line-height:1.55;color:var(--detail)}
+.wk .lead small{color:var(--muted);font-size:12.5px}
+.wk .lead small a{text-decoration:underline}
+.wk h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:22px 2px 8px}
+.wk .story{background:var(--card);border-radius:16px;padding:14px;margin:0 0 10px}
+.wk .story .m{font-size:12.5px;color:var(--muted)}
+.wk .story b{display:block;font-size:16px;line-height:1.35;margin:3px 0 6px;color:var(--ink)}
+.wk .story p{margin:0 0 10px;font-size:14px;line-height:1.5;color:var(--detail)}
+.wk .story .acts{display:flex;gap:8px;flex-wrap:wrap}
+.wk [hidden]{display:none!important}
+.wk .az{display:flex;flex-wrap:wrap;gap:6px}
+.wk input.find{width:100%;height:46px;border-radius:14px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font:500 16px var(--sans);padding:0 14px;margin:0 0 14px;box-sizing:border-box}
+.wk .tchip i{font-style:normal;color:var(--muted);margin-left:6px;font-weight:500}
+</style><main class='page wk'><section class='hero'><div class='kicker'><a href='index.html'>Topics</a></div><h1>Peter Marks (physician)</h1></section><div class='lead'><small><a href='https://en.wikipedia.org/wiki/Peter_Marks_%28physician%29'>Look up Peter Marks (physician) on Wikipedia</a></small></div><h3>In your briefing · 1</h3><div class='story'><span class='m'>Fierce Biotech · Nov 26</span><b>ARM CEO Tim Hunt details industry pushback against FDA&#x27;s shifting gene therapy regulatory stance</b><p>The Alliance for Regenerative Medicine (ARM) challenged the FDA&#x27;s recent ideological shift toward rigid methodological rigor in approving rare disease gene therapies.</p><div class='acts'><a class='chip' href='../read.html?u=https%3A%2F%2Fwww.fiercebiotech.com%2Fbiotech%2Farm-ceo-reflects-wild-12-months-navigating-fdas-shifting-gene-therapy-stance&amp;a=https%3A%2F%2Fgithub.com%2Fscadams1111%2Fbriefing%2Freleases%2Fdownload%2Faudio-2026-11-26%2Fart-872277f9695c.mp3'><span>Read</span></a><a class='chip' href='https://www.fiercebiotech.com/biotech/arm-ceo-reflects-wild-12-months-navigating-fdas-shifting-gene-therapy-stance'><span>Original</span></a></div></div><h3>Related topics</h3><div class='az'><a class='tchip' href='alliance-for-regenerative-medicine.html'>Alliance for Regenerative Medicine</a><a class='tchip' href='food-and-drug-administration.html'>Food and Drug Administration</a><a class='tchip' href='gene-therapy.html'>Gene therapy</a></div></main><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
+(()=>{const repo=document.body.dataset.repo;const KEY='gh_token';
+const toast=(html,ms=2600)=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
+ t.innerHTML=html;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,ms)};
+const root=document.body.dataset.root||'';
+const get=k=>{try{return localStorage.getItem(k)}catch(_){return null}}, set=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}};
+document.querySelectorAll('.fb').forEach(box=>{const id='fb:'+(box.dataset.id||box.dataset.url),cur=get(id);
+ box.querySelectorAll('.fbb').forEach(b=>{b.classList.toggle('on',b.dataset.act===cur);b.setAttribute('aria-pressed',b.dataset.act===cur)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.fbb');if(!b)return;const box=b.closest('.fb');
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up feedback</a>`,6000);return}
+ const id='fb:'+(box.dataset.id||box.dataset.url),prev=get(id),act=b.dataset.act;
+ const send=async(a)=>{const item={url:box.dataset.url,topic:box.dataset.topic,source:box.dataset.source,title:box.dataset.title};
+  const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'feedback: '+a,body:JSON.stringify(item)})});
+  if(!r.ok)throw new Error(r.status)};
+ try{if(prev)await send('undo-'+prev);
+  if(prev===act){set(id,null);toast('Removed')}else{await send(act);set(id,act);
+   toast(act==='more'?'Got it. More like this from tomorrow':'Got it. Less like this from tomorrow')}
+  box.querySelectorAll('.fbb').forEach(x=>{const on=x.dataset.act===get(id);x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+ }catch(err){toast(`Couldn't send (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}});
+/* save for later from inside the briefing */
+const norm=u=>{try{const x=new URL(u);return (x.hostname.replace(/^www\./,'')+x.pathname.replace(/\/+$/,'')).toLowerCase()}catch(_){return u}};
+const mark=b=>{b.classList.add('on');b.querySelector('span').textContent='Saved'};
+fetch(root+'saved.json',{cache:'no-store'}).then(r=>r.json()).then(list=>{const have=new Set(list.map(norm));
+ document.querySelectorAll('.savebtn').forEach(b=>{if(have.has(norm(b.dataset.url))||get('saved:'+norm(b.dataset.url)))mark(b)})}).catch(()=>{
+ document.querySelectorAll('.savebtn').forEach(b=>{if(get('saved:'+norm(b.dataset.url)))mark(b)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.savebtn');if(!b)return;ev.preventDefault();ev.stopPropagation();
+ if(b.classList.contains('on')){toast(`Already saved. <a href="${root}saved.html">Open Saved</a>`);return}
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up</a>`,6000);return}
+ b.querySelector('span').textContent='Saving…';
+ try{const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'Save: '+(b.dataset.title||b.dataset.url).slice(0,120),body:b.dataset.url})});
+  if(!r.ok)throw new Error(r.status);set('saved:'+norm(b.dataset.url),'1');mark(b);
+  toast('Saved. It appears in Saved in a couple of minutes, with a summary and audio.',4500)}
+ catch(err){b.querySelector('span').textContent='Save';toast(`Couldn't save (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}},true);
+const a=document.querySelector('.listen audio');if(a){const pb=document.querySelector('.listen .pb'),bar=document.querySelector('.listen .bar i'),
+ sp=document.querySelector('.listen .sp'),lab=document.querySelector('.listen .lt small');const rates=[1,1.25,1.5,0.85];let ri=0;
+ const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+ pb.onclick=()=>{a.paused?a.play():a.pause()};a.onplay=()=>{pb.innerHTML=pb.dataset.pause;pb.setAttribute('aria-label','Pause')};
+ a.onpause=()=>{pb.innerHTML=pb.dataset.play;pb.setAttribute('aria-label','Play')};
+ a.ontimeupdate=()=>{if(a.duration){bar.style.width=(100*a.currentTime/a.duration)+'%';lab.textContent=fmt(a.currentTime)+' / '+fmt(a.duration);
+  try{localStorage.setItem('audio:'+a.dataset.date,a.currentTime)}catch(_){}}};
+ a.onloadedmetadata=()=>{const t=+get('audio:'+a.dataset.date);if(t&&t<a.duration-5)a.currentTime=t};
+ sp.onclick=()=>{ri=(ri+1)%rates.length;a.playbackRate=rates[ri];sp.textContent=rates[ri]+'×'}}
+})();
+</script><script>
+(()=>{if(!('serviceWorker' in navigator))return;const root=document.body.dataset.root||'';
+navigator.serviceWorker.register(root+'sw.js').then(reg=>{
+ const warm=()=>{const sw=navigator.serviceWorker.controller||reg.active;if(!sw||!navigator.onLine)return;
+  const relay=document.body.dataset.relay||'';
+  const assets=[...document.querySelectorAll('img[src]')].map(i=>i.src).filter(s=>/^https?:/.test(s));
+  const articles=relay?[...document.querySelectorAll('.slide[data-url]')].map(s=>s.dataset.url).filter(Boolean)
+    .map(u=>relay.replace(/\/$/,'')+'/?url='+encodeURIComponent(u)):[];
+  const pages=['','saved.html','games.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
+  sw.postMessage({type:'warm',assets:[...assets,...pages],articles})};
+ if(document.querySelector('.deck'))(navigator.serviceWorker.ready.then(()=>setTimeout(warm,2500)));
+}).catch(()=>{});
+const badge=()=>{let b=document.querySelector('.offline');if(navigator.onLine){if(b)b.remove();return}
+ if(!b){b=document.createElement('div');b.className='offline';b.textContent='Offline · saved copy';document.body.appendChild(b)}};
+addEventListener('online',badge);addEventListener('offline',badge);badge();})();
+</script></body></html>

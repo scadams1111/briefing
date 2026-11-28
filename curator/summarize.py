@@ -23,7 +23,8 @@ Return JSON exactly like:
     {{"point": "a key takeaway, concrete, max 28 words",
       "detail": "120-200 words expanding this point with the article's specifics: names, numbers, evidence, caveats"}}
   ],
-  "room_line": "one sentence the reader could say in conversation that shows they grasp why this matters"
+  "room_line": "one sentence the reader could say in conversation that shows they grasp why this matters",
+  "tags": ["3-6 people, organizations, places, events, criminal cases or ideas the article is centrally about, each as its exact English Wikipedia article title"]
 }}
 Rules: never mention the reader, their job, employer or personal life; the reader profile is only to judge
 what matters, and this text is published. Write everything in English, even if the article is in another language.
@@ -63,4 +64,6 @@ def summarize(title: str, source: str, text: str, llm: LLM, profile: str) -> dic
     out.setdefault("headline", title)
     out.setdefault("room_line", "")
     out.pop("why_for_you", None)
+    from .wiki import clean_tags
+    out["tags"] = clean_tags(out.get("tags")) if ai else []
     return out

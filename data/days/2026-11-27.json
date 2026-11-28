@@ -32,7 +32,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-27/art-bab62e2cbe96.mp3",
    "seconds": 1365
-  }
+  },
+  "tags": [
+   "China\u2013United States relations",
+   "Artificial general intelligence",
+   "AI safety",
+   "Taiwan"
+  ]
  },
  {
   "id": "891c6781dc24",
@@ -63,7 +69,13 @@
   "date": "2026-11-27",
   "score": 8.5,
   "image": "https://www.statnews.com/wp-content/uploads/2026/11/Meta-phase-II-spindle-1024x576.jpg",
-  "author": "Megan Molteni"
+  "author": "Megan Molteni",
+  "tags": [
+   "Oocyte",
+   "Cohesin",
+   "In vitro fertilisation",
+   "Aneuploidy"
+  ]
  },
  {
   "id": "f823a0bd7f89",
@@ -98,7 +110,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-27/art-f823a0bd7f89.mp3",
    "seconds": 324
-  }
+  },
+  "tags": [
+   "Right-to-try law",
+   "Montana",
+   "Clinical trial",
+   "RAND Corporation"
+  ]
  },
  {
   "id": "0577f033443e",
@@ -133,7 +151,14 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-27/art-0577f033443e.mp3",
    "seconds": 456
-  }
+  },
+  "tags": [
+   "Vyriad",
+   "CAR T cell",
+   "Lentiviral vector in gene therapy",
+   "Regeneron Pharmaceuticals",
+   "Novartis"
+  ]
  },
  {
   "id": "1f02c916626f",
@@ -168,7 +193,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-27/art-1f02c916626f.mp3",
    "seconds": 355
-  }
+  },
+  "tags": [
+   "Kamil Khan Mumtaz",
+   "Architecture of Pakistan",
+   "Modernism",
+   "Craft"
+  ]
  },
  {
   "id": "669406732a3f",
@@ -199,7 +230,13 @@
   "date": "2026-11-27",
   "score": 6.0,
   "image": "",
-  "author": ""
+  "author": "",
+  "tags": [
+   "Ransomware",
+   "Wire fraud",
+   "Computer security",
+   "Cybercrime"
+  ]
  },
  {
   "id": "50965b191457",
@@ -230,7 +267,13 @@
   "date": "2026-11-27",
   "score": 8.8,
   "image": "https://images.aeonmedia.co/images/c26f206d-2e06-4e5b-8156-0d964a42cffc/essay-main-gettyimages-2247445825.jpg?width=1200&quality=75&format=jpeg",
-  "author": "David Cola\u00e7o; Philipp Haueis"
+  "author": "David Cola\u00e7o; Philipp Haueis",
+  "tags": [
+   "Brain metabolism",
+   "Computational theory of mind",
+   "Thermodynamics",
+   "Synaptic plasticity"
+  ]
  },
  {
   "id": "320dafcb104f",
@@ -265,7 +308,12 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-27/art-320dafcb104f.mp3",
    "seconds": 953
-  }
+  },
+  "tags": [
+   "Stanford Encyclopedia of Philosophy",
+   "Peer review",
+   "Wikipedia"
+  ]
  },
  {
   "id": "c35b891be910",
@@ -300,7 +348,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-27/art-c35b891be910.mp3",
    "seconds": 675
-  }
+  },
+  "tags": [
+   "Trail",
+   "United States Forest Service",
+   "National Park Service",
+   "Volunteering"
+  ]
  },
  {
   "id": "16ac4fe06345",
@@ -335,6 +389,12 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-27/art-16ac4fe06345.mp3",
    "seconds": 287
-  }
+  },
+  "tags": [
+   "Raoul Minot",
+   "German occupation of France during World War II",
+   "French Resistance",
+   "Philippe Broussard"
+  ]
  }
 ]

@@ -58,7 +58,7 @@ def make_item(c_url, title, source, topic, topic_name, text, summ, **extra) -> d
             "title": title, "headline": summ.get("headline") or title, "source": source,
             "topic": topic, "topic_name": topic_name, "words": words,
             "minutes": max(1, round(words / 230)), "bullets": summ["bullets"],
-            "room_line": summ.get("room_line", ""),
+            "room_line": summ.get("room_line", ""), "tags": summ.get("tags", []),
             "ai": summ.get("ai", False), **extra}
 
 
@@ -248,6 +248,11 @@ def daily() -> None:
     except Exception as ex:
         log.warning("couldn't keep article texts: %s", ex)
     try:
+        from . import wiki
+        wiki.backfill(llm)
+    except Exception as ex:
+        log.warning("tag backfill failed: %s", ex)
+    try:
         gamesmod.ensure(date, items, llm)
     except Exception as ex:
         log.warning("puzzles failed: %s", ex)
@@ -268,6 +273,12 @@ def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[d
     site = render.site_url(cfg)
     subs = load_subs(date)
     smart = load_smarter(date)
+    try:
+        from . import wiki
+        tags = {t for it in wiki.corpus(st["saved"]) for t in wiki.tags_of(it)}
+        wiki.fetch_summaries(sorted(tags))
+    except Exception as ex:
+        log.warning("wiki summaries failed: %s", ex)
     try:
         gamesmod.ensure(date, items)            # no-op if today's puzzles already exist
     except Exception as ex:
@@ -336,7 +347,7 @@ def retry() -> None:
         summ = summarize(it["title"], it["source"], text, llm, who)
         if summ.get("ai"):
             it.update(headline=summ.get("headline") or it["title"], bullets=summ["bullets"],
-                      room_line=summ.get("room_line", ""), ai=True)
+                      room_line=summ.get("room_line", ""), tags=summ.get("tags", []), ai=True)
             fixed += 1
     path.write_text(json.dumps(items, indent=1))
     if smart:

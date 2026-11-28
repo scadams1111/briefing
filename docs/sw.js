@@ -1,5 +1,5 @@
 
-const VERSION = 'briefing-202611271942';
+const VERSION = 'briefing-202611272125';
 const PAGES = VERSION + '-pages', ASSETS = 'briefing-assets-v1', ARTICLES = 'briefing-articles-v1';
 const CORE = ["./", "index.html", "saved.html", "games.html", "search.html", "archive/", "highlights.html", "read.html", "settings.html", "manifest.webmanifest", "apple-touch-icon.png", "icon-192.png", "icon-512.png", "search-index.json"];
 

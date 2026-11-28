@@ -299,7 +299,7 @@ def card(it: dict, root: str = "") -> str:
     pts = "".join(
         f"<details{' open' if n == 1 else ''}><summary><span class='n'>{n}</span><span>{e(b['point'])}</span>"
         f"{CHEV if b.get('detail') else ''}</summary>"
-        + (f"<p>{e(b['detail'])}</p>" if b.get("detail") else "") + "</details>"
+        + (f"<p>{_wiki().link_text(e(b['detail']), it, root)}</p>" if b.get("detail") else "") + "</details>"
         for n, b in enumerate(it["bullets"], 1))
     room = f"<p class='room'>“{e(it['room_line'])}”</p>" if it.get("room_line") else ""
     # Backup if the original page has moved or vanished: Wayback Machine's latest snapshot
@@ -318,7 +318,7 @@ def card(it: dict, root: str = "") -> str:
             f"<div class='body'><div class='src'><img src='{fav}' alt='' referrerpolicy='no-referrer'>"
             f"{e(it['source'])} · {it['minutes']} min read</div>"
             f"<h1 class='head'><a href='{e(it['url'])}'>{e(it['headline'])}</a></h1>{room}"
-            f"<div class='points'>{pts}</div>{feedback}{archived}</div></div></article>")
+            f"<div class='points'>{pts}</div>{_wiki().card_extras(it, root)}{feedback}{archived}</div></div></article>")
 
 
 def shell(title: str, active: str, body: str, root: str = "", script: bool = False) -> str:
@@ -336,7 +336,7 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
             "<meta name='apple-mobile-web-app-title' content='Briefing'>"
             f"<link rel='apple-touch-icon' href='{root}apple-touch-icon.png'>"
             f"<link rel='manifest' href='{root}manifest.webmanifest'>"
-            f"<title>{e(title)}</title>{FONTS}<style>{CSS}</style></head><body class='{'app' if script else ''}' data-repo='{e(_repo())}' data-root='{e(root)}' data-relay='{e(_relay_url())}'>"
+            f"<title>{e(title)}</title>{FONTS}<style>{CSS}{_wiki().CSS}</style></head><body class='{'app' if script else ''}' data-repo='{e(_repo())}' data-root='{e(root)}' data-relay='{e(_relay_url())}'>"
             f"<header class='top'><a class='brand' href='{root}./'>Briefing<span>.</span></a>"
             f"<nav class='tabs'>{tabs}</nav></header>{body}"
             + (f"<script>{JS}</script>" if script else "") + f"<script>{NEWTAB}</script><script>{FEEDBACK_JS}</script><script>{_offline().REGISTER}</script></body></html>")
@@ -536,6 +536,11 @@ def write_reader() -> None:
 def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archive_dates: list[str],
               subs: list[dict] | None = None, smart: dict | None = None) -> None:
     (DOCS / "archive").mkdir(parents=True, exist_ok=True)
+    try:
+        _wiki().prepare(saved)
+    except Exception as ex:
+        import logging
+        logging.getLogger(__name__).warning("wiki prepare failed: %s", ex)
     nice = dt.date.fromisoformat(date).strftime("%A, %B %-d")
     (DOCS / "index.html").write_text(shell(f"Briefing — {nice}", "today", deck(date, picks, subs=subs, smart=smart), script=True))
     (DOCS / "archive" / f"{date}.html").write_text(
@@ -546,8 +551,14 @@ def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archiv
     (DOCS / "archive" / "index.html").write_text(shell(
         "Archive — Briefing", "archive",
         f"<main class='page'><section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section>"
+        "<a class='chip' style='margin:0 0 14px' href='../wiki/index.html'><span>Browse topics: people, places, cases and ideas ›</span></a>"
         f"<div class='toc'>{rows}</div></main>", root="../"))
     write_saved(saved)
+    try:
+        _wiki().write_pages(shell)
+    except Exception as ex:
+        import logging
+        logging.getLogger(__name__).warning("couldn't write wiki pages: %s", ex)
     try:
         _games().write_pages(shell, date)
     except Exception as ex:
@@ -635,6 +646,11 @@ def _past_searches() -> list[dict]:
     d = Path("data") / "searches"
     items = [json.loads(p.read_text()) for p in d.glob("*.json")] if d.exists() else []
     return sorted(items, key=lambda x: x.get("when", ""), reverse=True)
+
+
+def _wiki():
+    from . import wiki
+    return wiki
 
 
 def _games():

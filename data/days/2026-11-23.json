@@ -25,7 +25,13 @@
   ],
   "room_line": "Novartis is showing that while AI is a game-changer for operational efficiency and trial simulation, the 'long pole in the tent' remains the fundamental, slow-moving reality of human biology.",
   "date": "2026-11-23",
-  "score": 9.0
+  "score": 9.0,
+  "tags": [
+   "Novartis",
+   "Vas Narasimhan",
+   "Artificial intelligence in healthcare",
+   "Drug development"
+  ]
  },
  {
   "id": "6b55ec3e4c7a",
@@ -53,7 +59,13 @@
   ],
   "room_line": "We're seeing a massive policy contradiction where we tighten export controls on one hand, yet leave our most sensitive grant data accessible to anyone with $25 and a web browser.",
   "date": "2026-11-23",
-  "score": 9.0
+  "score": 9.0,
+  "tags": [
+   "Freedom of Information Act (United States)",
+   "National Institutes of Health",
+   "Research funding",
+   "Industrial espionage"
+  ]
  },
  {
   "id": "4bf9ed4cb47a",
@@ -81,7 +93,14 @@
   ],
   "room_line": "We're moving past the hype of CRISPR; the real frontier is mastering the cell's native repair pathways\u2014like base editing\u2014to achieve precision without the catastrophic risk of double-strand breaks.",
   "date": "2026-11-23",
-  "score": 8.0
+  "score": 8.0,
+  "tags": [
+   "Genome editing",
+   "CRISPR gene editing",
+   "DNA repair",
+   "Base editing",
+   "Non-homologous end joining"
+  ]
  },
  {
   "id": "ab2360414d70",
@@ -109,7 +128,13 @@
   ],
   "room_line": "The PETA report on NIH international oversight highlights a significant tension between the agency's reliance on institutional self-policing and the practical challenges of enforcing welfare standards across global borders.",
   "date": "2026-11-23",
-  "score": 8.0
+  "score": 8.0,
+  "tags": [
+   "People for the Ethical Treatment of Animals",
+   "National Institutes of Health",
+   "Animal testing",
+   "Office of Laboratory Animal Welfare"
+  ]
  },
  {
   "id": "dcaf582ded07",
@@ -137,7 +162,13 @@
   ],
   "room_line": "The London meetings suggest that while the U.S. remains the primary exit market, we are seeing a significant, capital-backed effort to build a more self-sustaining European biotech ecosystem.",
   "date": "2026-11-23",
-  "score": 7.0
+  "score": 7.0,
+  "tags": [
+   "Mergers and acquisitions",
+   "Pharmaceutical industry",
+   "Biotechnology",
+   "China\u2013United States relations"
+  ]
  },
  {
   "id": "1f597d7f7cb5",
@@ -165,7 +196,13 @@
   ],
   "room_line": "We are seeing an unintended consequence of AI adoption where the legal system is effectively penalizing doctors for exercising clinical judgment when it contradicts an algorithm.",
   "date": "2026-11-23",
-  "score": 7.0
+  "score": 7.0,
+  "tags": [
+   "Medical malpractice",
+   "Artificial intelligence in healthcare",
+   "Defensive medicine",
+   "Jury"
+  ]
  },
  {
   "id": "e86b53f9e167",
@@ -193,7 +230,13 @@
   ],
   "room_line": "The collapse at Antalya proves that even when nations agree on the existential threat of warming, the lack of a central enforcement mechanism makes consensus impossible in a multipolar, resource-competitive world.",
   "date": "2026-11-23",
-  "score": 6.0
+  "score": 6.0,
+  "tags": [
+   "United Nations Climate Change conference",
+   "Antalya",
+   "Fossil fuel phase-out",
+   "Climate finance"
+  ]
  },
  {
   "id": "083a2fc15e32",
@@ -221,7 +264,13 @@
   ],
   "room_line": "The crisis in school performance isn't just about what kids are seeing on screens, but the cognitive atrophy caused by losing the tactile, sensorimotor act of handwriting.",
   "date": "2026-11-23",
-  "score": 9.0
+  "score": 9.0,
+  "tags": [
+   "Handwriting",
+   "Screen time",
+   "Fine motor skill",
+   "Memory"
+  ]
  },
  {
   "id": "5f87b66515dd",
@@ -249,7 +298,13 @@
   ],
   "room_line": "Bessent is essentially betting that 'revealed preference' data will eventually override the current public narrative on the economy, provided he can squeeze Iran long enough to stabilize energy prices.",
   "date": "2026-11-23",
-  "score": 8.0
+  "score": 8.0,
+  "tags": [
+   "Scott Bessent",
+   "United States Secretary of the Treasury",
+   "Second Trump administration",
+   "Tariff"
+  ]
  },
  {
   "id": "83154eed6249",
@@ -277,6 +332,12 @@
   ],
   "room_line": "Norway\u2019s oil fund is a masterclass in sovereign wealth management, but it\u2019s currently forcing a difficult national reckoning over whether extreme state-funded security stifles innovation and cultural identity.",
   "date": "2026-11-23",
-  "score": 8.0
+  "score": 8.0,
+  "tags": [
+   "Government Pension Fund of Norway",
+   "Nicolai Tangen",
+   "Sovereign wealth fund",
+   "Dutch disease"
+  ]
  }
 ]

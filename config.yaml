@@ -12,7 +12,7 @@ relay_url: "https://briefing-relay.scadams1111.workers.dev"
 
 daily_picks: 10          # articles in each day's briefing
 max_per_topic: 2         # so one busy topic can't take over the day
-min_light_picks: 1       # at least this many from "light" topics
+min_light_picks: 2       # at least this many from "light" topics
 lookback_hours: 36       # ignore anything older
 min_words: 600           # skip short news blurbs
 candidates_per_topic: 6  # shortlist per topic sent to the AI for ranking
@@ -182,6 +182,32 @@ topics:
       - {url: https://www.newyorker.com/feed/everything, name: The New Yorker, weight: 1.2}
     searches: []
 
+  - id: history
+    name: History & Mysteries
+    weight: 1.0
+    kind: light
+    feeds:
+      - {url: https://www.smithsonianmag.com/rss/history/, name: Smithsonian, weight: 1.2}
+      - {url: https://daily.jstor.org/feed/, name: JSTOR Daily, weight: 1.1}
+      - {url: https://publicdomainreview.org/rss.xml, name: The Public Domain Review}
+    searches:
+      - "historians discover"
+      - "archaeologists find"
+      - "history mystery solved"
+
+  - id: truecrime
+    name: True Crime & Famous Cases
+    weight: 0.95
+    kind: light
+    feeds:
+      - {url: https://magazine.atavist.com/feed, name: The Atavist, weight: 1.2}
+      - {url: https://crimereads.com/feed/, name: CrimeReads, weight: 0.8}
+    searches:
+      - "cold case solved"
+      - "true crime longread"
+      - "infamous heist"
+      - "wrongful conviction exonerated"
+
   - id: parenting
     name: Parenting & Family
     weight: 0.8
@@ -238,7 +264,8 @@ smarter:
   evergreen_picks: 2
   fields: [Biology, History, Economics, Psychology, Physics, Technology, Philosophy,
            Earth & Climate, Medicine, Mathematics, Engineering, Anthropology, Astronomy,
-           Political Science, Chemistry, Art & Culture, Neuroscience, Ecology]
+           Political Science, Chemistry, Art & Culture, Neuroscience, Ecology,
+           Famous Criminal Cases, Ancient History, Military History, Unsolved Mysteries]
   evergreen_feeds:
     - {url: https://www.quantamagazine.org/feed/, name: Quanta}
     - {url: https://aeon.co/feed.rss, name: Aeon}
@@ -252,6 +279,8 @@ smarter:
     - {url: https://bigthink.com/feed/, name: Big Think}
     - {url: https://www.noemamag.com/feed/, name: Noema}
     - {url: https://publicdomainreview.org/rss.xml, name: The Public Domain Review}
+    - {url: https://daily.jstor.org/feed/, name: JSTOR Daily}
+    - {url: https://magazine.atavist.com/feed, name: The Atavist}
     - {url: https://www.smithsonianmag.com/rss/latest_articles/, name: Smithsonian}
     - {url: https://waitbutwhy.com/feed, name: Wait But Why}
     - {url: https://theconversation.com/us/articles.atom, name: The Conversation}

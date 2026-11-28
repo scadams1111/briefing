@@ -32,7 +32,12 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-12faa6b494a6.mp3",
    "seconds": 322
-  }
+  },
+  "tags": [
+   "Medicare (United States)",
+   "Centers for Medicare & Medicaid Services",
+   "Physician fee schedule"
+  ]
  },
  {
   "id": "872277f9695c",
@@ -67,7 +72,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-872277f9695c.mp3",
    "seconds": 468
-  }
+  },
+  "tags": [
+   "Alliance for Regenerative Medicine",
+   "Food and Drug Administration",
+   "Gene therapy",
+   "Peter Marks (physician)"
+  ]
  },
  {
   "id": "638840fbd8f3",
@@ -102,7 +113,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-638840fbd8f3.mp3",
    "seconds": 463
-  }
+  },
+  "tags": [
+   "ProPublica",
+   "Ectopic pregnancy",
+   "Abortion in the United States",
+   "Maternal death"
+  ]
  },
  {
   "id": "d2043a094911",
@@ -137,7 +154,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-d2043a094911.mp3",
    "seconds": 1153
-  }
+  },
+  "tags": [
+   "European Union",
+   "Marine Le Pen",
+   "Alternative for Germany",
+   "Far-right politics in Europe"
+  ]
  },
  {
   "id": "e8385ccb4a40",
@@ -172,7 +195,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-e8385ccb4a40.mp3",
    "seconds": 313
-  }
+  },
+  "tags": [
+   "Iambic Therapeutics",
+   "San Diego",
+   "Drug discovery",
+   "CDK inhibitor"
+  ]
  },
  {
   "id": "b4cb2d8a0c4e",
@@ -207,7 +236,12 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-b4cb2d8a0c4e.mp3",
    "seconds": 239
-  }
+  },
+  "tags": [
+   "Medicare for All",
+   "Democratic Party (United States)",
+   "Single-payer healthcare"
+  ]
  },
  {
   "id": "94b5466c358d",
@@ -242,7 +276,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-94b5466c358d.mp3",
    "seconds": 724
-  }
+  },
+  "tags": [
+   "Weakly interacting massive particle",
+   "Dark matter",
+   "Nuclear clock",
+   "Atom interferometer"
+  ]
  },
  {
   "id": "ce22170cb41b",
@@ -277,7 +317,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-ce22170cb41b.mp3",
    "seconds": 315
-  }
+  },
+  "tags": [
+   "Economy of the United States",
+   "Gross domestic product",
+   "Federal Reserve",
+   "Inflation"
+  ]
  },
  {
   "id": "edfc6a957f34",
@@ -312,7 +358,13 @@
   "audio": {
    "url": "https://github.com/scadams1111/briefing/releases/download/audio-2026-11-26/art-edfc6a957f34.mp3",
    "seconds": 1280
-  }
+  },
+  "tags": [
+   "Measles",
+   "Vaccine hesitancy",
+   "Make America Healthy Again",
+   "Disease elimination"
+  ]
  },
  {
   "id": "1e33699f69aa",
@@ -343,6 +395,11 @@
   "date": "2026-11-26",
   "score": 8.0,
   "image": "",
-  "author": ""
+  "author": "",
+  "tags": [
+   "Nordic model",
+   "Welfare state",
+   "Economy of the United States"
+  ]
  }
 ]
