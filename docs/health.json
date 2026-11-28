@@ -1,7 +1,7 @@
 {
- "date": "2026-11-27",
+ "date": "2026-11-28",
  "llm": false,
- "candidates": 228,
+ "candidates": 207,
  "picked": 10,
  "feeds": {
   "https://www.technologyreview.com/feed/": "ok (10)",
@@ -25,7 +25,7 @@
   "https://www.economist.com/finance-and-economics/rss.xml": "ok (40)",
   "https://www.theatlantic.com/feed/channel/business/": "ok (25)",
   "https://feeds.npr.org/1001/rss.xml": "ok (10)",
-  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (28)",
+  "https://feeds.bbci.co.uk/news/world/rss.xml": "ok (24)",
   "https://www.economist.com/international/rss.xml": "ok (40)",
   "https://www.foreignaffairs.com/rss.xml": "ok (20)",
   "https://www.propublica.org/feeds/propublica/main": "ok (20)",
@@ -34,18 +34,18 @@
   "https://www.fiercebiotech.com/rss/xml": "ok (25)",
   "https://endpts.com/feed/": "ok (24)",
   "https://www.biopharmadive.com/feeds/news/": "ok (10)",
-  "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (12)",
+  "https://www.bing.com/news/search?q=San+Diego+biotech&format=rss": "ok (11)",
   "https://speakingofresearch.com/feed/": "ok (10)",
-  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (12)",
-  "https://www.bing.com/news/search?q=new+approach+methodologies+animal+testing&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=animal+research+NIH+policy&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=new+approach+methodologies+animal+testing&format=rss": "ok (10)",
   "https://www.bing.com/news/search?q=FDA+animal+testing&format=rss": "ok (12)",
-  "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (8)",
+  "https://www.bing.com/news/search?q=laboratory+animal+welfare&format=rss": "ok (9)",
   "http://www.aaronsw.com/2002/feeds/pgessays.rss": "ok (40)",
   "https://www.lennysnewsletter.com/feed": "ok (20)",
   "https://www.bing.com/news/search?q=solo+consulting+business&format=rss": "ok (3)",
   "https://lethain.com/feeds.xml": "ok (12)",
   "https://charity.wtf/feed/": "ok (20)",
-  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (10)",
+  "https://www.bing.com/news/search?q=management+leadership+lessons&format=rss": "ok (11)",
   "https://www.outsideonline.com/feed/": "ok (10)",
   "https://www.adventure-journal.com/feed/": "ok (10)",
   "https://www.backpacker.com/feed/": "ok (10)",
@@ -61,6 +61,18 @@
   "https://nautil.us/feed/": "ok (10)",
   "https://www.themarginalian.org/feed/": "ok (20)",
   "https://www.newyorker.com/feed/everything": "ok (40)",
+  "https://www.smithsonianmag.com/rss/history/": "ok (20)",
+  "https://daily.jstor.org/feed/": "ok (10)",
+  "https://publicdomainreview.org/rss.xml": "ok (40)",
+  "https://www.bing.com/news/search?q=historians+discover&format=rss": "ok (5)",
+  "https://www.bing.com/news/search?q=archaeologists+find&format=rss": "ok (7)",
+  "https://www.bing.com/news/search?q=history+mystery+solved&format=rss": "ok (1)",
+  "https://magazine.atavist.com/feed": "ok (10)",
+  "https://crimereads.com/feed/": "ok (10)",
+  "https://www.bing.com/news/search?q=cold+case+solved&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=true+crime+longread&format=rss": "ok (1)",
+  "https://www.bing.com/news/search?q=infamous+heist&format=rss": "ok (9)",
+  "https://www.bing.com/news/search?q=wrongful+conviction+exonerated&format=rss": "ok (12)",
   "https://parentdata.org/feed/": "ok (16)",
   "https://www.afterbabel.com/feed": "ok (20)",
   "https://www.theatlantic.com/feed/channel/family/": "ok (25)",
@@ -69,7 +81,6 @@
   "https://ourworldindata.org/atom.xml": "ok (10)",
   "https://fs.blog/feed/": "ok (20)",
   "https://bigthink.com/feed/": "ok (10)",
-  "https://publicdomainreview.org/rss.xml": "ok (40)",
   "https://www.smithsonianmag.com/rss/latest_articles/": "ok (10)",
   "https://waitbutwhy.com/feed": "ok (10)",
   "https://www.scientificamerican.com/platform/syndication/rss/": "ok (40)"
@@ -79,21 +90,17 @@
    "fetched": 3,
    "full_text": 0
   },
-  "Aeon": {
-   "fetched": 1,
-   "full_text": 1
-  },
   "Axios": {
-   "fetched": 6,
+   "fetched": 4,
    "full_text": 0
   },
   "BBC News": {
-   "fetched": 9,
-   "full_text": 3
+   "fetched": 15,
+   "full_text": 10
   },
   "Backpacker": {
-   "fetched": 4,
-   "full_text": 4
+   "fetched": 3,
+   "full_text": 3
   },
   "Blog \u2013 Hackaday": {
    "fetched": 7,
@@ -101,113 +108,125 @@
   },
   "Fierce Biotech": {
    "fetched": 18,
-   "full_text": 2
+   "full_text": 1
   },
-  "Foreign Affairs": {
+  "Irrational Exuberance": {
    "fetched": 1,
    "full_text": 1
   },
-  "MIT Technology Review": {
+  "JSTOR Daily": {
    "fetched": 1,
    "full_text": 1
   },
   "NPR Topics: News": {
-   "fetched": 8,
-   "full_text": 6
+   "fetched": 2,
+   "full_text": 2
   },
   "Nature": {
-   "fetched": 5,
+   "fetched": 7,
+   "full_text": 1
+  },
+  "Nautilus": {
+   "fetched": 1,
    "full_text": 0
   },
+  "Noahpinion": {
+   "fetched": 1,
+   "full_text": 1
+  },
   "Outside Online": {
-   "fetched": 6,
-   "full_text": 6
+   "fetched": 7,
+   "full_text": 7
   },
   "Paul Graham: Essays": {
    "fetched": 18,
    "full_text": 0
   },
   "PetaPixel": {
-   "fetched": 6,
-   "full_text": 3
+   "fetched": 7,
+   "full_text": 5
   },
   "STAT": {
-   "fetched": 5,
-   "full_text": 3
+   "fetched": 3,
+   "full_text": 2
+  },
+  "Simon Willison's Weblog": {
+   "fetched": 1,
+   "full_text": 0
   },
   "Techmeme": {
-   "fetched": 3,
+   "fetched": 8,
    "full_text": 0
   },
   "The Atlantic": {
-   "fetched": 6,
+   "fetched": 5,
    "full_text": 5
   },
   "The Economist": {
-   "fetched": 3,
+   "fetched": 1,
    "full_text": 0
   },
+  "The Marginalian": {
+   "fetched": 2,
+   "full_text": 2
+  },
   "The New Yorker": {
-   "fetched": 12,
-   "full_text": 9
+   "fetched": 11,
+   "full_text": 8
   },
   "Undark Magazine": {
    "fetched": 7,
    "full_text": 0
   },
-  "arxiv.org": {
+  "bouncemarket.minhanhday.com": {
    "fetched": 1,
    "full_text": 0
   },
-  "blainehansen.me": {
+  "citroenet.org.uk": {
    "fetched": 1,
    "full_text": 1
   },
-  "blog.ktz.me": {
+  "courant.com": {
    "fetched": 1,
    "full_text": 1
   },
-  "buynothingday.co.uk": {
+  "cr.yp.to": {
    "fetched": 1,
    "full_text": 1
-  },
-  "construct22.com": {
-   "fetched": 1,
-   "full_text": 1
-  },
-  "devnull.land": {
-   "fetched": 1,
-   "full_text": 0
   },
   "github.com": {
-   "fetched": 2,
-   "full_text": 2
-  },
-  "janlukas.blog": {
-   "fetched": 1,
-   "full_text": 1
-  },
-  "krebsonsecurity.com": {
-   "fetched": 1,
-   "full_text": 1
-  },
-  "lia.mg": {
-   "fetched": 1,
-   "full_text": 1
-  },
-  "msn.com": {
    "fetched": 1,
    "full_text": 0
   },
-  "techstackups.com": {
+  "infohawk.com": {
    "fetched": 1,
    "full_text": 1
   },
-  "themouseless.dev": {
+  "neuralnetworksanddeeplearning.com": {
    "fetched": 1,
    "full_text": 1
   },
-  "worksinprogress.co": {
+  "oag.state.va.us": {
+   "fetched": 1,
+   "full_text": 1
+  },
+  "research.google": {
+   "fetched": 1,
+   "full_text": 1
+  },
+  "theconversation.com": {
+   "fetched": 1,
+   "full_text": 1
+  },
+  "theindianalawyer.com": {
+   "fetched": 1,
+   "full_text": 1
+  },
+  "unkernel.dev": {
+   "fetched": 1,
+   "full_text": 0
+  },
+  "yahoo.com": {
    "fetched": 1,
    "full_text": 1
   }

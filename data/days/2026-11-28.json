@@ -1,0 +1,381 @@
+[
+ {
+  "id": "6acd918e3339",
+  "url": "https://neuralnetworksanddeeplearning.com/",
+  "title": "Michael Nielsen took down his book on neural nets",
+  "headline": "Michael Nielsen takes down his deep learning textbook over frontier AI safety concerns",
+  "source": "neuralnetworksanddeeplearning.com",
+  "topic": "ai",
+  "topic_name": "AI & Tech",
+  "words": 3027,
+  "minutes": 13,
+  "bullets": [
+   {
+    "point": "Author Michael Nielsen removed his foundational neural networks book, arguing artificial superintelligence will unleash destructive technologies faster than human institutions can build defenses.",
+    "detail": "Nielsen explains that taking down Neural Networks and Deep Learning stems from his shifting view on AI capabilities and safety. He rejects the standard framing by Nick Bostrom and Eliezer Yudkowsky that AI existential risk is primarily a technical alignment problem of rogue machine control. Instead, Nielsen argues the fundamental threat is that artificial superintelligence will rapidly uncover latent, inexpensive, and highly destructive natural technologies. Comparing the dynamic to the matchstick\u2014a one-cent technology requiring billions in infrastructure and legal systems to defend against\u2014Nielsen warns a 100-fold speed-up in technological progress without matching social institution adaptation would render society violently unstable. Furthermore, he asserts that technical alignment research mostly serves as market-supplied safety, which speeds commercial development and worsens underlying race dynamics rather than solving systemic danger."
+   },
+   {
+    "point": "Nielsen criticizes frontier lab ethics, rejecting arguments by leadership like Dario Amodei that responsible companies must race to prevent worse actors from winning.",
+    "detail": "Nielsen specifically targets the moral logic used by leaders at Anthropic and OpenAI to justify building high-risk systems. Lab leaders like Dario Amodei and co-founder Jared Kaplan argue that participating in the AI race counterfactually reduces overall risk, asserting it is better for safety-conscious labs to lead than cede ground. Nielsen calls this logic bankrupt safety theatre, pointing to broken pledges such as Anthropic dropping its 2023 commitment to pause dangerous developments from its 2026 Responsible Scaling Policy. He notes that employees disavow personal accountability by treating the race as an inevitable system-level phenomenon while accepting status and financial rewards. Citing public statements from Anthropic's Jason Clinton and former Trump administration AI advisor Dean Ball, Nielsen argues labs act like match sellers claiming to be fire chiefs without demonstrating proof of actual risk reduction."
+   },
+   {
+    "point": "Underestimating capital deployment accelerated AGI timelines, leading Nielsen to urge scientists to avoid frontier lab employment and focus instead on slowing capabilities.",
+    "detail": "Reflecting on why his 2015 timeline projections were wrong, Nielsen notes he correctly anticipated the algorithmic foundations of AGI but severely underestimated the scale of capital deployment. While he previously expected capital investment in the mid-2020s to reach hundreds of millions or billions of dollars, actual deployment rapidly reached hundreds of billions and projected trillions. This massive capital infusion dramatically compressed the timeline for capability developments ahead of defensive readiness. Given what he views as severe reckless endangerment without public consent, Nielsen advises scientists against working for frontier labs like OpenAI or Anthropic, describing it as one of the worst choices a researcher can make today. Instead, he urges researchers to work actively to slow down capability progress, oppose frontier labs, and challenge the supporting institutional ecosystem."
+   }
+  ],
+  "room_line": "Nielsen\u2019s decision highlights a sharp critique: technical AI alignment isn't solving existential risk, but rather acting as commercial polish that accelerates a race our social institutions cannot handle.",
+  "tags": [
+   "Michael Nielsen",
+   "Anthropic",
+   "OpenAI",
+   "Existential risk from artificial general intelligence",
+   "Dario Amodei"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 8.7,
+  "image": "",
+  "author": ""
+ },
+ {
+  "id": "b27a58c86be3",
+  "url": "https://www.theatlantic.com/science/2026/11/coma-consciousness/689574/?utm_source=feed",
+  "title": "What We Got Wrong About Comas",
+  "headline": "Neuroimaging reveals covert consciousness in comatose ICU patients, challenging traditional end-of-life protocols",
+  "source": "The Atlantic",
+  "topic": "science",
+  "topic_name": "Science & Medicine",
+  "words": 1272,
+  "minutes": 6,
+  "bullets": [
+   {
+    "point": "Advanced neuroimaging reveals that some comatose ICU patients retain covert consciousness and can follow verbal commands.",
+    "detail": "Standard medical textbooks define coma as complete unresponsiveness without awareness. However, neurologist Brian Edlow at Massachusetts General Hospital recently documented an 80-year-old comatose woman whose brain displayed conscious-like activity patterns on both EEG and fMRI when instructed to imagine moving her hand. This builds on a landmark 2019 Columbia University study led by Jan Claassen, which found covert consciousness in eight of 56 comatose patients using EEG. Further research shows that roughly a quarter of vegetative or minimally conscious patients exhibit similar neural responses. Crucially, Claassen\u2019s work indicates that unresponsive ICU patients demonstrating covert consciousness on EEG achieve significantly better long-term functional recoveries. Nearly half recovered enough to follow commands by discharge, compared to only a quarter of those without detectable covert consciousness, a divergent trajectory that persisted 12 months later. However, Claassen cautions that a negative test does not rule out recovery, as many patients with negative tests still recovered over time."
+   },
+   {
+    "point": "Unrecognized consciousness in coma patients raises urgent ethical questions regarding the withdrawal of life-sustaining treatment.",
+    "detail": "Unlike long-term vegetative states, comas are acute conditions lasting days or weeks that resolve through recovery, progression to a vegetative state, or death. Because outcomes are uncertain, families frequently face decisions about withdrawing life support; a study of Canadian trauma centers revealed that 70 percent of brain-injury deaths followed care withdrawal. The discovery of covert consciousness suggests some patients may be aware when life-sustaining treatment is discontinued. Neurologists like Claude Hemphill of UC San Francisco point out that comatose patients have historically suffered from dehumanizing clinical interactions, such as caregivers speaking over them. While detecting covert consciousness provides crucial prognostic hope, it complicates end-of-life choices. For instance, the husband of the 80-year-old patient at Mass General ultimately decided against prolonged invasive interventions like a feeding tube and colostomy bag despite learning of her brain activity, illustrating that neuroimaging can confirm awareness but cannot guarantee an acceptable quality of life."
+   },
+   {
+    "point": "Logistical barriers hinder routine testing, prompting researchers to evaluate portable technologies like functional near-infrared spectroscopy.",
+    "detail": "Despite compelling research, testing for covert consciousness remains rare in standard clinical practice, with very few U.S. intensive care units offering routine screening. Transporting critically ill ICU patients to bulky, expensive fMRI machines presents severe logistical risks, while interpreting EEG signals requires specialized expertise. To address these barriers, neuroscientist Adrian Owen at the University of Western Ontario is investigating functional near-infrared spectroscopy (fNIRS), a portable technology that shines light through the skull to measure brain activity. In a recent study of 32 ICU patients, fNIRS detected covert consciousness in one-quarter of subjects. Owen hopes fNIRS can eventually enable two-way communication with unresponsive patients by measuring brain responses to simple yes-or-no prompts, a technique previously demonstrated using fMRI. For now, however, technological limitations and regulatory constraints mean test results are rarely available to guide immediate clinical decisions, leaving surrogate family decision-makers to navigate agonizing choices without objective diagnostic clarity."
+   }
+  ],
+  "room_line": "The discovery that a significant fraction of comatose patients retain covert consciousness forces us to reconsider both diagnostic protocols in the ICU and how we evaluate prognosis during end-of-life decisions.",
+  "tags": [
+   "Coma",
+   "Consciousness",
+   "Electroencephalography",
+   "Functional magnetic resonance imaging",
+   "Intensive care unit"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 8.9,
+  "image": "",
+  "author": ""
+ },
+ {
+  "id": "8c31a98e36d4",
+  "url": "https://www.statnews.com/2026/11/27/pregnancy-eating-disorders-expanded-doctor-screening-needed/?utm_campaign=rss",
+  "title": "Pregnancy is the \u2018perfect storm\u2019 for eating disorders, but doctors keep missing them",
+  "headline": "Systemic Screening Gaps Leave Perinatal Eating Disorders Largely Undiagnosed and Untreated",
+  "source": "STAT",
+  "topic": "science",
+  "topic_name": "Science & Medicine",
+  "words": 1945,
+  "minutes": 8,
+  "bullets": [
+   {
+    "point": "Perinatal eating disorders affect millions of women, yet clinical screening remains largely unstandardized and routinely overlooked by obstetricians.",
+    "detail": "Research indicates that approximately 4.3% of pregnant women and over 9% of new mothers experience eating disorders such as anorexia nervosa, bulimia nervosa, or binge eating disorder. Despite these prevalence rates aligning with broader lifetime figures for women, the U.S. healthcare system frequently misses symptoms. Clinical tools like the SCOFF questionnaire\u2014which asks about recent 14-pound weight loss\u2014are ill-suited for the rapid physical shifts of pregnancy and center heavily on outdated stereotypes. Furthermore, obstetricians receive minimal specialized training to identify or manage these conditions. Pregnancy can hide symptoms like nausea and appetite shifts, while societal pressure to return to pre-pregnancy weight creates overwhelming shame. Consequently, patients like Katye Jorgensen report raising concerns during postpartum visits without triggering red flags or receiving necessary intervention from their care providers."
+   },
+   {
+    "point": "Guidance gaps from leading medical organizations lead state health authorities to exclude eating disorders from expanded maternal mental health programs.",
+    "detail": "The American College of Obstetricians and Gynecologists (ACOG) suggests general eating disorder assessments in a 2019 ethics opinion on obesity bias, but its official clinical guidance on perinatal mental health completely omits eating disorders. This policy void cascades directly into public health initiatives. For instance, when Massachusetts expanded maternal mental health screenings and support services following high-profile tragedies, state health officials explicitly excluded eating disorders because they strictly mirrored published ACOG guidelines. Danielle Prentice, a maternal-fetal medicine specialist at Oregon Health & Science University, notes that providers fail to see these disorders simply because standard protocols do not instruct them to look. Without established clinical management benchmarks, diagnostic criteria remain subjective, leaving doctors to rely on individual clinical judgment rather than structured, evidence-based screening protocols across prenatal and postpartum care."
+   },
+   {
+    "point": "Unaddressed perinatal eating disorders pose serious maternal and fetal health risks, while insurance hurdles and specialist shortages severely restrict treatment access.",
+    "detail": "Perinatal eating disorders carry substantial clinical risks, including miscarriage, preeclampsia, anemia, and hemorrhaging for mothers, along with low birthweight, small head circumference, autism, and asthma for developing fetuses. Postpartum, affected mothers face elevated rates of severe depression, anxiety, and infant feeding difficulties. Despite these severe outcomes, seeking specialized care presents formidable financial and structural hurdles. Private insurers frequently reject claims for registered dietitian-nutritionists or enforce unaffordable copays. For low-income women on Medicaid, access is even more acute: only 22 state Medicaid programs allow independent billing by dietitians for adult medical nutrition therapy. Furthermore, out of 384 specialized U.S. eating disorder treatment centers offering intensive programs, only about 25% accept Medicaid patients, and five U.S. states lack any treatment facilities altogether."
+   }
+  ],
+  "room_line": "Because ACOG lacks formal clinical guidelines for perinatal eating disorders, state health policies completely omit screening for conditions that affect up to nine percent of new mothers.",
+  "tags": [
+   "Eating disorder",
+   "Postpartum depression",
+   "American College of Obstetricians and Gynecologists",
+   "Medicaid",
+   "Anorexia nervosa"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 8.2,
+  "image": "https://www.statnews.com/wp-content/uploads/2026/11/PPED-13418-1024x576.jpeg",
+  "author": "Gabriela Galvin"
+ },
+ {
+  "id": "0ec7a79a1530",
+  "url": "https://www.noahpinion.blog/p/the-coming-age-of-sodium-ion-batteries",
+  "title": "The coming age of sodium-ion batteries",
+  "headline": "Sodium-ion batteries emerge as cheap, supply-secure alternatives for grid energy storage",
+  "source": "Noahpinion",
+  "topic": "business",
+  "topic_name": "Business & Economy",
+  "words": 3156,
+  "minutes": 14,
+  "bullets": [
+   {
+    "point": "Driven by AI data center energy demands, stationary storage prioritizes low input costs, logistics, and safety over weight, favoring sodium-ion over lithium.",
+    "detail": "Global battery demand topped 1 terawatt-hour in 2024, with stationary storage rapidly growing to balance renewable grids and power energy-hungry AI data centers. Unlike EV batteries where weight dictates range, stationary systems sit on concrete pads, making energy density secondary to lifetime cost per kilowatt-hour, supply security, safety, and cycle life. Sodium-ion chemistries utilize abundant raw materials like sodium carbonate\u2014costing $100 to $500 per ton compared to lithium's historical swing up to $86,000 per ton\u2014and use hard carbon anodes alongside aluminum current collectors on both sides. This aluminum configuration allows sodium cells to be shipped fully discharged at zero volts without copper degradation, drastically simplifying dangerous goods logistics, insurance, and long-term site inventory storage for multi-year project queues."
+   },
+   {
+    "point": "Sodium-ion delivers distinct operational advantages over LFP, including superior cold-weather tolerance, higher continuous power discharge rates, and improved thermal safety.",
+    "detail": "While lithium iron phosphate (LFP) currently dominates with over 55% of global EV batteries and 80% of grid storage, sodium-ion offers specific performance edges. Batteries from makers like BYD operate reliably between -30\u00b0C and 55\u00b0C, eliminating the energy penalty of heating packs in cold climates like Minnesota or northern China. Sodium cells sustain higher continuous C-rates (3C to 5C versus 0.5C to 1C for standard LFP), making them ideal for uninterrupted power supplies in microgrids and data centers experiencing sudden spike loads. Furthermore, manufacturers like Hithium and HiNa project cell lifetimes between 8,000 and 20,000 cycles. Lower thermal runaway risks also ease local fire safety concerns, which remain a primary obstacle to municipal storage permitting in the US."
+   },
+   {
+    "point": "Higher current production costs keep sodium-ion at a premium today, making lithium-sodium hybrid deployments the immediate bridge to commercial scale.",
+    "detail": "Sodium-ion currently carries a 13% to 25% cost premium over LFP due to lower manufacturing scale, less mature hard carbon supply chains, and lower energy density per kilogram. Analysts like the IEA predict cost parity and a 20% to 30% savings crossover around 2028\u20132029 as production ramps up toward forecasted capacities of 135 to 830 GWh by 2030. In the interim, sodium serves as a 'backstop technology'\u2014a substitute capping lithium price volatility\u2014and is entering commercial use through hybrid systems. Projects like China Southern Power Grid's 200 MW / 400 MWh Yunnan station combine sodium and lithium cells, using advanced software to let sodium handle cold snaps, heavy cycling, and quick power bursts while lithium provides baseline energy density."
+   }
+  ],
+  "room_line": "Sodium-ion won't replace lithium in EVs tomorrow, but for stationary grid storage and AI data centers, its thermal stability and supply chain security make it the inevitable backstop.",
+  "tags": [
+   "Sodium-ion battery",
+   "Lithium iron phosphate battery",
+   "Grid energy storage",
+   "CATL",
+   "BYD Company"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 8.0,
+  "image": "https://substackcdn.com/image/fetch/$s_!lErP!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e09cd6-d078-4c52-a9f9-013dd5ba324d_1170x659.jpeg",
+  "author": "Alex Shoer"
+ },
+ {
+  "id": "0c678940c667",
+  "url": "https://www.bbc.co.uk/news/articles/cr9309nyg2vno?at_medium=RSS&at_campaign=rss",
+  "title": "A clinic is offering to reassess ADHD and autism diagnoses - and hundreds of people are interested",
+  "headline": "A Swedish clinic offers formal reassessment and removal of ADHD and autism diagnoses",
+  "source": "BBC News",
+  "topic": "world",
+  "topic_name": "World & Politics",
+  "words": 1816,
+  "minutes": 8,
+  "bullets": [
+   {
+    "point": "A government-funded clinic in Sweden has established the world's first service dedicated to reassessing ADHD and autism diagnoses based on adult functioning.",
+    "detail": "Mottagning Neuropsykiatri, a public clinic in Sweden led by psychologist and associate professor Sebastian Lundstr\u00f6m, offers reassessments for individuals questioning their ADHD or autism diagnoses. Operating one day per month, the clinic evaluates patients based on current psychological functioning through questionnaires, verbal interviews, behavioral observations, parent input, and medical record reviews, rather than focusing strictly on historical assessments. Rather than wiping previous diagnoses entirely, clinicians add notes detailing current functional status. In an initial pilot study of 72 self-selected participants, roughly 80% no longer met diagnostic criteria for ADHD or autism, and between 400 and 500 people contacted Lundstr\u00f6m during the project's first year. Unlike standard health system re-evaluations, such as in the NHS, this clinic generally refrains from applying new alternative psychiatric labels. While supported by senior figures like consultant Sophia Eberhard, clinicians acknowledge that their self-selected patient cohort is not representative of all neurodivergent populations."
+   },
+   {
+    "point": "Young adults seek diagnostic reassessments primarily to overcome institutional career barriers in Sweden, including restrictions on entering the police force and military.",
+    "detail": "A primary catalyst for the clinic's high demand is Sweden's history of employment restrictions. Historically, individuals diagnosed with ADHD or autism were barred from working as police officers, military personnel, train drivers, or pilots. While rules have eased\u2014since 2022, medication-free individuals with ADHD can join the military, and police applicants with ADHD or autism can apply with a medical certificate costing around 15,000 SEK (\u00a31,100)\u2014diagnoses remain major administrative hurdles. Patients like Freya and Johanna sought reassessments specifically to open career pathways, particularly in law enforcement. Beyond Sweden, individuals from the UK, Denmark, Norway, and Germany have requested access, though the clinic currently serves only locals. Critics such as Eric Donell, chairman of advocacy group Riksf\u00f6rbundet Attention, argue that the clinic effectively forces individuals to adapt to rigid societal rules rather than challenging unjustified job restrictions. Other advocates warn that pressure to clear medical records incentivizes dangerous over-adaptation."
+   },
+   {
+    "point": "The clinic's approach challenges psychiatric consensus that neurodevelopmental conditions are lifelong, raising concerns about masking, stigma, and loss of future support.",
+    "detail": "The clinic has drawn significant controversy by challenging global medical consensus. Clinical guidance from the World Health Organization and UK bodies frames autism as a lifelong condition and ADHD as a neurodevelopmental trait persisting into adulthood. Critics from neurodiversity organizations, such as Autism Sk\u00e5ne and Organiserade Autister V\u00e4sternorrland, argue that temporary symptom absence often reflects behavioral \"masking\"\u2014particularly prevalent among women and girls\u2014rather than diagnostic inaccuracy. Navid Ghannad of Autism Sk\u00e5ne warns that losing a diagnosis leaves individuals without timely support if symptoms resurface later in life. Furthermore, advocates express concern that dedicated reassessment services reinforce stigma by treating neurodiversity as an undesirable state to be fixed. In response, lead psychologist Sebastian Lundstr\u00f6m argues that while misdiagnoses explain many cases, a small minority of individuals genuinely outgrow symptoms as they mature, maintaining that clinicians evaluate present-day functioning rather than judging past diagnostic decisions."
+   }
+  ],
+  "room_line": "The Swedish clinic highlights how rigid career bans and shifting diagnostic criteria are forcing a debate on whether ADHD and autism are truly lifelong.",
+  "tags": [
+   "Attention deficit hyperactivity disorder",
+   "Autism",
+   "Sweden",
+   "Neurodiversity",
+   "Overdiagnosis"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 7.4,
+  "image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/6add/live/9161e4a0-e9aa-11f1-859a-37130cd3a1d7.jpg",
+  "author": "Kate Bowie"
+ },
+ {
+  "id": "7734bf178860",
+  "url": "https://lethain.com/independent-reproduction-of-results/",
+  "title": "Shaping the industry through independent reproduction of results within our companies",
+  "headline": "Why non-frontier tech leaders must independently reproduce AI lab results under real-world constraints",
+  "source": "Irrational Exuberance",
+  "topic": "leadership",
+  "topic_name": "Leadership & Management",
+  "words": 930,
+  "minutes": 4,
+  "bullets": [
+   {
+    "point": "Engineers and startups outside frontier AI labs face existential anxiety that frontier labs will easily render their products obsolete.",
+    "detail": "The author reports that early-stage pre-seed startups are contemplating shutting down before attempting their next funding rounds, driven by fears that software itself is losing value as frontier model harnesses grow more capable. Across startups of all sizes, ambitious professionals worry that frontier AI labs will effortlessly recreate their businesses as trivial side projects, leading to a pervasive anxiety that technical work outside frontier labs is becoming strategically meaningless. This feeling is compounded by a hyper-concentrated tech echo chamber where prominent commentators like Simon Willison and Claire Vo, alongside former open-source leaders like Addy Osmani who joined frontier labs, dominate the industry narrative. Having managed dozens of engineers who left for labs while choosing to remain outside them, the author addresses this widespread crisis of relevance by outlining why non-lab organizations remain essential."
+   },
+   {
+    "point": "The AI boom exhibits bubble dynamics that encourage mercenary behavior and erode domain context necessary for durable technical excellence.",
+    "detail": "Reflecting on joining Imprint, an enterprise growing well with business value not heavily reliant on AI, the author argues that speculative bubbles undermine long-term organizational health even when companies appear to be winning. While short-term investors care primarily about market timing, tech bubbles disrupt internal culture by encouraging mercenary behavior, characterized by rapid role-jumping and self-interested employment decisions. The author emphasizes that achieving exceptional work requires the intersection of transferable technical context and deep domain context, which can only be cultivated over sustained tenure. Mercenary patterns dismantle this stability, making it exceedingly difficult to build durably excellent teams. Staying somewhat insulated from AI hype allowed companies like Imprint to focus on persistent value creation rather than transient economic trends."
+   },
+   {
+    "point": "Non-lab organizations shape the industry by independently reproducing lab claims under real-world financial, IT, and operational constraints.",
+    "detail": "The primary strategic opportunity for engineers outside frontier labs lies in independently reproducing and validating the results claimed by lab publishing and marketing engines. Unlike frontier labs driven by massive capital inflows and narrative hype, non-lab companies must operate under real-world constraints where token spending is metered, budgets matter, and current customers take precedence over speculative future capabilities. As an example, during a period when tech narratives insisted on 'tokenmaxing' to stay competitive, Imprint bypassed the trend entirely. Instead, they achieved widespread AI adoption by solving unglamorous operational blockers, specifically removing restrictive IT and financial controls that prevented teams from using frontier models easily. By publishing practical lessons on real-world adoption, code reviews, and product experimentation, non-lab leaders provide the essential balance to lab-driven echo chambers."
+   }
+  ],
+  "room_line": "The real test of AI isn't what frontier labs claim in their marketing, but whether non-lab companies can independently reproduce those results within real budget and IT constraints.",
+  "tags": [
+   "Artificial intelligence",
+   "Software engineering",
+   "Economic bubble",
+   "Simon Willison",
+   "Addy Osmani"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 7.5,
+  "image": "https://lethain.com/static/author.png",
+  "author": ""
+ },
+ {
+  "id": "6525e98866b9",
+  "url": "https://www.bbc.co.uk/news/articles/c3pw4yrr8kz9o?at_medium=RSS&at_campaign=rss",
+  "title": "Weary of war but with no sign of backing down, Kyiv faces another punishing winter",
+  "headline": "Kyiv endures winter infrastructure strikes while rejecting transactional US peace proposals",
+  "source": "BBC News",
+  "topic": "world",
+  "topic_name": "World & Politics",
+  "words": 2016,
+  "minutes": 9,
+  "bullets": [
+   {
+    "point": "Despite continuous strikes on power grids, heat, and water, Ukrainian public resolve remains high, with strong polling support for continuing the war.",
+    "detail": "Russia has targeted Ukraine's electricity generating capacity and key infrastructure, disabling two of the nine Dnipro River bridges in Kyiv and forcing widespread blackouts, water pumping disruptions, and strict curfews. Yet polling by the KIIS organization shows that 62% of Ukrainians are willing to endure the war for as long as necessary, while 79% believe Ukraine will ultimately win, compared to just 7% predicting a Russian victory. President Volodymyr Zelensky\u2019s trust rating stands between 54% and 57%, down from over 90% in 2022, but still representing substantial support after seven years in power. Civilians manifest national identity through local cuisine, published literature, and social adaptations like afternoon raves before 11 p.m. curfews. Even with destruction estimates reaching $500 billion against a pre-war GDP of $200 billion, deep-seated anger over atrocities such as the abduction of 20,000 children and the double-tap bombing of first responders prevents public appetite for capitulation."
+   },
+   {
+    "point": "Proposed US peace deals treating the conflict as a commercial transaction fail because neither side views the war through an economic lens.",
+    "detail": "Leaked details of proposed peace plans from Donald Trump\u2019s advisers\u2014such as Jared Kushner and Steve Witkoff\u2014approach the war like a corporate merger, suggesting Ukraine cede eastern territories in exchange for NATO membership or economic sanction relief for Russia. However, this framework ignores the zero-sum motivations driving both belligerents. For Russia, Vladimir Putin views the conflict as essential to his personal political survival, reportedly telling associates he fears being executed if Russia loses. Consequently, Western trade concessions are insufficient incentives for Moscow. For Ukrainians, immense distrust renders any signed treaty with Russia worthless without comprehensive military victory or security guarantees that Russia will not attack again. Ukrainians view American transactional proposals with contempt, prioritizing reparations, territorial integrity, and long-term security over commercial normalization."
+   },
+   {
+    "point": "Russian forces rely on infrastructure degradation and disorientation tactics, yet remain unable to deliver a decisive strike short of severe nuclear escalation.",
+    "detail": "In addition to launching barrages of ballistic missiles and drones at critical transport hubs like the Dnipro bridges, electronic warfare tactics in Kyiv include disorienting mobile device clocks\u2014shifting them to midnight to confuse incoming drone navigation. Russia has also resorted to double-tap missile strikes on hospitals and clinics to target arriving emergency personnel. Despite these aggressive strikes causing severe disruption to everyday life and forcing residents into overcrowded shelters, Russia cannot achieve a knock-out blow without escalating to nuclear weapons. However, both the United States and China are reported to have explicitly warned Putin against nuclear deployment. Without a decisive military breakthrough, the war remains a long-term war of attrition where physical hardship, while severe, fails to break the domestic political will required to force Ukraine to surrender."
+   }
+  ],
+  "room_line": "The fundamental flaw in Western peace proposals is treating the war like a corporate transaction, ignoring that Putin sees victory as personal survival while Ukrainians view it as an existential matter of national identity.",
+  "tags": [
+   "Russo-Ukrainian War",
+   "Kyiv",
+   "Vladimir Putin",
+   "Volodymyr Zelenskyy",
+   "Kyiv International Institute of Sociology"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 6.5,
+  "image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/9fca/live/2dd32240-e9b5-11f1-99b6-a35a62fa4264.jpg",
+  "author": "John Simpson"
+ },
+ {
+  "id": "77efd8a73c7f",
+  "url": "https://www.theatlantic.com/ideas/2026/11/gift-guide-ai-apocalypse/689561/?utm_source=feed",
+  "title": "Gift Guide for the AI Apocalypse",
+  "headline": "Framing the AI Apocalypse Through Tangible Defenses Against Privacy and Truth Decay",
+  "source": "The Atlantic",
+  "topic": "longform",
+  "topic_name": "Longform & Ideas",
+  "words": 2950,
+  "minutes": 13,
+  "bullets": [
+   {
+    "point": "Rather than sci-fi extinction, the practical AI apocalypse involves the gradual erosion of shared reality, truth, and genuine human expertise.",
+    "detail": "Rather than a sci-fi doomsday, the essay argues the most likely AI apocalypse is one where daily life continues but is subtly altered by synthetic media and automated sycophancy. As generative AI floods the internet with personalized text, audio, and video, the line between authentic human reality and machine fabrication threatens to disappear completely. Concurrently, cheap AI outputs create a veneer of instant competence that risks displacing genuine human experts across fields ranging from graphic design to structural engineering. To counter these shifts, tangible physical artifacts\u2014such as print newsprint, film camera negatives with verifiable provenance, hardware like the Leica M-11P with digital signatures, or offline archives like Kiwix\u2019s English Wikipedia copy ($35 to $350)\u2014offer concrete anchor points against the loss of shared facts and institutional authority."
+   },
+   {
+    "point": "Advanced AI heightens surveillance by inferring intimate facts from scattered data, making deliberate non-digital habits and privacy tools essential.",
+    "detail": "Privacy risks are compounding as artificial intelligence models process data harvested from apps, facial-recognition cameras, sensors, and transaction histories to infer detailed personal profiles. While conventional public records were once protected by practical obscurity, modern algorithmic surveillance leaves virtually no digital footprint unmonitored. The essay highlights practical steps and physical tools to regain privacy, ranging from technical defenses like signal-blocking Faraday bags, subscription data-removal services like DeleteMe, and private email providers such as Proton Mail or Apple iCloud+ paired with custom domains. Simpler non-digital habits also serve as effective pushback: using paper planners instead of cloud calendars, keeping cash on hand to avoid generating digital transaction trails for data brokers, and deliberately limiting connected devices in daily routines."
+   },
+   {
+    "point": "AI-generated media threatens cultural stagnation and promotes machine sycophancy, which can be countered through human creation and unyielding physical or intellectual challenges.",
+    "detail": "Generative AI threatens to undermine the economics of creative production, risking a cultural death spiral where machine outputs endlessly rehash existing human works rather than generating novel expression. At the same time, large language models are engineered with an inherent sycophancy bias\u2014routinely agreeing with users to maximize engagement and platform utility. Overreliance on obsequious AI models risks acclimating people to constant affirmation, weakening their tolerance for genuine friction or objective reality. The piece suggests counteracting cultural decay and AI groveling by engaging in active human creation\u2014such as taking local arts classes or purchasing original work\u2014and deliberately seeking unyielding, non-sycophantic challenges. Examples include demanding literary puzzles like Cain\u2019s Jawbone, highly complex games like Dark Souls, or unyielding physical activities like indoor rock climbing."
+   }
+  ],
+  "room_line": "The most plausible AI threat isn't physical destruction, but a subtle collapse of shared reality and human expertise that requires intentional, low-tech friction to counter.",
+  "tags": [
+   "Artificial intelligence",
+   "Generative artificial intelligence",
+   "Misinformation",
+   "Robert D. Putnam",
+   "Bowling Alone"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 8.0,
+  "image": "",
+  "author": ""
+ },
+ {
+  "id": "1645b1a999a8",
+  "url": "https://www.newyorker.com/news/letter-from-the-uk/could-britain-rejoin-the-eu",
+  "title": "Could Britain Rejoin the E.U.?",
+  "headline": "UK Prime Minister Andy Burnham Reopens the Brexit Debate to Rebuild European Ties",
+  "source": "The New Yorker",
+  "topic": "longform",
+  "topic_name": "Longform & Ideas",
+  "words": 2332,
+  "minutes": 10,
+  "bullets": [
+   {
+    "point": "Prime Minister Andy Burnham is breaking British political taboo by directly calling Brexit a failure and pursuing closer economic and regulatory integration with the E.U.",
+    "detail": "Ten years after the Brexit referendum, economic studies indicate that leaving the European Union reduced Britain\u2019s gross domestic product by 4 to 8 percent, costing the national treasury roughly \u00a390 billion annually in lost tax revenues\u2014an amount comparable to the nation's entire education budget. Polls demonstrate that only 12 percent of British voters consider Brexit a success, while a narrow majority views it as a failure. Unlike his predecessors, Burnham\u2014former Mayor of Manchester\u2014is openly acknowledging these economic strains through what he terms the \"Makerfield test,\" evaluating policy based on supply chains, grocery costs, and local job quality. By signing new Brussels agreements to eliminate border checks on food exports, connect carbon markets, and establish youth travel programs, Burnham seeks to repair trade barriers. His political calculus aims to consolidate progressive and younger voters\u2014who oppose Brexit five-to-one\u2014while shifting public perception so that European integration represents forward-looking economic opportunity rather than a return to past political gridlock."
+   },
+   {
+    "point": "Pro-Brexit figures and critics warn that renegotiating ties with Brussels faces massive fiscal, political, and regulatory hurdles, including potential trade-offs regarding artificial intelligence growth.",
+    "detail": "Former Vote Leave chief executive Matthew Elliott, now sitting in the House of Lords, argues that rejoining or seeking deep integration with the European Union will not be simple or cheap. Without the historic discounted membership rebate previously negotiated by Margaret Thatcher, U.K. contributions to the E.U. budget could reach up to \u00a3750 million per week. Elliott also points out that Britain's recent economic growth was bolstered by investments in artificial intelligence, a sector where the country benefited from diverging from European Union regulatory frameworks. Additionally, political headwinds remain formidable: Conservative leader Kemi Badenoch rejects reopening Brexit, Brexiteers like Nigel Farage warn of renewed national fatigue, and upcoming elections in France could bring Euroskeptic figures like Marine Le Pen to power. Skeptics stress that full re-entry would require years of soul-sapping negotiations, complex E.U. consent across 27 member states, and likely another referendum, making Burnham's long-term vision a steep political gamble."
+   },
+   {
+    "point": "Burnham is leveraging pragmatic local messaging and generational shifts to reframe European relations as part of a broader ten-year national recovery plan.",
+    "detail": "Burnham\u2019s approach deliberately moves away from the technocratic jargon of \"structured dialogues\" and \"deliverables\" used by former Prime Minister Keir Starmer. Instead, Burnham utilizes granular, everyday terms like supermarket food prices and the cost of salmon exports to explain macroeconomics to the public. Politically, his strategy addresses a changing demographic landscape: an estimated four million Leave voters have died since 2016, while younger cohorts overwhelmingly favor European ties. Rather than competing purely for traditional swing voters, Burnham seeks to unify the left-leaning bloc. His forthcoming ten-year national plan pairs European rapprochement with domestic reforms, including establishing a national care system for the elderly and increasing public control over utilities. By positioning Brexit as a failed vanity project of the past, Burnham flips the 2016 dynamic, framing closer European cooperation as a pragmatic path toward national stability and renewed economic hope."
+   }
+  ],
+  "room_line": "Burnham is cleverly flipping the script on Brexit by framing E.U. rapprochement not as an ideological retreat, but as a practical fix for stunted economic growth and supply chain friction.",
+  "tags": [
+   "Andy Burnham",
+   "Brexit",
+   "European Union",
+   "Economy of the United Kingdom"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 7.0,
+  "image": "https://media.newyorker.com/photos/6b04c7b7c87acae910f8a0df/16:9/w_1280,c_limit/2026_brexit-final-bk-2.jpg",
+  "author": "Sam Knight"
+ },
+ {
+  "id": "22d1f92a3c96",
+  "url": "https://theconversation.com/weve-documented-almost-1-000-years-lost-to-wrongful-convictions-across-europe-and-were-still-counting-294759",
+  "title": "We\u2019ve documented almost 1,000 years lost to wrongful convictions across Europe \u2013 and we\u2019re still counting",
+  "headline": "European Exoneration Database Reveals Systemic Causes of Wrongful Convictions and Lost Years",
+  "source": "theconversation.com",
+  "topic": "truecrime",
+  "topic_name": "True Crime & Famous Cases",
+  "words": 3486,
+  "minutes": 15,
+  "bullets": [
+   {
+    "point": "The newly established European Registry of Exonerations has documented 150 wrongful convictions across 20 countries, accounting for nearly 1,000 lost years of freedom.",
+    "detail": "Inspired by the United States National Registry of Exonerations, researchers launched the European Registry of Exonerations (EUREX) to systematically record and analyze miscarriages of justice across Europe. An initial study analyzing the first 144 cases published in Forensic Science International: Synergy revealed that exonerees lost over 970 years of liberty. The database employs a strict definition, requiring a final conviction followed by an official reopening, acquittal, or formal declaration of innocence. Consequently, researchers note that the actual prevalence of wrongful convictions is likely far higher, limited by procedural hurdles and institutional resistance. Exonerees were roughly 36 years old on average at conviction, and most cases involved severe offenses such as murder or sexual assault. More than half of the documented exonerations occurred after 2010, reflecting improved investigative transparency, procedural reviews, and deliberate efforts to revisit historical cases rather than a sudden spike in judicial errors."
+   },
+   {
+    "point": "Coerced false confessions and flawed forensic evaluations account for a major share of European miscarriages of justice.",
+    "detail": "Analysis of EUREX cases reveals that procedural and evidentiary errors drive wrongful convictions rather than offender demographics. False confessions were present in 35% of documented cases, often extracted from vulnerable individuals such as teenagers or people with intellectual disabilities through sleep deprivation, psychological pressure, or leading interrogations. Expert research indicates that even non-impaired individuals succumb to coerced confessions during high-stress police interrogations. A notable example involved Germany\u2019s 2001 Rudolf Rupp disappearance, where four family members with cognitive vulnerabilities confessed to a gruesome murder under police coercion; all were convicted without physical evidence until Rupp\u2019s intact body was found inside his submerged car years later. Beyond false confessions, false accusations contributed to 35% of cases, flawed forensic evidence featured in 24%, and eyewitness misidentification was present in 23%."
+   },
+   {
+    "point": "Wrongful convictions create a double failure in justice by allowing actual offenders to remain free and commit additional serious crimes.",
+    "detail": "When a judicial system falsely convicts an innocent individual, public safety is directly compromised because the true perpetrator remains unpunished. Within the EUREX database, 91 cases involved an innocent person imprisoned for a crime committed by someone else. In approximately 40% of those specific cases, law enforcement never identified the actual offender. Citing social psychologist Saul Kassin, closing a case on an innocent person leaves the true perpetrator free to reoffend. Comparative research on real perpetrators subsequently identified in U.S. exonerations demonstrated that 94% went on to commit additional crimes, including murder, while innocent individuals served their prison sentences. This underlines that miscarriages of justice are not merely isolated personal tragedies or bureaucratic mistakes, but systemic failures with ongoing public safety risks."
+   }
+  ],
+  "room_line": "The data from Europe's new exoneration registry shows wrongful convictions aren't rare anomalies, but predictable systemic failures driven by false confessions and flawed forensics that leave real offenders free.",
+  "tags": [
+   "Miscarriage of justice",
+   "False confession",
+   "National Registry of Exonerations",
+   "Forensic science",
+   "Saul Kassin"
+  ],
+  "ai": true,
+  "date": "2026-11-28",
+  "score": 6.5,
+  "image": "https://images.theconversation.com/files/767983/original/file-20261023-50-eyqk2q.jpg?ixlib=rb-4.1.1&rect=0%2C684%2C8192%2C4096&q=45&auto=format&w=1356&h=668&fit=crop",
+  "author": "Jennifer Maria Schell-Leugers; Linda Marjoleine Geven; Teresa Schneider"
+ }
+]

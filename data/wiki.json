@@ -1,1 +1,68 @@
-{}
+{
+"abortion-in-the-united-states": {
+"desc": "",
+"extract": "In the United States, abortion is a divisive issue in politics and culture wars. Prior to the mid-19th century, English common law formed the basis of abortion law in the colonies and the early Republic.",
+"title": "Abortion in the United States",
+"url": "https://en.wikipedia.org/wiki/Abortion_in_the_United_States"
+},
+"addy-osmani": {
+"missing": true
+},
+"ai-alignment": {
+"desc": "Conformance of AI to intended objectives",
+"extract": "In the field of artificial intelligence (AI), alignment aims to steer AI systems toward a person's or group's intended goals, preferences, or ethical principles. An AI system is considered aligned if it advances the intended objectives. A misaligned AI system pursues unintended objectives.",
+"title": "AI alignment",
+"url": "https://en.wikipedia.org/wiki/AI_alignment"
+},
+"ai-safety": {
+"desc": "Artificial intelligence field of study",
+"extract": "AI safety is an interdisciplinary field focused on preventing accidents, misuse, or other harmful consequences arising from artificial intelligence (AI) systems. It encompasses AI alignment, which aims to ensure AI systems behave as intended, as well as monitoring AI systems for risks and enhancing their robustness. The field is particularly concerned with existential risks posed by advanced AI models.",
+"title": "AI safety",
+"url": "https://en.wikipedia.org/wiki/AI_safety"
+},
+"alliance-for-regenerative-medicine": {
+"missing": true
+},
+"alternative-for-germany": {
+"desc": "Far-right political party in Germany",
+"extract": "Alternative for Germany is a far-right, right-wing populist,\nnational conservative, and in parts v\u00f6lkisch nationalist political party in Germany. It has 151 members of the Bundestag and 15 members of the European Parliament. It is the largest opposition party in the Bundestag and a member of the Europe of Sovereign Nations Group in the European Parliament.",
+"title": "Alternative for Germany",
+"url": "https://en.wikipedia.org/wiki/Alternative_for_Germany"
+},
+"american-college-of-obstetricians-and-gynecologists": {
+"desc": "US professional association",
+"extract": "The American College of Obstetricians and Gynecologists (ACOG) is a professional association of physicians specializing in obstetrics and gynecology in the United States. Several Latin American countries are also represented within Districts of the organization. It is a 501(c)(6) organization with a membership of more than 60,000 obstetrician-gynecologists and women's health care professionals. It was founded in 1951.",
+"title": "American College of Obstetricians and Gynecologists",
+"url": "https://en.wikipedia.org/wiki/American_College_of_Obstetricians_and_Gynecologists"
+},
+"andy-burnham": {
+"desc": "Prime Minister of the United Kingdom since 2026",
+"extract": "Andrew Murray Burnham is a British politician who has served as Prime Minister of the United Kingdom and Leader of the Labour Party since July 2026. He has been the member of Parliament (MP) for Makerfield in Greater Manchester since June 2026 and was Mayor of Greater Manchester from 2017 to 2026. He was previously the MP for Leigh from 2001 to 2017 and held several Cabinet positions. Burnham identifies as a socialist and is associated with the Labour Party's soft left; he is also a member of the Co-operative Party, which is allied with Labour. His political ideology has been called \"Manchesterism\".",
+"title": "Andy Burnham",
+"url": "https://en.wikipedia.org/wiki/Andy_Burnham"
+},
+"aneuploidy": {
+"desc": "Presence of an abnormal number of chromosomes in a cell",
+"extract": "Aneuploidy is the presence of an abnormal number of chromosomes in a cell, for example a human somatic cell having 45 or 47 chromosomes instead of the usual 46. It does not include a difference of one or more complete sets of chromosomes. A cell with any number of complete chromosome sets is called a euploid cell.",
+"title": "Aneuploidy",
+"url": "https://en.wikipedia.org/wiki/Aneuploidy"
+},
+"animal-testing": {
+"desc": "Use of animals in experiments",
+"extract": "Animal testing, also known as animal experimentation, animal research, and in vivo testing, is the use of non-human animals, as model organisms, in experiments that seek answers to scientific and medical questions. This approach can be contrasted with field studies in which animals are observed in their natural environments or habitats. Experimental research with animals is usually conducted in universities, medical schools, pharmaceutical companies, defense establishments, and commercial facilities that provide animal-testing services to the industry. The focus of animal testing varies on a continuum from pure research, focusing on developing fundamental knowledge of an organism, to applied",
+"title": "Animal testing",
+"url": "https://en.wikipedia.org/wiki/Animal_testing"
+},
+"animal-welfare": {
+"desc": "Well-being of non-human animals",
+"extract": "Animal welfare is the quality of life and overall well-being of animals. Formal standards of animal welfare vary between contexts, but are debated mostly by animal welfare groups, legislators, and academics. Animal welfare science uses measures such as longevity, disease, immunosuppression, behavior, physiology, and reproduction, although there is debate about which of these best indicate animal welfare.",
+"title": "Animal welfare",
+"url": "https://en.wikipedia.org/wiki/Animal_welfare"
+},
+"anorexia-nervosa": {
+"desc": "Eating disorder",
+"extract": "Anorexia nervosa (, commonly referred to as anorexia, is an eating disorder characterized by predominant food restriction, body image disturbance, fear of gaining weight, and an overwhelming desire to be thin. These characteristics often mean individuals undergo severe malnutrition as a result of the disorder.",
+"title": "Anorexia",
+"url": "https://en.wikipedia.org/wiki/Anorexia"
+}
+}

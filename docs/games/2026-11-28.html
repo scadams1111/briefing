@@ -1,0 +1,639 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#0B1220'><meta name='apple-mobile-web-app-capable' content='yes'><meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'><meta name='apple-mobile-web-app-title' content='Briefing'><link rel='apple-touch-icon' href='../apple-touch-icon.png'><link rel='manifest' href='../manifest.webmanifest'><title>Games — 2026-11-28</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'><style>
+:root{
+  --bg:#0B1220; --card:#131C2E; --tile:#172136; --tile-open:#1C2740; --ink:#EAF0FA; --muted:#8D9AB3;
+  --detail:#BAC5D8; --accent:#F2B544; --on-accent:#1A1305; --img:#1E2A44; --line:#2A3653;
+  --serif:"Fraunces","New York",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+
+/* shell */
+.top{max-width:560px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+/* story pages: a fixed app frame, so the page itself never scrolls out of reach */
+body.app{position:fixed;inset:0;display:flex;flex-direction:column;overflow:hidden;overscroll-behavior:none}
+body.app .top{flex:none;width:100%}
+body.app .reader{flex:1;min-height:0;height:auto;width:100%}
+.brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+.tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
+.tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
+.tabs a.on{background:var(--line);color:var(--ink)}
+@media (max-width:430px){.tabs a{padding:7px 9px}}
+.tabs a svg{display:block;margin:1px 0}
+
+/* story deck */
+.reader{max-width:560px;margin:0 auto;height:calc(100dvh - 58px);display:flex;flex-direction:column;padding:12px 0 calc(14px + env(safe-area-inset-bottom))}
+.bars{display:flex;gap:4px;padding:0 16px}
+.bars button{flex:1;height:14px;border:0;background:none;padding:5px 0}
+.bars button i{display:block;height:3px;border-radius:2px;background:var(--line);transition:background .2s}
+.bars button.seen i{background:var(--ink)}
+.status{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 10px;font-size:13px;color:var(--muted)}
+.status b{color:var(--ink);font-weight:600}
+.deck{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;padding:0 16px;display:flex}
+.card{flex:1;min-width:0;border-radius:24px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.scroll{overflow-y:auto;flex:1;min-height:0;overscroll-behavior:contain}
+.media{position:relative;height:190px;background:var(--img);display:flex;align-items:flex-end;padding:14px}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pill{position:relative;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--on-accent);padding:5px 9px;border-radius:6px}
+.body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px}
+.src{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.src img{width:16px;height:16px;border-radius:4px;background:var(--tile)}
+h1.head{margin:0;font-family:var(--serif);font-weight:700;font-size:25px;line-height:1.16;letter-spacing:-.01em}
+.room{margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.5;color:var(--detail)}
+.points{display:flex;flex-direction:column;gap:8px}
+.points details{border-radius:14px;background:var(--tile)}
+.points details[open]{background:var(--tile-open)}
+.points summary{list-style:none;display:flex;gap:10px;padding:12px;font-size:14.5px;line-height:1.42;font-weight:600;cursor:pointer}
+.points summary::-webkit-details-marker{display:none}
+.points summary .n{color:var(--accent);flex:none;width:12px}
+.points summary svg{flex:none;margin-left:auto;margin-top:2px;color:var(--muted);transition:transform .2s}
+.points details[open] summary svg{transform:rotate(180deg)}
+.points p{margin:0;padding:0 14px 14px 34px;font-size:14px;line-height:1.6;color:var(--detail)}
+.why{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.why b{color:var(--ink);font-weight:600}
+.fb{display:flex;gap:8px;flex-wrap:wrap;padding-top:2px}
+.fbb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);
+  background:transparent;color:var(--muted);font-size:13px;font-weight:600}
+.fbb.on[data-act=more]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.fbb.on[data-act=less]{background:var(--line);border-color:var(--muted);color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:92vw;
+  background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:11px 16px;border-radius:12px;z-index:50;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);text-align:center}
+.toast a{text-decoration:underline}
+.listen{display:flex;align-items:center;gap:12px;margin:0 16px 10px;padding:8px 12px 8px 8px;border-radius:14px;background:var(--tile)}
+.listen .pb{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:var(--accent);color:var(--on-accent);
+  display:flex;align-items:center;justify-content:center}
+.listen .lt{flex:1;min-width:0;font-size:13px;font-weight:600}
+.listen .lt small{display:block;font-weight:500;color:var(--muted);font-size:11.5px;margin-top:2px}
+.listen .bar{height:3px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}
+.listen .bar i{display:block;height:100%;width:0;background:var(--accent)}
+.listen .sp{flex:none;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 7px;background:none}
+.extras{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:4px}
+.chip{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;border:1px solid var(--line);background:var(--tile);color:var(--detail);font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
+.chip svg{color:var(--accent)}
+.chip:hover,.chip:active{background:var(--tile-open);border-color:var(--muted)}
+.hint{font-size:12px;color:var(--muted)}
+
+.actions{display:flex;gap:10px;padding:12px 16px 0}
+.btn{flex:1;height:48px;border-radius:14px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:600}
+.btn.icon{flex:none;width:48px}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+.btn[disabled]{opacity:.35}
+
+/* end slide + lists */
+.end h1{margin:4px 0 2px;font-family:var(--serif);font-size:28px}
+.toc{display:flex;flex-direction:column}
+.toc button,.toc a{display:flex;gap:12px;align-items:baseline;text-align:left;width:100%;padding:12px 0;border:0;border-bottom:1px solid var(--line);background:none;font-size:15px;line-height:1.35}
+.toc .k{color:var(--accent);font-weight:700;flex:none;width:18px}
+.toc small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.page{max-width:560px;margin:0 auto;padding:10px 16px 60px}
+.page .card{margin:14px 0}
+.hero{padding:18px 4px 6px}
+.hero .kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:6px 0 4px;font-family:var(--serif);font-size:32px;line-height:1.1}
+.hero p{margin:0;color:var(--muted);font-size:14px}
+.empty{color:var(--muted);text-align:center;padding:60px 0}
+.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:14px}
+.foot a{text-decoration:underline}
+.subs{display:flex;flex-direction:column;gap:10px}
+.sub{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:var(--tile)}
+.sub strong{font-family:var(--serif);font-size:18px;line-height:1.25}
+.sub .tk{font-size:14px;line-height:1.5;color:var(--detail)}
+.subhit{display:flex;flex-direction:column;gap:6px}
+.subrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.sub .open{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--accent)}
+.chip.sm{height:32px;padding:0 10px;font-size:12px;border-radius:9px;background:var(--card)}
+
+/* ── design system: one set of tokens and components for every page ── */
+:root{--sp1:4px;--sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;
+  --rad-s:10px;--rad-m:14px;--rad-l:20px;--rad-xl:24px;--tap:44px;
+  --fs-xs:12px;--fs-s:13.5px;--fs-m:15px;--fs-l:17px;--ease:cubic-bezier(.2,.7,.2,1)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:color-mix(in srgb,var(--accent) 35%,transparent)}
+button,.btn,.chip,.fbb,.tabs a,.toc a,.toc button{-webkit-tap-highlight-color:transparent;transition:transform .12s var(--ease),background .15s,border-color .15s,color .15s}
+button:active,.btn:active,.chip:active,.fbb:active{transform:scale(.97)}
+/* header: same on every page, sticky and blurred on scrolling pages */
+body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
+  padding:calc(12px + env(safe-area-inset-top)) max(16px,calc((100% - 528px)/2)) 12px;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
+  border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.tabs a{min-height:32px;display:flex;align-items:center}
+/* buttons and chips share sizes, corners and type */
+.btn{height:48px;border-radius:var(--rad-m);font-size:var(--fs-m)}
+.chip,.fbb{height:40px;border-radius:12px;padding:0 14px;font-size:var(--fs-s);font-weight:600;gap:7px}
+.chip{background:var(--tile);border:1px solid var(--line);color:var(--detail)}
+.savebtn{font-family:inherit;cursor:pointer}
+.savebtn.on{color:var(--accent);border-color:var(--accent)}
+.savebtn.on svg{fill:currentColor}
+.fbb{background:transparent}
+.chip.sm{height:34px;padding:0 11px;font-size:var(--fs-xs);border-radius:10px}
+/* surfaces */
+.card{border-radius:var(--rad-xl)}
+.bg,.fresh{border-radius:var(--rad-l)}
+.page .card{margin:var(--sp4) 0}
+.body{padding:var(--sp4) 18px 20px;gap:var(--sp3)}
+.extras,.fb{gap:var(--sp2)}
+/* page titles and section labels */
+.hero{padding:var(--sp5) 2px var(--sp2)}
+.hero h1{font-size:32px;letter-spacing:-.015em}
+.hero p{font-size:var(--fs-s);line-height:1.5}
+.label{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:var(--sp6) 2px var(--sp1)}
+/* story image fallback: quiet tile with the topic's initial */
+.media.noimg::after{content:attr(data-k);position:absolute;right:14px;top:-18px;font-family:var(--serif);font-weight:700;
+  font-size:150px;line-height:1;color:color-mix(in srgb,var(--ink) 7%,transparent);pointer-events:none}
+.media.noimg{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 9%,var(--img)),var(--img) 60%)}
+/* empty and loading states */
+.empty{padding:56px 20px;font-size:var(--fs-m);line-height:1.5}
+.empty::before{content:"";display:block;width:44px;height:44px;margin:0 auto 14px;border-radius:50%;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
+.skel{background:linear-gradient(90deg,var(--tile) 0%,var(--tile-open) 50%,var(--tile) 100%);background-size:200% 100%;animation:shimmer 1.3s linear infinite!important}
+@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+.toast{border-radius:var(--rad-m);animation:pop .2s var(--ease)}
+@keyframes pop{from{transform:translate(-50%,8px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.offline{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));left:50%;white-space:nowrap;transform:translateX(-50%);z-index:70;
+  background:var(--tile);border:1px solid var(--line);color:var(--detail);font:600 12.5px var(--sans);padding:7px 12px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+a.wl{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.tchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 4px}
+.tl{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:4px;width:100%}
+.tchip{display:inline-flex;align-items:center;height:32px;padding:0 11px;border-radius:999px;background:var(--tile);border:1px solid var(--line);color:var(--ink);font-size:13px;font-weight:600}
+.rels{display:flex;flex-direction:column;gap:6px;margin:14px 0 4px}
+.rel{display:block;padding:10px 12px;border-radius:12px;background:var(--tile);border:1px solid var(--line)}
+.rel span{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
+.rel b{font-size:14.5px;line-height:1.35;color:var(--ink);font-weight:600}
+.wk .lead{background:var(--card);border-radius:18px;padding:16px;margin:0 0 18px}
+.wk .lead p{margin:0 0 8px;font-size:15.5px;line-height:1.55;color:var(--detail)}
+.wk .lead small{color:var(--muted);font-size:12.5px}
+.wk .lead small a{text-decoration:underline}
+.wk h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:22px 2px 8px}
+.wk .story{background:var(--card);border-radius:16px;padding:14px;margin:0 0 10px}
+.wk .story .m{font-size:12.5px;color:var(--muted)}
+.wk .story b{display:block;font-size:16px;line-height:1.35;margin:3px 0 6px;color:var(--ink)}
+.wk .story p{margin:0 0 10px;font-size:14px;line-height:1.5;color:var(--detail)}
+.wk .story .acts{display:flex;gap:8px;flex-wrap:wrap}
+.wk [hidden]{display:none!important}
+.wk .az{display:flex;flex-wrap:wrap;gap:6px}
+.wk input.find{width:100%;height:46px;border-radius:14px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font:500 16px var(--sans);padding:0 14px;margin:0 0 14px;box-sizing:border-box}
+.wk .tchip i{font-style:normal;color:var(--muted);margin-left:6px;font-weight:500}
+</style></head><body class='' data-repo='scadams1111/briefing' data-root='../' data-relay='https://briefing-relay.scadams1111.workers.dev'><header class='top'><a class='brand' href='.././'>Briefing<span>.</span></a><nav class='tabs'><a href='.././' class=''>Today</a><a href='../saved.html' class=''>Saved</a><a href='../archive/' class=''>Archive</a><a href='../games.html' class='on' aria-label='Games'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='3' width='18' height='18' rx='3'/><path d='M3 9h18M3 15h18M9 3v18M15 3v18'/></svg></a><a href='../search.html' class='' aria-label='Search'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' aria-hidden='true'><circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/></svg></a></nav></header><style>
+[hidden]{display:none!important}
+.seg{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:var(--tile);padding:4px;border-radius:14px;margin:12px 0 14px;position:sticky;top:calc(env(safe-area-inset-top) + 56px);z-index:5}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:none;white-space:nowrap;border:0;background:none;color:var(--muted);font:600 13px var(--sans);padding:9px 12px;border-radius:10px}
+.seg button.on{background:var(--line);color:var(--ink)}
+.seg button .ok{color:var(--accent);margin-left:3px}
+.game h2{font-family:var(--serif);font-size:24px;margin:4px 2px 2px}
+.game .gsub{color:var(--muted);font-size:13.5px;margin:0 2px 12px;line-height:1.45}
+.gbtns{display:flex;gap:8px;margin:14px 0}
+.gbtns .btn{height:42px;font-size:14px}
+.gmsg{min-height:20px;font-size:14px;color:var(--muted);margin:2px 2px 8px}
+.gmsg.win{color:var(--accent);font-weight:700}
+.gmsg.bad{color:#F28B82}
+/* crossword */
+.xwrap{position:relative}
+.xboard{display:grid;gap:2px;background:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.xboard .blk{aspect-ratio:1}
+.xboard .cell{aspect-ratio:1;background:var(--ink);color:#0B1220;border-radius:3px;position:relative;display:flex;align-items:center;justify-content:center}
+.xboard .cell i{position:absolute;top:1px;left:2px;font:700 8px var(--sans);font-style:normal;color:#475569}
+.xboard .cell b{font:700 clamp(12px,4.2vw,20px) var(--sans)}
+.xboard .cell.hl{background:#CFE0FF}
+.xboard .cell.cur{background:var(--accent)}
+.xboard .cell.bad b{color:#C0392B}
+.xboard .cell.rev b{color:#2563EB}
+.kb{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;font-size:16px;border:0;padding:0}
+.cbar{position:sticky;top:calc(env(safe-area-inset-top) + 112px);z-index:4;background:var(--card);border-radius:12px;padding:10px 12px;margin:0 0 10px;font-size:14.5px;line-height:1.35;min-height:20px}
+.clues h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:16px 2px 6px}
+.clues ol{list-style:none;margin:0;padding:0}
+.clues li{padding:8px 6px;border-radius:8px;font-size:14.5px;line-height:1.35;display:flex;gap:8px}
+.clues li b{color:var(--muted);width:20px;flex:none;text-align:right}
+.clues li.on{background:var(--tile)}
+.clues li.done{color:var(--muted);text-decoration:line-through}
+/* whodunit */
+.cast{display:flex;flex-direction:column;gap:6px;margin:0 0 12px}
+.cast div{font-size:14px;color:var(--detail)}
+.cast b{color:var(--ink)}
+.wclues{margin:0 0 14px;padding:0 0 0 28px}
+.wclues li{margin:6px 0;font-size:15px;line-height:1.45}
+.lg{border-collapse:collapse;margin:6px 0;user-select:none;-webkit-user-select:none}
+.lg th{font:600 11.5px var(--sans);color:var(--detail);padding:3px 5px;text-align:right;white-space:nowrap}
+.lg thead th{writing-mode:vertical-rl;transform:rotate(180deg);text-align:left;vertical-align:bottom;height:128px;padding:4px 2px}
+.lg td{width:30px;height:30px;border:1px solid var(--line);text-align:center;font:700 15px var(--sans);color:var(--muted);background:var(--tile)}
+.lg td.o{color:var(--accent);background:var(--tile-open)}
+.lg td.gap{border:0;background:none}
+.lg .thick-l{border-left:2px solid var(--muted)}
+.lg .thick-t{border-top:2px solid var(--muted)}
+.lgwrap{overflow-x:auto;margin:0 -4px;padding:0 4px}
+.accuse{display:flex;flex-direction:column;gap:8px;margin:14px 0 0}
+.accuse .btn{flex:none}
+.accuse select{height:44px;border-radius:12px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font:500 15px var(--sans);padding:0 10px}
+/* murder map */
+.mboard{display:grid;gap:0;border:2px solid var(--ink);border-radius:6px;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.mboard div{aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center;border:0 solid #0B1220}
+.mboard .ri{position:absolute;top:2px;left:4px;font:700 9px var(--sans);color:rgba(11,18,32,.55)}
+.mboard .f{font-size:22px;line-height:1;color:rgba(11,18,32,.7)}
+.mboard .rug{background-image:repeating-linear-gradient(45deg,rgba(11,18,32,.16) 0 4px,transparent 4px 9px)}
+.mboard .tok{width:64%;height:64%;border-radius:50%;background:#0B1220;color:var(--ink);font:800 clamp(13px,4.5vw,20px) var(--sans);display:flex;align-items:center;justify-content:center}
+.mboard .tok.v{background:#7F1D1D}
+.mboard .xm{font:800 20px var(--sans);color:rgba(11,18,32,.5)}
+.mboard div.bad .tok{box-shadow:0 0 0 3px #F28B82}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin:10px 2px;font-size:13px;color:var(--detail)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tools button{display:flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--ink);font:600 13px var(--sans)}
+.tools button b{width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px}
+.tools button.on{border-color:var(--accent);background:var(--tile)}
+/* sudoku */
+.sboard{display:grid;grid-template-columns:repeat(9,1fr);border:2px solid var(--ink);border-radius:6px;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.sboard div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font:500 clamp(15px,5vw,22px) var(--sans);color:#7FB4FF;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;background:var(--card)}
+.sboard div.g{color:var(--ink);font-weight:700}
+.sboard div.br{border-right:2px solid var(--ink)}
+.sboard div.bb{border-bottom:2px solid var(--ink)}
+.sboard div.peer{background:var(--tile)}
+.sboard div.same{background:var(--tile-open)}
+.sboard div.cur{background:#3A4A6B}
+.sboard div.bad{color:#F28B82}
+.sboard .nt{position:absolute;inset:2px;display:grid;grid-template-columns:repeat(3,1fr);font:600 8.5px var(--sans);color:var(--muted);text-align:center;align-items:center}
+.pad{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:12px 0}
+.pad button{height:46px;border-radius:12px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font:600 19px var(--sans)}
+.pad button.mode.on{border-color:var(--accent);color:var(--accent)}
+.pad button small{font-size:12px}
+.past{margin-top:26px}
+.past h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 2px 6px}
+
+/* quiz */
+.qq{background:var(--card);border-radius:16px;padding:14px;margin:0 0 10px}
+.qq p{margin:0 0 10px;font-size:15.5px;line-height:1.4;font-weight:600}
+.qq button{display:block;width:100%;text-align:left;margin:6px 0 0;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font:500 14.5px var(--sans)}
+.qq button.right{border-color:#4ADE80;background:#12331F}
+.qq button.wrong{border-color:#F28B82;background:#3A1A1A}
+.qq .why{font-size:13.5px;color:var(--detail);margin-top:8px;line-height:1.45}
+/* groups */
+.gsolved{display:flex;flex-direction:column;gap:6px;margin-bottom:6px}
+.gsolved div{border-radius:12px;padding:10px;text-align:center;color:#0B1220}
+.gsolved b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.gsolved span{font-size:14px}
+.gtiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gtiles button{height:64px;border-radius:12px;border:0;background:var(--tile);color:var(--ink);font:700 clamp(10px,3vw,13.5px) var(--sans);padding:2px;word-break:break-word}
+.gtiles button.sel{background:var(--ink);color:var(--bg)}
+.dots{font-size:13px;color:var(--muted);margin:10px 2px}
+/* hive */
+.hword{text-align:center;font:700 26px var(--sans);letter-spacing:.06em;min-height:36px;margin:6px 0}
+.hword .c{color:var(--accent)}
+.hex{position:relative;width:240px;height:236px;margin:6px auto}
+.hex button{position:absolute;width:76px;height:66px;border:0;background:var(--tile);color:var(--ink);font:800 24px var(--sans);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.hex button.c{background:var(--accent);color:var(--on-accent)}
+.hfound{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:14px;color:var(--detail);margin:10px 2px}
+.hfound .pg{color:var(--accent);font-weight:700}
+.hbar{height:6px;background:var(--tile);border-radius:3px;margin:6px 2px 2px;overflow:hidden}
+.hbar i{display:block;height:100%;background:var(--accent)}
+/* cryptogram */
+.cg{display:flex;flex-wrap:wrap;gap:10px 12px;margin:10px 0;user-select:none;-webkit-user-select:none}
+.cg .w{display:flex;gap:2px}
+.cg .l{display:flex;flex-direction:column;align-items:center;width:clamp(18px,5.6vw,24px)}
+.cg .l b{height:26px;width:100%;border-bottom:2px solid var(--muted);font:700 18px var(--sans);text-align:center;color:var(--ink)}
+.cg .l small{font:600 11px var(--sans);color:var(--muted);margin-top:3px}
+.cg .l.sel b{border-color:var(--accent);background:var(--tile)}
+.cg .l.hint b{color:var(--accent)}
+.cg .p{font:700 18px var(--sans);align-self:flex-start;padding-top:2px}
+/* ladder */
+.lad{display:flex;flex-direction:column;gap:8px;align-items:center;margin:10px 0}
+.lad input,.lad div{width:180px;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--tile);color:var(--ink);font:700 22px var(--sans);letter-spacing:.3em;text-align:center;text-transform:uppercase;display:flex;align-items:center;justify-content:center;padding:0}
+.lad div{background:var(--card);border-color:transparent;color:var(--accent)}
+.lad input.bad{border-color:#F28B82}
+.lad input.good{border-color:#4ADE80}
+/* nonogram */
+.ngw{overflow-x:auto}
+.ng{border-collapse:collapse;margin:6px auto;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.ng td{width:28px;height:28px;padding:0;text-align:center;border:1px solid var(--line);background:var(--card)}
+.ng td.f{background:var(--ink)}
+.ng td.x::after{content:'✕';color:var(--muted);font-size:13px}
+.ng td.r5{border-right:2px solid var(--muted)}
+.ng td.b5{border-bottom:2px solid var(--muted)}
+.ng th{font:600 11px var(--sans);color:var(--detail);padding:2px 4px}
+.ng th.cc{vertical-align:bottom;line-height:1.25}
+.ng th.rc{text-align:right;white-space:nowrap}
+.mode2{display:flex;gap:6px;margin:8px 0}
+.mode2 button{flex:1;height:40px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--ink);font:600 14px var(--sans)}
+.mode2 button.on{border-color:var(--accent);background:var(--tile)}
+/* futoshiki */
+.ft{display:grid;gap:0;margin:8px auto;max-width:360px;user-select:none;-webkit-user-select:none}
+.ft .c{aspect-ratio:1;border-radius:10px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font:600 24px var(--sans);color:#7FB4FF}
+.ft .c.g{color:var(--ink);font-weight:800}
+.ft .c.cur{background:#3A4A6B}
+.ft .c.bad{color:#F28B82}
+.ft .s{display:flex;align-items:center;justify-content:center;font:800 18px var(--sans);color:var(--accent)}
+/* queens */
+.qb{display:grid;border:2px solid var(--ink);border-radius:6px;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.qb div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:0 solid #0B1220;font:800 clamp(16px,5vw,24px) var(--sans);color:#0B1220}
+.qb div.x{color:rgba(11,18,32,.45);font-size:15px}
+.qb div.bad{color:#B91C1C}
+</style><main class='page'><section class='hero'><div class='kicker'>Games · Saturday, November 28</div><h1>Puzzles</h1><p>New puzzles every morning. They're also at the end of your Kobo briefing.</p></section><div class='seg'><button data-g='qz'>Quiz</button><button data-g='gr'>Groups</button><button data-g='xw'>Crossword</button><button data-g='hv'>Hive</button><button data-g='wd'>Whodunit</button><button data-g='mm'>Map</button><button data-g='cg'>Cryptogram</button><button data-g='ld'>Ladder</button><button data-g='sd'>Sudoku</button><button data-g='ft'>Futoshiki</button><button data-g='qn'>Queens</button><button data-g='ng'>Nonogram</button></div><section class='game' id='xw'><h2>Crossword</h2><p class='gsub'>Today&#x27;s Global Briefing · built from today’s stories. Tap a square to type; tap it again to switch direction.</p><div class='cbar'>Tap a square or a clue to start.</div><div class='xwrap'><input class='kb' autocapitalize='characters' autocomplete='off' autocorrect='off' spellcheck='false' aria-label='Crossword input'><div class='xboard'></div></div><div class='gmsg'></div><div class='gbtns'><button class='btn chk'>Check</button><button class='btn rvw'>Reveal word</button><button class='btn rva'>Reveal all</button><button class='btn clr'>Clear</button></div><div class='clues'><h3>Across</h3><ol><li data-i='0'><b>1</b><span>Guiding light or signal on a hill (6)</span></li><li data-i='1'><b>3</b><span>Open public square in a town or city (5)</span></li><li data-i='2'><b>6</b><span>Declared blameless, as tracked by a European exoneration registry (8)</span></li><li data-i='3'><b>10</b><span>Deeply unconscious, yet sometimes retaining hidden awareness (8)</span></li><li data-i='4'><b>12</b><span>Curved path of a planet around a star (5)</span></li><li data-i='5'><b>13</b><span>Catch a brief or fleeting view of something (7)</span></li></ol><h3>Down</h3><ol><li data-i='6'><b>1</b><span>Historic UK departure from the EU, back in recent debates (6)</span></li><li data-i='7'><b>2</b><span>Spectrum condition reassessed at a novel Swedish clinic (6)</span></li><li data-i='8'><b>4</b><span>Sharp, severe, or demonstrating keen insight (5)</span></li><li data-i='9'><b>5</b><span>Personal secrecy threatened by advanced data-inferring AI (7)</span></li><li data-i='10'><b>7</b><span>Traditional tale conveying a moral lesson (5)</span></li><li data-i='11'><b>8</b><span>Brain-inspired network type in a recently withdrawn AI textbook (6)</span></li><li data-i='12'><b>9</b><span>Salt element powering cheap new grid-energy storage batteries (6)</span></li><li data-i='13'><b>11</b><span>Correspondence of ending sounds in verse (5)</span></li></ol></div></section><section class='game' id='wd' hidden><h2>Whodunit</h2><p class='gsub'>Countess Vera Lindqvist has been found dead in the orangery. Each suspect had one weapon and was in one place; no two shared either. Work out who had what, and where, then name the killer.</p><div class='cast'><div><b>Felix Orme</b>, the nephew with debts</div><div><b>Desmond Pike</b>, the groundskeeper</div><div><b>Greta Holm</b>, the cook</div><div><b>Ada Finch</b>, a nervous botanist</div></div><ol class='wclues'><li>Ada Finch was in the observatory.</li><li>The silk scarf was not in the observatory.</li><li>Greta Holm never touched the vial of arsenic.</li><li>The walking cane was not in the attic.</li><li>Greta Holm was never in the chapel.</li><li>Greta Holm did not have the silk scarf.</li><li>The cricket bat was in Felix Orme&#x27;s hands.</li><li>Desmond Pike was never in the chapel.</li></ol><p class='gsub'>Tap a box once for ✕ (ruled out), twice for ● (confirmed).</p><div class='lgwrap'><table class='lg'><thead><tr><th></th><th class=''>Cricket Bat</th><th class=''>Silk Scarf</th><th class=''>Walking Cane</th><th class=''>Vial Of Arsenic</th><th class='thick-l'>Observatory</th><th class=''>Chapel</th><th class=''>Attic</th><th class=''>Orangery</th></tr></thead><tbody><tr><th>Felix Orme</th><td data-k='sw:0:0'></td><td data-k='sw:0:1'></td><td data-k='sw:0:2'></td><td data-k='sw:0:3'></td><td data-k='sl:0:0' class='thick-l'></td><td data-k='sl:0:1' class=''></td><td data-k='sl:0:2' class=''></td><td data-k='sl:0:3' class=''></td></tr><tr><th>Desmond Pike</th><td data-k='sw:1:0'></td><td data-k='sw:1:1'></td><td data-k='sw:1:2'></td><td data-k='sw:1:3'></td><td data-k='sl:1:0' class='thick-l'></td><td data-k='sl:1:1' class=''></td><td data-k='sl:1:2' class=''></td><td data-k='sl:1:3' class=''></td></tr><tr><th>Greta Holm</th><td data-k='sw:2:0'></td><td data-k='sw:2:1'></td><td data-k='sw:2:2'></td><td data-k='sw:2:3'></td><td data-k='sl:2:0' class='thick-l'></td><td data-k='sl:2:1' class=''></td><td data-k='sl:2:2' class=''></td><td data-k='sl:2:3' class=''></td></tr><tr><th>Ada Finch</th><td data-k='sw:3:0'></td><td data-k='sw:3:1'></td><td data-k='sw:3:2'></td><td data-k='sw:3:3'></td><td data-k='sl:3:0' class='thick-l'></td><td data-k='sl:3:1' class=''></td><td data-k='sl:3:2' class=''></td><td data-k='sl:3:3' class=''></td></tr><tr><th>Observatory</th><td data-k='pw:0:0' class='thick-t'></td><td data-k='pw:0:1' class='thick-t'></td><td data-k='pw:0:2' class='thick-t'></td><td data-k='pw:0:3' class='thick-t'></td><td class='gap'></td><td class='gap'></td><td class='gap'></td><td class='gap'></td></tr><tr><th>Chapel</th><td data-k='pw:1:0' class=''></td><td data-k='pw:1:1' class=''></td><td data-k='pw:1:2' class=''></td><td data-k='pw:1:3' class=''></td><td class='gap'></td><td class='gap'></td><td class='gap'></td><td class='gap'></td></tr><tr><th>Attic</th><td data-k='pw:2:0' class=''></td><td data-k='pw:2:1' class=''></td><td data-k='pw:2:2' class=''></td><td data-k='pw:2:3' class=''></td><td class='gap'></td><td class='gap'></td><td class='gap'></td><td class='gap'></td></tr><tr><th>Orangery</th><td data-k='pw:3:0' class=''></td><td data-k='pw:3:1' class=''></td><td data-k='pw:3:2' class=''></td><td data-k='pw:3:3' class=''></td><td class='gap'></td><td class='gap'></td><td class='gap'></td><td class='gap'></td></tr></tbody></table></div><div class='accuse'><select class='who'><option value='-1'>Who did it?</option><option value='0'>Felix Orme</option><option value='1'>Desmond Pike</option><option value='2'>Greta Holm</option><option value='3'>Ada Finch</option></select><select class='what'><option value='-1'>With what?</option><option value='0'>cricket bat</option><option value='1'>silk scarf</option><option value='2'>walking cane</option><option value='3'>vial of arsenic</option></select><select class='where'><option value='-1'>Where?</option><option value='0'>observatory</option><option value='1'>chapel</option><option value='2'>attic</option><option value='3'>orangery</option></select><button class='btn primary acc'>Make the accusation</button></div><div class='gmsg' style='margin-top:10px'></div><div class='gbtns'><button class='btn rv'>Reveal</button><button class='btn clr'>Clear grid</button></div></section><section class='game' id='mm' hidden><h2>Murder map</h2><p class='gsub'>Place all 5 people on the floor plan. Each row and each column holds exactly one person, and nobody stands on a plant or table (rugs are fine). The murderer is the only person alone in a room with the victim.</p><div class='cast'><div><b>Opal Reyes</b>, a famous chemist</div><div><b>Felix Orme</b>, the nephew with debts</div><div><b>Greta Holm</b>, the cook</div><div><b>Cora Vane</b>, a retired opera singer</div><div><b>Lord Ambrose Pell</b>, the victim</div></div><ol class='wclues'><li>Lord Ambrose Pell was in the Library.</li><li>Opal Reyes was not in the Library.</li><li>Cora Vane was in the Hall.</li><li>Opal Reyes was not in the Parlor.</li><li>Greta Holm was in the Parlor.</li><li>Opal Reyes was nowhere near a plant.</li><li>Lord Ambrose Pell was right beside a table.</li><li>Cora Vane was nowhere near a table.</li><li>Greta Holm was in the fifth row from the top.</li></ol><div class='tools'><button data-t='O' class='on'><b>O</b>Opal</button><button data-t='F' class=''><b>F</b>Felix</button><button data-t='G' class=''><b>G</b>Greta</button><button data-t='C' class=''><b>C</b>Cora</button><button data-t='V' class=''><b>V</b>Victim</button><button data-t='x'><b>✕</b>Rule out</button><button data-t='erase'><b>⌫</b>Erase</button></div><div class='mboard'></div><div class='legend'><span><i style='background:#F6C9A8'></i>Garden</span><span><i style='background:#B9D8F2'></i>Hall</span><span><i style='background:#C8E6B8'></i>Library</span><span><i style='background:#E8C4E8'></i>Parlor</span><span>♣ plant</span><span>▬ table</span><span><i class='rug' style='background:#ddd;background-image:repeating-linear-gradient(45deg,#999 0 3px,transparent 3px 7px)'></i>rug</span></div><div class='gmsg'></div><div class='gbtns'><button class='btn chk'>Check</button><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><section class='game' id='sd' hidden><h2>Sudoku</h2><p class='gsub'>29 clues. Fill every row, column and box with 1–9. ✎ switches to pencil notes.</p><div class='sboard'></div><div class='pad'><button data-k='1'>1</button><button data-k='2'>2</button><button data-k='3'>3</button><button data-k='4'>4</button><button data-k='5'>5</button><button data-k='6'>6</button><button data-k='7'>7</button><button data-k='8'>8</button><button data-k='9'>9</button><button data-k='mode' class='mode' aria-label='Pencil notes'>✎</button></div><div class='gmsg'></div><div class='gbtns'><button class='btn chk'>Check</button><button class='btn era'>Erase</button><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><section class='game' id='qz' hidden><h2>News quiz</h2><p class='gsub'>Five questions on today's briefing. One tap per answer.</p><div class='qlist'></div><div class='gmsg'></div><div class='gbtns'><button class='btn clr'>Clear</button></div></section><section class='game' id='gr' hidden><h2>Groups</h2><p class='gsub'>Find four groups of four. Pick four words, then Submit. Four mistakes allowed.</p><div class='gsolved'></div><div class='gtiles'></div><div class='dots'></div><div class='gmsg'></div><div class='gbtns'><button class='btn shuf'>Shuffle</button><button class='btn desel'>Deselect</button><button class='btn primary sub4'>Submit</button></div><div class='gbtns'><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><section class='game' id='hv' hidden><h2>Letter hive</h2><p class='gsub'>Make words of 4+ letters using the center letter at least once. Letters can repeat. A word using all seven is a pangram.</p><div class='hsc gsub' style='margin-bottom:0'></div><div class='hbar'><i></i></div><div class='hword'></div><div class='hex'></div><div class='gmsg' style='text-align:center'></div><div class='gbtns'><button class='btn del'>Delete</button><button class='btn shuf'>Shuffle</button><button class='btn primary ent'>Enter</button></div><div class='hfound'></div><div class='gbtns'><button class='btn rv'>Reveal</button></div></section><section class='game' id='cg' hidden><h2>Cryptogram</h2><p class='gsub'>Each letter stands for another. Tap a letter, then type what you think it is. From today&#x27;s briefing.</p><div class='xwrap'><input class='kb' autocapitalize='characters' autocomplete='off' autocorrect='off' spellcheck='false' aria-label='Letter'><div class='cg'></div></div><div class='gmsg'></div><div class='gbtns'><button class='btn chk'>Check</button><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><section class='game' id='ld' hidden><h2>Word ladder</h2><p class='gsub'>Get from GEAR to MIND by changing one letter at a time. Every rung must be a real word.</p><div class='lad'></div><div class='gmsg'></div><div class='gbtns'><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><section class='game' id='ng' hidden><h2>Nonogram</h2><p class='gsub'>The numbers give the runs of filled squares in each row and column, in order. Fill squares to reveal a picture.</p><div class='mode2'><button data-m='f' class='on'>■ Fill</button><button data-m='x'>✕ Mark empty</button></div><div class='ngw'><table class='ng'></table></div><div class='gmsg'></div><div class='gbtns'><button class='btn chk'>Check</button><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><section class='game' id='ft' hidden><h2>Futoshiki</h2><p class='gsub'>Fill each row and column with 1–5. Signs between squares show which number is bigger.</p><div class='ft'></div><div class='pad'></div><div class='gmsg'></div><div class='gbtns'><button class='btn chk'>Check</button><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><section class='game' id='qn' hidden><h2>Queens</h2><p class='gsub'>Place 8 crowns: one in each row, column and colored region. No two crowns may touch, even diagonally. Tap once for ✕, twice for ♛.</p><div class='qb'></div><div class='gmsg'></div><div class='gbtns'><button class='btn rv'>Reveal</button><button class='btn clr'>Clear</button></div></section><div class='past'><h3>Past puzzles</h3><div class='toc'><a href='../games/2026-11-27.html'><span class='k'>›</span><span>Friday, November 27</span></a></div></div><div class='past'><h3>Play on your Kobo</h3><div class='fresh' style='display:block;padding:16px;border-radius:18px;background:var(--card)'><p class='gsub' style='margin:0 0 10px'>Tap to solve all of these in KOReader. One-time setup, on a computer:</p><ol style='margin:0;padding-left:20px;font-size:14px;line-height:1.6;color:var(--detail)'><li>Download the <a href='../kobo/briefinggames.koplugin.zip' style='text-decoration:underline'>Briefing puzzles plugin</a> and unzip it.</li><li>Plug in your Kobo and copy the <b>briefinggames.koplugin</b> folder into <b>.adds/koreader/plugins</b>. (.adds is a hidden folder; on a Mac press Cmd+Shift+. to see it.)</li><li>Eject, then restart KOReader.</li><li>Open the top menu → Tools (🛠) → <b>Briefing puzzles</b>. It downloads the day's puzzles over Wi-Fi.</li></ol></div></div></main><script type='application/json' id='gdata'>{"date": "2026-11-28", "crossword": {"rows": 13, "cols": 13, "solution": [".......BEACON", ".PLAZA.R.U...", ".....C.E.T...", "P....U.X.I...", "R....T.I.S...", "INNOCENT.M...", "V............", "A..F...N.S...", "COMATOSE.O..R", "Y..B...U.D..H", "...L..ORBIT.Y", "...E...A.U..M", "......GLIMPSE"], "entries": [{"answer": "BEACON", "clue": "Guiding light or signal on a hill", "r": 0, "c": 7, "d": "A", "n": 1}, {"answer": "PLAZA", "clue": "Open public square in a town or city", "r": 1, "c": 1, "d": "A", "n": 3}, {"answer": "INNOCENT", "clue": "Declared blameless, as tracked by a European exoneration registry", "r": 5, "c": 0, "d": "A", "n": 6}, {"answer": "COMATOSE", "clue": "Deeply unconscious, yet sometimes retaining hidden awareness", "r": 8, "c": 0, "d": "A", "n": 10}, {"answer": "ORBIT", "clue": "Curved path of a planet around a star", "r": 10, "c": 6, "d": "A", "n": 12}, {"answer": "GLIMPSE", "clue": "Catch a brief or fleeting view of something", "r": 12, "c": 6, "d": "A", "n": 13}, {"answer": "BREXIT", "clue": "Historic UK departure from the EU, back in recent debates", "r": 0, "c": 7, "d": "D", "n": 1}, {"answer": "AUTISM", "clue": "Spectrum condition reassessed at a novel Swedish clinic", "r": 0, "c": 9, "d": "D", "n": 2}, {"answer": "ACUTE", "clue": "Sharp, severe, or demonstrating keen insight", "r": 1, "c": 5, "d": "D", "n": 4}, {"answer": "PRIVACY", "clue": "Personal secrecy threatened by advanced data-inferring AI", "r": 3, "c": 0, "d": "D", "n": 5}, {"answer": "FABLE", "clue": "Traditional tale conveying a moral lesson", "r": 7, "c": 3, "d": "D", "n": 7}, {"answer": "NEURAL", "clue": "Brain-inspired network type in a recently withdrawn AI textbook", "r": 7, "c": 7, "d": "D", "n": 8}, {"answer": "SODIUM", "clue": "Salt element powering cheap new grid-energy storage batteries", "r": 7, "c": 9, "d": "D", "n": 9}, {"answer": "RHYME", "clue": "Correspondence of ending sounds in verse", "r": 8, "c": 12, "d": "D", "n": 11}], "theme": "Today's Global Briefing"}, "whodunit": {"size": 4, "victim": "Countess Vera Lindqvist", "suspects": [{"name": "Felix Orme", "about": "the nephew with debts"}, {"name": "Desmond Pike", "about": "the groundskeeper"}, {"name": "Greta Holm", "about": "the cook"}, {"name": "Ada Finch", "about": "a nervous botanist"}], "weapons": ["cricket bat", "silk scarf", "walking cane", "vial of arsenic"], "places": ["observatory", "chapel", "attic", "orangery"], "clues": ["Ada Finch was in the observatory.", "The silk scarf was not in the observatory.", "Greta Holm never touched the vial of arsenic.", "The walking cane was not in the attic.", "Greta Holm was never in the chapel.", "Greta Holm did not have the silk scarf.", "The cricket bat was in Felix Orme's hands.", "Desmond Pike was never in the chapel."], "crime_place": 3, "intro": "Countess Vera Lindqvist has been found dead in the orangery. Each suspect had one weapon and was in one place; no two shared either. Work out who had what, and where, then name the killer.", "solution": {"weapon": [0, 1, 2, 3], "place": [1, 2, 3, 0], "killer": 2}}, "murdermap": {"n": 5, "rooms": ["Garden", "Hall", "Library", "Parlor"], "room": [[0, 1, 1, 1, 1], [0, 0, 0, 2, 1], [0, 0, 0, 2, 2], [3, 0, 3, 2, 2], [3, 3, 3, 2, 2]], "furniture": [{"r": 0, "c": 3, "t": "table"}, {"r": 0, "c": 4, "t": "plant"}, {"r": 1, "c": 0, "t": "rug"}, {"r": 1, "c": 2, "t": "plant"}, {"r": 2, "c": 4, "t": "rug"}], "people": [{"name": "Opal Reyes", "initial": "O", "about": "a famous chemist"}, {"name": "Felix Orme", "initial": "F", "about": "the nephew with debts"}, {"name": "Greta Holm", "initial": "G", "about": "the cook"}, {"name": "Cora Vane", "initial": "C", "about": "a retired opera singer"}, {"name": "Lord Ambrose Pell", "initial": "V", "about": "the victim"}], "victim": 4, "clues": ["Lord Ambrose Pell was in the Library.", "Opal Reyes was not in the Library.", "Cora Vane was in the Hall.", "Opal Reyes was not in the Parlor.", "Greta Holm was in the Parlor.", "Opal Reyes was nowhere near a plant.", "Lord Ambrose Pell was right beside a table.", "Cora Vane was nowhere near a table.", "Greta Holm was in the fifth row from the top."], "solution": {"pos": [[2, 0], [3, 4], [4, 2], [0, 1], [1, 3]], "killer": 1}}, "sudoku": {"puzzle": "000000060000162080001090004470200090009781200010009075700010600080956000090000000", "solution": "938574162547162983261893754476235891359781246812649375725418639183956427694327518", "givens": 29}, "quiz": {"questions": [{"q": "Why did Michael Nielsen remove his textbook 'Neural Networks and Deep Learning' from the public domain?", "options": ["He believes the content has become technically obsolete.", "He fears superintelligence will accelerate the discovery of destructive technologies faster than society can adapt.", "He was pressured by frontier AI labs to restrict access to foundational knowledge.", "He is transitioning to a new career in government policy."], "answer": 1, "why": "Nielsen argues that superintelligence poses a risk by enabling the rapid creation of destructive technologies that outpace human institutional defenses."}, {"q": "What is a primary advantage of using sodium-ion batteries for stationary grid storage compared to lithium-ion?", "options": ["They offer significantly higher energy density for long-distance transport.", "They are lighter and more compact for residential use.", "They utilize abundant, inexpensive raw materials and allow for safer shipping at zero volts.", "They require less maintenance because they do not use aluminum current collectors."], "answer": 2, "why": "Sodium-ion batteries use abundant materials like sodium carbonate and allow for safer, fully discharged shipping due to their aluminum configuration."}, {"q": "What did the pilot study at Sweden's Mottagning Neuropsykiatri clinic reveal about adult ADHD and autism diagnoses?", "options": ["Most participants required higher levels of medication after reassessment.", "Approximately 80% of self-selected participants no longer met the diagnostic criteria.", "The clinic found that previous diagnoses were almost always accurate.", "The clinic decided to stop offering reassessments due to lack of demand."], "answer": 1, "why": "The pilot study of 72 participants found that 80% no longer met the criteria for their original ADHD or autism diagnoses when evaluated based on current functioning."}, {"q": "What does research suggest about 'covert consciousness' in comatose ICU patients?", "options": ["It is a rare phenomenon that typically leads to poor long-term outcomes.", "It is easily detected through standard physical examinations.", "It is present in roughly 25% of vegetative or minimally conscious patients and correlates with better recovery.", "It indicates that the patient is fully aware but physically incapable of any neural response."], "answer": 2, "why": "Studies show that about a quarter of such patients exhibit covert consciousness, which is associated with significantly better functional recovery."}, {"q": "According to the European Registry of Exonerations (EUREX), what is a key limitation of their current data on wrongful convictions?", "options": ["The database only tracks cases involving violent crimes.", "The actual number of wrongful convictions is likely much higher due to procedural hurdles and institutional resistance.", "The registry only includes cases from the last five years.", "The data is based on self-reporting from prisoners rather than official court records."], "answer": 1, "why": "The registry notes that their count is limited by strict requirements for official exoneration, masking a likely much higher prevalence of actual wrongful convictions."}], "ai": true}, "groups": {"groups": [{"name": "Coffee drinks", "words": ["LATTE", "MOCHA", "ESPRESSO", "CORTADO"]}, {"name": "Planets", "words": ["MARS", "VENUS", "SATURN", "MERCURY"]}, {"name": "Cell parts", "words": ["NUCLEUS", "RIBOSOME", "MEMBRANE", "VACUOLE"]}, {"name": "Rivers", "words": ["NILE", "AMAZON", "DANUBE", "THAMES"]}], "ai": false}, "hive": {"center": "H", "outer": ["C", "I", "D", "M", "O", "E"], "answers": ["CHEMO", "CHIC", "CHICO", "CHIME", "CHIMED", "CHOICE", "ECHO", "ECHOED", "HEED", "HEEDED", "HEMMED", "HIDE", "HOME", "HOMICIDE", "HOOCH", "HOOD", "HOODED", "HOODIE"], "pangrams": ["HOMICIDE"], "max": 83}, "cryptogram": {"cipher": "RKO QYOJGQK HFGVGH KGCKFGCKRQ KAY TGCGJ HMTOOT LMVQ MVJ QKGXRGVC JGMCVAQRGH HTGROTGM MTO XATHGVC M JOLMRO AV YKORKOT MJKJ MVJ MZRGQP MTO RTZFD FGXOFAVC.", "plain": "THE SWEDISH CLINIC HIGHLIGHTS HOW RIGID CAREER BANS AND SHIFTING DIAGNOSTIC CRITERIA ARE FORCING A DEBATE ON WHETHER ADHD AND AUTISM ARE TRULY LIFELONG.", "source": "From today's briefing", "hints": {"F": "L", "H": "C"}}, "ladder": {"start": "GEAR", "end": "MIND", "solution": ["GEAR", "BEAR", "BEAD", "BEND", "BIND", "MIND"], "valid": ["ABBA", "ABBE", "ABED", "ABET", "ABLE", "ABLY", "ABUT", "ACED", "ACES", "ACHE", "ACHY", "ACID", "ACME", "ACNE", "ACRE", "ACTA", "ACTS", "ACYL", "ADDS", "AEON", "AERO", "AFAR", "AGAR", "AGED", "AGEE", "AGER", "AGES", "AGHA", "AGIN", "AHEM", "AHOY", "AIDE", "AIDS", "AILS", "AIMS", "AIRS", "AIRY", "AJAR", "AKIN", "ALAN", "ALAS", "ALBA", "ALEC", "ALES", "ALFA", "ALGA", "ALLS", "ALLY", "ALMA", "ALMS", "ALOE", "ALPS", "ALSO", "ALTO", "ALTS", "ALUM", "AMAS", "AMBO", "AMEN", "AMID", "AMIE", "AMIN", "AMIR", "AMIS", "AMMO", "AMOK", "AMPS", "ANAS", "ANDS", "ANEW", "ANIL", "ANIS", "ANKH", "ANNA", "ANON", "ANSA", "ANTE", "ANTI", "ANTS", "APES", "APEX", "APSE", "AQUA", "ARAK", "ARCH", "ARCO", "ARCS", "AREA", "ARES", "ARIA", "ARID", "ARMS", "ARMY", "ARTS", "ARTY", "ARUM", "ARVO", "ARYL", "ASHY", "ASKS", "ATMA", "ATOM", "ATOP", "AULD", "AUNT", "AURA", "AUTO", "AVER", "AVES", "AVID", "AWAY", "AWED", "AWOL", "AWRY", "AXED", "AXEL", "AXES", "AXIS", "AXLE", "AXON", "AYAH", "AYES", "BAAL", "BAAS", "BABA", "BABE", "BABU", "BABY", "BACH", "BACK", "BADE", "BAGS", "BAHT", "BAIL", "BAIT", "BAKE", "BALD", "BALE", "BALK", "BALL", "BALM", "BAND", "BANE", "BANG", "BANI", "BANK", "BANS", "BAPS", "BARB", "BARD", "BARE", "BARF", "BARK", "BARN", "BARS", "BASE", "BASH", "BASK", "BASS", "BAST", "BATE", "BATH", "BATS", "BATT", "BAUD", "BAWL", "BAYS", "BEAD", "BEAK", "BEAM", "BEAN", "BEAR", "BEAT", "BEAU", "BECK", "BEDS", "BEEF", "BEEN", "BEEP", "BEER", "BEES", "BEET", "BEGS", "BELL", "BELT", "BEND", "BENE", "BENS", "BENT", "BERG", "BERM", "BEST", "BETA", "BETH", "BETS", "BEVY", "BIAS", "BIBB", "BIBS", "BIDE", "BIDS", "BIER", "BIFF", "BIGS", "BIKE", "BILE", "BILL", "BIND", "BINS", "BINT", "BIOS", "BIRD", "BIRK", "BITE", "BITS", "BLAB", "BLAH", "BLAM", "BLED", "BLEW", "BLIP", "BLOB", "BLOC", "BLOT", "BLOW", "BLUE", "BLUR", "BOAR", "BOAS", "BOAT", "BOBS", "BOCK", "BODE", "BODY", "BOGS", "BOIL", "BOLA", "BOLD", "BOLE", "BOLL", "BOLO", "BOLT", "BOMB", "BOND", "BONE", "BONG", "BONK", "BONY", "BOOK", "BOOM", "BOON", "BOOS", "BOOT", "BOPS", "BORA", "BORE", "BORN", "BOSH", "BOSS", "BOTH", "BOTS", "BOTT", "BOUT", "BOWL", "BOWS", "BOXY", "BOYO", "BOYS", "BOZO", "BRAD", "BRAE", "BRAG", "BRAN", "BRAS", "BRAT", "BRAY", "BRED", "BREE", "BREN", "BREW", "BRIE", "BRIG", "BRIM", "BRIN", "BRIO", "BRIS", "BRIT", "BROS", "BROW", "BRRR", "BRUT", "BUBS", "BUCK", "BUDS", "BUFF", "BUGS", "BULB", "BULK", "BULL", "BUMP", "BUMS", "BUND", "BUNG", "BUNK", "BUNN", "BUNS", "BUNT", "BUOY", "BURD", "BURG", "BURL", "BURN", "BURP", "BURR", "BURY", "BUSH", "BUSK", "BUSS", "BUST", "BUSY", "BUTE", "BUTS", "BUYS", "BUZZ", "BYES", "BYTE", "CABS", "CADE", "CAFE", "CAGE", "CAIN", "CAKE", "CALF", "CALL", "CALM", "CAME", "CAMP", "CAMS", "CANE", "CANS", "CANT", "CAPE", "CAPO", "CAPS", "CARB", "CARD", "CARE", "CARL", "CARN", "CARP", "CARR", "CARS", "CART", "CASA", "CASE", "CASH", "CASK", "CAST", "CATE", "CATS", "CAVE", "CEDE", "CELL", "CELT", "CENT", "CERO", "CESS", "CHAD", "CHAM", "CHAO", "CHAP", "CHAR", "CHAT", "CHEF", "CHEW", "CHEZ", "CHIA", "CHIC", "CHIN", "CHIP", "CHIT", "CHON", "CHOP", "CHOW", "CHUB", "CHUG", "CHUM", "CIAO", "CINE", "CITE", "CITY", "CLAD", "CLAM", "CLAN", "CLAP", "CLAW", "CLAY", "CLEF", "CLIP", "CLOD", "CLOG", "CLOP", "CLOT", "CLUB", "CLUE", "COAL", "COAT", "COAX", "COBB", "COBS", "COCA", "COCO", "CODA", "CODE", "COED", "COGS", "COHO", "COIL", "COIN", "COIR", "COKE", "COLA", "COLD", "COLE", "COLT", "COMA", "COMB", "COME", "COMP", "CONE", "CONN", "CONS", "COOK", "COOL", "COON", "COOP", "COOS", "COOT", "COPE", "COPS", "COPY", "CORD", "CORE", "CORK", "CORN", "CORY", "COSH", "COST", "COSY", "COTE", "COTS", "COUP", "COVE", "COWL", "COWS", "COZY", "CRAB", "CRAG", "CRAM", "CRAW", "CREW", "CRIB", "CRIS", "CROC", "CROP", "CROW", "CRUD", "CRUS", "CRUX", "CUBE", "CUBS", "CUED", "CUES", "CUFF", "CULL", "CULT", "CUPS", "CURB", "CURD", "CURE", "CURL", "CURR", "CURT", "CUSP", "CUSS", "CUTE", "CUTS", "CYAN", "CYST", "CZAR", "DABS", "DADA", "DADO", "DADS", "DAFT", "DAHL", "DAIS", "DALE", "DAME", "DAMP", "DAMS", "DANG", "DANK", "DARE", "DARK", "DARN", "DART", "DASH", "DATA", "DATE", "DATO", "DAUB", "DAVY", "DAWN", "DAWS", "DAYS", "DAZE", "DEAD", "DEAF", "DEAL", "DEAN", "DEAR", "DEBS", "DEBT", "DECK", "DECO", "DEED", "DEEM", "DEEP", "DEER", "DEES", "DEET", "DEFT", "DEFY", "DEKE", "DELE", "DELI", "DELL", "DEMO", "DENE", "DENS", "DENT", "DENY", "DERE", "DERM", "DESK", "DEVA", "DEVS", "DEWY", "DIAL", "DIBS", "DICE", "DIDO", "DIED", "DIES", "DIET", "DIGS", "DIKE", "DILL", "DIME", "DIMS", "DINE", "DING", "DINK", "DINT", "DIPS", "DIRE", "DIRK", "DIRT", "DISC", "DISH", "DISK", "DISS", "DITA", "DIVA", "DIVE", "DOCK", "DOCS", "DODO", "DOER", "DOES", "DOGE", "DOGS", "DOIT", "DOJO", "DOLE", "DOLL", "DOLT", "DOME", "DOMS", "DONA", "DONE", "DONG", "DONS", "DOOM", "DOOR", "DOPA", "DOPE", "DORE", "DORK", "DORM", "DORR", "DORY", "DOSE", "DOSS", "DOST", "DOTE", "DOTH", "DOTS", "DOTY", "DOUR", "DOVE", "DOWN", "DOZE", "DRAB", "DRAG", "DRAM", "DRAW", "DRAY", "DREW", "DRIP", "DROP", "DRUG", "DRUM", "DUAL", "DUBS", "DUCE", "DUCK", "DUCT", "DUDE", "DUDS", "DUEL", "DUES", "DUET", "DUFF", "DUKE", "DULL", "DULY", "DUMA", "DUMB", "DUMP", "DUNE", "DUNG", "DUNK", "DUNS", "DUOS", "DUPE", "DURA", "DURO", "DURR", "DUSK", "DUST", "DUTY", "DYAD", "DYED", "DYER", "DYES", "EACH", "EARL", "EARN", "EARS", "EASE", "EAST", "EASY", "EATS", "EBBS", "EBON", "ECHO", "EDDY", "EDGE", "EDGY", "EDIT", "EELS", "EGGS", "EGGY", "EGOS", "ELAN", "ELKS", "ELLS", "ELMS", "ELSE", "EMIR", "EMIT", "EMUS", "ENDS", "ENVY", "EONS", "EPIC", "ERAS", "ERGO", "EROS", "ESPY", "ETCH", "ETNA", "EURO", "EVEN", "EVER", "EVES", "EVIL", "EWES", "EXAM", "EXEC", "EXES", "EXIT", "EXON", "EXPO", "EYED", "EYES", "EYRE", "FACE", "FACT", "FADE", "FADS", "FAIL", "FAIN", "FAIR", "FAKE", "FALL", "FAME", "FANE", "FANG", "FANS", "FARE", "FARM", "FARO", "FART", "FASH", "FAST", "FATE", "FATS", "FAUN", "FAUX", "FAVA", "FAVE", "FAWN", "FAZE", "FEAR", "FEAT", "FECK", "FEDS", "FEED", "FEEL", "FEES", "FEET", "FELL", "FELT", "FEND", "FENS", "FERN", "FESS", "FETA", "FETE", "FEUD", "FIAT", "FICO", "FIDO", "FIEF", "FIFE", "FIGS", "FILA", "FILE", "FILL", "FILM", "FILO", "FILS", "FIND", "FINE", "FINK", "FINO", "FINS", "FIRE", "FIRM", "FIRS", "FISH", "FIST", "FITS", "FIVE", "FIZZ", "FLAB", "FLAG", "FLAK", "FLAM", "FLAN", "FLAP", "FLAT", "FLAW", "FLAX", "FLAY", "FLEA", "FLED", "FLEE", "FLEW", "FLEX", "FLIP", "FLIT", "FLOE", "FLOG", "FLOP", "FLOW", "FLUB", "FLUE", "FLUX", "FOAL", "FOAM", "FOBS", "FOCI", "FOES", "FOGS", "FOIL", "FOLD", "FOLK", "FOND", "FONS", "FONT", "FOOD", "FOOL", "FOOT", "FORA", "FORD", "FORE", "FORK", "FORM", "FORT", "FOSS", "FOUL", "FOUR", "FOWL", "FOXY", "FRAG", "FRAT", "FRAY", "FREE", "FRET", "FRIG", "FROG", "FROM", "FUEL", "FUJI", "FULL", "FUME", "FUND", "FUNK", "FURS", "FURY", "FUSE", "FUSS", "FUZE", "FUZZ", "GABY", "GAFF", "GAGA", "GAGE", "GAGS", "GAIN", "GAIT", "GALA", "GALE", "GALL", "GALS", "GAMA", "GAME", "GAMS", "GANG", "GAOL", "GAPE", "GAPS", "GARB", "GASH", "GASP", "GATE", "GATS", "GAVE", "GAWK", "GAYS", "GAZE", "GEAR", "GEEK", "GEES", "GEEZ", "GELS", "GEMS", "GENE", "GENS", "GENT", "GERM", "GETS", "GEUM", "GHAT", "GHEE", "GIFT", "GIGA", "GIGS", "GILD", "GILL", "GILT", "GIMP", "GINS", "GIRD", "GIRL", "GIRO", "GIST", "GIVE", "GLAD", "GLEE", "GLEN", "GLIB", "GLOB", "GLOW", "GLUE", "GLUM", "GLUT", "GNAT", "GNAW", "GOAD", "GOAL", "GOAT", "GOBS", "GODS", "GOER", "GOES", "GOGO", "GOLD", "GOLF", "GONE", "GONG", "GOOD", "GOOF", "GOON", "GOOP", "GORE", "GORY", "GOSH", "GOUT", "GOWN", "GRAB", "GRAD", "GRAM", "GRAN", "GRAT", "GRAY", "GREE", "GREW", "GREY", "GRID", "GRIM", "GRIN", "GRIP", "GRIT", "GROG", "GROW", "GRUB", "GUAN", "GUAR", "GUFF", "GUID", "GULF", "GULL", "GULP", "GUMS", "GUNK", "GUNS", "GURU", "GUSH", "GUST", "GUTS", "GUYS", "GYMS", "GYRE", "GYRO", "HAAR", "HACK", "HAFT", "HAGS", "HAHA", "HAIL", "HAIR", "HAJI", "HAJJ", "HAKE", "HALE", "HALF", "HALL", "HALO", "HALT", "HAMS", "HAND", "HANG", "HANK", "HARD", "HARE", "HARK", "HARM", "HARP", "HART", "HASH", "HAST", "HATE", "HATH", "HATS", "HAUL", "HAUT", "HAVE", "HAWK", "HAYS", "HAZE", "HAZY", "HEAD", "HEAL", "HEAP", "HEAR", "HEAT", "HECK", "HEED", "HEEL", "HEFT", "HEIL", "HEIR", "HELD", "HELL", "HELM", "HELO", "HELP", "HEME", "HEMP", "HEMS", "HENS", "HERB", "HERD", "HERE", "HERM", "HERO", "HERS", "HEWN", "HICK", "HIDE", "HIGH", "HIKE", "HILL", "HILT", "HIND", "HINT", "HIPS", "HIRE", "HISS", "HIST", "HITS", "HIVE", "HOAR", "HOAX", "HOBO", "HOCK", "HOES", "HOGG", "HOGS", "HOKE", "HOLD", "HOLE", "HOLM", "HOLT", "HOLY", "HOME", "HONE", "HONG", "HONK", "HONS", "HOOD", "HOOF", "HOOK", "HOOP", "HOOT", "HOPE", "HOPS", "HORA", "HORN", "HOSE", "HOST", "HOTS", "HOUR", "HOVE", "HOWE", "HOWL", "HOWS", "HOYA", "HUBS", "HUCK", "HUED", "HUES", "HUFF", "HUGE", "HUGS", "HULA", "HULK", "HULL", "HUMP", "HUMS", "HUNG", "HUNK", "HUNS", "HUNT", "HURL", "HURT", "HUSH", "HUSK", "HUTS", "HWAN", "HYMN", "HYPE", "HYPO", "IBEX", "IBIS", "ICED", "ICES", "ICKY", "ICON", "IDEA", "IDEM", "IDES", "IDLE", "IDLY", "IDOL", "IFFY", "IKON", "ILIA", "ILLS", "ILLY", "IMAM", "IMPS", "INCH", "INFO", "INKS", "INKY", "INNS", "INTI", "INTO", "IONS", "IOTA", "IRIS", "IRKS", "IRON", "ISLE", "ISMS", "ITCH", "ITEM", "JABS", "JACK", "JADE", "JAGS", "JAIL", "JAKE", "JAMB", "JAMS", "JANE", "JARL", "JARS", "JAVA", "JAWS", "JAYS", "JAZZ", "JEAN", "JEEP", "JEEZ", "JEFE", "JEHU", "JELL", "JEON", "JERK", "JESS", "JEST", "JETS", "JEUX", "JEWS", "JIAO", "JIBE", "JIGS", "JILL", "JINN", "JINX", "JIVE", "JOBS", "JOCK", "JOES", "JOEY", "JOGS", "JOHN", "JOIN", "JOKE", "JOLT", "JOSH", "JOSS", "JOTA", "JOYS", "JUBA", "JUDO", "JUGS", "JUJU", "JUKE", "JUMP", "JUNK", "JURA", "JURY", "JUST", "JUTE", "JUTS", "KAIF", "KAIL", "KAIN", "KAKA", "KAKI", "KALE", "KAME", "KAMI", "KANA", "KANE", "KARN", "KART", "KATA", "KATS", "KAVA", "KAYO", "KECK", "KEEF", "KEEL", "KEEN", "KEEP", "KEGS", "KEIR", "KELP", "KEMP", "KENO", "KENT", "KEPT", "KERB", "KERN", "KETO", "KEYS", "KHAN", "KHAT", "KICK", "KIDS", "KIER", "KILN", "KILO", "KILT", "KINA", "KIND", "KING", "KINK", "KINO", "KIRK", "KISS", "KITE", "KITH", "KITS", "KIVA", "KIWI", "KNEE", "KNEW", "KNIT", "KNOB", "KNOT", "KNOW", "KOBO", "KOHL", "KOLA", "KOLO", "KOOK", "KORE", "KORS", "KOSS", "KOTO", "KRIS", "KUDO", "KURU", "LABS", "LACE", "LACK", "LACS", "LACY", "LADS", "LADY", "LAGS", "LAID", "LAIN", "LAIR", "LAKE", "LAKH", "LAMA", "LAMB", "LAME", "LAMP", "LAND", "LANE", "LANG", "LAPS", "LARD", "LARK", "LARS", "LASH", "LASS", "LAST", "LATE", "LATH", "LATS", "LAUD", "LAVA", "LAVE", "LAWN", "LAWS", "LAYS", "LAZE", "LAZY", "LEAD", "LEAF", "LEAK", "LEAL", "LEAN", "LEAP", "LEAR", "LEAS", "LECH", "LEEK", "LEER", "LEES", "LEET", "LEFT", "LEGS", "LEIS", "LEND", "LENO", "LENS", "LENT", "LESS", "LEST", "LETS", "LEVY", "LEWD", "LEYS", "LIAR", "LIBS", "LICE", "LICH", "LICK", "LIDO", "LIDS", "LIED", "LIEF", "LIEN", "LIER", "LIES", "LIEU", "LIFE", "LIFT", "LIKE", "LILT", "LILY", "LIMA", "LIMB", "LIME", "LIMO", "LIMP", "LINE", "LING", "LINK", "LINN", "LINO", "LINT", "LION", "LIPS", "LIRA", "LIRE", "LISP", "LIST", "LITE", "LIVE", "LOAD", "LOAF", "LOAM", "LOAN", "LOBE", "LOBO", "LOBS", "LOCA", "LOCH", "LOCI", "LOCK", "LOCO", "LODE", "LOFT", "LOGO", "LOGS", "LOIN", "LOLL", "LONE", "LONG", "LOOK", "LOOM", "LOON", "LOOP", "LOOS", "LOOT", "LOPE", "LORD", "LORE", "LOSE", "LOSS", "LOST", "LOTS", "LOUD", "LOUP", "LOVE", "LOWE", "LOWS", "LUAU", "LUBE", "LUCE", "LUCK", "LUFF", "LUGE", "LUGS", "LULL", "LULU", "LUMP", "LUNA", "LUNE", "LUNG", "LUNT", "LURE", "LURK", "LUSH", "LUST", "LUTE", "LUTZ", "LUXE", "LYNX", "LYRE", "MAAR", "MACE", "MACH", "MACK", "MACS", "MADE", "MADS", "MAES", "MAGE", "MAGI", "MAGS", "MAID", "MAIL", "MAIM", "MAIN", "MAIR", "MAKE", "MAKO", "MALE", "MALL", "MALT", "MAMA", "MANA", "MANE", "MANO", "MANS", "MANY", "MAPS", "MARC", "MARE", "MARK", "MARL", "MARS", "MART", "MASH", "MASK", "MASS", "MAST", "MATE", "MATH", "MATS", "MATT", "MAUD", "MAUL", "MAXI", "MAYA", "MAYO", "MAYS", "MAZE", "MEAD", "MEAL", "MEAN", "MEAT", "MEEK", "MEET", "MELD", "MELL", "MELT", "MEMO", "MEMS", "MEND", "MENU", "MEOW", "MERE", "MESA", "MESH", "MESS", "META", "METE", "METH", "MEWS", "MICA", "MICE", "MICK", "MIDI", "MIDS", "MIEN", "MIGS", "MIKE", "MILD", "MILE", "MILK", "MILL", "MILO", "MILS", "MILT", "MIME", "MINA", "MIND", "MINE", "MINI", "MINK", "MINT", "MINX", "MIRE", "MIRI", "MISE", "MISO", "MISS", "MIST", "MITE", "MITT", "MOAN", "MOAT", "MOBS", "MOCK", "MODE", "MODI", "MODS", "MOJO", "MOLA", "MOLD", "MOLE", "MOLL", "MOLT", "MOLY", "MOMS", "MONK", "MONO", "MONS", "MONY", "MOOD", "MOON", "MOOR", "MOOS", "MOOT", "MOPE", "MOPS", "MORA", "MORE", "MORN", "MORS", "MORT", "MOSS", "MOST", "MOTE", "MOTH", "MOTS", "MOTT", "MOVE", "MOWN", "MUCH", "MUCK", "MUDS", "MUFF", "MUGS", "MULE", "MULL", "MUMM", "MUMS", "MUNI", "MUON", "MURA", "MURK", "MURR", "MUSE", "MUSH", "MUSK", "MUSS", "MUST", "MUTE", "MUTT", "MYTH", "NAAN", "NADA", "NAGS", "NAIL", "NAME", "NANA", "NAPE", "NAPS", "NARC", "NARY", "NAVE", "NAVY", "NAZI", "NEAR", "NEAT", "NECK", "NEED", "NEEM", "NEMA", "NENE", "NEON", "NERD", "NESS", "NEST", "NETS", "NETT", "NEVE", "NEWS", "NEWT", "NEXT", "NIBS", "NICE", "NICK", "NIGH", "NILS", "NINE", "NIPS", "NISI", "NITE", "NITS", "NOCK", "NODE", "NODS", "NOEL", "NOES", "NOIR", "NOMA", "NOME", "NOMS", "NONA", "NONE", "NOOK", "NOON", "NOPE", "NORI", "NORM", "NOSE", "NOSH", "NOSY", "NOTA", "NOTE", "NOUN", "NOUS", "NOVA", "NOWT", "NUKE", "NULL", "NUMB", "NUNS", "NUTS", "OAKS", "OARS", "OATH", "OATS", "OBEY", "OBIT", "OBOE", "ODDS", "ODES", "ODOR", "OFFS", "OGLE", "OGRE", "OHMS", "OILS", "OILY", "OINK", "OKAY", "OKRA", "OLDS", "OMEN", "OMER", "OMIT", "ONCE", "ONES", "ONLY", "ONTO", "ONUS", "ONYX", "OOPS", "OOZE", "OPAL", "OPED", "OPEN", "OPTS", "OPUS", "ORAL", "ORBS", "ORCA", "ORCS", "ORDO", "ORES", "ORGY", "ORYX", "OTTO", "OUCH", "OURS", "OUST", "OUTS", "OVAL", "OVEN", "OVER", "OVUM", "OWED", "OWES", "OWLS", "OWNS", "OXEN", "PACE", "PACK", "PACS", "PACT", "PADI", "PADS", "PAGE", "PAID", "PAIL", "PAIN", "PAIR", "PALE", "PALL", "PALM", "PALP", "PALS", "PANE", "PANG", "PANS", "PANT", "PAPA", "PAPS", "PARA", "PARE", "PARK", "PARR", "PARS", "PART", "PASS", "PAST", "PATE", "PATH", "PATS", "PAVE", "PAWN", "PAWS", "PAYS", "PEAK", "PEAL", "PEAR", "PEAS", "PEAT", "PECK", "PECS", "PEDS", "PEED", "PEEK", "PEEL", "PEEN", "PEEP", "PEER", "PEES", "PEGS", "PELE", "PELT", "PENS", "PENT", "PEON", "PERI", "PERK", "PERM", "PERT", "PESO", "PEST", "PETS", "PEWS", "PFFT", "PHAT", "PHEW", "PICA", "PICK", "PICS", "PIED", "PIER", "PIES", "PIGS", "PIKA", "PIKE", "PILE", "PILI", "PILL", "PIMA", "PIMP", "PINA", "PINE", "PING", "PINK", "PINS", "PINT", "PIPE", "PIPS", "PISH", "PISO", "PITA", "PITH", "PITS", "PITY", "PLAN", "PLAT", "PLAY", "PLEA", "PLEB", "PLED", "PLOD", "PLOP", "PLOT", "PLOW", "PLOY", "PLUG", "PLUM", "PLUS", "POCK", "POCO", "PODS", "POEM", "POET", "POIS", "POKE", "POLE", "POLL", "POLO", "POLS", "POLY", "POMP", "POMS", "POND", "PONE", "PONG", "PONS", "PONY", "POOF", "POOH", "POOL", "POON", "POOP", "POOR", "POPE", "POPS", "PORE", "PORK", "PORT", "POSE", "POSH", "POST", "POSY", "POTS", "POUR", "POUT", "POWS", "PRAM", "PRAT", "PRAY", "PREP", "PREY", "PREZ", "PRIM", "PROD", "PROF", "PROG", "PROM", "PROP", "PROS", "PROW", "PSST", "PUBS", "PUCK", "PUFF", "PUGH", "PUGS", "PUJA", "PUKE", "PULA", "PULL", "PULP", "PUMA", "PUMP", "PUNA", "PUNK", "PUNS", "PUNT", "PUNY", "PUPA", "PUPS", "PURE", "PURI", "PURL", "PURR", "PUSH", "PUSS", "PUTS", "PUTT", "PUTZ", "PYRE", "QUAD", "QUAI", "QUAY", "QUID", "QUIN", "QUIP", "QUIT", "QUIZ", "QUOD", "RACE", "RACK", "RACY", "RADS", "RAFF", "RAFT", "RAGA", "RAGE", "RAGS", "RAID", "RAIL", "RAIN", "RAJA", "RAKE", "RAMI", "RAMP", "RAMS", "RAND", "RANG", "RANI", "RANK", "RANT", "RAPS", "RAPT", "RARE", "RASH", "RASP", "RATE", "RATH", "RATS", "RAVE", "RAYA", "RAYS", "RAZE", "READ", "REAL", "REAM", "REAP", "REAR", "REBS", "RECS", "REDD", "REDE", "REDO", "REDS", "REED", "REEF", "REEK", "REEL", "REES", "REFS", "REGS", "REIN", "REIS", "RELY", "REND", "RENT", "REPO", "REPS", "REST", "REVS", "RHEA", "RIAL", "RIAS", "RIBS", "RICE", "RICH", "RICK", "RIDE", "RIEL", "RIFE", "RIFF", "RIFT", "RIGS", "RILE", "RIME", "RIMS", "RIND", "RING", "RINK", "RIOT", "RIPE", "RIPS", "RISE", "RISK", "RITE", "RITZ", "RIVE", "ROAD", "ROAM", "ROAN", "ROAR", "ROBE", "ROBS", "ROCK", "RODE", "RODS", "ROLE", "ROLF", "ROLL", "ROMP", "ROMS", "ROOD", "ROOF", "ROOK", "ROOM", "ROOT", "ROPE", "ROSE", "ROSY", "ROTA", "ROTE", "ROTI", "ROTO", "ROTS", "ROUT", "ROUX", "ROVE", "ROWS", "RUBE", "RUBS", "RUBY", "RUCK", "RUDD", "RUDE", "RUFF", "RUGS", "RUIN", "RULE", "RUMP", "RUNE", "RUNG", "RUNS", "RUNT", "RUSE", "RUSH", "RUSK", "RUST", "RUTH", "RUTS", "SACK", "SACS", "SADE", "SAFE", "SAGA", "SAGE", "SAGO", "SAGS", "SAID", "SAIL", "SAKE", "SAKI", "SALE", "SALL", "SALT", "SAME", "SAND", "SANE", "SANG", "SANK", "SANS", "SAPS", "SARI", "SARK", "SASH", "SASS", "SATE", "SATI", "SAUL", "SAVE", "SAWN", "SAWS", "SAYS", "SCAB", "SCAM", "SCAN", "SCAR", "SCAT", "SCOT", "SCUD", "SCUM", "SEAL", "SEAM", "SEAR", "SEAS", "SEAT", "SECS", "SECT", "SEED", "SEEK", "SEEM", "SEEN", "SEEP", "SEER", "SEES", "SEIF", "SEIS", "SELF", "SELL", "SEMI", "SEND", "SENT", "SEPT", "SERA", "SERE", "SERF", "SETA", "SETS", "SETT", "SEWN", "SEWS", "SEXT", "SHAD", "SHAG", "SHAH", "SHAM", "SHAT", "SHAW", "SHAY", "SHEA", "SHED", "SHES", "SHEW", "SHIM", "SHIN", "SHIP", "SHIV", "SHOD", "SHOE", "SHOO", "SHOP", "SHOT", "SHOW", "SHRI", "SHUL", "SHUN", "SHUT", "SIBS", "SICK", "SIDE", "SIFT", "SIGH", "SIGN", "SILK", "SILL", "SILO", "SILT", "SIMA", "SIMP", "SIMS", "SINE", "SING", "SINK", "SINS", "SIPS", "SIRE", "SIRS", "SITE", "SITH", "SITS", "SIZE", "SKEW", "SKID", "SKIM", "SKIN", "SKIP", "SKIS", "SKIT", "SLAB", "SLAG", "SLAM", "SLAP", "SLAT", "SLAW", "SLAY", "SLED", "SLEW", "SLID", "SLIM", "SLIP", "SLIT", "SLOB", "SLOG", "SLOP", "SLOT", "SLOW", "SLUG", "SLUM", "SLUR", "SMIT", "SMOG", "SMUG", "SMUT", "SNAG", "SNAP", "SNIP", "SNOB", "SNOT", "SNOW", "SNUB", "SNUG", "SOAK", "SOAP", "SOAR", "SOBS", "SOCK", "SODA", "SODS", "SOFA", "SOFT", "SOIL", "SOLA", "SOLD", "SOLE", "SOLI", "SOLO", "SOMA", "SOME", "SONE", "SONG", "SONS", "SOOK", "SOON", "SOOT", "SOPH", "SOPS", "SORA", "SORE", "SORI", "SORT", "SOUK", "SOUL", "SOUP", "SOUR", "SOUS", "SOWN", "SOWS", "SOYA", "SPAN", "SPAR", "SPAS", "SPAT", "SPAY", "SPAZ", "SPEC", "SPED", "SPEW", "SPIN", "SPIT", "SPOT", "SPRY", "SPUD", "SPUN", "SPUR", "STAB", "STAG", "STAR", "STAT", "STAY", "STEM", "STEP", "STEW", "STIR", "STOP", "STOW", "STUB", "STUD", "STUN", "SUBS", "SUCH", "SUCK", "SUDS", "SUED", "SUES", "SUET", "SUIT", "SULK", "SULU", "SUMO", "SUMP", "SUMS", "SUNG", "SUNK", "SUNS", "SURA", "SURE", "SURF", "SUSS", "SWAB", "SWAG", "SWAM", "SWAN", "SWAP", "SWAT", "SWAY", "SWIG", "SWIM", "SWOT", "SWUM", "SYNC", "SYNE", "TABS", "TABU", "TACK", "TACO", "TACT", "TAGS", "TAIL", "TAIN", "TAKA", "TAKE", "TALA", "TALC", "TALE", "TALI", "TALK", "TALL", "TAME", "TAMP", "TAMS", "TANG", "TANK", "TANS", "TAOS", "TAPE", "TAPS", "TARE", "TARN", "TARO", "TARP", "TARS", "TART", "TASK", "TASS", "TATE", "TATS", "TAUT", "TAXA", "TAXI", "TEAK", "TEAL", "TEAM", "TEAR", "TEAS", "TEAT", "TEED", "TEEN", "TEES", "TELE", "TELL", "TEMP", "TEND", "TENS", "TENT", "TERM", "TERN", "TEST", "TEXT", "THAN", "THAT", "THAW", "THEE", "THEM", "THEN", "THEW", "THEY", "THIN", "THIS", "THOU", "THRO", "THRU", "THUD", "THUG", "THUS", "TICK", "TICS", "TIDE", "TIDY", "TIED", "TIER", "TIES", "TIFF", "TIKI", "TILE", "TILL", "TILT", "TIME", "TINE", "TING", "TINS", "TINT", "TINY", "TIPI", "TIPS", "TIRE", "TITI", "TOAD", "TOBY", "TOED", "TOES", "TOFF", "TOFU", "TOGA", "TOIL", "TOIT", "TOKE", "TOLA", "TOLD", "TOLL", "TOMB", "TOME", "TOMS", "TONE", "TONG", "TONS", "TONY", "TOOK", "TOOL", "TOON", "TOOT", "TOPE", "TOPH", "TOPS", "TORA", "TORE", "TORI", "TORN", "TORO", "TORR", "TORT", "TORY", "TOSH", "TOSS", "TOTE", "TOTS", "TOUR", "TOUT", "TOWN", "TOWS", "TOYO", "TOYS", "TRAD", "TRAM", "TRAP", "TRAY", "TREE", "TREK", "TREY", "TRIG", "TRIM", "TRIO", "TRIP", "TROD", "TROP", "TROT", "TROW", "TROY", "TRUE", "TSAR", "TUBA", "TUBE", "TUBS", "TUCK", "TUFF", "TUFT", "TUGS", "TUNA", "TUNE", "TUNG", "TURD", "TURF", "TURK", "TURN", "TUSH", "TUSK", "TUTS", "TUTU", "TWAS", "TWEE", "TWIG", "TWIN", "TWIT", "TWOS", "TYNE", "TYPE", "TYPO", "TYRE", "TYRO", "UGLY", "ULAN", "ULNA", "UNDE", "UNDO", "UNIT", "UNTO", "UPON", "UREA", "URGE", "URIC", "URNS", "URSA", "USED", "USER", "USES", "VAIL", "VAIN", "VALE", "VAMP", "VANE", "VANG", "VANS", "VARA", "VARY", "VASA", "VASE", "VAST", "VATS", "VEAL", "VEEP", "VEER", "VEIL", "VEIN", "VELA", "VELD", "VENA", "VENT", "VERA", "VERB", "VERT", "VERY", "VEST", "VETO", "VETS", "VIAL", "VIBE", "VICE", "VIDE", "VIED", "VIES", "VIEW", "VILE", "VILL", "VINA", "VINE", "VINO", "VIOL", "VISA", "VISE", "VITA", "VIVA", "VIVE", "VOID", "VOLE", "VOLT", "VOTE", "VOWS", "WACK", "WADE", "WADI", "WADS", "WAFT", "WAGE", "WAGS", "WAIF", "WAIL", "WAIN", "WAIT", "WAKE", "WALE", "WALK", "WALL", "WAND", "WANE", "WANT", "WARD", "WARE", "WARK", "WARM", "WARN", "WARP", "WARS", "WART", "WARY", "WASH", "WASP", "WAST", "WATS", "WATT", "WAVE", "WAVY", "WAXY", "WAYS", "WEAK", "WEAL", "WEAN", "WEAR", "WEBS", "WEDS", "WEED", "WEEK", "WEEN", "WEEP", "WEFT", "WEIR", "WELD", "WELL", "WELT", "WENT", "WEPT", "WERE", "WERT", "WEST", "WETS", "WHAM", "WHAT", "WHEE", "WHEN", "WHET", "WHEW", "WHEY", "WHIG", "WHIM", "WHIP", "WHIT", "WHIZ", "WHOA", "WHOM", "WHYS", "WICH", "WICK", "WIDE", "WIFE", "WIGS", "WILD", "WILE", "WILL", "WILT", "WILY", "WIMP", "WIND", "WINE", "WING", "WINK", "WINS", "WIPE", "WIRE", "WIRY", "WISE", "WISH", "WISP", "WITH", "WITS", "WOES", "WOKE", "WOLD", "WOLF", "WOMB", "WONK", "WONT", "WOOD", "WOOF", "WOOL", "WOOS", "WORD", "WORE", "WORK", "WORM", "WORN", "WORT", "WOVE", "WOWS", "WRAP", "WREN", "WRIT", "WUSS", "WYNN", "YAKS", "YAMS", "YANG", "YANK", "YARD", "YARN", "YAWN", "YEAH", "YEAR", "YEAS", "YELL", "YELP", "YETI", "YOGA", "YOGI", "YOKE", "YOLK", "YONI", "YORE", "YOUR", "YUAN", "YUCK", "YULE", "YURT", "ZAGS", "ZANY", "ZAPS", "ZEAL", "ZERO", "ZEST", "ZETA", "ZINC", "ZING", "ZIPS", "ZITS", "ZONE", "ZOOM", "ZOOS"]}, "nonogram": {"rows": [[0], [3, 3], [10], [10], [10], [8], [6], [4], [2], [0]], "cols": [[3], [5], [6], [7], [7], [7], [7], [6], [5], [3]], "solution": ["0000000000", "0111001110", "1111111111", "1111111111", "1111111111", "0111111110", "0011111100", "0001111000", "0000110000", "0000000000"], "picture": "a heart", "givens": []}, "futoshiki": {"n": 5, "givens": [], "less": [[3, 3, 2, 3], [1, 3, 1, 4], [0, 3, 0, 4], [4, 2, 3, 2], [0, 1, 1, 1], [3, 4, 2, 4], [2, 0, 1, 0], [3, 1, 3, 2], [4, 1, 3, 1], [2, 2, 2, 3], [1, 2, 1, 1], [4, 1, 4, 0], [2, 4, 2, 3], [1, 3, 1, 2], [3, 1, 2, 1], [2, 4, 1, 4], [1, 3, 2, 3], [1, 1, 2, 1], [3, 0, 4, 0], [4, 1, 4, 2], [0, 0, 0, 1]], "solution": ["12435", "53214", "25143", "34521", "41352"]}, "queens": {"n": 8, "regions": [[2, 0, 0, 1, 1, 1, 1, 1], [2, 0, 1, 1, 1, 1, 1, 1], [2, 3, 3, 3, 1, 1, 1, 1], [2, 2, 3, 3, 3, 1, 1, 4], [2, 2, 3, 3, 3, 4, 4, 4], [3, 3, 3, 3, 3, 4, 5, 5], [3, 3, 3, 3, 6, 5, 5, 5], [3, 3, 3, 6, 6, 7, 7, 5]], "solution": [1, 3, 0, 2, 5, 7, 4, 6]}}</script><script>
+(()=>{const G=JSON.parse(document.getElementById('gdata').textContent);
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const K=k=>'game:'+G.date+':'+k;
+const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(K(k)));return v==null?d:v}catch(_){return d}};
+const save=(k,v)=>{try{localStorage.setItem(K(k),JSON.stringify(v))}catch(_){}};
+const msg=(id,t,c)=>{const m=$('#'+id+' .gmsg');m.textContent=t;m.className='gmsg'+(c?' '+c:'')};
+const won=id=>{const b=$(`.seg [data-g="${id}"]`);if(b&&!b.querySelector('.ok'))b.insertAdjacentHTML('beforeend','<span class="ok">✓<\/span>')};
+const twice=(btn,fn)=>{btn.onclick=()=>{if(btn.dataset.arm){delete btn.dataset.arm;btn.textContent=btn.dataset.l;fn()}else{btn.dataset.l=btn.textContent;btn.dataset.arm=1;btn.textContent='Tap again';setTimeout(()=>{if(btn.dataset.arm){delete btn.dataset.arm;btn.textContent=btn.dataset.l}},2500)}}};
+const segs=$$('.seg button');
+const show=id=>{segs.forEach(b=>b.classList.toggle('on',b.dataset.g===id));$$('.game').forEach(s=>s.hidden=s.id!==id);try{localStorage.setItem('lastGame',id)}catch(_){}};
+segs.forEach(b=>b.onclick=()=>{show(b.dataset.g);scrollTo({top:0})});
+let first=location.hash.slice(1);try{first=first||localStorage.getItem('lastGame')}catch(_){}
+show(segs.some(b=>b.dataset.g===first)?first:segs[0].dataset.g);
+const on=segs.find(b=>b.classList.contains('on'));on&&on.scrollIntoView({inline:'center',block:'nearest'});
+
+/* ── crossword ── */
+(()=>{const X=G.crossword,R=X.rows,C=X.cols,S=X.solution,board=$('#xw .xboard'),inp=$('#xw .kb');
+let st=load('xw',{}),rev=load('xwrev',{});const ce={};
+X.entries.forEach((en,i)=>{for(let k=0;k<en.answer.length;k++){const r=en.d=='A'?en.r:en.r+k,c=en.d=='A'?en.c+k:en.c;(ce[r+','+c]=ce[r+','+c]||{})[en.d]=i}});
+const nums={};X.entries.forEach(en=>nums[en.r+','+en.c]=en.n);
+board.style.gridTemplateColumns=`repeat(${C},1fr)`;let h='';
+for(let r=0;r<R;r++)for(let c=0;c<C;c++){const k=r+','+c;h+=S[r][c]=='.'?'<div class="blk"><\/div>':`<div class="cell" data-k="${k}">${nums[k]?`<i>${nums[k]}<\/i>`:''}<b><\/b><\/div>`}
+board.innerHTML=h;const cel=k=>board.querySelector(`[data-k="${k}"]`);
+const cells=i=>{const en=X.entries[i];return [...en.answer].map((_,k)=>en.d=='A'?en.r+','+(en.c+k):(en.r+k)+','+en.c)};
+const sol=k=>{const [r,c]=k.split(',').map(Number);return S[r][c]};
+let cur=null,dir='A';const ent=()=>{const m=ce[cur];return m[dir]!=null?m[dir]:m[dir=='A'?'D':'A']};
+function paint(){$$('.cell',board).forEach(el=>{const k=el.dataset.k;el.querySelector('b').textContent=st[k]||'';el.classList.remove('cur','hl','bad');el.classList.toggle('rev',!!rev[k])});
+ $$('#xw .clues li').forEach(li=>{const i=+li.dataset.i;li.classList.toggle('done',cells(i).every(k=>st[k]));li.classList.remove('on')});
+ if(cur){const i=ent(),en=X.entries[i];dir=en.d;cells(i).forEach(k=>cel(k).classList.add('hl'));cel(cur).classList.add('cur');
+  $('#xw .cbar').innerHTML=`<b>${en.n} ${en.d=='A'?'Across':'Down'}<\/b> · ${en.clue.replace(/[<&]/g,'')}`;
+  const li=$(`#xw .clues li[data-i="${i}"]`);li&&li.classList.add('on')}
+ save('xw',st);const all=Object.keys(ce);
+ if(all.every(k=>st[k]===sol(k))){msg('xw',Object.keys(rev).length?'Complete.':'Solved! Nicely done.','win');won('xw')}}
+function go(k){cur=k;paint();inp.value=' ';inp.focus({preventScroll:true})}
+board.onclick=ev=>{const el=ev.target.closest('.cell');if(!el)return;const k=el.dataset.k;
+ if(k===cur){const m=ce[k];if(m.A!=null&&m.D!=null)dir=dir=='A'?'D':'A'}else{const m=ce[k];if(m[dir]==null)dir=m.A!=null?'A':'D'}go(k)};
+$$('#xw .clues li').forEach(li=>li.onclick=()=>{const i=+li.dataset.i;dir=X.entries[i].d;const cs=cells(i);go(cs.find(k=>!st[k])||cs[0]);board.scrollIntoView({block:'nearest'})});
+function step(d){const cs=cells(ent()),j=cs.indexOf(cur)+d;if(j>=0&&j<cs.length)cur=cs[j]}
+function type(ch){if(!cur)return;if(rev[cur]){step(1);paint();return}st[cur]=ch;msg('xw','');step(1);paint()}
+function back(){if(!cur)return;if(st[cur]&&!rev[cur]){delete st[cur]}else{step(-1);if(!rev[cur])delete st[cur]}paint()}
+inp.addEventListener('input',()=>{const v=inp.value;if(v.length<1)back();else{const ch=v.slice(-1).toUpperCase();if(/[A-Z]/.test(ch))type(ch)}inp.value=' '});
+inp.addEventListener('keydown',ev=>{if(ev.key==='Backspace'&&inp.value===''){ev.preventDefault();back()}
+ const mv={ArrowRight:[0,1],ArrowLeft:[0,-1],ArrowDown:[1,0],ArrowUp:[-1,0]}[ev.key];
+ if(mv&&cur){ev.preventDefault();let [r,c]=cur.split(',').map(Number);for(;;){r+=mv[0];c+=mv[1];if(r<0||c<0||r>=R||c>=C)break;if(ce[r+','+c]){dir=mv[0]?'D':'A';cur=r+','+c;break}}paint()}});
+$('#xw .chk').onclick=()=>{let n=0;for(const k in st)if(st[k]!==sol(k)){cel(k).classList.add('bad');n++}msg('xw',n?`${n} square${n>1?'s':''} wrong.`:'Everything so far is right.',n?'bad':'')};
+$('#xw .rvw').onclick=()=>{if(!cur){msg('xw','Tap a square first.');return}cells(ent()).forEach(k=>{if(st[k]!==sol(k)){st[k]=sol(k);rev[k]=1}});save('xwrev',rev);paint()};
+twice($('#xw .rva'),()=>{for(const k in ce){if(st[k]!==sol(k)){st[k]=sol(k);rev[k]=1}}save('xwrev',rev);paint()});
+twice($('#xw .clr'),()=>{st={};rev={};save('xwrev',rev);msg('xw','');paint()});
+paint();})();
+
+/* ── whodunit ── */
+(()=>{const W=G.whodunit,n=W.size,t=$('#wd .lg');let st=load('wd',{});
+const cyc={'':'x','x':'o','o':''};
+function set(k,v){if(v)st[k]=v;else delete st[k]}
+t.onclick=ev=>{const td=ev.target.closest('td[data-k]');if(!td)return;const k=td.dataset.k,v=cyc[st[k]||''];set(k,v);
+ if(v==='o'){const [g,a,b]=k.split(':');for(let j=0;j<n;j++){if(j!=+b&&!st[`${g}:${a}:${j}`])st[`${g}:${a}:${j}`]='x';if(j!=+a&&!st[`${g}:${j}:${b}`])st[`${g}:${j}:${b}`]='x'}}
+ paint()};
+function paint(){$$('td[data-k]',t).forEach(td=>{const v=st[td.dataset.k]||'';td.textContent=v==='x'?'✕':v==='o'?'●':'';td.className=td.className.replace(/\bo\b/,'').trim()+(v==='o'?' o':'')});save('wd',st)}
+twice($('#wd .clr'),()=>{st={};paint();msg('wd','')});
+$('#wd .acc').onclick=()=>{const w=+$('#wd .who').value,x=+$('#wd .what').value,y=+$('#wd .where').value;
+ if(w<0||x<0||y<0){msg('wd','Choose a suspect, a weapon and a place.');return}
+ const s=W.solution,ok=w===s.killer&&x===s.weapon[s.killer]&&y===W.crime_place;
+ if(ok){msg('wd',`Case closed: ${W.suspects[w].name}, with the ${W.weapons[x]}, in the ${W.places[y]}.`,'win');won('wd');save('wdwon',1)}
+ else msg('wd',w===s.killer?'Right suspect, but the details are off.':'Not quite. Check your grid against the clues.','bad')};
+$('#wd .rv').onclick=()=>{const s=W.solution;msg('wd',`It was ${W.suspects[s.killer].name}, with the ${W.weapons[s.weapon[s.killer]]}, in the ${W.places[W.crime_place]}.`)};
+if(load('wdwon',0))won('wd');paint()})();
+
+/* ── murder map ── */
+(()=>{const M=G.murdermap,n=M.n,b=$('#mm .mboard');let st=load('mm',{}),tool=M.people[0].initial;
+const COL=['#F6C9A8','#B9D8F2','#C8E6B8','#E8C4E8','#F2E3A2','#BFE3DD'];
+const fur={};M.furniture.forEach(f=>fur[f.r+','+f.c]=f.t);
+b.style.gridTemplateColumns=`repeat(${n},1fr)`;let h='';
+for(let r=0;r<n;r++)for(let c=0;c<n;c++){const rm=M.room[r][c],bw=[r>0&&M.room[r-1][c]!==rm?3:0,c<n-1&&M.room[r][c+1]!==rm?3:0,r<n-1&&M.room[r+1][c]!==rm?3:0,c>0&&M.room[r][c-1]!==rm?3:0];
+ const f=fur[r+','+c];h+=`<div data-k="${r},${c}" class="${f==='rug'?'rug':''}" style="background-color:${COL[rm]};border-width:${bw.map(x=>x/2+'px').join(' ')}"><span class="ri">${M.rooms[rm][0]}<\/span>${f==='plant'?'<span class="f">♣<\/span>':f==='table'?'<span class="f">▬<\/span>':''}<\/div>`}
+b.innerHTML=h;
+$('#mm .tools').onclick=ev=>{const bt=ev.target.closest('button');if(!bt)return;tool=bt.dataset.t;$$('#mm .tools button').forEach(x=>x.classList.toggle('on',x===bt))};
+b.onclick=ev=>{const d=ev.target.closest('[data-k]');if(!d)return;const k=d.dataset.k,f=fur[k];if(f==='plant'||f==='table'){msg('mm','Nobody can stand on a '+f+'.');return}
+ if(tool==='erase')delete st[k];else if(tool==='x')st[k]=st[k]==='x'?undefined:'x';else{if(st[k]===tool)delete st[k];else{for(const q in st)if(st[q]===tool)delete st[q];st[k]=tool}}
+ for(const q in st)if(st[q]===undefined)delete st[q];msg('mm','');paint()};
+function paint(){$$('[data-k]',b).forEach(d=>{const v=st[d.dataset.k];d.classList.remove('bad');d.querySelectorAll('.tok,.xm').forEach(x=>x.remove());
+ if(v==='x')d.insertAdjacentHTML('beforeend','<span class="xm">✕<\/span>');else if(v)d.insertAdjacentHTML('beforeend',`<span class="tok${v==='V'?' v':''}">${v}<\/span>`)});save('mm',st)}
+const where=i=>M.solution.pos[i].join(',');
+$('#mm .chk').onclick=()=>{let wrong=0,missing=0;M.people.forEach((p,i)=>{const k=Object.keys(st).find(q=>st[q]===p.initial);if(!k)missing++;else if(k!==where(i)){wrong++;b.querySelector(`[data-k="${k}"]`).classList.add('bad')}});
+ if(!wrong&&!missing){msg('mm',`Solved! ${M.people[M.solution.killer].name} was alone with the victim in the ${M.rooms[M.room[M.solution.pos[M.victim][0]][M.solution.pos[M.victim][1]]]}.`,'win');won('mm');save('mmwon',1)}
+ else msg('mm',wrong?`${wrong} ${wrong>1?'people are':'person is'} in the wrong spot.`:`${missing} still to place.`,wrong?'bad':'')};
+twice($('#mm .rv'),()=>{st={};M.people.forEach((p,i)=>st[where(i)]=p.initial);paint();msg('mm',`${M.people[M.solution.killer].name} did it.`)});
+twice($('#mm .clr'),()=>{st={};paint();msg('mm','')});
+if(load('mmwon',0))won('mm');paint()})();
+
+/* ── sudoku ── */
+(()=>{const P=G.sudoku.puzzle,S=G.sudoku.solution,b=$('#sd .sboard');let st=load('sd',{v:{},n:{}}),cur=-1,notes=false;
+let h='';for(let i=0;i<81;i++){const r=Math.floor(i/9),c=i%9;h+=`<div data-i="${i}" class="${P[i]!=='0'?'g ':''}${c%3==2&&c<8?'br ':''}${r%3==2&&r<8?'bb':''}"><\/div>`}b.innerHTML=h;
+const val=i=>P[i]!=='0'?P[i]:(st.v[i]||'');
+function paint(){const cv=cur>=0?val(cur):'';$$('[data-i]',b).forEach(d=>{const i=+d.dataset.i,r=Math.floor(i/9),c=i%9,v=val(i);
+ d.classList.remove('peer','same','cur','bad');
+ if(cur>=0){const R=Math.floor(cur/9),C=cur%9;if(r===R||c===C||(Math.floor(r/3)===Math.floor(R/3)&&Math.floor(c/3)===Math.floor(C/3)))d.classList.add('peer');if(cv&&v===cv)d.classList.add('same');if(i===cur)d.classList.add('cur')}
+ d.innerHTML=v?v:(st.n[i]?`<span class="nt">${[1,2,3,4,5,6,7,8,9].map(k=>`<span>${st.n[i].includes(k)?k:''}<\/span>`).join('')}<\/span>`:'')});
+ save('sd',st);if([...Array(81).keys()].every(i=>val(i)===S[i])){msg('sd','Solved! Well played.','win');won('sd')}}
+b.onclick=ev=>{const d=ev.target.closest('[data-i]');if(!d)return;cur=+d.dataset.i;paint()};
+function put(k){if(cur<0||P[cur]!=='0')return;if(k==='del'){delete st.v[cur];delete st.n[cur]}
+ else if(notes){if(st.v[cur])return;const s=st.n[cur]||'';st.n[cur]=s.includes(k)?s.replace(k,''):s+k}
+ else{st.v[cur]=st.v[cur]===k?undefined:k;if(!st.v[cur])delete st.v[cur];delete st.n[cur]}msg('sd','');paint()}
+$('#sd .pad').onclick=ev=>{const bt=ev.target.closest('button');if(!bt)return;if(bt.dataset.k==='mode'){notes=!notes;bt.classList.toggle('on',notes);bt.innerHTML=notes?'✎<small> on<\/small>':'✎';return}put(bt.dataset.k)};
+document.addEventListener('keydown',ev=>{if($('#sd').hidden)return;if(/^[1-9]$/.test(ev.key))put(ev.key);if(ev.key==='Backspace')put('del')});
+$('#sd .era').onclick=()=>put('del');
+$('#sd .chk').onclick=()=>{let n=0;for(const i in st.v)if(st.v[i]!==S[i]){b.querySelector(`[data-i="${i}"]`).classList.add('bad');n++}msg('sd',n?`${n} wrong.`:'No mistakes so far.',n?'bad':'')};
+twice($('#sd .rv'),()=>{for(let i=0;i<81;i++)if(P[i]==='0')st.v[i]=S[i];paint()});
+twice($('#sd .clr'),()=>{st={v:{},n:{}};paint();msg('sd','')});
+paint()})();
+})();
+</script><script>
+(()=>{const G=JSON.parse(document.getElementById('gdata').textContent);
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const K=k=>'game:'+G.date+':'+k;
+const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(K(k)));return v==null?d:v}catch(_){return d}};
+const save=(k,v)=>{try{localStorage.setItem(K(k),JSON.stringify(v))}catch(_){}};
+const msg=(id,t,c)=>{const m=$('#'+id+' .gmsg');if(m){m.textContent=t;m.className='gmsg'+(c?' '+c:'')}};
+const won=id=>{const b=$(`.seg [data-g="${id}"]`);if(b&&!b.querySelector('.ok'))b.insertAdjacentHTML('beforeend','<span class="ok">✓<\/span>')};
+const twice=(btn,fn)=>{if(!btn)return;btn.onclick=()=>{if(btn.dataset.arm){delete btn.dataset.arm;btn.textContent=btn.dataset.l;fn()}else{btn.dataset.l=btn.textContent;btn.dataset.arm=1;btn.textContent='Tap again';setTimeout(()=>{if(btn.dataset.arm){delete btn.dataset.arm;btn.textContent=btn.dataset.l}},2500)}}};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* quiz */
+if(G.quiz)(()=>{const Q=G.quiz.questions,box=$('#qz .qlist');let st=load('qz',{});
+function paint(){box.innerHTML=Q.map((q,i)=>{const a=st[i];return `<div class="qq"><p>${i+1}. ${esc(q.q)}<\/p>${q.options.map((o,j)=>`<button data-q="${i}" data-o="${j}" class="${a==null?'':j===q.answer?'right':j===a?'wrong':''}">${esc(o)}<\/button>`).join('')}${a!=null&&q.why?`<div class="why">${esc(q.why)}<\/div>`:''}<\/div>`}).join('');
+ const n=Object.keys(st).length,s=Q.filter((q,i)=>st[i]===q.answer).length;
+ if(n===Q.length){msg('qz',`You scored ${s} out of ${Q.length}.`,'win');won('qz')}else msg('qz',n?`${s} of ${n} so far.`:'');save('qz',st)}
+box.onclick=ev=>{const b=ev.target.closest('button');if(!b)return;const i=+b.dataset.q;if(st[i]!=null)return;st[i]=+b.dataset.o;paint()};
+twice($('#qz .clr'),()=>{st={};paint()});paint()})();
+
+/* groups */
+if(G.groups)(()=>{const GR=G.groups.groups;let st=load('gr',{found:[],miss:0,order:null}),sel=[];
+const all=GR.flatMap(g=>g.words);if(!st.order)st.order=shuffle(all.slice());
+const COL=['#F2E3A2','#C8E6B8','#B9D8F2','#E8C4E8'];
+function paint(){const left=st.order.filter(w=>!st.found.some(i=>GR[i].words.includes(w)));
+ $('#gr .gsolved').innerHTML=st.found.map(i=>`<div style="background:${COL[i]}"><b>${esc(GR[i].name)}<\/b><span>${GR[i].words.join(', ')}<\/span><\/div>`).join('');
+ $('#gr .gtiles').innerHTML=left.map(w=>`<button data-w="${w}" class="${sel.includes(w)?'sel':''}">${w}<\/button>`).join('');
+ $('#gr .dots').textContent=st.found.length===4?'':'Mistakes left: '+'● '.repeat(Math.max(0,4-st.miss));
+ if(st.found.length===4){msg('gr',st.miss?`Solved with ${st.miss} mistake${st.miss>1?'s':''}.`:'Perfect! No mistakes.','win');won('gr')}save('gr',st)}
+$('#gr .gtiles').onclick=ev=>{const b=ev.target.closest('button');if(!b)return;const w=b.dataset.w;sel=sel.includes(w)?sel.filter(x=>x!==w):sel.length<4?[...sel,w]:sel;paint()};
+$('#gr .sub4').onclick=()=>{if(sel.length<4){msg('gr','Pick four words.');return}
+ const i=GR.findIndex(g=>sel.every(w=>g.words.includes(w)));
+ if(i>=0){st.found.push(i);sel=[];msg('gr','')}else{st.miss++;const close=GR.some(g=>sel.filter(w=>g.words.includes(w)).length===3);msg('gr',st.miss>=4?'Out of mistakes. Keep going, or reveal.':close?'One away…':'Not a group.','bad')}paint()};
+$('#gr .shuf').onclick=()=>{shuffle(st.order);paint()};$('#gr .desel').onclick=()=>{sel=[];paint()};
+twice($('#gr .rv'),()=>{st.found=[0,1,2,3].filter(i=>!st.found.includes(i)).reduce((a,i)=>[...a,i],st.found);paint()});
+twice($('#gr .clr'),()=>{st={found:[],miss:0,order:shuffle(all.slice())};sel=[];msg('gr','');paint()});paint()})();
+
+/* hive */
+if(G.hive)(()=>{const H=G.hive,A=new Set(H.answers),P=new Set(H.pangrams);let st=load('hv',{f:[]}),cur='',outer=H.outer.slice();
+const pts=w=>(w.length===4?1:w.length)+(P.has(w)?7:0);
+const RANKS=[[0,'Beginner'],[.05,'Getting going'],[.15,'Solid'],[.3,'Good'],[.45,'Great'],[.6,'Amazing'],[.8,'Genius']];
+const POS=[[82,0],[164,46],[164,136],[82,170],[0,136],[0,46]];
+function hex(){$('#hv .hex').innerHTML=`<button class="c" data-l="${H.center}" style="left:82px;top:85px">${H.center}<\/button>`+outer.map((l,i)=>`<button data-l="${l}" style="left:${POS[i][0]}px;top:${POS[i][1]}px">${l}<\/button>`).join('')}
+function paint(){$('#hv .hword').innerHTML=[...cur].map(c=>c===H.center?`<span class="c">${c}<\/span>`:c).join('')||'&nbsp;';
+ const sc=st.f.reduce((a,w)=>a+pts(w),0),fr=sc/H.max;let rk='';for(const [t,n] of RANKS)if(fr>=t)rk=n;
+ $('#hv .hsc').textContent=`${rk} · ${sc} points · ${st.f.length} of ${H.answers.length} words`;$('#hv .hbar i').style.width=Math.min(100,fr*100)+'%';
+ $('#hv .hfound').innerHTML=st.f.slice().sort().map(w=>`<span class="${P.has(w)?'pg':''}">${w}<\/span>`).join('');
+ if(st.f.length===H.answers.length){msg('hv','Every word found!','win');won('hv')}save('hv',st)}
+function enter(){const w=cur;cur='';if(w.length<4)msg('hv','Too short.','bad');else if(!w.includes(H.center))msg('hv','Missing the center letter.','bad');
+ else if(st.f.includes(w))msg('hv','Already found.');else if(!A.has(w))msg('hv','Not in the word list.','bad');
+ else{st.f.push(w);msg('hv',P.has(w)?'Pangram! +'+pts(w):'+'+pts(w),P.has(w)?'win':'');if(fr()>=.45)won('hv')}paint()}
+const fr=()=>st.f.reduce((a,w)=>a+pts(w),0)/H.max;
+$('#hv .hex').onclick=ev=>{const b=ev.target.closest('button');if(b){cur+=b.dataset.l;paint()}};
+$('#hv .del').onclick=()=>{cur=cur.slice(0,-1);paint()};$('#hv .ent').onclick=enter;$('#hv .shuf').onclick=()=>{shuffle(outer);hex()};
+document.addEventListener('keydown',ev=>{if($('#hv').hidden)return;const k=ev.key.toUpperCase();if(k==='ENTER')enter();else if(k==='BACKSPACE'){cur=cur.slice(0,-1);paint()}else if(/^[A-Z]$/.test(k)&&(k===H.center||outer.includes(k))){cur+=k;paint()}});
+twice($('#hv .rv'),()=>{$('#hv .hfound').innerHTML=H.answers.map(w=>`<span class="${P.has(w)?'pg':''}" style="${st.f.includes(w)?'':'opacity:.5'}">${w}<\/span>`).join('')});
+if(fr()>=.45)won('hv');hex();paint()})();
+
+/* cryptogram */
+if(G.cryptogram)(()=>{const C=G.cryptogram,box=$('#cg .cg'),inp=$('#cg .kb');let st=load('cg',{}),cur=null;
+const hint=C.hints;for(const k in hint)st[k]=hint[k];
+box.innerHTML=C.cipher.split(' ').map(w=>`<span class="w">${[...w].map(ch=>/[A-Z]/.test(ch)?`<span class="l${hint[ch]?' hint':''}" data-c="${ch}"><b><\/b><small>${ch}<\/small><\/span>`:`<span class="p">${esc(ch)}<\/span>`).join('')}<\/span>`).join('');
+function paint(){$$('.l',box).forEach(l=>{l.querySelector('b').textContent=st[l.dataset.c]||'';l.classList.toggle('sel',l.dataset.c===cur)});save('cg',st);
+ const out=[...C.cipher].map(ch=>/[A-Z]/.test(ch)?(st[ch]||'_'):ch).join('');if(out===C.plain){msg('cg','Decoded!','win');won('cg')}}
+box.onclick=ev=>{const l=ev.target.closest('.l');if(!l||hint[l.dataset.c])return;cur=l.dataset.c;paint();inp.value=' ';inp.focus({preventScroll:true})};
+inp.addEventListener('input',()=>{const v=inp.value;if(cur){if(v.length<1)delete st[cur];else{const ch=v.slice(-1).toUpperCase();if(/[A-Z]/.test(ch)){for(const k in st)if(st[k]===ch&&!hint[k])delete st[k];st[cur]=ch;
+ const ks=[...new Set([...C.cipher].filter(c=>/[A-Z]/.test(c)))];const i=ks.indexOf(cur);cur=ks.slice(i+1).concat(ks.slice(0,i)).find(k=>!st[k])||cur}}}inp.value=' ';msg('cg','');paint()});
+$('#cg .chk').onclick=()=>{const map={};[...C.cipher].forEach((c,i)=>{if(/[A-Z]/.test(c))map[c]=C.plain[i]});let n=0;for(const k in st)if(st[k]!==map[k]){delete st[k];n++}paint();msg('cg',n?`Cleared ${n} wrong letter${n>1?'s':''}.`:'All correct so far.',n?'bad':'')};
+twice($('#cg .rv'),()=>{[...C.cipher].forEach((c,i)=>{if(/[A-Z]/.test(c))st[c]=C.plain[i]});paint()});
+twice($('#cg .clr'),()=>{st={};for(const k in hint)st[k]=hint[k];paint();msg('cg','')});paint()})();
+
+/* word ladder */
+if(G.ladder)(()=>{const L=G.ladder,V=new Set(L.valid),n=L.solution.length-2,box=$('#ld .lad');let st=load('ld',[]);
+box.innerHTML=`<div>${L.start}<\/div>`+Array.from({length:n},(_,i)=>`<input maxlength="4" data-i="${i}" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="next">`).join('')+`<div>${L.end}<\/div>`;
+const ins=$$('input',box);ins.forEach((x,i)=>x.value=st[i]||'');
+const diff=(a,b)=>[...a].filter((c,i)=>c!==b[i]).length;
+function check(){let prev=L.start,ok=true;st=ins.map(x=>x.value.toUpperCase());save('ld',st);
+ ins.forEach(x=>{const w=x.value.toUpperCase();x.classList.remove('bad','good');if(w.length<4){ok=false;return}if(V.has(w)&&diff(prev,w)===1){x.classList.add('good');prev=w}else{x.classList.add('bad');ok=false}});
+ if(ok&&diff(prev,L.end)===1){msg('ld','Solved!','win');won('ld')}else msg('ld','')}
+ins.forEach((x,i)=>{x.addEventListener('input',()=>{check();if(x.value.length===4&&ins[i+1])ins[i+1].focus()})});
+twice($('#ld .rv'),()=>{ins.forEach((x,i)=>x.value=L.solution[i+1]);check()});
+twice($('#ld .clr'),()=>{ins.forEach(x=>x.value='');check()});check()})();
+
+/* nonogram */
+if(G.nonogram)(()=>{const N=G.nonogram,R=N.rows.length,C=N.cols.length,S=N.solution,t=$('#ng .ng');let st=load('ng',{}),mode='f';
+const giv={};N.givens.forEach(([r,c,v])=>giv[r+','+c]=v?'f':'x');Object.assign(st,giv);
+let h='<tr><th><\/th>'+N.cols.map(cl=>`<th class="cc">${cl.join('<br>')}<\/th>`).join('')+'<\/tr>';
+for(let r=0;r<R;r++)h+=`<tr><th class="rc">${N.rows[r].join(' ')}<\/th>`+Array.from({length:C},(_,c)=>`<td data-k="${r},${c}" class="${c%5==4&&c<C-1?'r5 ':''}${r%5==4&&r<R-1?'b5':''}"><\/td>`).join('')+'<\/tr>';t.innerHTML=h;
+function paint(){$$('td',t).forEach(td=>{const v=st[td.dataset.k];td.classList.toggle('f',v==='f');td.classList.toggle('x',v==='x')});save('ng',st);
+ let ok=true;for(let r=0;r<R;r++)for(let c=0;c<C;c++)if((st[r+','+c]==='f')!==(S[r][c]==='1'))ok=false;
+ if(ok){msg('ng',`Solved! It's ${N.picture}.`,'win');won('ng')}}
+t.onclick=ev=>{const td=ev.target.closest('td');if(!td||giv[td.dataset.k])return;const k=td.dataset.k;st[k]=st[k]===mode?undefined:mode;if(!st[k])delete st[k];msg('ng','');paint()};
+$$('#ng .mode2 button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('#ng .mode2 button').forEach(x=>x.classList.toggle('on',x===b))});
+$('#ng .chk').onclick=()=>{let n=0;for(const k in st){const [r,c]=k.split(',').map(Number);if((st[k]==='f')!==(S[r][c]==='1')){n++}}msg('ng',n?`${n} square${n>1?'s':''} wrong.`:'No mistakes so far.',n?'bad':'')};
+twice($('#ng .rv'),()=>{st={};for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(S[r][c]==='1')st[r+','+c]='f';paint()});
+twice($('#ng .clr'),()=>{st=Object.assign({},giv);paint();msg('ng','')});paint()})();
+
+/* futoshiki */
+if(G.futoshiki)(()=>{const F=G.futoshiki,n=F.n,S=F.solution,b=$('#ft .ft');let st=load('ft',{}),cur=null;
+const giv={};F.givens.forEach(([r,c,v])=>giv[r+','+c]=String(v));
+const sym={};F.less.forEach(([a,b2,c,d])=>{if(a===c)sym[`h${a},${Math.min(b2,d)}`]=b2<d?'<':'>';else sym[`v${Math.min(a,c)},${b2}`]=a<c?'∧':'∨'});
+b.style.gridTemplateColumns=Array.from({length:2*n-1},(_,i)=>i%2?'22px':'1fr').join(' ');let h='';
+for(let R=0;R<2*n-1;R++)for(let C=0;C<2*n-1;C++){const r=R>>1,c=C>>1;
+ if(R%2==0&&C%2==0)h+=`<div class="c${giv[r+','+c]?' g':''}" data-k="${r},${c}"><\/div>`;
+ else if(R%2==0)h+=`<div class="s">${sym['h'+r+','+c]||''}<\/div>`;else if(C%2==0)h+=`<div class="s" style="height:22px">${sym['v'+r+','+c]||''}<\/div>`;else h+='<div><\/div>'}
+b.innerHTML=h;const val=k=>giv[k]||st[k]||'';
+function paint(){$$('.c',b).forEach(d=>{d.textContent=val(d.dataset.k);d.classList.toggle('cur',d.dataset.k===cur);d.classList.remove('bad')});save('ft',st);
+ let ok=true;for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(val(r+','+c)!==S[r][c])ok=false;if(ok){msg('ft','Solved!','win');won('ft')}}
+b.onclick=ev=>{const d=ev.target.closest('.c');if(!d||giv[d.dataset.k])return;cur=d.dataset.k;paint()};
+$('#ft .pad').innerHTML=Array.from({length:n},(_,i)=>`<button data-k="${i+1}">${i+1}<\/button>`).join('')+'<button data-k="del">⌫<\/button>';
+$('#ft .pad').style.gridTemplateColumns=`repeat(${n+1},1fr)`;
+$('#ft .pad').onclick=ev=>{const bt=ev.target.closest('button');if(!bt||!cur)return;if(bt.dataset.k==='del')delete st[cur];else st[cur]=bt.dataset.k;msg('ft','');paint()};
+$('#ft .chk').onclick=()=>{let m=0;for(const k in st){const [r,c]=k.split(',').map(Number);if(st[k]!==S[r][c]){b.querySelector(`[data-k="${k}"]`).classList.add('bad');m++}}msg('ft',m?`${m} wrong.`:'No mistakes so far.',m?'bad':'')};
+twice($('#ft .rv'),()=>{for(let r=0;r<n;r++)for(let c=0;c<n;c++)st[r+','+c]=S[r][c];paint()});
+twice($('#ft .clr'),()=>{st={};paint();msg('ft','')});paint()})();
+
+/* queens */
+if(G.queens)(()=>{const Qn=G.queens,n=Qn.n,R=Qn.regions,b=$('#qn .qb');let st=load('qn',{});
+const COL=["#F6C9A8", "#B9D8F2", "#C8E6B8", "#E8C4E8", "#F2E3A2", "#BFE3DD", "#F4B6B6", "#D6CCF5", "#E3D2B4", "#C9D3DF"];b.style.gridTemplateColumns=`repeat(${n},1fr)`;let h='';
+for(let r=0;r<n;r++)for(let c=0;c<n;c++){const g=R[r][c],bw=[r>0&&R[r-1][c]!==g?3:0,c<n-1&&R[r][c+1]!==g?3:0,r<n-1&&R[r+1][c]!==g?3:0,c>0&&R[r][c-1]!==g?3:0];
+ h+=`<div data-k="${r},${c}" style="background:${COL[g]};border-width:${bw.map(x=>x/2+'px').join(' ')}"><\/div>`}b.innerHTML=h;
+function paint(){const qs=Object.keys(st).filter(k=>st[k]==='q').map(k=>k.split(',').map(Number));
+ $$('[data-k]',b).forEach(d=>{const v=st[d.dataset.k];d.textContent=v==='q'?'♛':v==='x'?'✕':'';d.className=v==='x'?'x':'';});
+ const bad=new Set();qs.forEach((a,i)=>qs.forEach((q,j)=>{if(i<j&&(a[0]===q[0]||a[1]===q[1]||R[a[0]][a[1]]===R[q[0]][q[1]]||(Math.abs(a[0]-q[0])<=1&&Math.abs(a[1]-q[1])<=1))){bad.add(a+'');bad.add(q+'')}}));
+ bad.forEach(k=>{const d=b.querySelector(`[data-k="${k}"]`);d&&d.classList.add('bad')});save('qn',st);
+ if(qs.length===n&&!bad.size){msg('qn','Solved!','win');won('qn')}else msg('qn',bad.size?'Two crowns clash.':'',bad.size?'bad':'')}
+b.onclick=ev=>{const d=ev.target.closest('[data-k]');if(!d)return;const k=d.dataset.k;st[k]=!st[k]?'x':st[k]==='x'?'q':undefined;if(!st[k])delete st[k];paint()};
+twice($('#qn .rv'),()=>{st={};Qn.solution.forEach((c,r)=>st[r+','+c]='q');paint()});
+twice($('#qn .clr'),()=>{st={};paint()});paint()})();
+})();
+</script><script>document.querySelectorAll('a[href^="http"],a[data-orig]').forEach(a=>{a.target='_blank';a.rel='noopener'})</script><script>
+(()=>{const repo=document.body.dataset.repo;const KEY='gh_token';
+const toast=(html,ms=2600)=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
+ t.innerHTML=html;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,ms)};
+const root=document.body.dataset.root||'';
+const get=k=>{try{return localStorage.getItem(k)}catch(_){return null}}, set=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}};
+document.querySelectorAll('.fb').forEach(box=>{const id='fb:'+(box.dataset.id||box.dataset.url),cur=get(id);
+ box.querySelectorAll('.fbb').forEach(b=>{b.classList.toggle('on',b.dataset.act===cur);b.setAttribute('aria-pressed',b.dataset.act===cur)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.fbb');if(!b)return;const box=b.closest('.fb');
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up feedback</a>`,6000);return}
+ const id='fb:'+(box.dataset.id||box.dataset.url),prev=get(id),act=b.dataset.act;
+ const send=async(a)=>{const item={url:box.dataset.url,topic:box.dataset.topic,source:box.dataset.source,title:box.dataset.title};
+  const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'feedback: '+a,body:JSON.stringify(item)})});
+  if(!r.ok)throw new Error(r.status)};
+ try{if(prev)await send('undo-'+prev);
+  if(prev===act){set(id,null);toast('Removed')}else{await send(act);set(id,act);
+   toast(act==='more'?'Got it. More like this from tomorrow':'Got it. Less like this from tomorrow')}
+  box.querySelectorAll('.fbb').forEach(x=>{const on=x.dataset.act===get(id);x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+ }catch(err){toast(`Couldn't send (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}});
+/* save for later from inside the briefing */
+const norm=u=>{try{const x=new URL(u);return (x.hostname.replace(/^www\./,'')+x.pathname.replace(/\/+$/,'')).toLowerCase()}catch(_){return u}};
+const mark=b=>{b.classList.add('on');b.querySelector('span').textContent='Saved'};
+fetch(root+'saved.json',{cache:'no-store'}).then(r=>r.json()).then(list=>{const have=new Set(list.map(norm));
+ document.querySelectorAll('.savebtn').forEach(b=>{if(have.has(norm(b.dataset.url))||get('saved:'+norm(b.dataset.url)))mark(b)})}).catch(()=>{
+ document.querySelectorAll('.savebtn').forEach(b=>{if(get('saved:'+norm(b.dataset.url)))mark(b)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.savebtn');if(!b)return;ev.preventDefault();ev.stopPropagation();
+ if(b.classList.contains('on')){toast(`Already saved. <a href="${root}saved.html">Open Saved</a>`);return}
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up</a>`,6000);return}
+ b.querySelector('span').textContent='Saving…';
+ try{const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'Save: '+(b.dataset.title||b.dataset.url).slice(0,120),body:b.dataset.url})});
+  if(!r.ok)throw new Error(r.status);set('saved:'+norm(b.dataset.url),'1');mark(b);
+  toast('Saved. It appears in Saved in a couple of minutes, with a summary and audio.',4500)}
+ catch(err){b.querySelector('span').textContent='Save';toast(`Couldn't save (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}},true);
+const a=document.querySelector('.listen audio');if(a){const pb=document.querySelector('.listen .pb'),bar=document.querySelector('.listen .bar i'),
+ sp=document.querySelector('.listen .sp'),lab=document.querySelector('.listen .lt small');const rates=[1,1.25,1.5,0.85];let ri=0;
+ const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+ pb.onclick=()=>{a.paused?a.play():a.pause()};a.onplay=()=>{pb.innerHTML=pb.dataset.pause;pb.setAttribute('aria-label','Pause')};
+ a.onpause=()=>{pb.innerHTML=pb.dataset.play;pb.setAttribute('aria-label','Play')};
+ a.ontimeupdate=()=>{if(a.duration){bar.style.width=(100*a.currentTime/a.duration)+'%';lab.textContent=fmt(a.currentTime)+' / '+fmt(a.duration);
+  try{localStorage.setItem('audio:'+a.dataset.date,a.currentTime)}catch(_){}}};
+ a.onloadedmetadata=()=>{const t=+get('audio:'+a.dataset.date);if(t&&t<a.duration-5)a.currentTime=t};
+ sp.onclick=()=>{ri=(ri+1)%rates.length;a.playbackRate=rates[ri];sp.textContent=rates[ri]+'×'}}
+})();
+</script><script>
+(()=>{if(!('serviceWorker' in navigator))return;const root=document.body.dataset.root||'';
+navigator.serviceWorker.register(root+'sw.js').then(reg=>{
+ const warm=()=>{const sw=navigator.serviceWorker.controller||reg.active;if(!sw||!navigator.onLine)return;
+  const relay=document.body.dataset.relay||'';
+  const assets=[...document.querySelectorAll('img[src]')].map(i=>i.src).filter(s=>/^https?:/.test(s));
+  const articles=relay?[...document.querySelectorAll('.slide[data-url]')].map(s=>s.dataset.url).filter(Boolean)
+    .map(u=>relay.replace(/\/$/,'')+'/?url='+encodeURIComponent(u)):[];
+  const pages=['','saved.html','games.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
+  sw.postMessage({type:'warm',assets:[...assets,...pages],articles})};
+ if(document.querySelector('.deck'))(navigator.serviceWorker.ready.then(()=>setTimeout(warm,2500)));
+}).catch(()=>{});
+const badge=()=>{let b=document.querySelector('.offline');if(navigator.onLine){if(b)b.remove();return}
+ if(!b){b=document.createElement('div');b.className='offline';b.textContent='Offline · saved copy';document.body.appendChild(b)}};
+addEventListener('online',badge);addEventListener('offline',badge);badge();})();
+</script></body></html>
