@@ -398,7 +398,8 @@ document.querySelector('meta[name=theme-color]').content=T[p.theme||'midnight']}
 def write_reader(relay: str = "") -> None:
     body = ("<main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'>"
             f"{w.PREV}</a><div class='meta'><span class='badge'>Reader</span><br>"
-            "<b id='host'></b><span class='when'> · <span id='when'>Loading…</span></span></div></div>"
+            "<b id='host'></b><span class='when'> · <span id='when'>Loading…</span></span></div>"
+            f"{w.save_btn('', '', 'chip rsave')}</div>"
             "<div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div>"
             "<div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div>"
             "<div class='skel' style='width:70%'></div></div></main>")
@@ -411,7 +412,10 @@ def write_reader(relay: str = "") -> None:
             f"<style>{w.CSS}{w.READER_CSS}{HL_CSS}</style>"
             f"{EARLY}<script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script>"
             "<script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script>"
-            f"</head><body data-relay='{e(relay)}' data-root=''>{body}<script>{READER_JS}</script>"
+            f"</head><body data-relay='{e(relay)}' data-root='' data-repo='{e(w._repo())}'>{body}"
+            "<script>(()=>{const u=new URLSearchParams(location.search).get('u')||'';const b=document.querySelector('.rsave');"
+            "if(!u)b.remove();else b.dataset.url=u})()</script>"
+            f"<script>{READER_JS}</script><script>{w.FEEDBACK_JS}</script>"
             f"<script>{w._offline().REGISTER}</script></body></html>")
     w.DOCS.mkdir(exist_ok=True)
     (w.DOCS / "read.html").write_text(page)

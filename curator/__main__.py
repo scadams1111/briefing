@@ -24,7 +24,10 @@ elif sys.argv[1] == "render":
 elif sys.argv[1] == "retry":
     retry()
 else:
-    url = find_url(" ".join(sys.argv[2:]))
+    text = " ".join(sys.argv[2:])
+    if text.strip().lower().startswith("feedback:"):
+        sys.exit(0)  # More/Less taps are issues too; they aren't save requests
+    url = find_url(text)
     if not url:
         sys.exit("no URL found")
     save(url)

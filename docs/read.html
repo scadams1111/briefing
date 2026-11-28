@@ -127,6 +127,9 @@ body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
 .btn{height:48px;border-radius:var(--rad-m);font-size:var(--fs-m)}
 .chip,.fbb{height:40px;border-radius:12px;padding:0 14px;font-size:var(--fs-s);font-weight:600;gap:7px}
 .chip{background:var(--tile);border:1px solid var(--line);color:var(--detail)}
+.savebtn{font-family:inherit;cursor:pointer}
+.savebtn.on{color:var(--accent);border-color:var(--accent)}
+.savebtn.on svg{fill:currentColor}
 .fbb{background:transparent}
 .chip.sm{height:34px;padding:0 11px;font-size:var(--fs-xs);border-radius:10px}
 /* surfaces */
@@ -302,7 +305,7 @@ const F={serif:"'Literata','Charter','Iowan Old Style',Georgia,serif",sans:"'Int
 const T={midnight:'#0B1220',dusk:'#18181B',sepia:'#F3EBD9',paper:'#FAFAF7'};
 if(p.theme&&p.theme!=='midnight')h.classList.add('t-'+p.theme);h.style.setProperty('--r-size',(p.size||17.5)+'px');
 h.style.setProperty('--r-lh',p.lh||1.72);h.style.setProperty('--r-font',F[p.font||'sans']);
-document.querySelector('meta[name=theme-color]').content=T[p.theme||'midnight']}catch(_){}})()</script><script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script><script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script></head><body data-relay='https://briefing-relay.scadams1111.workers.dev' data-root=''><main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg></a><div class='meta'><span class='badge'>Reader</span><br><b id='host'></b><span class='when'> · <span id='when'>Loading…</span></span></div></div><div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div><div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div><div class='skel' style='width:70%'></div></div></main><script>
+document.querySelector('meta[name=theme-color]').content=T[p.theme||'midnight']}catch(_){}})()</script><script src='https://cdn.jsdelivr.net/npm/@mozilla/readability@0.5.0/Readability.js'></script><script src='https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js'></script></head><body data-relay='https://briefing-relay.scadams1111.workers.dev' data-root='' data-repo='scadams1111/briefing'><main class='rd'><div class='bar'><a class='back' href='javascript:history.back()' aria-label='Back'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' aria-hidden='true'><path d='M15 5l-7 7 7 7'/></svg></a><div class='meta'><span class='badge'>Reader</span><br><b id='host'></b><span class='when'> · <span id='when'>Loading…</span></span></div><button type='button' class='chip rsave savebtn' data-url='' data-title=''><svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round' aria-hidden='true'><path d='M6 3h12v18l-6-4-6 4z'/></svg><span>Save</span></button></div><div id='out'><div class='skel' style='height:30px;width:85%'></div><div class='skel' style='width:40%'></div><div class='skel'></div><div class='skel'></div><div class='skel' style='width:92%'></div><div class='skel'></div><div class='skel' style='width:70%'></div></div></main><script>(()=>{const u=new URLSearchParams(location.search).get('u')||'';const b=document.querySelector('.rsave');if(!u)b.remove();else b.dataset.url=u})()</script><script>
 (async()=>{
 const $=s=>document.querySelector(s), P=new URLSearchParams(location.search), u=P.get('u')||'', want=P.get('src')||'live';
 const RELAY=document.body.dataset.relay||'', root=document.body.dataset.root||'';
@@ -540,6 +543,51 @@ if(AU)(()=>{const I={play:"<svg width='18' height='18' viewBox='0 0 24 24' fill=
   const i=blocks.findIndex(b=>b.el===e.target.closest('p,h2,h3,h4,li,blockquote'));if(i>=0)speakFrom(i)});
  addEventListener('pagehide',()=>S.cancel());
 })();
+})();
+</script><script>
+(()=>{const repo=document.body.dataset.repo;const KEY='gh_token';
+const toast=(html,ms=2600)=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
+ t.innerHTML=html;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,ms)};
+const root=document.body.dataset.root||'';
+const get=k=>{try{return localStorage.getItem(k)}catch(_){return null}}, set=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}};
+document.querySelectorAll('.fb').forEach(box=>{const id='fb:'+(box.dataset.id||box.dataset.url),cur=get(id);
+ box.querySelectorAll('.fbb').forEach(b=>{b.classList.toggle('on',b.dataset.act===cur);b.setAttribute('aria-pressed',b.dataset.act===cur)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.fbb');if(!b)return;const box=b.closest('.fb');
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up feedback</a>`,6000);return}
+ const id='fb:'+(box.dataset.id||box.dataset.url),prev=get(id),act=b.dataset.act;
+ const send=async(a)=>{const item={url:box.dataset.url,topic:box.dataset.topic,source:box.dataset.source,title:box.dataset.title};
+  const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'feedback: '+a,body:JSON.stringify(item)})});
+  if(!r.ok)throw new Error(r.status)};
+ try{if(prev)await send('undo-'+prev);
+  if(prev===act){set(id,null);toast('Removed')}else{await send(act);set(id,act);
+   toast(act==='more'?'Got it. More like this from tomorrow':'Got it. Less like this from tomorrow')}
+  box.querySelectorAll('.fbb').forEach(x=>{const on=x.dataset.act===get(id);x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+ }catch(err){toast(`Couldn't send (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}});
+/* save for later from inside the briefing */
+const norm=u=>{try{const x=new URL(u);return (x.hostname.replace(/^www\./,'')+x.pathname.replace(/\/+$/,'')).toLowerCase()}catch(_){return u}};
+const mark=b=>{b.classList.add('on');b.querySelector('span').textContent='Saved'};
+fetch(root+'saved.json',{cache:'no-store'}).then(r=>r.json()).then(list=>{const have=new Set(list.map(norm));
+ document.querySelectorAll('.savebtn').forEach(b=>{if(have.has(norm(b.dataset.url))||get('saved:'+norm(b.dataset.url)))mark(b)})}).catch(()=>{
+ document.querySelectorAll('.savebtn').forEach(b=>{if(get('saved:'+norm(b.dataset.url)))mark(b)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.savebtn');if(!b)return;ev.preventDefault();ev.stopPropagation();
+ if(b.classList.contains('on')){toast(`Already saved. <a href="${root}saved.html">Open Saved</a>`);return}
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up</a>`,6000);return}
+ b.querySelector('span').textContent='Saving…';
+ try{const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'Save: '+(b.dataset.title||b.dataset.url).slice(0,120),body:b.dataset.url})});
+  if(!r.ok)throw new Error(r.status);set('saved:'+norm(b.dataset.url),'1');mark(b);
+  toast('Saved. It appears in Saved in a couple of minutes, with a summary and audio.',4500)}
+ catch(err){b.querySelector('span').textContent='Save';toast(`Couldn't save (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}},true);
+const a=document.querySelector('.listen audio');if(a){const pb=document.querySelector('.listen .pb'),bar=document.querySelector('.listen .bar i'),
+ sp=document.querySelector('.listen .sp'),lab=document.querySelector('.listen .lt small');const rates=[1,1.25,1.5,0.85];let ri=0;
+ const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+ pb.onclick=()=>{a.paused?a.play():a.pause()};a.onplay=()=>{pb.innerHTML=pb.dataset.pause;pb.setAttribute('aria-label','Pause')};
+ a.onpause=()=>{pb.innerHTML=pb.dataset.play;pb.setAttribute('aria-label','Play')};
+ a.ontimeupdate=()=>{if(a.duration){bar.style.width=(100*a.currentTime/a.duration)+'%';lab.textContent=fmt(a.currentTime)+' / '+fmt(a.duration);
+  try{localStorage.setItem('audio:'+a.dataset.date,a.currentTime)}catch(_){}}};
+ a.onloadedmetadata=()=>{const t=+get('audio:'+a.dataset.date);if(t&&t<a.duration-5)a.currentTime=t};
+ sp.onclick=()=>{ri=(ri+1)%rates.length;a.playbackRate=rates[ri];sp.textContent=rates[ri]+'×'}}
 })();
 </script><script>
 (()=>{if(!('serviceWorker' in navigator))return;const root=document.body.dataset.root||'';

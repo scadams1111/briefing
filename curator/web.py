@@ -145,6 +145,9 @@ body:not(.app) .top{position:sticky;top:0;z-index:20;max-width:none;
 .btn{height:48px;border-radius:var(--rad-m);font-size:var(--fs-m)}
 .chip,.fbb{height:40px;border-radius:12px;padding:0 14px;font-size:var(--fs-s);font-weight:600;gap:7px}
 .chip{background:var(--tile);border:1px solid var(--line);color:var(--detail)}
+.savebtn{font-family:inherit;cursor:pointer}
+.savebtn.on{color:var(--accent);border-color:var(--accent)}
+.savebtn.on svg{fill:currentColor}
 .fbb{background:transparent}
 .chip.sm{height:34px;padding:0 11px;font-size:var(--fs-xs);border-radius:10px}
 /* surfaces */
@@ -180,6 +183,15 @@ CHEV = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='cur
         "aria-hidden='true'><path d='M6 9l6 6 6-6'/></svg>")
 NEXT = ("<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' "
         "aria-hidden='true'><path d='M9 5l7 7-7 7'/></svg>")
+BOOKMARK = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
+            "stroke-linejoin='round' aria-hidden='true'><path d='M6 3h12v18l-6-4-6 4z'/></svg>")
+
+
+def save_btn(url: str, title: str, cls: str = "chip") -> str:
+    return (f"<button type='button' class='{cls} savebtn' data-url='{e(url)}' data-title='{e(title)}'>"
+            f"{BOOKMARK}<span>Save</span></button>")
+
+
 ARCHIVE = ("<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' "
            "stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='4' width='18' height='4' rx='1'/>"
            "<path d='M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4'/></svg>")
@@ -223,6 +235,21 @@ document.addEventListener('click',async ev=>{const b=ev.target.closest('.fbb');i
    toast(act==='more'?'Got it. More like this from tomorrow':'Got it. Less like this from tomorrow')}
   box.querySelectorAll('.fbb').forEach(x=>{const on=x.dataset.act===get(id);x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
  }catch(err){toast(`Couldn't send (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}});
+/* save for later from inside the briefing */
+const norm=u=>{try{const x=new URL(u);return (x.hostname.replace(/^www\./,'')+x.pathname.replace(/\/+$/,'')).toLowerCase()}catch(_){return u}};
+const mark=b=>{b.classList.add('on');b.querySelector('span').textContent='Saved'};
+fetch(root+'saved.json',{cache:'no-store'}).then(r=>r.json()).then(list=>{const have=new Set(list.map(norm));
+ document.querySelectorAll('.savebtn').forEach(b=>{if(have.has(norm(b.dataset.url))||get('saved:'+norm(b.dataset.url)))mark(b)})}).catch(()=>{
+ document.querySelectorAll('.savebtn').forEach(b=>{if(get('saved:'+norm(b.dataset.url)))mark(b)})});
+document.addEventListener('click',async ev=>{const b=ev.target.closest('.savebtn');if(!b)return;ev.preventDefault();ev.stopPropagation();
+ if(b.classList.contains('on')){toast(`Already saved. <a href="${root}saved.html">Open Saved</a>`);return}
+ const token=get(KEY);if(!token){toast(`One-time setup needed. <a href="${root}settings.html">Set up</a>`,6000);return}
+ b.querySelector('span').textContent='Saving…';
+ try{const r=await fetch(`https://api.github.com/repos/${repo}/issues`,{method:'POST',headers:{Authorization:'Bearer '+token,
+   Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({title:'Save: '+(b.dataset.title||b.dataset.url).slice(0,120),body:b.dataset.url})});
+  if(!r.ok)throw new Error(r.status);set('saved:'+norm(b.dataset.url),'1');mark(b);
+  toast('Saved. It appears in Saved in a couple of minutes, with a summary and audio.',4500)}
+ catch(err){b.querySelector('span').textContent='Save';toast(`Couldn't save (${err.message}). <a href="${root}settings.html">Check setup</a>`,6000)}},true);
 const a=document.querySelector('.listen audio');if(a){const pb=document.querySelector('.listen .pb'),bar=document.querySelector('.listen .bar i'),
  sp=document.querySelector('.listen .sp'),lab=document.querySelector('.listen .lt small');const rates=[1,1.25,1.5,0.85];let ri=0;
  const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
@@ -283,7 +310,7 @@ def card(it: dict, root: str = "") -> str:
     au = (it.get("audio") or {}).get("url", "")
     read_href = f"{root}read.html?u={e(quote(it['url'], safe=''))}" + (f"&amp;a={e(quote(au, safe=''))}" if au else "")
     read_chip = (f"<a class='chip' href='{read_href}'>{HEADPHONES if au else BOOK}<span>{'Read or listen' if au else 'Read'}</span></a>")
-    archived = (f"<div class='extras'>{read_chip}<a class='chip' href='https://wallhop.io/{e(it['url'])}'>"
+    archived = (f"<div class='extras'>{read_chip}{save_btn(it['url'], it.get('headline') or it.get('title', ''))}<a class='chip' href='https://wallhop.io/{e(it['url'])}'>"
                 f"{ARCHIVE}<span>Archived copy</span></a><span class='hint'>if the link is broken</span></div>")
     initial = e((it.get("topic_name") or it.get("source") or "B")[:1].upper())
     return (f"<article class='card'><div class='scroll'>"
@@ -331,7 +358,7 @@ def subs_slide(subs: list[dict], root: str = "", section: str = "premium") -> st
         f"<div class='sub'><a class='subhit' href='{e(i['url'])}'><span class='src'>"
         + (e(i.get('topic_name', '')) if section == "nyt" else f"{e(i['source'])} · {e(i.get('topic_name', ''))}")
         + f"</span><strong>{e(i['headline'])}</strong><span class='tk'>{e(i.get('takeaway', ''))}</span></a>"
-        f"<div class='subrow'><a class='open' href='{e(i['url'])}'>Open article {NEXT}</a>"
+        f"<div class='subrow'><a class='open' href='{e(i['url'])}'>Open article {NEXT}</a>{save_btn(i['url'], i['headline'], 'chip sm')}"
         f"<a class='chip sm' href='https://wallhop.io/{e(i['url'])}'>{ARCHIVE}<span>Link broken?</span></a></div></div>"
         for i in subs)
     return (f"<section class='slide' data-url='' data-label='{e(pill)}'><article class='card'><div class='scroll'><div class='body'>"
@@ -540,6 +567,7 @@ def write_saved(saved: list[dict]) -> None:
     body += "".join(card(i) for i in saved[:50]) or \
         "<p class='empty'>Nothing saved yet. Share a link to your Save shortcut and it'll show up here.</p>"
     (DOCS / "saved.html").write_text(shell("Saved — Briefing", "saved", body + "</main>"))
+    (DOCS / "saved.json").write_text(json.dumps([s["url"] for s in saved]))
 
 
 # ── search ─────────────────────────────────────────────────────────────
