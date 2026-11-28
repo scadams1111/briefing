@@ -342,8 +342,18 @@ def page_body(g: dict, root: str, past: list[str]) -> str:
             "<h1>Puzzles</h1><p>New puzzles every morning. They're also at the end of your Kobo briefing.</p></section>"
             f"<div class='seg'>{seg}</div>"
             + _xw_html(g["crossword"]) + _wd_html(g["whodunit"]) + _mm_html(g["murdermap"]) + _sd_html(g["sudoku"])
-            + extra_html + past_html + f"</main><script type='application/json' id='gdata'>{data}</script>"
+            + extra_html + past_html + KOBO_CARD.format(root=root) + f"</main><script type='application/json' id='gdata'>{data}</script>"
             f"<script>{JS_SAFE}</script><script>{more.JS_SAFE}</script>")
+
+
+KOBO_CARD = ("<div class='past'><h3>Play on your Kobo</h3><div class='fresh' style='display:block;padding:16px;border-radius:18px;background:var(--card)'>"
+             "<p class='gsub' style='margin:0 0 10px'>Tap to solve all of these in KOReader. One-time setup, on a computer:</p>"
+             "<ol style='margin:0;padding-left:20px;font-size:14px;line-height:1.6;color:var(--detail)'>"
+             "<li>Download the <a href='{root}kobo/briefinggames.koplugin.zip' style='text-decoration:underline'>Briefing puzzles plugin</a> and unzip it.</li>"
+             "<li>Plug in your Kobo and copy the <b>briefinggames.koplugin</b> folder into <b>.adds/koreader/plugins</b>. "
+             "(.adds is a hidden folder; on a Mac press Cmd+Shift+. to see it.)</li>"
+             "<li>Eject, then restart KOReader.</li>"
+             "<li>Open the top menu → Tools (🛠) → <b>Briefing puzzles</b>. It downloads the day's puzzles over Wi-Fi.</li></ol></div></div>")
 
 
 def write_pages(shell, date: str) -> None:
@@ -356,11 +366,27 @@ def write_pages(shell, date: str) -> None:
     (DOCS / "games").mkdir(parents=True, exist_ok=True)
     past = [d for d in days if d != g["date"]][:14]
     (DOCS / "games.html").write_text(shell("Games — Briefing", "games", page_body(g, "", past)))
+    (DOCS / "games" / "today.json").write_text(json.dumps(g))   # for the Kobo plugin
+    _kobo_zip()
     for d in days[:15]:
         gd = load(d)
         if gd:
             (DOCS / "games" / f"{d}.html").write_text(
                 shell(f"Games — {d}", "games", page_body(gd, "../", [x for x in days if x != d][:14]), root="../"))
+
+
+def _kobo_zip() -> None:
+    """Package the KOReader plugin so it can be downloaded from the site."""
+    import zipfile
+    src = Path("kobo") / "briefinggames.koplugin"
+    if not src.exists():
+        return
+    out = DOCS / "kobo"
+    out.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(out / "briefinggames.koplugin.zip", "w", zipfile.ZIP_DEFLATED) as z:
+        for p in sorted(src.glob("*.lua")):
+            info = zipfile.ZipInfo(f"briefinggames.koplugin/{p.name}", (2026, 1, 1, 0, 0, 0))
+            z.writestr(info, p.read_bytes())
 
 
 # ── e-reader (EPUB) ───────────────────────────────────────────────────────
