@@ -39,6 +39,7 @@ body.app .reader{flex:1;min-height:0;height:auto;width:100%}
 .tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
 .tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
 .tabs a.on{background:var(--line);color:var(--ink)}
+@media (max-width:430px){.tabs a{padding:7px 9px}}
 .tabs a svg{display:block;margin:1px 0}
 
 /* story deck */
@@ -297,6 +298,8 @@ def shell(title: str, active: str, body: str, root: str = "", script: bool = Fal
     tabs = "".join(f"<a href='{root}{href}' class='{'on' if active == k else ''}'>{label}</a>"
                    for k, label, href in (("today", "Today", "./"), ("saved", "Saved", "saved.html"),
                                           ("archive", "Archive", "archive/")))
+    tabs += (f"<a href='{root}games.html' class='{'on' if active == 'games' else ''}' aria-label='Games'>"
+             f"{_games().PUZZLE_ICON}</a>")
     tabs += (f"<a href='{root}search.html' class='{'on' if active == 'search' else ''}' aria-label='Search'>"
              f"{SEARCH_ICON}</a>")
     return ("<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
@@ -518,6 +521,11 @@ def write_all(cfg: dict, date: str, picks: list[dict], saved: list[dict], archiv
         f"<main class='page'><section class='hero'><div class='kicker'>Past briefings</div><h1>Archive</h1></section>"
         f"<div class='toc'>{rows}</div></main>", root="../"))
     write_saved(saved)
+    try:
+        _games().write_pages(shell, date)
+    except Exception as ex:
+        import logging
+        logging.getLogger(__name__).warning("couldn't write games pages: %s", ex)
     _offline().write_sw()
     write_reader()
     write_search_page()
@@ -599,6 +607,11 @@ def _past_searches() -> list[dict]:
     d = Path("data") / "searches"
     items = [json.loads(p.read_text()) for p in d.glob("*.json")] if d.exists() else []
     return sorted(items, key=lambda x: x.get("when", ""), reverse=True)
+
+
+def _games():
+    from . import games
+    return games
 
 
 def _offline():

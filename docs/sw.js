@@ -1,7 +1,7 @@
 
-const VERSION = 'briefing-202611272258';
+const VERSION = 'briefing-202611271851';
 const PAGES = VERSION + '-pages', ASSETS = 'briefing-assets-v1', ARTICLES = 'briefing-articles-v1';
-const CORE = ["./", "index.html", "saved.html", "search.html", "archive/", "highlights.html", "read.html", "settings.html", "manifest.webmanifest", "apple-touch-icon.png", "icon-192.png", "icon-512.png", "search-index.json"];
+const CORE = ["./", "index.html", "saved.html", "games.html", "search.html", "archive/", "highlights.html", "read.html", "settings.html", "manifest.webmanifest", "apple-touch-icon.png", "icon-192.png", "icon-512.png", "search-index.json"];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(PAGES).then(c => Promise.allSettled(CORE.map(u => c.add(new Request(u, {cache: 'reload'}))))).then(() => self.skipWaiting()));

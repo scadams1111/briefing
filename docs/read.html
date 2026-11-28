@@ -21,6 +21,7 @@ body.app .reader{flex:1;min-height:0;height:auto;width:100%}
 .tabs{display:flex;gap:2px;background:var(--tile);padding:3px;border-radius:999px}
 .tabs a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;color:var(--muted)}
 .tabs a.on{background:var(--line);color:var(--ink)}
+@media (max-width:430px){.tabs a{padding:7px 9px}}
 .tabs a svg{display:block;margin:1px 0}
 
 /* story deck */
@@ -548,7 +549,7 @@ navigator.serviceWorker.register(root+'sw.js').then(reg=>{
   const assets=[...document.querySelectorAll('img[src]')].map(i=>i.src).filter(s=>/^https?:/.test(s));
   const articles=relay?[...document.querySelectorAll('.slide[data-url]')].map(s=>s.dataset.url).filter(Boolean)
     .map(u=>relay.replace(/\/$/,'')+'/?url='+encodeURIComponent(u)):[];
-  const pages=['','saved.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
+  const pages=['','saved.html','games.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
   sw.postMessage({type:'warm',assets:[...assets,...pages],articles})};
  if(document.querySelector('.deck'))(navigator.serviceWorker.ready.then(()=>setTimeout(warm,2500)));
 }).catch(()=>{});

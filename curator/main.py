@@ -20,6 +20,7 @@ from .summarize import summarize
 from . import smarter
 from . import search as searchmod
 from . import audio as audiomod
+from . import games as gamesmod
 from . import feedback as fb
 
 log = logging.getLogger("curator")
@@ -246,6 +247,10 @@ def daily() -> None:
         Path("build/texts.json").write_text(json.dumps({it["id"]: c.text for it, c in zip(items, picks)}))
     except Exception as ex:
         log.warning("couldn't keep article texts: %s", ex)
+    try:
+        gamesmod.ensure(date, items, llm)
+    except Exception as ex:
+        log.warning("puzzles failed: %s", ex)
     publish(cfg, st, date, items, new_saved)
     for s in new_saved:
         s["delivered"] = True
@@ -263,6 +268,10 @@ def publish(cfg: dict, st: dict, date: str, items: list[dict], new_saved: list[d
     site = render.site_url(cfg)
     subs = load_subs(date)
     smart = load_smarter(date)
+    try:
+        gamesmod.ensure(date, items)            # no-op if today's puzzles already exist
+    except Exception as ex:
+        log.warning("puzzles failed: %s", ex)
     render.build_epub(cfg, date, items, new_saved, subs, smart)
     archive = [p.stem for p in (render.DOCS / "archive").glob("20*.html")] + [date]
     render.web(cfg, date, items, st["saved"], sorted(set(archive)), subs, smart)

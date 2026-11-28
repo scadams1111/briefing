@@ -167,6 +167,22 @@ def build_epub(cfg: dict, date: str, picks: list[dict], saved: list[dict], subs:
             contents += (f"<p class='meta'>{e(it['source'])} · {e(it.get('topic_name', ''))}</p>"
                          f"<h2>{e(it['headline'])}</h2><p>{e(it.get('takeaway', ''))}</p>"
                          f"<p class='back'>Read on your phone: {e(it['url'])}</p>")
+    from . import games as gm
+    g = gm.load(date)
+    if g:
+        try:
+            pages = gm.epub_pages(g)
+            contents += "<h3 class='section'>Puzzles</h3>" + "".join(
+                f"<p><a href='{f}'>{e(t)}</a></p>" for t, f, _ in pages)
+            gcss = epub.EpubItem(uid="gcss", file_name="games.css", media_type="text/css", content=gm.EPUB_CSS)
+            book.add_item(gcss)
+            for t, f, b in pages:
+                ch = _x(t, f, b, css)
+                ch.add_item(gcss)
+                chapters.append(ch)
+        except Exception as ex:
+            import logging
+            logging.getLogger(__name__).warning("couldn't add puzzles to the EPUB: %s", ex)
     toc_ch = _x("Contents", "contents.xhtml", contents, css)
     for ch in [toc_ch, *chapters]:
         book.add_item(ch)

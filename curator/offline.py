@@ -89,7 +89,7 @@ navigator.serviceWorker.register(root+'sw.js').then(reg=>{
   const assets=[...document.querySelectorAll('img[src]')].map(i=>i.src).filter(s=>/^https?:/.test(s));
   const articles=relay?[...document.querySelectorAll('.slide[data-url]')].map(s=>s.dataset.url).filter(Boolean)
     .map(u=>relay.replace(/\/$/,'')+'/?url='+encodeURIComponent(u)):[];
-  const pages=['','saved.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
+  const pages=['','saved.html','games.html','search.html','archive/','highlights.html','read.html','search-index.json'].map(p=>new URL(root+p,location.href).href);
   sw.postMessage({type:'warm',assets:[...assets,...pages],articles})};
  if(document.querySelector('.deck'))(navigator.serviceWorker.ready.then(()=>setTimeout(warm,2500)));
 }).catch(()=>{});
@@ -106,6 +106,6 @@ OFFLINE_CSS = """
 
 
 def write_sw() -> None:
-    core = ["./", "index.html", "saved.html", "search.html", "archive/", "highlights.html", "read.html", "settings.html",
+    core = ["./", "index.html", "saved.html", "games.html", "search.html", "archive/", "highlights.html", "read.html", "settings.html",
             "manifest.webmanifest", "apple-touch-icon.png", "icon-192.png", "icon-512.png", "search-index.json"]
     (w.DOCS / "sw.js").write_text(SW % {"version": time.strftime("%Y%m%d%H%M"), "core": json.dumps(core)})
